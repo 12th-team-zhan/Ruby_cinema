@@ -1,0 +1,19 @@
+development:
+ address: "smtp.mailgun.org"
+  port: "587"
+  domain: <%=ENV['DOMAIN']%>
+  authentication: "plain"
+  user_name: <%=ENV['MAILGUN_USERNAME']%>
+  password: <%=ENV['MAILGUN_PASSWORD']%>
+  enable_starttls_auto: true
+production:
+  address: "smtp.mailgun.org"
+  port: "587"
+  domain: <%=ENV['DOMAIN']%>
+  authentication: "plain"
+  user_name: <%=ENV['MAILGUN_USERNAME']%>
+  password: <%=ENV['MAILGUN_PASSWORD']%>
+  enable_starttls_auto: true
+
+  #請把檔名改成email.yml
+  #記得放在.gitignore
