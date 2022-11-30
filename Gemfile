@@ -16,6 +16,9 @@ gem "paranoia", "~> 2.6"
 gem 'net-smtp', require: false
 gem "devise", "~> 4.8"
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
