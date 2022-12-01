@@ -1,11 +1,11 @@
 <div class="card text-center">
-  <div class="card-header">
+  <div class="card-header bg-primary">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link disabled">會員權益</a>
+        <a class="nav-link disabled  text-white">會員權益</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" >會員條款</a>
+        <a class="nav-link disabled  text-white" >會員條款</a>
       </li>
       <li class="nav-item">
         <a class="nav-link active" aria-current="true" href="#">會員基本資料</a>
@@ -17,54 +17,55 @@
       <section class="vh-80">
        <div class="container py-6">
           <div class="d-flex align-items-center justify-content-center">
-            <div class="col-10 col-md-8 col-lg-6 col-xl-5 ">
-              <form>
-                <!-- your_name -->
-                <div class="form-outline mb-4">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-5 user_register_form">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name) ,method: "POST") do |f| %>
+              
+                <%# name (not in model)%>
+                <div class="mb-4">
                   <label class="form-label" for="form1Example13">您的姓名</label>
-                  <input type="string" id="form1Example13" class="form-control form-control-lg" />
+                  <div>
+                    <%= f.text_field :email, autofocus: true, autocomplete: "email" %> 
+                  </div>
+                </div>      
+
+                <%# email %>
+                <div class="field mb-4">
+                  <div class="form-label ">
+                    <label class="form-label" for="form1Example13">網路帳號信箱</label>
+                  </div>
+                  <div>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %> 
+                  </div>
                 </div>
 
-                <!-- birthday -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form1Example23">西元出生日期</label>
-                  <input type="date" id="form1Example23" class="form-control form-control-lg" />
+                <%# password %>
+                <div class="field mb-4">
+                  <label class="form-label" for="form1Example13">密碼</label>
+                  <% if @minimum_password_length %>
+                  <em>(至少要有 <%= @minimum_password_length %> 個字元)</em>
+                  <% end %><br />
+                  <div>
+                    <%= f.password_field :password, autocomplete: "new-password" %>                  
+                  </div>
+                 
                 </div>
 
-                <!-- phone -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form1Example13">手機號碼</label>
-                  <input type="string" id="form1Example13" class="form-control form-control-lg" />
+                <div class="field mb-4">
+                  <label class="form-label" for="form1Example13">確認密碼</label>
+                  <div>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>                  
+                  </div>
                 </div>
 
-                <!-- email -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form1Example13">網路帳號信箱</label>
-                  <input type="email" id="form1Example13" class="form-control form-control-lg" />
+                <div class="actions user_register_btn">
+                  <%= f.submit("註冊", class: "btn btn-secondary btn-lg mx-3" )%>
                 </div>
-
-                <!-- password -->
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form1Example23">網路帳號密碼</label>
-                  <input type="password" id="form1Example23" class="form-control form-control-lg" />
-                </div>
-
-                <div class="d-flex justify-content-around align-items-center mb-4">
-                  <!-- Checkbox -->
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                      <label class="form-check-label" for="form1Example3"> 記住我 </label>
-                    </div>
-                  <a href="#!">忘記密碼?</a>
-                </div>
-
-                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-lg btn-block">註冊</button>
-
-              </form>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      <% end %>
+      <%= render "devise/shared/links" %>
   </div>
 </div>
+
