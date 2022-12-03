@@ -20,11 +20,11 @@
             <div class="col-10 col-md-8 col-lg-6 col-xl-5 user_register_form">
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name) ,method: "POST") do |f| %>
               
-                <%# name (not in model)%>
+                <%# 您的姓名%>
                 <div class="mb-4">
                   <label class="form-label" for="form1Example13">您的姓名</label>
                   <div>
-                    <%= f.text_field :email, autofocus: true, autocomplete: "email" %> 
+                    <%= f.text_field :name, autofocus: true, autocomplete: "name" %> 
                   </div>
                 </div>      
 

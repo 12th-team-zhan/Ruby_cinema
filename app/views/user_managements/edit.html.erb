@@ -1,0 +1,22 @@
+<h1>變更使用者資料</h1>
+
+<%= form_with(model: @user) do |form| %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :eamil %>
+    <%= form.text_field :eamil %>
+  </div>
+
+  <div>
+    <%= form.label :role %>
+    <%= form.text_field :role %>
+  </div>
+
+<%= form.submit %>
+
+<% end %>
