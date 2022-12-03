@@ -37,5 +37,8 @@ class User < ApplicationRecord
     return user
   end
   enum role: [:user , :staff , :admin]
+  
+  validates :name ,presence: true
+
 
 end

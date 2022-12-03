@@ -14,7 +14,8 @@
 
   <div>
     <%= form.label :role %>
-    <%= form.select :role, options_for_select(@status_select_options)%>
+    <%# <%= form.role %> %>
+    <%= form.select :role, options_for_select(@roles_select_options) %>
   </div>
 
 <%= form.submit %>

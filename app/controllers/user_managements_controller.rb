@@ -7,12 +7,13 @@ class UserManagementsController < ApplicationController
   end
 
   def edit
-    @status_select_options = User.roles.keys.map do |key|
+    @roles_select_options = User.roles.keys.map do |key|
       [User.human_attribute_name("role.#{key}"), key]
     end
   end
 
   def update
+    # render html: params
     if @user.update(clean_user)
       redirect_to user_managements_path ,notice:"修改完成"
       else
