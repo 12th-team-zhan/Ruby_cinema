@@ -1,12 +1,6 @@
 <h1>變更使用者資料</h1>
 
-<%= form_with(model: @user ,url: user_management_path) do |form| %>
-
-   <div>
-    <%= form.label :role %>
-    <%= form.text_field :role %>
-    <p>role: [:user , :staff , :admin]</p> 
-  </div>
+<%= form_with(model: @user ,url: user_management_path,method:"patch") do |form| %>
 
   <div>
     <%= form.label :name %>
@@ -20,7 +14,7 @@
 
   <div>
     <%= form.label :role %>
-    <%= form.text_field :role %>
+    <%= form.select :role, options_for_select(@status_select_options)%>
   </div>
 
 <%= form.submit %>

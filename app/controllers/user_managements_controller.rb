@@ -3,9 +3,13 @@ class UserManagementsController < ApplicationController
 
   def index
     @users=User.all
+    
   end
 
   def edit
+    @status_select_options = User.roles.keys.map do |key|
+      [User.human_attribute_name("role.#{key}"), key]
+    end
   end
 
   def update
