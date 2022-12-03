@@ -9,7 +9,7 @@ class UserManagementsController < ApplicationController
   end
 
   def update
-    if user.update(clean_user)
+    if @user.update(clean_user)
       redirect_to user_managements_path ,notice:"修改完成"
       else
       render :edit
@@ -18,6 +18,7 @@ class UserManagementsController < ApplicationController
 
   def destroy
     @user.destroy
+    redirect_to user_managements_path ,alert:"已刪除"
   end
 
   private

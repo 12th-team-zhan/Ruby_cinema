@@ -1,6 +1,12 @@
 <h1>變更使用者資料</h1>
 
-<%= form_with(model: @user) do |form| %>
+<%= form_with(model: @user ,url: user_management_path) do |form| %>
+
+   <div>
+    <%= form.label :role %>
+    <%= form.text_field :role %>
+    <p>role: [:user , :staff , :admin]</p> 
+  </div>
 
   <div>
     <%= form.label :name %>
@@ -8,8 +14,8 @@
   </div>
 
   <div>
-    <%= form.label :eamil %>
-    <%= form.text_field :eamil %>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
   </div>
 
   <div>
