@@ -13,7 +13,6 @@ class UserManagementsController < ApplicationController
   end
 
   def update
-    # render html: params
     if @user.update(clean_user)
       redirect_to user_managements_path ,notice:"修改完成"
       else

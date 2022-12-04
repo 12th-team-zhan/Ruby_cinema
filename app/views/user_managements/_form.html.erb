@@ -1,0 +1,24 @@
+<table>
+  <ul>
+    <tr>
+      <td>序號</td>
+      <td>操作</td>
+      <td></td>
+      <td>身份</td>
+      <td>使用者姓名</td>
+    </tr>
+    <% users.each do |user| %>
+    <tr>
+      <td> <%= user.id %></td>
+      <td> <%= link_to "編輯" , edit_user_management_path(user) %></td>
+      <td> <%= link_to "刪除" , user_registration_path(user),method:"delete",data:{confirm:"確定刪除？"} %></td>
+      <td> <%= user.role %></td>
+      <td> <%= user.name %></td>
+      <td> <%= user.email %></td>
+
+    </tr>
+    <% end %>
+
+  </ul>
+
+</table>
