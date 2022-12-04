@@ -44,17 +44,15 @@
 <% if user_signed_in? %>
   <%= link_to "登出", destroy_user_session_path	, :method => :delete %>
   <p>您好<%= current_user.email %></p>
-    
-    <% if current_user.staff? %>
+      <%= link_to "修改個人資料", edit_user_registration_path(@user) %>
       <%= link_to "購票" ,"#" %>
+
+    <% if current_user.staff? %>
       <%= link_to "影城管理" ,"#" %>
     <% elsif current_user.admin? %>
-      <%= link_to "購票" ,"#" %>
       <%= link_to "影城管理" ,"#" %>
       <%= link_to "會員管理介面" ,user_managements_path %>
     <% else %>
-      <%= link_to "修改會員資料", edit_user_registration_path(@user) %>
-      <%= link_to "購票" ,"#" %>
     <% end %>
 
   <% else %>
