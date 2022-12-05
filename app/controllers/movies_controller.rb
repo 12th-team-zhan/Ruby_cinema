@@ -1,4 +1,4 @@
-class TestController < ApplicationController
+class MoviesController < ApplicationController
   def index
     @user = User.new
   end

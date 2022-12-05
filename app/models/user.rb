@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  
+  acts_as_paranoid  
 
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid
@@ -36,4 +36,8 @@ class User < ApplicationRecord
     user.save!
     return user
   end
+  enum role: { user: 0 , staff: 1 , admin: 2}
+  
+
+
 end

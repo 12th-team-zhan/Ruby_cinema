@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2022_11_30_035708) do
     t.string "fb_uid"
     t.string "fb_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["fb_uid"], name: "index_users_on_fb_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
