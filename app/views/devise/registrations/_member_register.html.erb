@@ -14,65 +14,66 @@
   </div>
   <div class="card-body">
     <h2 class="card-title">會員基本資料</h2>
-      <section class="vh-80">
-        <div class="container py-6">
-          <div class="d-flex align-items-center justify-content-center">
-            <div class="col-10 col-md-8 col-lg-6 col-xl-5 user_register_form">
-              <%= form_for(resource, as: resource_name, url: registration_path(resource_name) ,method: "POST") do |f| %>
-              
-                <%# 您的姓名%>
-                <div class="mb-4">
-                  <div>
-                    <label class="form-label" for="form1Example13">您的姓名</label>
-                  </div>
-                  <div>
-                    <%= f.text_field :name, autofocus: true, autocomplete: "name" %> 
-                  </div>
-                </div>      
-
-                <%# email %>
-                <div class="field mb-4">
-                  <div>
-                    <label class="form-label" for="form1Example13">網路帳號信箱</label>
-                  </div>
-                  <div>
-                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %> 
-                  </div>
+    <section class="vh-80">
+      <div class="container py-6">
+        <div class="d-flex align-items-center justify-content-center">
+          <div class="col-10 col-md-8 col-lg-6 col-xl-5 user_register_form">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name) ,method: "POST") do |f| %>
+              <%# 您的姓名%>
+              <div class="mb-4">
+                <div>
+                  <label class="form-label" for="form1Example13">您的姓名(選填)</label>
                 </div>
-
-                <%# password %>
-                <div class="field mb-4">
-                  <div>
-                    <label class="form-label" for="form1Example13">密碼</label>
-                    <% if @minimum_password_length %>
+                <div>
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+                </div>
+              </div>
+              <%# email %>
+              <div class="field mb-4" data-user-register-target="input">
+                <div  data-user-register-target="input">
+                  <label class="form-label" for="form1Example13">網路帳號信箱</label>
+                </div>
+                <div>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
+              </div>
+              <%# password %>
+              <div class="field mb-4" data-user-register-target="input">
+                <div>
+                  <label class="form-label" for="form1Example13">密碼</label>
+                  <% if @minimum_password_length %>
                     <em>(至少要有 <%= @minimum_password_length %> 個字元)</em>
-                    <% end %><br />
-                  </div>
-                  <div>
-                    <%= f.password_field :password, autocomplete: "new-password" %>                  
+                  <% end %><br />
+                </div>
+                <div>
+                  <%= f.password_field :password, autocomplete: "new-password" %>
+                </div>
+              </div>
+              <div class="field mb-4">
+                <div>
+                  <label class="form-label" for="form1Example13">確認密碼</label>
+                </div>
+                <div>
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                </div>
+              </div>
+              <section>
+              <div class="container text-center p-4">
+                <div class="row align-items-center">
+                  <div class="col" >
+                    <button type="button" class="btn btn-primary btn-lg mx-3" 
+                            data-action="click->user-register#registerBack">上一步</button>
+                    <button type="button">
+                            <%= f.submit("註冊", class: "btn btn-secondary btn-lg mx-3 px-4")%>
+                    </button>
                   </div>
                 </div>
-
-                <div class="field mb-4">
-                  <div>
-                    <label class="form-label" for="form1Example13">確認密碼</label>
-                  </div>
-                  <div>
-                    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>                  
-                  </div>
-                </div>
-
-                <div class="actions user_register_btn">
-                  <%= f.submit("註冊", class: "btn btn-secondary btn-lg mx-3" )%>
-                </div>
-
-              <% end %>
-            </div>
+              </div>
+            </section>
+            <% end %>
           </div>
         </div>
-      </section>
-      
-     <%= render "devise/shared/links" %>
+      </div>
+    </section>
+    <%= render "devise/shared/links" %>
   </div>
-
-

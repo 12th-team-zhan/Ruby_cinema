@@ -6,7 +6,14 @@
     </ol>
   </nav>
 
-
-<%# <%= render "member_benefits" %>
-<%# <%= render "member_terms" %>
-<%= render "member_register" %>
+<section data-controller="user-register">
+  <div data-user-register-target="benefits">
+    <%= render "member_benefits" %>
+  </div>
+  <div data-user-register-target="terms">
+    <%= render "member_terms" %>
+  </div>
+  <div data-user-register-target="register">
+    <%= render "member_register" %>
+  </div>
+</section>
