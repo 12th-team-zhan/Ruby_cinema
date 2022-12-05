@@ -1,0 +1,142 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/maps";
+$cerulean: #2660a9;
+$deepskyblue: #2f96ee;
+$darkgray: #999;
+$white: #fff;
+
+$custom-theme-colors: (
+  "cerulean": $cerulean,
+  "deepskyblue": $deepskyblue,
+  "darkgray": $darkgray,
+  "white": $white,
+);
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop(
+  $utilities-colors,
+  rgba-css-var,
+  "$key",
+  "text"
+);
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+
+$utilities: (
+  "width": (
+    property: width,
+    class: w,
+    values: (
+      0: 0%,
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      90: 90%,
+      100: 100%,
+      auto: auto,
+    ),
+  ),
+);
+
+$utilities: (
+  "height": (
+    property: height,
+    class: h,
+    values: (
+      0: 0%,
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto,
+    ),
+  ),
+);
+
+$utilities: (
+  "cursor": (
+    property: cursor,
+    values: (
+      default: default,
+      none: none,
+      grab: grab,
+    ),
+  ),
+);
+$utilities: (
+  "viewport-height": (
+    property: height,
+    class: vh,
+    values: (
+      75: 75vh,
+      100: 100vh,
+    ),
+  ),
+);
+
+// Layout & components
+
+@import "../../../node_modules/bootstrap/scss/utilities";
+@import "../../../node_modules/bootstrap/scss/root";
+@import "../../../node_modules/bootstrap/scss/reboot";
+@import "../../../node_modules/bootstrap/scss/type";
+@import "../../../node_modules/bootstrap/scss/images";
+@import "../../../node_modules/bootstrap/scss/containers";
+@import "../../../node_modules/bootstrap/scss/grid";
+@import "../../../node_modules/bootstrap/scss/tables";
+@import "../../../node_modules/bootstrap/scss/forms";
+@import "../../../node_modules/bootstrap/scss/buttons";
+@import "../../../node_modules/bootstrap/scss/transitions";
+@import "../../../node_modules/bootstrap/scss/dropdown";
+@import "../../../node_modules/bootstrap/scss/button-group";
+@import "../../../node_modules/bootstrap/scss/nav";
+@import "../../../node_modules/bootstrap/scss/navbar";
+@import "../../../node_modules/bootstrap/scss/card";
+@import "../../../node_modules/bootstrap/scss/accordion";
+@import "../../../node_modules/bootstrap/scss/breadcrumb";
+@import "../../../node_modules/bootstrap/scss/pagination";
+@import "../../../node_modules/bootstrap/scss/badge";
+@import "../../../node_modules/bootstrap/scss/alert";
+@import "../../../node_modules/bootstrap/scss/progress";
+@import "../../../node_modules/bootstrap/scss/list-group";
+@import "../../../node_modules/bootstrap/scss/close";
+@import "../../../node_modules/bootstrap/scss/toasts";
+@import "../../../node_modules/bootstrap/scss/modal";
+@import "../../../node_modules/bootstrap/scss/tooltip";
+@import "../../../node_modules/bootstrap/scss/popover";
+@import "../../../node_modules/bootstrap/scss/carousel";
+@import "../../../node_modules/bootstrap/scss/spinners";
+@import "../../../node_modules/bootstrap/scss/offcanvas";
+@import "../../../node_modules/bootstrap/scss/placeholders";
+
+// Helpers
+@import "../../../node_modules/bootstrap/scss/helpers";
+
+// Utilities
+@import "../../../node_modules/bootstrap/scss/utilities/api";
+// scss-docs-end import-stack
+
+.btn-cerulean {
+  --bs-btn-color: var(--bs-gray-300);
+  --bs-btn-border-color: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-hover-bg: none;
+  --bs-btn-disabled-color: var(--white);
+  --bs-btn-disabled-opacity: 1;
+  span {
+    display: block;
+    transition: transform 0.2s, border-bottom 0.4s ease;
+    transform: scale(1);
+    transform-origin: center;
+    border-bottom: 0px solid none;
+  }
+  &:hover span {
+    transform: scale(1.1);
+    border-bottom: 2px solid white;
+  }
+}
+a{
+  text-decoration: none;
+}
