@@ -1,4 +1,4 @@
-<%= render "test/shared/nav" %>
+<%= render "movies/shared/nav" %>
 <div id="carousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">
@@ -184,7 +184,7 @@
       <%= link_to "影城管理" ,"#" %>
     <% elsif current_user.admin? %>
       <%= link_to "影城管理" ,"#" %>
-      <%= link_to "會員管理介面" ,user_managements_path %>
+      <%= link_to "會員管理介面" ,admin_users_path %>
     <% else %>
     <% end %>
 

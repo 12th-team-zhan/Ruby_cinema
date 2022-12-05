@@ -1,6 +1,8 @@
-class UserManagementsController < ApplicationController
+module Admin
+class UsersController < ApplicationController
 before_action :find_user ,only: [:edit ,:update , :destroy]
 before_action :authenticate_user!
+
 
   def index
     @users=User.all
@@ -15,7 +17,7 @@ before_action :authenticate_user!
 
   def update
     if @user.update(clean_user)
-      redirect_to user_managements_path ,notice:"修改完成"
+      redirect_to admin_users_path ,notice:"修改完成"
       else
       render :edit
     end
@@ -23,7 +25,7 @@ before_action :authenticate_user!
 
   def destroy
     @user.destroy
-    redirect_to user_managements_path ,alert:"已刪除"
+    redirect_to admin_users_path ,alert:"已刪除"
   end
 
   private
@@ -34,4 +36,6 @@ before_action :authenticate_user!
   def clean_user
     params.require(:user).permit(:name , :email , :password , :role)
   end
+end
+
 end

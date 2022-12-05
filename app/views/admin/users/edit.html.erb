@@ -1,6 +1,6 @@
 <h1>變更使用者資料</h1>
 
-<%= form_with(model: @user ,url: user_management_path,method:"patch") do |form| %>
+<%= form_with(model: @user ,url: admin_user_path,method:"patch") do |form| %>
 
   <div>
     <%= form.label :name %>
