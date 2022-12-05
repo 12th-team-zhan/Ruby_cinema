@@ -6,9 +6,11 @@ export default class extends Controller {
 
   connect() {
      console.log(this.inputTarget)
+     console.log(this.inputTarget.children)
+    //  console.log(this.inputTarget.children === field_with_errors)
       
-      if (this.inputTarget.classList === "field_with_errors"){
-
+      if (this.inputTarget){
+        console.log("132")
       }else{
         this.benefitsTarget.classList.add("d-block")
         this.termsTarget.classList.add("d-none")
