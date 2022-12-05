@@ -36,7 +36,7 @@ class User < ApplicationRecord
     user.save!
     return user
   end
-  enum role: [:user , :staff , :admin]
+  enum role: { user: 0 , staff: 1 , admin: 2}
   
   validates :name ,presence: true
 
