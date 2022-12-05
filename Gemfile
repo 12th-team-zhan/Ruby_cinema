@@ -5,7 +5,6 @@ ruby '3.1.2'
 gem 'rails', '~> 6.1.7'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
-gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
@@ -16,6 +15,7 @@ gem "paranoia", "~> 2.6"
 gem 'net-smtp', require: false
 gem "devise", "~> 4.8"
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "dartsass-rails", "~> 0.4.0"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -33,6 +33,7 @@ group :test do
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   gem 'webdrivers'
 end
+
 
 
 

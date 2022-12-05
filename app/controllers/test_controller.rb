@@ -1,5 +1,7 @@
-class TestController < ApplicationController 
-    def index
+class TestController < ApplicationController
+  def index
+    @user = User.new
+  end
 
-    end
+  
 end
