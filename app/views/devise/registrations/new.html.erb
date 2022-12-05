@@ -1,44 +1,3 @@
-<%# main_nav %>
-
-
-    <nav class="navbar navbar-expand-sm navbar-light justify-content-md-around bg-primary">
-      <a class="navbar-brand" href="#">
-        <img src="./img/ruby.png" width="30" height="30" alt="" />
-        寶石影城
-      </a>
-      <button
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        class="navbar-toggler collapsed d-flex d-sm-none flex-column justify-content-around"
-        aria-controls="collapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="toggler-icon top-bar"></span>
-        <span class="toggler-icon middle-bar"></span>
-        <span class="toggler-icon bottom-bar"></span>
-      </button>
-
-      <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
-        <ul class="navbar-nav active">
-          <li class="nav-item active">
-            <a href="#" class="nav-link">影城介紹</a>
-          </li>
-          <li class="nav-item active">
-            <a href="#" class="nav-link">電影介紹</a>
-          </li>
-          <li class="nav-item active">
-            <a href="#" class="nav-link">會員專區</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-
-<%# main_nav %>
-
-
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb ">
       <li class="breadcrumb-item"><%= link_to "首頁" , root_path %></li>
@@ -47,9 +6,6 @@
     </ol>
   </nav>
 
-
-
-<%= render "devise/shared/error_messages", resource: resource %>
 
 <%# <%= render "member_benefits" %>
 <%# <%= render "member_terms" %>

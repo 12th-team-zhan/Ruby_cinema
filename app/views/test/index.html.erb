@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%= render "test/shared/nav" %>
 <div id="carousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -39,61 +38,6 @@
           <li class="bg-darkgray ps-4 py-2 border-bottom text-white">售票公告</li>
           <li class="bg-darkgray ps-4 py-2 border-bottom text-white">入場須知</li>
           <li class="bg-darkgray ps-4 py-2 border-bottom text-white">場次查詢</li>
-=======
-<h1>test push</h1>
-<% if user_signed_in? %>
-  <%= link_to "登出", destroy_user_session_path	, :method => :delete %>
-  <p>您好<%= current_user.email %></p>
-      <%= link_to "修改個人資料", edit_user_registration_path(@user) %>
-      <%= link_to "購票" ,"#" %>
-
-    <% if current_user.staff? %>
-      <%= link_to "影城管理" ,"#" %>
-    <% elsif current_user.admin? %>
-      <%= link_to "影城管理" ,"#" %>
-      <%= link_to "會員管理介面" ,user_managements_path %>
-    <% else %>
-    <% end %>
-
-  <% else %>
-    <%= link_to "註冊", new_user_registration_path %>
-    <%= link_to "登入", new_user_session_path %>
-<% end %>
-
-   
-  <!--------- nav---------->
-
-    <nav class="navbar navbar-expand-sm navbar-light justify-content-md-around bg-primary">
-      <a class="navbar-brand" href="#">
-        <img src="./img/ruby.png" width="30" height="30" alt="" />
-        寶石影城
-      </a>
-      <button
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        class="navbar-toggler collapsed d-flex d-sm-none flex-column justify-content-around"
-        aria-controls="collapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="toggler-icon top-bar"></span>
-        <span class="toggler-icon middle-bar"></span>
-        <span class="toggler-icon bottom-bar"></span>
-      </button>
-
-      <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
-        <ul class="navbar-nav active">
-          <li class="nav-item active">
-            <a href="#" class="nav-link">影城介紹</a>
-          </li>
-          <li class="nav-item active">
-            <a href="#" class="nav-link">電影介紹</a>
-          </li>
-          <li class="nav-item active">
-            <a href="#" class="nav-link">會員專區</a>
-          </li>
->>>>>>> dd8c5dd (測試擴充會員資料驗證)
         </ul>
       </div>
       <div class="container col-8 col-md-12 col-lg-9 mx-md-0 bg-cerulean rounded-4" 
@@ -228,3 +172,23 @@
   </div>
 </article>
 <footer class="bg-cerulean text-center py-4">Lorem ipsum dolor sit </footer>
+
+<h1>test</h1>
+<% if user_signed_in? %>
+  <%= link_to "登出", destroy_user_session_path	, :method => :delete %>
+  <p>您好<%= current_user.email %></p>
+      <%= link_to "修改個人資料", edit_user_registration_path(@user) %>
+      <%= link_to "購票" ,"#" %>
+
+    <% if current_user.staff? %>
+      <%= link_to "影城管理" ,"#" %>
+    <% elsif current_user.admin? %>
+      <%= link_to "影城管理" ,"#" %>
+      <%= link_to "會員管理介面" ,user_managements_path %>
+    <% else %>
+    <% end %>
+
+  <% else %>
+    <%= link_to "註冊", new_user_registration_path %>
+    <%= link_to "登入", new_user_session_path %>
+<% end %>
