@@ -1,0 +1,12 @@
+<form form method="post" action="https://ccore.newebpay.com/MPG/mpg_gateway" >
+  <input type="hidden" id="MerchantID" name="MerchantID" value="">
+  <input type="hidden" id="TradeInfo" name="TradeInfo" value="<%= @form_info[:TradeInfo] %>">
+  <input type="hidden" id="TradeSha" name="TradeSha" value="<%= @form_info[:TradeSha] %>">
+  <input type="hidden" id="Version" name="Version" value="2.0">
+  <input type="hidden" id="RespondType" name="RespondType" value="JSON">
+  <input type="hidden" id="TimeStamp" name="TimeStamp" value="">
+  <input type="hidden" id="MerchantOrderNo" name="MerchantOrderNo" value="">
+  <input type="hidden" id="Amt" name="Amt" value="">
+  <input type="hidden" id="ItemDesc" name="ItemDesc" value="">
+  <input type="submit" value="go">
+</form>
