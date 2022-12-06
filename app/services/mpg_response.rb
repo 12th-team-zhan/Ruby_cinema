@@ -19,27 +19,26 @@ class MpgResponse
   end
 
   private
+  def decrypy(encrypted_data)
+    encrypted_data = [encrypted_data].pack('H*')
+    decipher = OpenSSL::Cipher::AES256.new(:CBC)
+    decipher.decrypt
+    decipher.padding = 0
+    decipher.key = @key
+    decipher.iv = @iv
+    data = decipher.update(encrypted_data) + decipher.final
+    raw_data = strippadding(data)
+    JSON.parse(raw_data)
+  end
 
-    def decrypy(encrypted_data)
-      encrypted_data = [encrypted_data].pack('H*')
-      decipher = OpenSSL::Cipher::AES256.new(:CBC)
-      decipher.decrypt
-      decipher.padding = 0
-      decipher.key = @key
-      decipher.iv = @iv
-      data = decipher.update(encrypted_data) + decipher.final
-      raw_data = strippadding(data)
-      JSON.parse(raw_data)
+  def strippadding(data)
+    slast = data[-1].ord
+    slastc = slast.chr
+    string_match = /#{slastc}{#{slast}}/ =~ data
+    if !string_match.nil?
+      data[0, string_match]
+    else
+      false
     end
-
-    def strippadding(data)
-      slast = data[-1].ord
-      slastc = slast.chr
-      string_match = /#{slastc}{#{slast}}/ =~ data
-      if !string_match.nil?
-        data[0, string_match]
-      else
-        false
-      end
-    end
+  end
 end
