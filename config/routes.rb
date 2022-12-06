@@ -13,8 +13,12 @@ Rails.application.routes.draw do
     resources :showtimes
     resources :news
     resources :theaters
+
+    resources :cinemas
+
+    resources :seats
   end
-  
+
   namespace :"api/v1" do
   end
 end

@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 2022_12_06_030320) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deleted_at"], name: "index_theaters_on_deleted_at"
+
+  create_table "cinemas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,6 +73,9 @@ ActiveRecord::Schema.define(version: 2022_12_06_030320) do
     t.integer "role", default: 0
     t.string "fb_uid"
     t.string "fb_token"
+    t.string "name"
+    t.datetime "deleted_at"
+    t.integer "role", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
