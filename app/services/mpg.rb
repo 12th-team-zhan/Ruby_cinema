@@ -28,7 +28,7 @@ class Mpg
   end
 
   def set_info
-    info[:MerchantID] = @merchant_id
+    info[:MerchantID] = @mid
     info[:TimeStamp] = Time.now.to_i
     info[:Version] = "2.0"
     info[:RespondType] = "JSON"
