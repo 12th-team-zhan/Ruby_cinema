@@ -2,21 +2,31 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "benefits","terms","register","input" ]
+  static targets = [ "benefits", "terms", "register","termsConfirmed"]
 
   connect() {
-     console.log(this.inputTarget)
-     console.log(this.inputTarget.children)
-    //  console.log(this.inputTarget.children === field_with_errors)
+    this.termsConfirmedTarget.classList.toggle("disabled")
+    
+    if (document.querySelector(".field_with_errors")){
+      this.benefitsTarget.classList.toggle("d-none")
+      this.termsTarget.classList.toggle("d-none")
+      this.registerTarget.classList.toggle("d-block")
+    }else{
+      this.benefitsTarget.classList.toggle("d-block")
+      this.termsTarget.classList.toggle("d-none")
+      this.registerTarget.classList.toggle("d-none")  
+    }
       
-      if (this.inputTarget){
-        console.log("132")
-      }else{
-        this.benefitsTarget.classList.add("d-block")
-        this.termsTarget.classList.add("d-none")
-        this.registerTarget.classList.add("d-none")  
-      }
-      
+  }
+
+  confirm(){
+    if(document.getElementById("TermsCheckbox").checked){
+      this.termsConfirmedTarget.classList.add("disabled")
+      this.termsConfirmedTarget.classList.replace("disabled","action")
+    }else{
+      this.termsConfirmedTarget.classList.add("action")
+      this.termsConfirmedTarget.classList.replace("action","disabled")
+    }
   }
 
   benefitsNext(){
@@ -25,8 +35,6 @@ export default class extends Controller {
   }
 
   termsBack(){
-    console.log("上");
-
     this.termsTarget.classList.replace("d-block","d-none")
     this.benefitsTarget.classList.replace("d-none","d-block")
   }
@@ -37,7 +45,6 @@ export default class extends Controller {
   }
 
   registerBack(){
-    console.log("上");
     this.registerTarget.classList.replace("d-block","d-none")
     this.termsTarget.classList.replace("d-none","d-block")
   }
