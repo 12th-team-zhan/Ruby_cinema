@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :news
     resources :theaters
   end
+  
   namespace :"api/v1" do
   end
 end
