@@ -1,0 +1,3 @@
+class TheatersController < ApplicationController
+  
+end
