@@ -1,5 +1,5 @@
 /*---------------nav--------------*/
-.navbar{
+.navbar {
   background-color: rgb(255, 0, 0);
 }
 .navbar-toggler {
@@ -72,6 +72,22 @@
 
 .nav-link:hover {
   background-color: #154178;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; // remove the gap so it doesn't close
+}
+.dropdown-menu {
+  min-width: 100%;
+  li {
+    background-color: rgb(117, 47, 47);
+  }
+}
+.dropdown-item {
+  background-color: rgb(70, 34, 34);
+}
+.dropdown-item:hover {
+  background-color: rgb(91, 49, 49);
 }
 
 /*---------------popup--------------*/

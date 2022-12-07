@@ -1,0 +1,36 @@
+<%= form_for @movie, url: url, method: method do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :eng_name %>
+    <%= f.text_field :eng_name %>
+  </div>
+  <div>
+    <%= f.label :duration %>
+    <%= f.number_field :duration %>
+  </div>
+  <div>
+    <%= f.label :film_rating %>
+    <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), @movie.film_rating) %>
+  </div>
+  <div>
+    <%= f.label :director %>
+    <%= f.text_field :director %>
+  </div>
+  <div>
+    <%= f.label :actor %>
+    <%= f.text_field :actor %>
+  </div>
+  <div>
+    <%= f.label :debut_date %>
+    <%= f.date_select :debut_date , discard_year: true %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.submit %>
+  <% end %>

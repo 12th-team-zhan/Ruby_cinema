@@ -1,0 +1,23 @@
+.sidebar {
+  min-width: 110px;
+  border-right: 3px solid var(--bs-darkgray);
+  
+  .position-sticky {
+    align-self: flex-start;
+    top: 50px;
+  }
+  
+  .list-group-item a{
+    color: white;
+  }
+  
+  .list-group-item:hover a {
+    background-color: #525560;
+  }
+}
+
+.main {
+  .container-breadcrumb {
+    --bs-breadcrumb-font-size: 30px;
+  }
+}

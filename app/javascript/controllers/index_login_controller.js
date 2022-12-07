@@ -86,6 +86,8 @@ export default class extends Controller {
         this.passwordTarget.value = ""
         this.emailValue = false
         this.passwordValue = false
+        this.passwordLabelTarget.classList.remove("input-at2")
+        this.emailLabelTarget.classList.remove("input-at2")
         this.loginAt()
     }
     Modal(e) {

@@ -6,12 +6,14 @@ $cerulean: #2660a9;
 $deepskyblue: #2f96ee;
 $darkgray: #999;
 $white: #fff;
+$slategray: #3c3f48;
 
 $custom-theme-colors: (
   "cerulean": $cerulean,
   "deepskyblue": $deepskyblue,
   "darkgray": $darkgray,
   "white": $white,
+  "slategray": $slategray,
 );
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
@@ -45,6 +47,7 @@ $utilities: (
     property: height,
     class: h,
     values: (
+      1px:1px,
       0: 0%,
       25: 25%,
       50: 50%,
@@ -119,12 +122,12 @@ $utilities: (
 // scss-docs-end import-stack
 
 .btn-cerulean {
-  --bs-btn-color: var(--bs-gray-300);
-  --bs-btn-border-color: none;
-  --bs-btn-active-bg: none;
-  --bs-btn-hover-bg: none;
-  --bs-btn-disabled-color: var(--white);
-  --bs-btn-disabled-opacity: 1;
+    --bs-btn-color: var(--bs-gray-300);
+    --bs-btn-border-color: none;
+    --bs-btn-active-bg: none;
+    --bs-btn-hover-bg: none;
+    --bs-btn-disabled-color: var(--white);
+    --bs-btn-disabled-opacity: 1;
   span {
     display: block;
     transition: transform 0.2s, border-bottom 0.4s ease;
