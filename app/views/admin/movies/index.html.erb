@@ -1,0 +1,44 @@
+<div class="continer vh-100  text-white">
+  <div class="d-flex vh-100">
+    <%= render "sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "Home",movies_path%></li>
+            <li class="breadcrumb-item active" aria-current="page">Movie list</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="container">
+        <%= link_to "新增電影",new_admin_movie_path ,class: "btn btn-primary"%>
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th scope="col">電影名稱</th>
+              <th scope="col">場次管理</th>
+              <th scope="col">上映時間</th>
+              <th scope="col">最後編輯者ID</th>
+              <th scope="col">建立者ID</th>
+              <th scope="col">建立時間</th>
+              <th scope="col">編輯時間</th>
+            </tr>
+          </thead>
+          <% @movies.each do |movie|%>
+            <tbody>
+              <tr>
+                <th scope="row"><%= link_to movie.name,admin_movie_path(movie) %></th>
+                <td>1</td>
+                <td><%= movie.debut_date%></td>
+                <td>123</td>
+                <td><%= movie.user_id%></td>
+                <td><%= movie.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+                <td><%= movie.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

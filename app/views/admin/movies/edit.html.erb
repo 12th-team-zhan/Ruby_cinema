@@ -1,0 +1,3 @@
+<h1>電影編輯</h1>
+<%= @movie.name%>
+<%= render "form", movie: @movie ,url:"#{admin_movies_path}/#{@movie.id}",method:"PATCH" %>
