@@ -1,22 +1,16 @@
 <h1>變更使用者資料</h1>
-
-<%= form_with(model: @user ,url: admin_user_path,method:"patch") do |form| %>
-
+<%= form_with(model: @user, url: admin_user_path, method:"patch") do |form| %>
   <div>
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
-
   <div>
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
-
   <div>
     <%= form.label :role %>
     <%= form.select :role, options_for_select(User.roles.keys, @user.role) %>
   </div>
-
-<%= form.submit %>
-
+  <%= form.submit %>
 <% end %>

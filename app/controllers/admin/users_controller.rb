@@ -10,11 +10,7 @@ module Admin
       @users = User.all
     end
 
-    def edit
-      @roles_select_options = User.roles.keys.map do |key|
-        [User.human_attribute_name("role.#{key}"), key]
-      end
-    end
+    def edit;    end
 
     def update
       if @user.update(clean_user)
