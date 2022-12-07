@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", sessions: "users/sessions" }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
 
-  root "movies#index"
+  root 'movies#index'
   resources :movies, only: %i[index show]
   resources :news, only: %i[index show]
   resources :theaters, only: %i[index show]

@@ -266,7 +266,7 @@ Devise.setup do |config|
   # config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = [ :delete , :get]
+  config.sign_out_via = %i[delete get]
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
@@ -310,5 +310,6 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   # 第三方登入-FaceBook
-  config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_APP_SECRET'], :scope => 'public_profile,email', :info_fields => 'email,name', callback_url: "http://localhost:3000/users/auth/facebook/callback"
+  config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_APP_SECRET'], scope: 'public_profile,email',
+                                                                     info_fields: 'email,name', callback_url: 'http://localhost:3000/users/auth/facebook/callback'
 end

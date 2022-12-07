@@ -13,8 +13,7 @@
   </div>
   <div>
     <%= f.label :film_rating %>
-    <%= f.select :film_rating, Movie.film_ratings.map { |v| [v.first.upcase,v.first ]} %>
-    <%# <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), @movie.film_rating) %> 
+    <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), @movie.film_rating) %>
   </div>
   <div>
     <%= f.label :director %>

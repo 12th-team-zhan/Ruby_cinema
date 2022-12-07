@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  eng_name: MyString
+  duration: 1
+  film_rating: 1
+  director: MyString
+  actor: MyString
+  debut_date: 2022-12-06
+  description: MyText
+  deleted_at: 2022-12-06 10:55:51
+
+two:
+  name: MyString
+  eng_name: MyString
+  duration: 1
+  film_rating: 1
+  director: MyString
+  actor: MyString
+  debut_date: 2022-12-06
+  description: MyText
+  deleted_at: 2022-12-06 10:55:51
