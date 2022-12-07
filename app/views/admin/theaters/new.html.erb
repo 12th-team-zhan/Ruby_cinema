@@ -1,0 +1,31 @@
+<h1>新增影城資訊</h1>
+
+<% if @theater.errors.any? %>
+
+  <ul>
+    <% @theater.errors.full_messages.each do |message| %>
+      <li> <%= message %> </li>
+    <% end %>
+  </ul>
+
+<% end%>
+
+<%= form_with(model: @theater, url:admin_theaters_path, method: "post") do |form| %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <%= form.submit "送出" %>
+<% end %>

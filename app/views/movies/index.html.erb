@@ -185,6 +185,7 @@
     <% elsif current_user.admin? %>
       <%= link_to "影城管理" ,"#" %>
       <%= link_to "會員管理介面" ,admin_users_path %>
+      <%= link_to "管理據點資訊", admin_theaters_path %>
     <% else %>
     <% end %>
 
