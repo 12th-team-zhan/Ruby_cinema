@@ -38,22 +38,22 @@ export default class extends Controller {
 
     addToTable() {
         const token = document.querySelector("meta[name='csrf-token']").content;
-        // const id = this.element.dataset.id;
+        const cinemaId = this.element.dataset.id;
         const seats = {"seats": this.seatsArr}
 
-        fetch("/admin/seats", {
+        fetch(`/admin/cinemas/${cinemaId}/seats`, {
             method: "POST",
             headers: {
               "X-csrf-Token": token,
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
+            redirect: 'follow',
             body: JSON.stringify(seats)
           })
           .then((resp) => {
-            return resp.json();
-          })
-          .then(({status}) => {
-            console.log(status);
+            if (resp.redirected) {
+              window.location.href = resp.url;
+            }
           })
           .catch((err) => {
             console.log(err);

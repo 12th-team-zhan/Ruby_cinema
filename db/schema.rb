@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 2022_12_06_030320) do
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
   end
 
+  create_table "seats", force: :cascade do |t|
+    t.string "row"
+    t.string "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "cinema_id"
+    t.index ["cinema_id"], name: "index_seats_on_cinema_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

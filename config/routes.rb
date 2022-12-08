@@ -14,9 +14,9 @@ Rails.application.routes.draw do
     resources :news
     resources :theaters
 
-    resources :cinemas
-
-    resources :seats
+    resources :cinemas do
+      resources :seats, only: [:new, :create]
+    end
   end
 
   namespace :"api/v1" do

@@ -8,7 +8,7 @@
 
 <br>
 
-<div data-controller="addseat">
+<div data-controller="addseat" data-id="<%= @cinema.id %>">
     <div class="grid">
         <div class="item" data-status="not added" data-action="click->addseat#changeSeatStatus">1</div>
         <div class="item" data-status="not added" data-action="click->addseat#changeSeatStatus">2</div>
