@@ -1,4 +1,8 @@
 class Admin::CinemasController < ApplicationController
+    def index
+        @cinemas = Cinema.all
+    end
+
     def new
         @cinema = Cinema.new
     end
@@ -15,6 +19,6 @@ class Admin::CinemasController < ApplicationController
 
     private
     def cinema_params
-        params.require(:cinema).permit(:name)
+        params.require(:cinema).permit(:name, :max_row, :max_column)
     end
 end

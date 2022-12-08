@@ -1,1 +1,24 @@
-<h1>123</h1>
+<h1>影廳列表</h1>
+
+<%= link_to "回後台首頁", movies_path %>
+<%= link_to "新增影廳", new_admin_cinema_path %>
+
+<br>
+
+<table>
+  <tr>
+    <td>影廳名稱</td>
+    <td>編輯影廳</td>
+    <td>刪除影廳</td>
+    <td>影廳座位</td>
+  </tr>
+
+  <% @cinemas.each do |cinema| %>
+    <tr>
+        <td><%= link_to("#{cinema.name}", admin_cinema_path(cinema)) %></td>
+        <td><%= link_to "編輯", edit_admin_cinema_path(cinema) %></td>
+        <td><%= link_to "刪除", admin_cinema_path(cinema), method: "delete", data: {confirm: "確定刪除影廳？"} %></td>
+        <td><%= link_to "座位表", admin_cinema_seats_path(cinema) %></td>
+    </tr>
+  <% end %>
+</table>

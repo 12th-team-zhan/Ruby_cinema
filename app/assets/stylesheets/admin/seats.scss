@@ -14,8 +14,8 @@
   width: 600px;
   background-color: #fc9;
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(10, 1fr);
+  // grid-template-rows: repeat(3, 1fr);
+  // grid-template-columns: repeat(10, 1fr);
   row-gap: 20px;
 }
 .item {
