@@ -288,10 +288,6 @@ GEM
     zeitwerk (2.6.6)
 
 PLATFORMS
-<<<<<<< HEAD
-  arm64-darwin-21
-=======
->>>>>>> 553a489 (Cinema新增max row、max column，建立影廳後，可動態新增最大座位表)
   x86_64-linux
 
 DEPENDENCIES

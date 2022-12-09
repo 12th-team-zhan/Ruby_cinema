@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Admin
-  class Admin::CinemasController < ApplicationController
+  class CinemasController < ApplicationController
     def index
       @cinemas = Cinema.all
     end
@@ -19,6 +21,7 @@ module Admin
     end
 
     private
+
     def cinema_params
       params.require(:cinema).permit(:name, :max_row, :max_column)
     end

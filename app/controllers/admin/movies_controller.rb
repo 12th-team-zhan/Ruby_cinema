@@ -43,7 +43,8 @@ module Admin
     end
 
     def movie_params
-      params.require(:movie).permit(:name, :eng_name, :duration, :film_rating, :director, :actor, :debut_date, :description)
+      params.require(:movie).permit(:name, :eng_name, :duration, :film_rating, :director, :actor, :debut_date,
+                                    :description)
     end
   end
 end

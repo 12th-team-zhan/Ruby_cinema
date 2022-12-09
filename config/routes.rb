@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :theaters
 
     resources :cinemas do
-      resources :seats, only: [:index, :new, :create]
+      resources :seats, only: %i[index new create]
     end
   end
 

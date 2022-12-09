@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddCategoryToSeats < ActiveRecord::Migration[6.1]
   def change
     add_column :seats, :category, :integer, default: 0

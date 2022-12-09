@@ -1,2 +1,6 @@
-module Admin::SeatsHelper
+# frozen_string_literal: true
+
+module Admin
+  module SeatsHelper
+  end
 end
