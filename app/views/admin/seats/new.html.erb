@@ -1,6 +1,13 @@
-<%= render "shared/nav" %>
-
-<h1>新增座位</h1>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href=<%= admin_movies_path %>>後台首頁</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            新增座位
+        </li>
+    </ol>
+</nav>
 
 <div class="screen">
     銀幕位置
@@ -11,5 +18,7 @@
 <div data-controller="addseat" data-id="<%= @cinema.id %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" >
     <div class="grid"></div>
 
-    <button class="bg-primary border border-2" data-action="click->addseat#addToTable">下一步</button>
+    <br>
+
+    <button class="btn btn-primary" data-action="click->addseat#addToTable">建立座位</button>
 </div>

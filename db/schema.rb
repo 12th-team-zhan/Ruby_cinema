@@ -59,11 +59,11 @@ ActiveRecord::Schema.define(version: 2022_12_06_030320) do
   end
 
   create_table "seats", force: :cascade do |t|
-    t.string "row"
-    t.string "number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "cinema_id"
+    t.text "seat_list", default: [], array: true
+    t.string "category", default: "added"
     t.index ["cinema_id"], name: "index_seats_on_cinema_id"
   end
 

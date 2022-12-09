@@ -3,9 +3,12 @@ import { Controller } from "stimulus";
 
 export default class extends Controller {
     connect() {
-      this.seatsArr = {};
       this.maxRow = this.element.dataset.maxrow;
       this.maxColumn = this.element.dataset.maxcolumn;
+
+      this.seatsAll = [...Array(this.maxRow * this.maxColumn).keys()].map(x => x + 1);
+      this.seatsNotAdded = [];
+
       this.makeSeatingChart(this.maxRow, this.maxColumn);
     }
 
@@ -16,7 +19,7 @@ export default class extends Controller {
       
       for (var r = 1; r <= maxR; r++) {
         for (let c = 1; c <= maxC; c++) {
-          const item = `<div class="item" data-status="not added" data-action="click->addseat#changeSeatStatus">${(r-1)*maxC + c}</div>`;
+          const item = `<div class="item" data-status="added" data-action="click->addseat#changeSeatStatus">${(r-1)*maxC + c}</div>`;
 
           grid.insertAdjacentHTML("beforeend", item);      
         }
@@ -24,57 +27,53 @@ export default class extends Controller {
     }
 
     changeSeatStatus(el) {
-        const seatId = +el.target.textContent;
-        let seatStatus = el.target.dataset.status;
+      const seatId = +el.target.textContent;
+      let seatStatus = el.target.dataset.status;
 
-        const seatRow = Math.floor(seatId / this.maxRow) + 1;
-        const seatColumn = seatId % this.maxColumn;
+      switch (seatStatus) {
+        case "not added":
+          el.target.classList.remove("bg-transparent")
 
-        switch (seatStatus) {
-            case "not added":
-                el.target.classList.add("bg-danger");
+          el.target.dataset.status = "added";
 
-                seatStatus = "added";
-                el.target.dataset.status = seatStatus;
+          const index = this.seatsNotAdded.indexOf(seatId);
+          this.seatsNotAdded.splice(index, 1);
+          break;
+        case "added":
+          el.target.classList.add("bg-transparent");
 
-                const seatArr = [seatRow, seatColumn, seatStatus];
-                this.seatsArr[seatId] = seatArr;
-                break;
-            case "added":
-                el.target.classList.remove("bg-danger")
+          el.target.dataset.status = "not added";
 
-                seatStatus = "not added";
-                el.target.dataset.status = seatStatus;
-
-                delete this.seatsArr[seatId.toString()];
-                break;
-            default:
-                console.log(123);
-        }        
+          this.seatsNotAdded.push(seatId);
+          break;
+        default:
+          console.log("We don't have the seat status");
+      }        
     }
 
     addToTable() {
-        const token = document.querySelector("meta[name='csrf-token']").content;
-        const cinemaId = this.element.dataset.id;
-        const seats = {"seats": this.seatsArr};
-      
-        fetch(`/admin/cinemas/${cinemaId}/seats`, {
-            method: "POST",
-            headers: {
-              "X-csrf-Token": token,
-              "Content-Type": "application/json"
-            },
-            redirect: 'follow',
-            body: JSON.stringify(seats)
-          })
-          .then((resp) => {
-            console.log(resp);
-            // if (resp.redirected) {
-            //   window.location.href = resp.url;
-            // }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+      const token = document.querySelector("meta[name='csrf-token']").content;
+      const cinemaId = this.element.dataset.id;
+
+      this.seatsAdded = this.seatsAll.filter(s => !this.seatsNotAdded.includes(s));
+      const seats = {"added": this.seatsAdded, "notAdded": this.seatsNotAdded}
+    
+      fetch(`/admin/cinemas/${cinemaId}/seats`, {
+        method: "POST",
+        headers: {
+          "X-csrf-Token": token,
+          "Content-Type": "application/json"
+        },
+        redirect: 'follow',
+        body: JSON.stringify(seats)
+      })
+      .then((resp) => {
+        if (resp.redirected) {
+          window.location.href = resp.url;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
 }
