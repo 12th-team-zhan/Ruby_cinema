@@ -1,1 +1,21 @@
 <h1>訂單列表</h1>
+
+<ul>
+  <% @orders.each do |order| %>
+    <li class="d-flex">
+      <p><%= order.user_id %></p>
+      <p>no.<%= order.id %></p>
+      <p><%= order.status %></p>
+      <%= link_to "查看訂單", order_path(order) %>
+      <p>購買日期： <%= order.created_at.strftime("%Y/%m/%d %I:%M") %></p>
+      <%= link_to "取消訂單", cancel_order_path(order), method:"patch"  %>
+    </li>
+  <% end %>
+</ul>
+
+訂票紀錄
+
+
+
+
+<%= link_to "新增訂單"  , new_order_path %>

@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :movies, only: %i[index show]
   resources :news, only: %i[index show]
   resources :theaters, only: %i[index show]
-  resources :orders
+  resources :orders do
+    member do
+      patch :cancel
+    end
+  end
   namespace :admin do
     resources :users, only: %i[index edit update delete]
     resources :movies do
