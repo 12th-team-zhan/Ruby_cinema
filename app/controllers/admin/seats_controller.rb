@@ -5,8 +5,7 @@ module Admin
     before_action :find_cinema, only: %i[index new create]
 
     def index
-      @added = @cinema.seats.find_by({ category: 1 })
-      @not_added = @cinema.seats.find_by({ category: 0 })
+      @not_added = @cinema.seats.find_by({category: 'not_added'})
     end
 
     def new; end
