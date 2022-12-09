@@ -14,50 +14,64 @@
   </div>
   <div class="card-body">
     <h2 class="card-title">會員條款</h2>
-      <div class="container ">
-        <div class="col-12">
-          <section class="vh-80">
-            <article class="text-start">
-              <ul>
-              <li>1. 威秀影城股份有限公司(以下簡稱威秀影城)所發行之威秀影城iShow卡實體卡或虛擬卡(以下簡稱本卡)，採會員記名式發行，可同時累積威秀影城iShow點數(以下簡稱iShow點數)及快樂購卡點數，且具儲值功能，若憑本卡之儲值金消費，可享會員購票及餐飲優惠。本權益說明部分內容不包含MUVIE CINEMAS，請消費者特別留意。
+    <div class="container ">
+      <div class="col-12">
+        <section class="vh-80">
+          <article class="text-start">
+            <ul class="user_terms">
+              <li>
+                1. 威秀影城股份有限公司(以下簡稱威秀影城)所發行之威秀影城iShow卡實體卡或虛擬卡(以下簡稱本卡)，採會員記名式發行，可同時累積威秀影城iShow點數(以下簡稱iShow點數)及快樂購卡點數，且具儲值功能，若憑本卡之儲值金消費，可享會員購票及餐飲優惠。本權益說明部分內容不包含MUVIE CINEMAS，請消費者特別留意。
               </li>
               <li>
-              2. 請於儲值或消費時，立即確認儲值金額，離開櫃檯後或線上完成交易後如有爭議，恕不負賠償責任。
+                2. 請於儲值或消費時，立即確認儲值金額，離開櫃檯後或線上完成交易後如有爭議，恕不負賠償責任。
               </li>
               <li>
-              3. 每消費40元可集iShow點數一點。
+                3. 每消費40元可集iShow點數一點。
               </li>
               <li>
                 <ul>
                   <p>會員分級制：</p>
-                  <li>統計周期：每年01/01-12/31，依會員當年度有效消費金額進行會員等級調整，並給予不同分級優惠回饋。有效消費金額不含團體電影優惠券、經濟餐飲兌換券、豪華餐飲兌換券及包廳之購買金額。
+                  <li>
+                    統計周期：每年01/01-12/31，依會員當年度有效消費金額進行會員等級調整，並給予不同分級優惠回饋。有效消費金額不含團體電影優惠券、經濟餐飲兌換券、豪華餐飲兌換券及包廳之購買金額。
                   </li>
                   <li>
                     分級說明：分為一般影迷、黃金影迷及白金影迷。一般影迷：加入會員並完成帳號開通；黃金影迷：年度有效消費金額達$5,000元；白金影迷：年度有效消費金額達$10,000元。
-                  </li>    
+                  </li>
                 </ul>
               </li>
               <li>
                 <ul>
-                  <li>1. 於威秀影城官方網站及威秀影城官方APP登入會員後，選擇「線上儲值」，即可使用信用卡進行儲值。</li>
-                  <li>2.使用線上儲值時，需先依照系統規定輸入帳號及密碼，當與註冊資料一致時，無論是否由會員本人親自輸入，均將視為本人所使用，同時需確保您所使用的信用卡資料之機密安全，並為您本人所持有，利用該密碼、帳號及信用卡所進行的一切行動，您須負完全的責任。如您的信用卡遭盜用、不當使用或其他無法辯識是否為本人親自使用之情況時，對此所生之損害，威秀影城概不負責。</li>
+                  <li>
+                    1. 於威秀影城官方網站及威秀影城官方APP登入會員後，選擇「線上儲值」，即可使用信用卡進行儲值。
+                  </li>
+                  <li>
+                    2.使用線上儲值時，需先依照系統規定輸入帳號及密碼，當與註冊資料一致時，無論是否由會員本人親自輸入，均將視為本人所使用，同時需確保您所使用的信用卡資料之機密安全，並為您本人所持有，利用該密碼、帳號及信用卡所進行的一切行動，您須負完全的責任。如您的信用卡遭盜用、不當使用或其他無法辯識是否為本人親自使用之情況時，對此所生之損害，威秀影城概不負責。
+                  </li>
                 </ul>
               </li>
-              </ul>
-            </article>
-          </section>
-              <section>
-                <div class="container text-center p-4">
-                  <div class="row align-items-center">
-                    <div class="col" >
-                      <button type="button" class="btn btn-primary btn-lg mx-3">上一步</button>
-                      <button type="button" class="btn btn-secondary btn-lg mx-3">下一步</button>
-                    </div>
-                  </div>
-                </div>
-              </section>
+            </ul>
+          </article>
+        </section>
+        <div>
+          <input type="checkbox" 
+                 data-action="click->user-register#confirm"
+                 id="TermsCheckbox">
+          <label>我已閱讀以上條款</label>
         </div>
+        <section>
+          <div class="container text-center p-4">
+            <div class="row align-items-center">
+              <div class="col" >
+                <button type="button" class="btn btn-primary btn-lg mx-3" 
+                        data-action="click->user-register#termsBack">上一步</button>
+                <button type="button" class="btn btn-secondary btn-lg mx-3 disabled"
+                        data-action="click->user-register#termsNext"
+                        data-user-register-target="termsConfirmed">下一步</button>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      
+    </div>
   </div>
 </div>

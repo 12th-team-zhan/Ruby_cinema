@@ -14,34 +14,33 @@
   </div>
   <div class="card-body">
     <h2 class="card-title">會員權益</h2>
-      <section class="vh-80">
-        <div class="container py-6">
-          <div class="row d-flex align-items-center justify-content-center">
-            <div class="col-10 col-xl-8 ">
-              <table class="table">
-                <thead class="table-primary">
-                  <td>相關權益</td>
-                  <td>無使用儲值金</td>
-                  <td>使用儲值金</td>
-                </thead>
-                <tbody>
-                  <td>票價優惠</td>
-                  <td>X</td>
-                  <td>O</td>
-                </tbody>
-                  <tbody>
-                  <td>餐飲折扣</td>
-                  <td>X</td>
-                  <td>O</td>
-                </tbody>
-                  <tbody>
-                  <td>線上訂票贈點數</td>
-                  <td>O</td>
-                  <td>O</td>
+    <section class="vh-80">
+      <div class="container py-6">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="col-10 col-xl-8 ">
+            <table class="table">
+              <thead class="table-primary">
+                <td>相關權益</td>
+                <td>無使用儲值金</td>
+                <td>使用儲值金</td>
+              </thead>
+              <tbody>
+                <td>票價優惠</td>
+                <td>X</td>
+                <td>O</td>
+              </tbody>
+              <tbody>
+                <td>餐飲折扣</td>
+                <td>X</td>
+                <td>O</td>
+              </tbody>
+              <tbody>
+                <td>線上訂票贈點數</td>
+                <td>O</td>
+                <td>O</td>
               </table>
-
               <div class="container text-center">
-                <%# 會員等級 表頭  %>
+                <!-- 會員等級 表頭  -->
                 <div class="row align-items-start text-white bg-primary p-8">
                   <div class="col">
                     會員分級
@@ -56,7 +55,7 @@
                     白金
                   </div>
                 </div>
-                <%# 會員福利 內容 %>
+                <!-- 會員福利 內容 -->
                 <div class="row align-items-start p-8 m-0 ">
                   <div class="col">
                     分級辦法
@@ -99,7 +98,6 @@
                     不定期獨享活動
                   </div>
                 </div>
-            
               </div>
             </div>
           </div>
@@ -111,11 +109,11 @@
             <div class="col">
               <button type="button" 
                       class="btn btn-secondary btn-lg mx-3" 
-                      >下一步</button>
+                      data-action="click->user-register#benefitsNext">
+                下一步</button>
             </div>
           </div>
         </div>
       </section>
-        
+    </div>
   </div>
-</div>

@@ -1,7 +1,8 @@
 <h2>修改會員資料</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-
+  
+    <!-- name -->
     <div class="mb-4">
       <div>
         <label class="form-label" for="form1Example13">您的姓名</label>
@@ -9,9 +10,9 @@
       <div>
         <%= f.text_field :name, autofocus: true, autocomplete: "name" %> 
       </div>
-    </div>   
+    </div>  
 
-    <%# email %>
+      <!-- email -->
     <div class="field mb-4">
       <div>
         <label class="form-label" for="form1Example13">網路帳號信箱</label>
@@ -21,12 +22,11 @@
       </div>
     </div>
 
-
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
 
-    <%# password %>
+    <!-- password  -->
     <div class="field mb-4">
       <div>
         <label class="form-label" for="form1Example13">新密碼（不更改密碼則不需填寫）</label>
@@ -38,7 +38,8 @@
         <%= f.password_field :password, autocomplete: "new-password" %>                  
       </div>
     </div>
-
+    
+    <!-- password_confirmation  -->
     <div class="field mb-4">
       <div>
         <label class="form-label" for="form1Example13">確認新密碼</label>
@@ -48,7 +49,7 @@
       </div>
     </div>
 
-    <%# 目前密碼 %>
+    <!-- current_password -->
     <div class="field mb-4">
       <div>
         <label class="form-label" for="form1Example13">輸入原密碼以儲存變更</label>
@@ -58,12 +59,10 @@
       </div>
     </div>
 
- 
-
-  <div class="actions">
-    <%= f.submit "修改" %>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= f.submit "修改" %>
+    </div>
+  <% end %>
 
 <h3>刪除帳號</h3>
 

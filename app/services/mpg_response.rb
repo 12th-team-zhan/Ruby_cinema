@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MpgResponse
   attr_reader :status, :message, :result, :order_no, :trans_no
 
@@ -9,9 +11,8 @@ class MpgResponse
     @status = response['Status']
     @message = response['Message']
     @result = response['Result']
-    @order_no = @result["MerchantOrderNo"]
-    @trans_no = @result["TradeNo"]
-
+    @order_no = @result['MerchantOrderNo']
+    @trans_no = @result['TradeNo']
   end
 
   def success?
@@ -19,9 +20,10 @@ class MpgResponse
   end
 
   private
+
   def decrypy(encrypted_data)
     encrypted_data = [encrypted_data].pack('H*')
-    decipher = OpenSSL::Cipher::AES256.new(:CBC)
+    decipher = OpenSSL::Cipher.new('aes-256-cbc')
     decipher.decrypt
     decipher.padding = 0
     decipher.key = @key
