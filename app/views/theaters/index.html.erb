@@ -1,0 +1,40 @@
+<%= render "shared/nav" %>
+<div class="front-breadcrumb bg-Silver">
+  <nav class="container px-lg-5p" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "Home", root_path, class: "text-muted"  %></li>
+      <li class="breadcrumb-item active text-deepskyblue" aria-current="page">theater</li>
+    </ol>
+  </nav>
+</div>
+<div class="container px-lg-5p">
+  <h1 class="text-deepskyblue">影城據點</h1>
+  <div class="theater-list  d-flex  flex-wrap">
+    <% @theaters.each do |theater| %>
+      <div class="card theater-card col-12 col-xl-6 py-4 ">
+        <div class="d-flex flex-column flex-sm-row">
+          <div class="img">
+            <% if theater.exterior_img.attached? %>
+              <%= image_tag theater.exterior_img, size: "300x200" %>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= theater.name %></h5>
+            <div class="d-flex position-relative">
+              <div class="icon ps-1">
+                <i class="fa-solid fa-location-dot "></i>
+              </div>
+              <p class="card-text ms-4">影城地址：<%= theater.address %></p>
+            </div>
+            <div class="d-flex position-relative">
+              <div class="icon">
+                <i class="fa-solid fa-phone-flip "></i>
+              </div>
+              <p class="card-text ms-4">服務專線：<%= theater.phone %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

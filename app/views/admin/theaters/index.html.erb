@@ -1,22 +1,42 @@
-<h1>影城據點列表</h1>
-
-<table>
-  <tr>
-    <td>影城名稱</td>
-    <td>編輯影城</td>
-    <td>刪除影城</td>
-  </tr>
-
-  <% @theaters.each do |theater| %>
-  <tr>
-    <td><%= link_to theater.name, admin_theater_path(theater) %></td>
-    <td><%= link_to "編輯", edit_admin_theater_path(theater) %></td>
-    <td><%= link_to "刪除", admin_theater_path(theater), method: "delete", data: {confirm: "確定刪除影城？"} %></td>
-  </tr>
-  <% end %>
-</table>
-
-<br>
-<%= link_to "新增影城", new_admin_theater_path %> 
-<br>
-<%= link_to "回首頁", root_path %>
+<div class="continer vh-100  text-white">
+  <div class="d-flex vh-100">
+    <%= render "admin/shared/sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "Home", admin_theaters_path %></li>
+            <li class="breadcrumb-item active" aria-current="page">Movie list</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="container">
+        <%= link_to "新增影城", new_admin_theater_path, class: "btn btn-primary" %>
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th scope="col">戲院名稱</th>
+              <th scope="col">影聽管理</th>
+              <th scope="col">最後編輯者ID</th>
+              <th scope="col">建立者ID</th>
+              <th scope="col">建立時間</th>
+              <th scope="col">編輯時間</th>
+            </tr>
+          </thead>
+          <% @theaters.each do |theater| %>
+            <tbody>
+              <tr>
+                <th scope="row"><%= link_to theater.name,edit_admin_theater_path(theater) %></th>
+                <td>1</td>
+                <td>123</td>
+                <td><%= theater.id %></td>
+                <td><%= theater.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+                <td><%= theater.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

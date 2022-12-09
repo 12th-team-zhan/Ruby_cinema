@@ -7,6 +7,8 @@ $deepskyblue: #2f96ee;
 $darkgray: #999;
 $white: #fff;
 $slategray: #3c3f48;
+$Silver: #f5f1f1;
+$card-border-width: 0px;
 
 $custom-theme-colors: (
   "cerulean": $cerulean,
@@ -14,6 +16,7 @@ $custom-theme-colors: (
   "darkgray": $darkgray,
   "white": $white,
   "slategray": $slategray,
+  "Silver": $Silver,
 );
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
@@ -25,6 +28,26 @@ $utilities-text-colors: map-loop(
   "text"
 );
 $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 3.5,
+  7: $spacer * 4,
+  8: $spacer * 4.5,
+  9: $spacer * 5,
+  10: $spacer * 5.5,
+  50px:50px,
+  100px:100px,
+  5p:5%,
+  10p:10%,
+  20p:20%
+);
+
 
 $utilities: (
   "width": (
@@ -47,8 +70,6 @@ $utilities: (
     property: height,
     class: h,
     values: (
-      1px:1px,
-      0: 0%,
       25: 25%,
       50: 50%,
       75: 75%,
@@ -122,24 +143,34 @@ $utilities: (
 // scss-docs-end import-stack
 
 .btn-cerulean {
-    --bs-btn-color: var(--bs-gray-300);
-    --bs-btn-border-color: none;
-    --bs-btn-active-bg: none;
-    --bs-btn-hover-bg: none;
-    --bs-btn-disabled-color: var(--white);
-    --bs-btn-disabled-opacity: 1;
+  --bs-btn-color: var(--bs-gray-300);
+  --bs-btn-disabled-bg:none;
+  --bs-btn-border-color: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-hover-bg: none;
+  --bs-btn-disabled-color: var(--white);
+  --bs-btn-disabled-opacity: 1;
   span {
     display: block;
-    transition: transform 0.2s, border-bottom 0.4s ease;
+    transition: transform 0.2s ,border-bottom 1s;
     transform: scale(1);
     transform-origin: center;
-    border-bottom: 0px solid none;
+    border-bottom: 2px solid $cerulean;
   }
   &:hover span {
     transform: scale(1.1);
     border-bottom: 2px solid white;
   }
 }
-a{
-  text-decoration: none;
+.btn-deepskyblue {
+  --bs-btn-color: var(--white);
+  --bs-btn-hover-bg: var(--bs-backdrop-bg);
+}
+
+.front-breadcrumb {
+  .breadcrumb {
+    --bs-breadcrumb-bg: var(--bs-Silver);
+    --bs-breadcrumb-padding-y:20px;
+    --bs-breadcrumb-font-size:20px;
+  }
 }

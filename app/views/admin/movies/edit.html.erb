@@ -1,3 +1,96 @@
-<h1>電影編輯</h1>
-<%= @movie.name %>
-<%= render "form", movie: @movie, url:admin_movies_path(@movie), method:"PATCH" %>
+<div class="continer">
+  <div class="d-flex ">
+    <%= render "admin/shared/sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "Home",movies_path %></li>
+            <li class="breadcrumb-item active"><%= link_to "Movie list",admin_movies_path %></li>
+            <li class="breadcrumb-item active" aria-current="page">Movie edit</li>
+          </ol>
+        </nav>
+      </div>
+      <%= form_with model: [:admin, @movie] do |f| %>
+        <div class="edit container d-flex">
+          <div class="movie_posters">
+            <% if @movie.movie_poster.attached? %>
+              <div>
+                <%= image_tag  @movie.movie_poster ,width:"350", height: "500" %>
+                <%= link_to "刪除圖片", delete_images_admin_movie_path(@movie.movie_poster.id),
+                    method: "DELETE", class: "d-block", data: {confirm: "Are you sure?"} %>
+              </div>
+            <% else %>
+              <%= f.label "上傳海報圖", for: "movie_movie_poster" %>
+              <%= f.file_field :movie_poster, class: "d-none" %>
+            <% end %>
+          </div>
+          <div class="input flex-grow-1 d-flex flex-column justify-content-around">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">電影名稱</span>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">電影英文名稱</span>
+              <%= f.text_field :eng_name, class: "form-control" %>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">時長</span>
+              <%= f.number_field :duration, class: "form-control" %>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">級數</span>
+              <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), 
+                @movie.film_rating),{}, {class: "form-select" }%>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">導演</span>
+              <%= f.text_field :director, class: "form-control" %>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">主演</span>
+              <%= f.text_field :actor, class: "form-control" %>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">上映日期</span>
+              <%= f.date_select :debut_date , {discard_year: true}, {class: "form-select"} %>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">簡介</span>
+          <%= f.text_area :description, cols: 30, rows: 30, class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <%= f.submit %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<% if @movie.scene_images.attached? %>
+  <% @movie.scene_images.each do |image| %>
+    <div>
+      <%= image_tag image ,width:"350", height: "500" %>
+      <%= link_to "刪除圖片", delete_images_admin_movie_path(image.id),
+          method: "DELETE", class: "d-block", data: {confirm: "Are you sure?"} %>
+    </div>
+  <% end %>
+<% else %>
+  <p class="not-find-movie-posters">123</p>
+<% end %>
+
+<% if @movie.scene_images.attached? %>
+  <% @movie.scene_images.each do |image| %>
+    <div>
+      <%= image_tag image ,width:"350", height: "500" %>
+      <%= link_to "刪除圖片", delete_images_admin_movie_path(image.id),
+          method: "DELETE", class: "d-block", data: {confirm: "Are you sure?"} %>
+    </div>
+  <% end %>
+<% else %>
+  <p class="not-find-movie-posters">123</p>
+<% end %>

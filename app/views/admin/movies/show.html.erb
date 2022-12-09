@@ -1,6 +1,14 @@
 <h1>電影編輯</h1>
-<%= @movie.name %>
-
-
+<div>
+  <%= @movie.name %>
+</div>
+<%= @movie.scene_images.attached? %>
+<% if @movie.scene_images.attached? %>
+  <% @movie.scene_images.each do |image| %>
+    <div>
+      <%= image_tag image ,width:"200", height: "300" %>
+      <%= image.id %> <%= link_to "移除", "#" %>
+    </div>
+  <% end %>
+<% end %>
 <%= link_to "編輯" ,edit_admin_movie_path %>
-
