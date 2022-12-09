@@ -1,0 +1,16 @@
+<section>
+    <h2>訂單編號：<%= @order.serial %></h2> 
+    <article>
+      <h3>訂單金額 <%= @order.amount %></h3>
+      <!-- 電影票明細 -->
+      <div>訂單明細： 
+        <ul>
+          <li>(電影票明細1)</li>
+          <li>(電影票明細2)</li>
+          <li>(電影票明細3)</li>
+          <li>(電影票明細4)</li>
+        </ul>
+      </div>
+    </article>
+    <%= link_to "回訂單列表" , admin_orders_path %>
+</section>

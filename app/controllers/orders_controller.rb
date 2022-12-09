@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :current_user_is_admin, only: [:edit, :update]
-  before_action :find_order, only: [:edit, :update, :show, :destroy, :cancel]
+  before_action :find_order, only: [:edit, :update, :show, :cancel]
 
   def  index
     @orders = current_user.orders.all
@@ -21,7 +21,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    # render html:params
   end
 
   def edit
@@ -32,11 +31,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def destroy
-    @order.destroy
-    redirect_to orders_path, notice:"訂單刪除"
-  end
-
   def cancel
     @order.update(status: "cancel")
     redirect_to orders_path, notice:"訂單取消"
@@ -44,7 +38,7 @@ class OrdersController < ApplicationController
 
   private
   def clean_order_params
-    params.require(:order).permit(:amount, :serial, :status, :payment_method, :created_at)
+    params.require(:order).permit(:amount, :payment_method, :created_at)
   end
 
   def find_order

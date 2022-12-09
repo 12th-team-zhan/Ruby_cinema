@@ -27,9 +27,12 @@ Rails.application.routes.draw do
     resources :showtimes
     resources :news
     resources :theaters
-
     resources :cinemas do
       resources :seats, only: %i[index new create]
+    resources :orders do
+      member do
+        patch :cancel
+      end
     end
   end
   namespace :api do

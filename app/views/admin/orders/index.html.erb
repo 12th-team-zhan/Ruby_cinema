@@ -1,0 +1,42 @@
+<div class="continer vh-100  text-white">
+  <div class="d-flex vh-100">
+    <%= render "sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "Home",movies_path %></li>
+            <li class="breadcrumb-item active" aria-current="page">Order</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="container">
+        <%= link_to "新增電影",new_admin_movie_path ,class: "btn btn-primary" %>
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th scope="col">訂單編號</th>
+              <th scope="col">訂單狀態</th>
+              <th scope="col">訂購者</th>
+              <th scope="col">最後編輯者ID</th>
+              <th scope="col">建立時間</th>
+              <th scope="col">編輯時間</th>
+            </tr>
+          </thead>
+          <% @orders.each do |order| %>
+            <tbody>
+              <tr>
+                <th scope="row"><%= link_to order.serial, admin_order_path(order) %></th>
+                <td><%= order.status %></td>
+                <td><%= order.user.name %></td>
+                <td>X</td>
+                <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+                <td><%= order.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
