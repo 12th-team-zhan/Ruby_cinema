@@ -20,6 +20,7 @@ module Admin
 
     def update
       if @movie.update(movie_params)
+        append_movie_poster
         redirect_to admin_movies_path, notice: '成功修改'
       else
         render :edit
@@ -28,12 +29,22 @@ module Admin
 
     def create
       @movie = current_user.movies.create(movie_params)
-
       if @movie.save
-        redirect_to admin_movies_path, notice: '成功新增電影！'
+        append_movie_poster
+        redirect_to admin_movies_path, notice: '成功新增電影!'
       else
         render :new
       end
+    end
+
+    def delete_images
+      @image = ActiveStorage::Attachment.find(params[:id])
+      @image.purge
+      redirect_to admin_movies_path
+    end
+
+    def create_movie_poster
+      append_movie_poster
     end
 
     private
@@ -43,8 +54,21 @@ module Admin
     end
 
     def movie_params
-      params.require(:movie).permit(:name, :eng_name, :duration, :film_rating, :director, :actor, :debut_date,
-                                    :description)
+      params.require(:movie).permit(:name, :eng_name, :duration, :film_rating, :director, :actor, :debut_date, :description)
+    end
+
+    def append_movie_poster
+      return if params[:movie][:movie_poster].blank?
+
+      @movie.movie_poster.attach(params[:movie][:movie_poster])
+    end
+
+    def append_images
+      return if params[:movie][:scene_images].blank?
+
+      params[:movie][:scene_images].each do |image|
+        @movie.scene_images.attach(image)
+      end
     end
   end
 end
