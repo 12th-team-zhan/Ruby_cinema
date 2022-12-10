@@ -1,0 +1,44 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.member_card {
+  h4 {
+    font-size: 1.5rem;
+  }
+  img {
+    width: 100%;
+  }
+
+  .fa-ticket {
+    font-size: 1rem;
+    transform: rotate(-45deg);
+    margin-right: 10px;
+  }
+
+  .card-title {
+    .membership_level {
+      font-size: 1rem;
+    }
+  }
+  ul {
+    padding: 0px;
+
+    li {
+      h5 {
+        font-size: 1rem;
+      }
+      button {
+        margin-bottom: 10px;
+        margin-left: 0px;
+        font-size: 0.5rem;
+      }
+    }
+  }
+}
+
+// .check_order_btn{
+//   font-size: 1rem;
+//   color: white;
+// }

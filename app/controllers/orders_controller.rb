@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :current_user_is_admin, only: [:edit, :update]
-  before_action :find_order, only: [:edit, :update, :show, :cancel]
+  before_action :find_order, only: [:show, :cancel]
 
   def  index
-    @orders = current_user.orders.all
+    @orders = current_user.orders.all.order(created_at: :desc)
+    @user = current_user
   end
 
   def new
@@ -20,20 +20,14 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-  end
 
-  def edit
-    if @order.update(clean_order_params)
-      redirect_to orders_path, notice:"訂單已成立"
-    else
-      render :new, alert:"修改失敗"
-    end
+  def show
   end
 
   def cancel
     @order.update(status: "cancel")
     redirect_to orders_path, notice:"訂單取消"
+    # render json: { status: @order.status }
   end
 
   private

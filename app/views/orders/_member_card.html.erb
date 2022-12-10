@@ -1,0 +1,61 @@
+<section class="member_card">
+  <div class="card mb-3">
+    <div class="card-header text-bg-primary text-start d-flex">
+      <div>
+        <i class="fa-solid fa-ticket"></i>
+      </div>
+      <h4 class="d-block my-0">會員專區</h4>
+    </div>
+    <div class="card-body text-start">
+      <!-- 會員等級 -->
+      <div class="card-title">
+        <div class="row">
+          <div class="col-4">
+            <img
+              src="https://www.vscinemas.com.tw/vsweb/upload/content/01.png"
+              alt=""
+            />
+          </div>
+          <div class="col-8">
+            <h4 class="membership_level">一般影迷</h4>
+            <h5 class="card-text">HI! <%= @user.name %></h5>
+          </div>
+        </div>
+      </div>
+      <!-- 會員條碼 -->
+      <div></div>
+      <!-- 點數紀錄 -->
+      <ul>
+        <li class="d-flex justify-content-between">
+          <h5>iShow點數： 0</h5>
+          <button type="button" class="btn btn-success">
+            點數紀錄
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </button>
+        </li>
+        <li class="d-flex justify-content-between">
+          <h5>儲值金餘額： $0</h5>
+          <button type="button" class="btn btn-success">
+            儲值紀錄
+            <i class="fa-solid fa-chart-bar"></i>
+          </button>
+        </li>
+        <li class="d-flex justify-content-between">
+          <h5>年度消費金額: $0</h5>
+          <button type="button" class="btn btn-success">信用卡登錄/查詢</button>
+        </li>
+      </ul>
+      <div>12/31前再消費5000元，即可成為黃金影迷。</div>
+      <div>
+        <h6>會籍期限:永久會員</h6>
+        <a href="#">點我了解會員權益</a>
+      </div>
+      <button type="button" class="btn btn-primary d-flex">
+        我要儲值
+        <div>
+          <i class="fa-solid fa-money-bill-1-wave"></i>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>

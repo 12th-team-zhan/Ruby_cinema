@@ -11,6 +11,8 @@ class Order < ApplicationRecord
 
   private
     def generate_serial
-      self.serial = SecureRandom.alphanumeric(10)
+      if self.serial.nil?
+        self.serial = SecureRandom.alphanumeric(10)
+      end
     end
 end
