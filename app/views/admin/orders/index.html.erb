@@ -11,7 +11,8 @@
         </nav>
       </div>
       <div class="container">
-        <%= link_to "新增電影",new_admin_movie_path ,class: "btn btn-primary" %>
+        <!-- 測試用，連上購物車就刪除 -->
+        <%= link_to "新增訂單", new_admin_order_path, class: "btn btn-primary" %>
         <table class="table table-striped ">
           <thead>
             <tr>
@@ -21,6 +22,7 @@
               <th scope="col">最後編輯者ID</th>
               <th scope="col">建立時間</th>
               <th scope="col">編輯時間</th>
+              <th scope="col">刪除訂單</th>
             </tr>
           </thead>
           <% @orders.each do |order| %>
@@ -32,6 +34,7 @@
                 <td>X</td>
                 <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
                 <td><%= order.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+                <td><%= link_to "刪除", admin_order_path(order), method:"delete", data:{confirm:"確定刪除？"} %></td>
               </tr>
             </tbody>
           <% end %>

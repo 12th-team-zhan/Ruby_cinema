@@ -8,6 +8,7 @@ module Admin
       @orders = Order.all
     end
 
+    #＝＝＝＝＝＝＝＝＝連結購物車後刪除＝＝＝＝＝＝＝＝＝
     def new
       @order = current_user.orders.new
     end
@@ -15,19 +16,20 @@ module Admin
     def create
       @order = current_user.orders.new(clean_order_params)
       if @order.save
-        redirect_to orders_path, notice:"訂單已成立"
+        redirect_to admin_orders_path, notice:"訂單已成立"
       else
         render :new, alert:"建立失敗"
       end
     end
+    #＝＝＝＝＝＝＝＝＝/連結購物車後刪除＝＝＝＝＝＝＝＝＝
 
-    def show
-      # render html:params
-    end
+    def show;  end
 
-    def edit
+    def edit;   end
+
+    def update
       if @order.update(clean_order_params)
-        redirect_to orders_path, notice:"訂單已成立"
+        redirect_to admin_orders_path, notice:"訂單已成立"
       else
         render :new, alert:"修改失敗"
       end
@@ -35,12 +37,12 @@ module Admin
 
     def destroy
       @order.destroy
-      redirect_to orders_path, notice:"訂單刪除"
+      redirect_to admin_orders_path, notice:"訂單刪除"
     end
 
     def cancel
       @order.update(status: "cancel")
-      redirect_to orders_path, notice:"訂單取消"
+      redirect_to admin_orders_path, notice:"訂單取消"
     end
 
     private

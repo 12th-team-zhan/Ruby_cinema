@@ -1,7 +1,10 @@
+<h1>訂單明細(訂單編號：<%= @order.serial %>)</h1>
 <section>
-    <h2>訂單編號：<%= @order.serial %></h2> 
+    <head>
+      <div>付款方式：<%= @order.payment_method %></div> 
+      <div>訂單金額 <%= @order.amount %></div>
+    </head>
     <article>
-      <h3>訂單金額 <%= @order.amount %></h3>
       <!-- 電影票明細 -->
       <div>訂單明細： 
         <ul>
@@ -12,5 +15,8 @@
         </ul>
       </div>
     </article>
-    <%= link_to "回訂單列表" , admin_orders_path %>
+    <div>
+      <%= link_to "編輯訂單" , edit_admin_order_path %>
+      <%= link_to "回訂單列表" , admin_orders_path %>
+    </div>
 </section>
