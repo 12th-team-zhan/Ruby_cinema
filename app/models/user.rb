@@ -9,6 +9,8 @@ class User < ApplicationRecord
   acts_as_paranoid
   has_many :movies, dependent: :destroy
 
+  enum role: { user: 0, staff: 1, admin: 2 }
+
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid
     user = User.find_by(fb_uid: auth.uid)
@@ -39,5 +41,4 @@ class User < ApplicationRecord
     user.save!
     user
   end
-  enum role: { user: 0, staff: 1, admin: 2 }
 end

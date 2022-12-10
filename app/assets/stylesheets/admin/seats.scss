@@ -1,0 +1,32 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.screen {
+  width: 600px;
+  padding: 10px 15px;
+  text-align: center;
+  background-color: #ddd;
+  border: 1px solid #aaa;
+}
+.grid {
+  width: 600px;
+  background-color: #fc9;
+  display: grid;
+  // grid-template-rows: repeat(3, 1fr);
+  // grid-template-columns: repeat(10, 1fr);
+  row-gap: 20px;
+}
+.item {
+  font-size: 14px;
+  color: #fff;
+  background-color: #5bc0de;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+
+.item:hover {
+  background-color: #ff0;
+}

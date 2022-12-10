@@ -1,0 +1,24 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href=<%= admin_movies_path %>>後台首頁</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            新增座位
+        </li>
+    </ol>
+</nav>
+
+<div class="screen">
+    銀幕位置
+</div>
+
+<br>
+
+<div data-controller="addseat" data-id="<%= @cinema.id %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" >
+    <div class="grid"></div>
+
+    <br>
+
+    <button class="btn btn-primary" data-action="click->addseat#addToTable">建立座位</button>
+</div>

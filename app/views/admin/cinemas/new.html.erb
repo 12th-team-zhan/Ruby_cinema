@@ -1,0 +1,48 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href=<%= admin_movies_path %>>後台首頁</a>
+        </li>
+        <li class="breadcrumb-item" aria-current="page">
+            <a href=<%= admin_cinemas_path %>>影廳列表</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            新增影廳
+        </li>
+    </ol>
+</nav>
+
+<div>
+    <%= form_with(url: admin_cinemas_path, model: @cinema, method: "post") do |f| %>
+        <div>
+            <%= f.label("影廳名稱") %>
+        </div>
+        <div>
+            <%= f.text_field(:name) %>
+        </div>
+
+        <br>
+
+        <div>
+            <%= f.label("最大排數") %>
+        </div>
+        <div>
+            <%= f.text_field(:max_row) %>
+        </div>
+
+        <br>
+        
+        <div>
+            <%= f.label("最大欄數") %>
+        </div>
+        <div>
+            <%= f.text_field(:max_column) %>
+        </div>
+
+        <br>
+        
+        <div>
+            <%= f.submit("建立影廳") %>
+        </div>
+    <% end %>
+</div>

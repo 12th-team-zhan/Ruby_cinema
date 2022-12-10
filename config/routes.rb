@@ -13,7 +13,12 @@ Rails.application.routes.draw do
     resources :showtimes
     resources :news
     resources :theaters
+
+    resources :cinemas do
+      resources :seats, only: %i[index new create]
+    end
   end
+
   namespace :"api/v1" do
   end
 end
