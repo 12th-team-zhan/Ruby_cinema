@@ -43,6 +43,7 @@ $spacers: (
   10: $spacer * 5.5,
   50px:50px,
   100px:100px,
+  4p:4%,
   5p:5%,
   10p:10%,
   20p:20%
@@ -170,7 +171,7 @@ $utilities: (
 .front-breadcrumb {
   .breadcrumb {
     --bs-breadcrumb-bg: var(--bs-Silver);
-    --bs-breadcrumb-padding-y:20px;
+    --bs-breadcrumb-padding-y:5px;
     --bs-breadcrumb-font-size:20px;
   }
 }

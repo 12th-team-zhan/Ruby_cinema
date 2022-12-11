@@ -1,6 +1,6 @@
 <nav class="navbar px-2 navbar-expand-sm p-0 navbar-light justify-content-sm-around bg-cerulean
             text-white">
-  <div class="container px-lg-5p">
+  <div class="container px-lg-4p">
     <a class="navbar-brand  m-sm-0" href=<%= root_path %>>
     <%= image_tag 'ruby.png' ,width:"30", height: "30" %> 寶石影城
     </a>
@@ -46,11 +46,14 @@
             <button class="nav-link text-white p-3" data-bs-toggle="modal" data-bs-target="#Modal">
               登入
             </button>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "註冊", new_user_registration_path, class: "nav-link text-white p-3" %></span>
+        <% end %>
+      </li>
+    </ul>
   </div>
+</div>
 </nav>
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"

@@ -1,20 +1,20 @@
 <%= render "shared/nav" %>
 <div class="front-breadcrumb bg-Silver">
-  <nav class="container" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <nav class="container px-lg-4p" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><%= link_to "Home", root_path, class: "text-muted"  %></li>
       <li class="breadcrumb-item active text-deepskyblue" aria-current="page">movie</li>
     </ol>
   </nav>
 </div>
-<div class="container">
+<div class="container px-lg-4p">
   <h1 class="text-deepskyblue">熱售中</h1>
   <div class="movie-list">
     <div class="d-flex flex-wrap ">
       <% @movie.each do |movie| %>
         <div class="card p-4">
         <% if movie.movie_poster.attached? %>
-          <%= image_tag movie.movie_poster, size: "200x280" %>
+          <%= image_tag movie.movie_poster, size: "190x280" %>
         <% end %> 
           <div class="card-body">
             <h5 class="card-title"><%= movie.name %></h5>
