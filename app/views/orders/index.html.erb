@@ -1,7 +1,11 @@
-<!-- 連結購物車後刪除 -->
-訂票紀錄 <%= link_to "新增訂單" , new_order_path %>
-<!-- 連結購物車後刪除 -->
-
+<%= render "movies/shared/nav" %>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "首頁" , root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "會員專區" , "#" %></li>
+    <li class="breadcrumb-item active" aria-current="page">訂票查詢</li>
+  </ol>
+</nav>
 <div class="container text-center">
   <div class="row d-flex justify-content-evenly">
     <div class="col-12 col-md-7 col-lg-8">
@@ -22,9 +26,9 @@
               >
                 <thead>
                   <tr class="table-secondary">
-                    <th scope="col" class="col-3">訂購時間</th>
-                    <th scope="col" class="col-7">訂購內容</th>
-                    <th scope="col" class="col-2"></th>
+                    <th scope="col" class="col-2 col-md-3">訂購時間</th>
+                    <th scope="col" class="col-7 col-md-6">訂購內容</th>
+                    <th scope="col" class="col-2 col-md-3"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -32,12 +36,23 @@
                   <tr>
                     <td>
                       <p><%= order.created_at.strftime("%Y/%m/%d %I:%M") %></p>
-                      <p><%= order.status %></p>
-                      <div data-id="<%= order.id %>" data-canceled="123">
-                        <%= link_to "取消訂單", cancel_order_path(order),
-                        method:"patch", class:"btn btn-secondary btn-md mx-2
-                        check_order_btn",
-                        data:{action:"click->order-content#cancel"} %>
+                      <div
+                        data-controller="order-cancelbtn"
+                        data-id="<%= order.id %>"
+                        data-canceled="<%= order.status %>"
+                      >
+                        <p data-order-cancelbtn-target="orderStatus">
+                          <%= order.status %>
+                        </p>
+                        <button
+                          method="patch"
+                          class="btn btn-secondary btn-md mx-2"
+                          data-order-cancelbtn-target="cancelBtn"
+                          data-action="click->order-cancelbtn#cancel"
+                          data-confirm="Are you sure？"
+                        >
+                          取消訂單
+                        </button>
                       </div>
                     </td>
                     <td class="text-start mx-3">
@@ -50,17 +65,14 @@
                       </div>
                     </td>
                     <td>
-                      <button
-                        class="btn btn-secondary btn-md"
-                        data-action="click->order-content#read"
-                      >
-                        查看訂單
-                      </button>
+                      <%= link_to "查看訂單", order_path(order), {class:"btn
+                      btn-secondary btn-md" } %>
                     </td>
                   </tr>
                   <% end %>
                 </tbody>
               </table>
+              <%= will_paginate @orders %>
             </div>
           </div>
         </div>
@@ -69,3 +81,6 @@
     <div class="col-12 col-md-5 col-lg-4"><%= render "member_card" %></div>
   </div>
 </div>
+<!-- 連結購物車後刪除 -->
+訂票紀錄 <%= link_to "新增訂單" , new_order_path %>
+<!-- 連結購物車後刪除 -->

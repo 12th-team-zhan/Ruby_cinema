@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :theaters
     resources :cinemas do
       resources :seats, only: %i[index new create]
+    end
     resources :orders do
       member do
         patch :cancel

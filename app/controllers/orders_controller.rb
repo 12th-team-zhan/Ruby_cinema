@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_order, only: [:show, :cancel]
+  before_action :find_order, only: %i[show cancel]
 
-  def  index
-    @orders = current_user.orders.all.order(created_at: :desc)
+  def index
+    @orders = current_user.orders.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
     @user = current_user
   end
 
@@ -14,23 +16,21 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.new(clean_order_params)
     if @order.save
-      redirect_to orders_path, notice:"訂單已成立"
+      redirect_to orders_path, notice: '訂單已成立'
     else
-      render :new, alert:"建立失敗"
+      render :new, alert: '建立失敗'
     end
   end
 
-
-  def show
-  end
+  def show; end
 
   def cancel
-    @order.update(status: "cancel")
-    redirect_to orders_path, notice:"訂單取消"
-    # render json: { status: @order.status }
+    @order.update(status: 'cancel')
+    render json: { status: 'cancel' }
   end
 
   private
+
   def clean_order_params
     params.require(:order).permit(:amount, :payment_method, :created_at)
   end
@@ -38,5 +38,4 @@ class OrdersController < ApplicationController
   def find_order
     @order = current_user.orders.find(params[:id])
   end
-
 end

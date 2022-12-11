@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   belongs_to :user
   # has_many :tickets
@@ -8,11 +10,11 @@ class Order < ApplicationRecord
   before_validation :generate_serial
 
   validates :serial, presence: true, uniqueness: true
+  validates :amount, presence: true
 
   private
-    def generate_serial
-      if self.serial.nil?
-        self.serial = SecureRandom.alphanumeric(10)
-      end
-    end
+
+  def generate_serial
+    return self.serial = SecureRandom.alphanumeric(10) if serial.nil?
+  end
 end

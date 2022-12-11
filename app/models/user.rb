@@ -7,8 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
   acts_as_paranoid
-  
-  #relationship
+
+  # relationship
   has_many :movies, dependent: :destroy
   has_many :orders, dependent: :destroy
 
