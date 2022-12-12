@@ -1,18 +1,16 @@
 <div class="continer vh-100  text-white">
   <div class="d-flex vh-100">
-    <%= render "sidebar" %>
+    <%= render "admin/shared/sidebar" %>
     <div class="main flex-grow-1 p-0 ms-1">
       <div class="container container-breadcrumb ">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "Home",movies_path %></li>
+            <li class="breadcrumb-item"><%= link_to "Home", admin_movies_path %></li>
             <li class="breadcrumb-item active" aria-current="page">Order</li>
           </ol>
         </nav>
       </div>
       <div class="container">
-        <!-- 測試用，連上購物車就刪除 -->
-        <%= link_to "新增訂單", new_admin_order_path, class: "btn btn-primary" %>
         <table class="table table-striped ">
           <thead>
             <tr>
@@ -44,3 +42,5 @@
     </div>
   </div>
 </div>
+<!-- 測試用，連上購物車就刪除 -->
+<%= link_to "新增訂單", new_admin_order_path, class: "btn btn-primary" %>

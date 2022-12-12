@@ -18,7 +18,7 @@ module Admin
       @theater = Theater.new(params_theater)
       if @theater.save
         append_exterior_img
-        redirect_to admin_theaters_path, notice: "新增影城"
+        redirect_to admin_theaters_path, notice: '新增影城'
       else
         render :new
       end

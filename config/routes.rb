@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }, skip: :sessions
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' },
+                     skip: :sessions
   as :user do
     post '/users/sign_in', to: 'devise/sessions#create', as: :user_session
     delete '/users/sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
@@ -30,11 +31,7 @@ Rails.application.routes.draw do
     resources :cinemas do
       resources :seats, only: %i[index new create]
     end
-    resources :orders do
-      member do
-        patch :cancel
-      end
-    end
+    resources :orders
   end
   namespace :api do
     namespace :v1 do

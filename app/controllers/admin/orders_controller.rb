@@ -4,7 +4,7 @@ module Admin
   class OrdersController < ApplicationController
     before_action :authenticate_user!
     before_action :current_user_is_staff
-    before_action :find_order, only: %i[edit update show destroy cancel]
+    before_action :find_order, only: %i[edit update show destroy]
 
     def index
       @orders = Order.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
@@ -38,11 +38,6 @@ module Admin
     def destroy
       @order.destroy
       redirect_to admin_orders_path, notice: '訂單刪除'
-    end
-
-    def cancel
-      @order.update(status: 'cancel')
-      redirect_to admin_orders_path, notice: '訂單取消'
     end
 
     private
