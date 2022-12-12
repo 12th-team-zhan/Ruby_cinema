@@ -9,10 +9,9 @@ export default class extends Controller {
         let theatersList = []
         const theaterTarget = this.theaterTarget
 
-        fetch('http://127.0.0.1:3000/api/v1/getMovieList')
+        fetch('http://127.0.0.1:3000/api/v1/getTheaterList')
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 theatersList = data
                 theater()
             })
@@ -31,9 +30,9 @@ export default class extends Controller {
 
     }
     theater() {
+        console.log("theater");
         if (this.theaterTarget.value && this.theaterTarget.value != "請選擇影城") {
             const moviesList = this.getMovie(this.theaterTarget.value)
-            console.log(moviesList);
             moviesList.forEach((movie) => {
                 let element = `<option value="${movie}">${movie}</option>`
                 this.movieTarget.insertAdjacentHTML("beforeend", element)
@@ -53,7 +52,8 @@ export default class extends Controller {
     }
 
     movie() {
-        if (this.dateTarget.value && this.dateTarget.value != "請選擇電影") {
+        console.log("movie");
+        if (this.movieTarget.value && this.movieTarget.value != "請選擇電影") {
             const datesList = this.getDate(this.dateTarget.value)
             console.log(datesList);
             datesList.forEach((date) => {
@@ -72,8 +72,9 @@ export default class extends Controller {
     }
 
     date() {
-        if (this.movieTarget.value && this.movieTarget.value != "請選擇場次") {
-            const showTimesList = this.getShowTime(this.movieTarget.value)
+        console.log("date");
+        if (this.dateTarget.value && this.dateTarget.value != "請選擇日期") {
+            const showTimesList = this.getShowTime(this.dateTarget.value)
             console.log(showTimesList);
             showTimesList.forEach((showTime) => {
                 let element = `<option value="${showTime}">${showTime}</option>`
