@@ -18,8 +18,9 @@ export default class extends Controller {
       grid.style.cssText += `grid-template-rows: repeat(${maxR}, 1fr);grid-template-columns: repeat(${maxC}, 1fr);`;
       
       for (var r = 1; r <= maxR; r++) {
+        let row_index = String.fromCharCode(r + 64);
         for (let c = 1; c <= maxC; c++) {
-          const item = `<div class="item" data-status="added" data-action="click->addseat#changeSeatStatus">${(r-1)*maxC + c}</div>`;
+          const item = `<div class="seat-item" data-seat-id=${(r-1)*maxC + c} data-status="added" data-action="click->addseat#changeSeatStatus">${row_index}${String(c).padStart(2, '0')}</div>`;
 
           grid.insertAdjacentHTML("beforeend", item);      
         }
@@ -27,7 +28,7 @@ export default class extends Controller {
     }
 
     changeSeatStatus(el) {
-      const seatId = +el.target.textContent;
+      const seatId = +el.target.dataset.seatId;
       let seatStatus = el.target.dataset.status;
 
       switch (seatStatus) {
@@ -67,11 +68,11 @@ export default class extends Controller {
         redirect: 'follow',
         body: JSON.stringify(seats)
       })
-      .then((resp) => {
-        if (resp.redirected) {
-          window.location.href = resp.url;
-        }
-      })
+      // .then((resp) => {
+      //   if (resp.redirected) {
+      //     window.location.href = resp.url;
+      //   }
+      // })
       .catch((err) => {
         console.log(err);
       });
