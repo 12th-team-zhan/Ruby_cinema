@@ -11,6 +11,7 @@ export default class extends Controller {
     }
 
     connect() { }
+
     addClassAt(e) {
         switch (e.srcElement.autocomplete) {
             case "current-password":
@@ -51,7 +52,7 @@ export default class extends Controller {
         this.loginAt()
     }
 
-    test(e) {
+    keyup(e) {
         if (e.srcElement.value) {
             this.inputValueStatus(e.srcElement.autocomplete, true)
         }

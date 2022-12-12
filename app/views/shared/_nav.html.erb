@@ -1,37 +1,103 @@
-<nav class="navbar px-2 navbar-expand-sm p-0 navbar-light justify-content-sm-around bg-cerulean text-white">
-  <a class="navbar-brand  m-sm-0" href="#">
-    <%= image_tag 'ruby.png' ,width:"30", height: "30" %>
-    <span>寶石影城</span>
-  </a>
-  <button
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarNav"
-    class="navbar-toggler collapsed d-flex d-sm-none flex-column justify-content-around m-0 "
-    aria-controls="collapse"
-    aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span class="toggler-icon top-bar"></span>
-    <span class="toggler-icon middle-bar"></span>
-    <span class="toggler-icon bottom-bar"></span>
-  </button>
-  <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
-    <ul class="navbar-nav active">
-      <li class="nav-item active">
-        <a href="#" class="nav-link text-white p-3">影城介紹</a>
-      </li>
-      <li class="nav-item active">
-        <a href="#" class="nav-link text-white p-3">電影介紹</a>
-      </li>
-      <li class="nav-item active">
-        <% if user_signed_in? %>
-          <%= link_to "登出", destroy_user_session_path, method: "delete", class: "nav-link text-white p-3" %>
-        <% else %>
-          <button class="nav-link text-white p-3" data-bs-toggle="modal" data-bs-target="#Modal">
-            登入
-          </button>
+<nav class="navbar px-2 navbar-expand-sm p-0 navbar-light justify-content-sm-around bg-cerulean
+            text-white">
+  <div class="container px-lg-4p">
+    <a class="navbar-brand  m-sm-0" href=<%= root_path %>>
+    <%= image_tag 'ruby.png' ,width:"30", height: "30" %> 寶石影城
+    </a>
+      <button type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          class="navbar-toggler collapsed d-flex d-sm-none flex-column justify-content-around m-0"
+          aria-controls="collapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+        <span class="toggler-icon top-bar"></span>
+        <span class="toggler-icon middle-bar"></span>
+        <span class="toggler-icon bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+        <ul class="navbar-nav active">
+          <li class="nav-item active">
+            <%= link_to "影城介紹", theaters_path, class: "nav-link text-white p-3" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "電影介紹", movies_path, class: "nav-link text-white p-3" %>
+          </li>
+          <li class="nav-item active dropdown">
+            <% if user_signed_in? %>
+              <a href="#" class="nav-link text-white p-3 dropdown-toggle"
+                 data-bs-toggle="dropdown" aria-expanded="false">會員專區</a>
+              <ul class="dropdown-menu m-0 p-0">
+                <li><%= link_to "個人資料", edit_user_registration_path(current_user.id),
+                        class:"dropdown-item text-white p-3" %></li>
+                <% if current_user.admin? || current_user.staff?%>
+                  <li><%= link_to "影城管理", admin_movies_path, class: "dropdown-item text-white p-3" %></li>
+                <% end %>
+                <% if current_user.admin? %>
+                  <li><%= link_to "後台管理", admin_users_path, class: "dropdown-item text-white p-3" %></li>
+                <% end %>
+              </ul>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "登出", destroy_user_session_path, method: "delete", class: "nav-link text-white p-3" %>
+            </li>
+          <% else %>
+            <!-- Button trigger modal -->
+            <button class="nav-link text-white p-3" data-bs-toggle="modal" data-bs-target="#Modal">
+              登入
+            </button>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "註冊", new_user_registration_path, class: "nav-link text-white p-3" %></span>
         <% end %>
       </li>
     </ul>
   </div>
+</div>
 </nav>
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"
+     data-controller="index-login" data-action="click->index-login#Modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header position-relative">
+        <h1 class="modal-title fs-5 col-12 text-center">寶石影城</h1>
+        <button type="button" class="position-absolute translate-middle rounded-circle d-flex justify-content-center align-items-center "data-bs-dismiss="modal" data-action="click->index-login#clearInput">
+          <span class=" position-absolute"></span>
+          <span class=" position-absolute"></span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <%= form_for User.new , url: user_session_path ,method:"post" do |f| %>
+          <div class="field mt-5 position-relative d-flex">
+            <%= f.email_field :email, autocomplete: "email",class:"form-control",
+                data:{ action: "click->index-login#addClassAt focusout->index-login#removeClassAt
+                            keyup->index-login#keyup",index_login_target: "email"}%>
+            <%= f.label :email,class:"form-inline position-absolute ",
+                data:{ index_login_target: "emailLabel" }%>
+          </div>
+          <div class="field mt-5 mb-3 position-relative d-flex">
+            <%= f.password_field :password, autocomplete: "current-password" ,class:"form-control",
+                data:{ action: "click->index-login#addClassAt focusout->index-login#removeClassAt
+                            keyup->index-login#keyup",index_login_target: "password"}%>
+            <%= f.label :password ,class:"form-inline position-absolute ",
+                data:{ index_login_target: "passwordLabel" }%>
+          </div>
+          <div class="forgot-password d-flex flex-row-reverse text-dodgerblue">
+            <%= link_to "Forgot your password?", new_user_password_path %>
+          </div>
+        </div>
+        <div class="modal-footer flex-column justify-content-center">
+          <div class="actions text-white">
+            <%= f.submit "Log in" ,class:"px-5 py-3 rounded-3",disabled: "disabled",
+                data:{ index_login_target: "login" }%>
+          </div>
+          <div class="sing-up">
+            <span>Don’t have an account?</span>
+            <span class="ms-2"><%= link_to "Sign Up", new_user_registration_path %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

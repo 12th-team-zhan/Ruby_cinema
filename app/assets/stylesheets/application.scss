@@ -2,13 +2,19 @@
 @import "index";
 @import "nav";
 @import "users";
-@import "admin/movie.scss";
+@import "admin/movie/index.scss";
+@import "root.scss";
+@import "admin/movie/edit.scss";
 @import "admin/seats.scss";
-
+@import "theater.scss";
 button {
   all: unset;
   cursor: pointer;
 }
 ul {
   list-style: none;
+}
+
+a{
+  text-decoration: none;
 }

@@ -1,7 +1,7 @@
-/*---------------nav--------------*/
 .navbar {
   background-color: rgb(255, 0, 0);
 }
+
 .navbar-toggler {
   width: 15px;
   height: 20px;
@@ -73,19 +73,23 @@
 .nav-link:hover {
   background-color: #154178;
 }
+
 .dropdown:hover .dropdown-menu {
   display: block;
   margin-top: 0; // remove the gap so it doesn't close
 }
+
 .dropdown-menu {
   min-width: 100%;
   li {
     background-color: rgb(117, 47, 47);
   }
 }
+
 .dropdown-item {
   background-color: rgb(70, 34, 34);
 }
+
 .dropdown-item:hover {
   background-color: rgb(91, 49, 49);
 }
@@ -106,35 +110,42 @@
       height: 2px;
       width: 20px;
     }
+
     :nth-child(1) {
       transform: rotate(45deg);
     }
+
     :nth-child(2) {
       transform: rotate(-45deg);
     }
   }
+
   button:hover {
     background-color: #b3b5b8;
   }
 }
+
 .modal-body {
   label {
     color: #7b858e;
     padding: 6px 0px 0px 13px;
     transition: 0.5s;
   }
+
   .field {
     input:focus {
       outline: none;
       box-shadow: none;
       border-bottom: 1px solid #1ea1f7;
     }
+
     .input-at {
       color: #1ea1f7;
       transform: translateX(-1px) translateY(-40px);
       background-color: #fff;
       font-size: 0.8rem;
     }
+
     .input-at2 {
       color: #7b858e;
       transform: translateX(-1px) translateY(-40px);
@@ -142,6 +153,7 @@
       font-size: 0.8rem;
     }
   }
+
   .forgot-password {
     a {
       font-size: 0.8rem;
@@ -150,6 +162,7 @@
     }
   }
 }
+
 .modal-footer {
   .actions {
     input {
@@ -157,6 +170,7 @@
       color: white;
       border: none;
     }
+
     .login-at {
       background-color: #1ea1f7;
     }

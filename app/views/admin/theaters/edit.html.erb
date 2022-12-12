@@ -13,6 +13,11 @@
 <%= form_with(model: @theater, url: admin_theater_path, method: "patch") do |form| %>
 
   <div>
+    <%= form.label :exterior_img %>
+    <%= form.file_field :exterior_img %>
+  </div>
+
+  <div>
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>

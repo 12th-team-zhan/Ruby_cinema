@@ -1,36 +1,39 @@
-<%= form_for @movie, url: url, method: method do |f| %>
-  <div>
-    <%= f.label :name %>
+<%= form_with model: [:admin, @movie] do |f| %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">電影名稱</span>
     <%= f.text_field :name %>
   </div>
-  <div>
-    <%= f.label :eng_name %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">電影英文名稱</span>
     <%= f.text_field :eng_name %>
   </div>
-  <div>
-    <%= f.label :duration %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">時長</span>
     <%= f.number_field :duration %>
   </div>
-  <div>
-    <%= f.label :film_rating %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">級數</span>
     <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), @movie.film_rating) %>
   </div>
-  <div>
-    <%= f.label :director %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">導演</span>
     <%= f.text_field :director %>
   </div>
-  <div>
-    <%= f.label :actor %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">主演</span>
     <%= f.text_field :actor %>
   </div>
-  <div>
-    <%= f.label :debut_date %>
-    <%= f.date_select :debut_date , discard_year: true %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">時長</span>
+    <%= f.date_select :debut_date, start_year: Date.today.year   %>
   </div>
-  <div>
-    <%= f.label :description %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">簡介</span>
     <%= f.text_area :description %>
   </div>
-  <div>
+  <div class="input-group mb-3">
+    <%= f.file_field :movie_poster %>
+  </div>
+  <div class="input-group mb-3">
     <%= f.submit %>
   <% end %>

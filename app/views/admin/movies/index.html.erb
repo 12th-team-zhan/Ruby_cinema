@@ -1,6 +1,6 @@
 <div class="continer vh-100  text-white">
   <div class="d-flex vh-100">
-    <%= render "sidebar" %>
+    <%= render "admin/shared/sidebar" %>
     <div class="main flex-grow-1 p-0 ms-1">
       <div class="container container-breadcrumb ">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -27,7 +27,7 @@
           <% @movies.each do |movie| %>
             <tbody>
               <tr>
-                <th scope="row"><%= link_to movie.name,admin_movie_path(movie) %></th>
+                <th scope="row"><%= link_to movie.name,edit_admin_movie_path(movie) %></th>
                 <td>1</td>
                 <td><%= movie.debut_date %></td>
                 <td>123</td>
