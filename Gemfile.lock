@@ -298,11 +298,9 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
-<<<<<<< HEAD
+
   x86_64-linux
-=======
   arm64-darwin-22
->>>>>>> 120a87f (add showtime crud)
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
