@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  started_at: 2022-12-10 13:44:12
+  end_at: 2022-12-10 13:44:12
+  deleted_at: 2022-12-10 13:44:12
+  movie_id: 1
+  cinema_id: 1
+
+two:
+  started_at: 2022-12-10 13:44:12
+  end_at: 2022-12-10 13:44:12
+  deleted_at: 2022-12-10 13:44:12
+  movie_id: 1
+  cinema_id: 1

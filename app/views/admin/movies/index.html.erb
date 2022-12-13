@@ -29,6 +29,8 @@
               <tr>
                 <th scope="row"><%= link_to movie.name,edit_admin_movie_path(movie) %></th>
                 <td>1</td>
+                <th scope="row"><%= link_to movie.name,admin_movie_path(movie) %></th>
+                <td><%= link_to "查看",admin_movie_showtimes_path(movie) %></td>
                 <td><%= movie.debut_date %></td>
                 <td>123</td>
                 <td><%= movie.user_id %></td>

@@ -24,8 +24,8 @@ Rails.application.routes.draw do
         delete :delete_images
         post :create_movie_poster
       end
+      resources :showtimes
     end
-    resources :showtimes
     resources :news
     resources :theaters
     resources :cinemas do

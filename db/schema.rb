@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_12_09_043248) do
+=======
+ActiveRecord::Schema.define(version: 2022_12_10_054412) do
+>>>>>>> 120a87f (add showtime crud)
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +45,7 @@ ActiveRecord::Schema.define(version: 2022_12_09_043248) do
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
+<<<<<<< HEAD
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.decimal "amount"
@@ -77,6 +82,17 @@ ActiveRecord::Schema.define(version: 2022_12_09_043248) do
     t.text "seat_list", default: [], array: true
     t.string "category", default: "added"
     t.index ["cinema_id"], name: "index_seats_on_cinema_id"
+=======
+  create_table "showtimes", force: :cascade do |t|
+    t.datetime "started_at"
+    t.datetime "end_at"
+    t.datetime "deleted_at"
+    t.integer "movie_id"
+    t.integer "cinema_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deleted_at"], name: "index_showtimes_on_deleted_at"
+>>>>>>> 120a87f (add showtime crud)
   end
 
   create_table "theaters", force: :cascade do |t|
@@ -109,9 +125,12 @@ ActiveRecord::Schema.define(version: 2022_12_09_043248) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "fb_uid"
+    t.string "fb_token"
     t.string "name"
     t.datetime "deleted_at"
     t.integer "role", default: 0
+<<<<<<< HEAD
     t.string "fb_uid"
     t.string "fb_token"
     t.string "name"
@@ -119,6 +138,8 @@ ActiveRecord::Schema.define(version: 2022_12_09_043248) do
     t.integer "role", default: 0
     t.string "google_uid"
     t.string "google_token"
+=======
+>>>>>>> 120a87f (add showtime crud)
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
