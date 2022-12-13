@@ -1,8 +1,8 @@
 <%= render "shared/nav" %>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to "首頁" , root_path %></li>
-    <li class="breadcrumb-item"><%= link_to "會員專區" , "#" %></li>
+    <li class="breadcrumb-item"><%= link_to "首頁", root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "會員專區", "#" %></li>
     <li class="breadcrumb-item active" aria-current="page">訂票查詢</li>
   </ol>
 </nav>
@@ -11,7 +11,7 @@
     <div class="col-12 col-md-7 col-lg-8">
       <div class="container p-3">
         <div class="col text-start">
-          <h2>訂票信箱 <%= @user.email %></h2>
+          <h2>訂票信箱 <%= current_user.email %></h2>
           <p class="fw-lighter">
             若購票失敗您的付款授權稍後將被取消不會收取任何費用，可於 30
             分後重新確認。
@@ -34,28 +34,18 @@
                       <td>
                         <p><%= order.created_at.strftime("%Y/%m/%d %I:%M") %></p>
                         <div
-                        data-controller="order-cancelbtn"
-                        data-id="<%= order.id %>"
-<<<<<<< HEAD
-                        data-canceled="<%= order.status %>"
-                      >
-=======
-                        data-canceled="<%= order.status %>">
->>>>>>> 098f486 (調整縮排)
+                          data-controller="order-cancelbtn"
+                          data-id="<%= order.id %>"
+                          data-canceled="<%= order.status %>">
                           <p data-order-cancelbtn-target="orderStatus">
                             <%= order.status %>
                           </p>
                           <button
-                          method="patch"
-                          class="btn btn-secondary btn-md mx-2"
-                          data-order-cancelbtn-target="cancelBtn"
-                          data-action="click->order-cancelbtn#cancel"
-<<<<<<< HEAD
-                            data-confirm="Are you sure？"
-                            >
-=======
+                            method="patch"
+                            class="btn btn-secondary btn-md mx-2"
+                            data-order-cancelbtn-target="cancelBtn"
+                            data-action="click->order-cancelbtn#cancel"
                             data-confirm="Are you sure？">
->>>>>>> 098f486 (調整縮排)
                             取消訂單
                           </button>
                         </div>

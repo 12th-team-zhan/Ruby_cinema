@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
 
   def index
     @orders = current_user.orders.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
-    @user = current_user
   end
 
   def new
