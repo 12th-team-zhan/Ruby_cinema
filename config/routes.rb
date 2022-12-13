@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: %i[index edit update delete]
     resources :movies do
+<<<<<<< HEAD
       member do
         delete :delete_images
         post :create_movie_poster
@@ -27,6 +28,11 @@ Rails.application.routes.draw do
     end
     resources :showtimes
     resources :news
+=======
+      resources :showtimes
+    end
+      resources :news
+>>>>>>> 120a87f (add showtime crud)
     resources :theaters
     resources :cinemas do
       resources :seats, only: %i[index new create]
