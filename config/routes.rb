@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     
     resources :cinemas do
       resources :seats, only: %i[index new create]
+      get "/seats/edit", to: 'seats#edit'
+      patch "/seats/update", to: 'seats#update'
     end
     
     resources :orders

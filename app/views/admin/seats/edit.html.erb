@@ -12,8 +12,8 @@
                 <a href=<%= admin_cinemas_path %>>影廳列表</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
-                新增座位
-            </li>
+                編輯座位
+              </li>
           </ol>
         </nav>
       </div>
@@ -25,12 +25,12 @@
             
             <br>
             
-            <div data-controller="addseat" data-id="<%= @cinema.id %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" >
+            <div data-controller="editseat" data-id="<%= @cinema.id %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-not-added="<%= @not_added.seat_list %>">
                 <div class="grid"></div>
 
                 <br>
 
-                <button class="btn btn-primary" data-action="click->addseat#addToTable">建立座位</button>
+                <button class="btn btn-primary" data-action="click->editseat#updateToTable">更新座位</button>
             </div>
         </div>
       </div>
