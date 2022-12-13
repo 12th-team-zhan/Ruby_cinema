@@ -2,16 +2,21 @@
   <div class="position-sticky">
     <h3>系統首頁</h3>
     <ul class="list-group list-group-flush text-white">
-      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "電影管理",admin_movies_path ,
+      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "電影管理", admin_movies_path,
           class:"p-3 my-1 d-block text-center" %></li>
-      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "場次管理",admin_showtimes_path ,
+      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "場次管理", admin_showtimes_path,
           class:"p-3 my-1 d-block text-center"%></li>
-      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "戲院管理",admin_theaters_path ,
+      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "戲院管理", admin_theaters_path,
           class:"p-3 my-1 d-block text-center"%></li>
-      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "影廳管理",admin_cinemas_path,  
+      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "影廳管理", admin_cinemas_path,  
           class:"p-3 my-1 d-block text-center"%></li>
-      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "消息管理",admin_news_index_path ,
+      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "消息管理", admin_news_index_path,
           class:"p-3 my-1 d-block text-center" %></li>
+      <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "訂單管理", admin_orders_path,
+          class:"p-3 my-1 d-block text-center" %></li>
+      <% if current_user.admin? %>
+        <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "人員管理", admin_users_path, class: "p-3 my-1 d-block text-center" %></li>
+      <% end %>
     </ul>
   </div>
 </div>

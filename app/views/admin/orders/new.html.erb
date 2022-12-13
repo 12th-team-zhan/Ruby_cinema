@@ -1,0 +1,23 @@
+<h2>NEW</h2>
+
+<%= form_with(model: @order, url: admin_orders_path ) do |form| %>
+
+  <div>
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div>
+    <%= form.label :status %>
+    <%= form.select :status, options_for_select(Order.statuses.keys, @order.status) %>
+  </div>
+
+  <div>
+    <%= form.label :payment_method %>
+    <%= form.select :payment_method, options_for_select(Order.payment_methods.keys, @order.payment_method) %>
+  </div>
+
+<%= form.submit %>
+
+<% end %>
+

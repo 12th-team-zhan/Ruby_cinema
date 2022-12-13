@@ -1,0 +1,22 @@
+<h1>訂單明細(訂單編號：<%= @order.serial %>)</h1>
+<section>
+    <head>
+      <div>付款方式：<%= @order.payment_method %></div> 
+      <div>訂單金額 <%= @order.amount %></div>
+    </head>
+    <article>
+      <!-- 電影票明細 -->
+      <div>訂單明細： 
+        <ul>
+          <li>(電影票明細1)</li>
+          <li>(電影票明細2)</li>
+          <li>(電影票明細3)</li>
+          <li>(電影票明細4)</li>
+        </ul>
+      </div>
+    </article>
+    <div>
+      <%= link_to "編輯訂單" , edit_admin_order_path %>
+      <%= link_to "回訂單列表" , admin_orders_path %>
+    </div>
+</section>

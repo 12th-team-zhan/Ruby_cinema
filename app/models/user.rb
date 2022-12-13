@@ -7,7 +7,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
   acts_as_paranoid
+
+  # relationship
   has_many :movies, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   enum role: { user: 0, staff: 1, admin: 2 }
 
