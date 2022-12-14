@@ -8,5 +8,6 @@ class MoviesController < ApplicationController
 
   def root
     @user = User.new
+    @movies = Movie.all
   end
 end
