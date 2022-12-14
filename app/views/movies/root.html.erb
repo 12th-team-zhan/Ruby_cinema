@@ -1,4 +1,5 @@
 <%= render "shared/nav" %>
+
 <div id="carousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">
@@ -29,149 +30,147 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-<article>
-  <div class="d-md-flex gap-2 my-md-5 container mx-lg-auto p-0">
-    <div class="container search d-flex col-12 col-md-6 py-3 " >
-      <div class="qalist d-none d-lg-block col-lg-3 ">
-        <ul class="bg-secondary mt-4 p-0">
-          <li class="bg-darkgray ps-4 py-2 border-bottom text-white">線上定票</li>
-          <li class="bg-darkgray ps-4 py-2 border-bottom text-white">售票公告</li>
-          <li class="bg-darkgray ps-4 py-2 border-bottom text-white">入場須知</li>
-          <li class="bg-darkgray ps-4 py-2 border-bottom text-white">場次查詢</li>
-        </ul>
+
+<article class="d-md-flex gap-2 my-md-5 container mx-lg-auto p-0">
+  <div class="container search d-flex col-12 col-md-6 py-3 " >
+    <div class="qalist d-none d-lg-block col-lg-3 ">
+      <ul class="bg-secondary mt-4 p-0">
+        <li class="bg-darkgray ps-4 py-2 border-bottom text-white">線上定票</li>
+        <li class="bg-darkgray ps-4 py-2 border-bottom text-white">售票公告</li>
+        <li class="bg-darkgray ps-4 py-2 border-bottom text-white">入場須知</li>
+        <li class="bg-darkgray ps-4 py-2 border-bottom text-white">場次查詢</li>
+      </ul>
+    </div>
+    <div class="container col-12 col-md-12 col-lg-9 mx-md-0 bg-cerulean rounded-4" data-controller="index-search-form">
+      <div class="container search-top d-flex text-light justify-content-around">
+        <button class="py-2 btn btn-cerulean py-3"  disabled= "disabled"
+                data-index-search-form-target="ticketBtn"
+                data-action="click->index-search-form#formSwitch"><span class="fs-4 fs-scale">快速定票</span>
+        </button>
+        <button class="py-2 btn btn-cerulean py-3"  
+                data-index-search-form-target="setBtn"
+                data-action="click->index-search-form#formSwitch"><span class="fs-4">快搜空位</span>
+        </button>
       </div>
-      <div class="container col-12 col-md-12 col-lg-9 mx-md-0 bg-cerulean rounded-4" 
-           data-controller="index-search-form">
-        <div class="container search-top d-flex text-light justify-content-around">
-          <button class="py-2 btn btn-cerulean py-3"  disabled= "disabled"
-                  data-index-search-form-target="ticketBtn"
-                  data-action="click->index-search-form#formSwitch"><span class="fs-4 fs-scale">快速定票</span>
-          </button>
-          <button class="py-2 btn btn-cerulean py-3"  
-                  data-index-search-form-target="setBtn"
-                  data-action="click->index-search-form#formSwitch"><span class="fs-4">快搜空位</span>
-          </button>
+      <div class="search-middle py-3" >
+        <div class="item d-grid gap-2 " data-index-search-form-target="ticketForm" data-controller="search-showtime">
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
+            <select class="form-select w-90" aria-label="select" data-action="change->search-showtime#addTheaterList">
+              <option>請選擇電影</option>
+              <% @movies.each do |movie| %>
+                <option value="<%= movie.id %>" ><%= movie.name %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
+            <select class="form-select w-90" aria-label="select" data-action="change->search-showtime#addShowtimeList" data-search-showtime-target="theaterList">
+              <option>請選擇影城</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="icon"><i class="m-0 fa-regular fa-calendar-days text-white"></i></div>
+            <select class="form-select w-90" aria-label="select" data-search-showtime-target="ShowtimeList">
+              <option>請選擇日期</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="icon"><i class="m-0 fa-regular fa-clock text-white"></i></div>
+            <select class="form-select w-90" aria-label="select" data-index-search-form-target="showTime">
+              <option>請選擇場次</option>
+            </select>
+          </div>
         </div>
-        <div class="search-middle py-3" >
-          <div class="item d-grid gap-2 " data-index-search-form-target="ticketForm">
-            <div class="d-flex justify-content-around align-items-center">
-              <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-              <select class="form-select w-90" aria-label="select"data-index-search-form-target="theater"
-                    data-action="change->index-search-form#theater">
-                <option>請選擇影城</option>
-              </select>
-            </div>
-            <div class="d-flex justify-content-around align-items-center">
-              <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
-              <select class="form-select w-90 " aria-label="select" data-index-search-form-target="movie"
-                      data-action="change->index-search-form#movie">
-                <option>請選擇電影</option>
-              </select>
-            </div>
-            <div class="d-flex justify-content-around align-items-center">
+        <div class="item d-grid gap-2 item-hidden" data-index-search-form-target="setForm">
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
+            <select class="form-select w-90" aria-label="select" data-index-search-form-target="theater"
+                  data-action="change->index-search-form#test">
+              <option>請選擇地區</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
+            <select class="form-select w-90" aria-label="select" data-index-search-form-target="movie">
+              <option>請選擇影片</option>
+            </select>
+          </div>
+          <div class="d-flex">
+            <div class="d-flex justify-content-around align-items-center col">
               <div class="icon"><i class="m-0 fa-regular fa-calendar-days text-white"></i></div>
-              <select class="form-select w-90" aria-label="select" data-index-search-form-target="date"
-                      data-action="change->index-search-form#date">
+              <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="date">
                 <option>請選擇日期</option>
               </select>
             </div>
-            <div class="d-flex justify-content-around align-items-center">
-              <div class="icon"><i class="m-0 fa-regular fa-clock text-white"></i></div>
-              <select class="form-select w-90" aria-label="select" data-index-search-form-target="showTime">
-                <option>請選擇場次</option>
+            <div class="d-flex justify-content-around align-items-center col">
+              <div class="icon"><i class="m-0 fa-solid fa-user text-white"></i></div>
+              <select class="form-select w-90 col " aria-label="select" data-index-search-form-target="date">
+                <option >幾人</option>
               </select>
             </div>
           </div>
-          <div class="item d-grid gap-2 item-hidden" data-index-search-form-target="setForm">
-            <div class="d-flex justify-content-around align-items-center">
+          <div class="d-flex">
+            <div class="d-flex justify-content-around align-items-center col">
               <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-              <select class="form-select w-90" aria-label="select" data-index-search-form-target="theater"
-                    data-action="change->index-search-form#test">
-                <option>請選擇地區</option>
+              <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="showtime">
+                <option>時段(起)</option>
               </select>
             </div>
-            <div class="d-flex justify-content-around align-items-center">
-              <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
-              <select class="form-select w-90" aria-label="select" data-index-search-form-target="movie">
-                <option>請選擇影片</option>
+            <div class="d-flex justify-content-around align-items-center col">
+              <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
+              <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="showtime">
+                <option>時段(迄)</option>
               </select>
-            </div>
-            <div class="d-flex">
-              <div class="d-flex justify-content-around align-items-center col">
-                <div class="icon"><i class="m-0 fa-regular fa-calendar-days text-white"></i></div>
-                <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="date">
-                  <option>請選擇日期</option>
-                </select>
-              </div>
-              <div class="d-flex justify-content-around align-items-center col">
-                <div class="icon"><i class="m-0 fa-solid fa-user text-white"></i></div>
-                <select class="form-select w-90 col " aria-label="select" data-index-search-form-target="date">
-                  <option >幾人</option>
-                </select>
-              </div>
-            </div>
-            <div class="d-flex">
-              <div class="d-flex justify-content-around align-items-center col">
-                <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-                <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="showtime">
-                  <option>時段(起)</option>
-                </select>
-              </div>
-              <div class="d-flex justify-content-around align-items-center col">
-                <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-                <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="showtime">
-                  <option>時段(迄)</option>
-                </select>
-              </div>
             </div>
           </div>
-        </div>
-        <div class="container search-bottom d-flex text-light justify-content-around pb-3">
-          <span class="my-2 py-1 px-4 bg-primary3">
-            <%= link_to "前往定票", "#", class: "btn btn-deepskyblue btn-lg" %>
-          </span>
-          <span class="my-2 py-1 px-4 bg-primary3">
-            <%= link_to "查看座位", "#", class: "btn btn-deepskyblue btn-lg" %>
-          </span>
         </div>
       </div>
+      <div class="container search-bottom d-flex text-light justify-content-around pb-3">
+        <span class="my-2 py-1 px-4 bg-primary3">
+          <%= link_to "前往定票", "#", class: "btn btn-deepskyblue btn-lg" %>
+        </span>
+        <span class="my-2 py-1 px-4 bg-primary3">
+          <%= link_to "查看座位", "#", class: "btn btn-deepskyblue btn-lg" %>
+        </span>
+      </div>
     </div>
-    <div class="container new d-flex flex-column col-9  col-md-6 col-lg-5 py-3 ">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb align-items-baseline m-0 ">
-          <li class="breadcrumb-item">
-            <p class="fs-4 text-deepskyblue" >最新公告</p>
-          </li>
-          <li class="breadcrumb-item active text-dark" aria-current="page"><a href="" class="link-dark">MORE</a></li>
-        </ol>
-      </nav>
-      <ul class="list-group gap-1 flex-grow-1 justify-content-around">
-        <li class="list-group-item ps-0">
-          <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-          <span class="new-text">213213</span>
+  </div>
+  <div class="container new d-flex flex-column col-9  col-md-6 col-lg-5 py-3 ">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb align-items-baseline m-0 ">
+        <li class="breadcrumb-item">
+          <p class="fs-4 text-deepskyblue" >最新公告</p>
         </li>
-        <li class="list-group-item ps-0">
-          <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-          <span class="new-text">2313213</span>
-        </li>
-        <li class="list-group-item ps-0">
-          <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-          <span class="new-text">24124214</span>
-        </li>
-        <li class="list-group-item ps-0">
-          <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-          <span class="new-text">3213123123</span>
-        </li>
-        <li class="list-group-item ps-0">
-          <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-          <span class="new-text">21424</span>
-        </li>
-        <li class="list-group-item ps-0">
-          <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-          <span class="new-text">2131244</span>
-        </li>
-      </ul>
-    </div>
+        <li class="breadcrumb-item active text-dark" aria-current="page"><a href="" class="link-dark">MORE</a></li>
+      </ol>
+    </nav>
+    <ul class="list-group gap-1 flex-grow-1 justify-content-around">
+      <li class="list-group-item ps-0">
+        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
+        <span class="new-text">213213</span>
+      </li>
+      <li class="list-group-item ps-0">
+        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
+        <span class="new-text">2313213</span>
+      </li>
+      <li class="list-group-item ps-0">
+        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
+        <span class="new-text">24124214</span>
+      </li>
+      <li class="list-group-item ps-0">
+        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
+        <span class="new-text">3213123123</span>
+      </li>
+      <li class="list-group-item ps-0">
+        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
+        <span class="new-text">21424</span>
+      </li>
+      <li class="list-group-item ps-0">
+        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
+        <span class="new-text">2131244</span>
+      </li>
+    </ul>
   </div>
 </article>
 <footer class="bg-cerulean text-center py-4">Lorem ipsum dolor sit </footer>

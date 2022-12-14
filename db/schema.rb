@@ -50,7 +50,18 @@ ActiveRecord::Schema.define(version: 2022_12_14_032834) do
     t.datetime "deleted_at"
     t.integer "max_row", default: 1
     t.integer "max_column", default: 1
+    t.bigint "theater_id"
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
+    t.index ["theater_id"], name: "index_cinemas_on_theater_id"
+  end
+
+  create_table "movie_theaters", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.bigint "theater_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_movie_theaters_on_movie_id"
+    t.index ["theater_id"], name: "index_movie_theaters_on_theater_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -160,6 +171,8 @@ ActiveRecord::Schema.define(version: 2022_12_14_032834) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "movie_theaters", "movies"
+  add_foreign_key "movie_theaters", "theaters"
   add_foreign_key "movies", "users"
   add_foreign_key "orders", "users"
 end
