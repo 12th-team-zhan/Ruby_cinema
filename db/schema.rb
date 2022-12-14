@@ -10,10 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_09_043248) do
+ActiveRecord::Schema.define(version: 2022_12_14_032834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
 
   create_table "cinemas", force: :cascade do |t|
     t.string "name"
@@ -53,23 +81,6 @@ ActiveRecord::Schema.define(version: 2022_12_09_043248) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "theaters", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "phone"
-    t.datetime "deleted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["deleted_at"], name: "index_theaters_on_deleted_at"
-
-  create_table "cinemas", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
-  end
-
   create_table "seats", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -79,6 +90,17 @@ ActiveRecord::Schema.define(version: 2022_12_09_043248) do
     t.index ["cinema_id"], name: "index_seats_on_cinema_id"
   end
 
+  create_table "showtimes", force: :cascade do |t|
+    t.datetime "started_at"
+    t.datetime "end_at"
+    t.datetime "deleted_at"
+    t.integer "movie_id"
+    t.integer "cinema_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deleted_at"], name: "index_showtimes_on_deleted_at"
+  end
+
   create_table "theaters", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -87,6 +109,18 @@ ActiveRecord::Schema.define(version: 2022_12_09_043248) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deleted_at"], name: "index_theaters_on_deleted_at"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "seat_list"
+    t.integer "status"
+    t.string "serial"
+    t.integer "category"
+    t.datetime "deleted_at"
+    t.integer "showtime_id"
+    t.integer "order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -109,16 +143,11 @@ ActiveRecord::Schema.define(version: 2022_12_09_043248) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.datetime "deleted_at"
-    t.integer "role", default: 0
     t.string "fb_uid"
     t.string "fb_token"
     t.string "name"
     t.datetime "deleted_at"
     t.integer "role", default: 0
-    t.string "google_uid"
-    t.string "google_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
