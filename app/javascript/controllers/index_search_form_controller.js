@@ -9,13 +9,13 @@ export default class extends Controller {
         let theatersList = []
         const theaterTarget = this.theaterTarget
 
-        fetch('http://127.0.0.1:3000/api/v1/getTheaterList')
-            .then(res => res.json())
-            .then(data => {
-                theatersList = data
-                theater()
-            })
-            .catch(err => console.log(err))
+        // fetch('http://127.0.0.1:3000/api/v1/getTheaterList')
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         theatersList = data
+        //         theater()
+        //     })
+        //     .catch(err => console.log(err))
 
         function theater() {
             theatersList.forEach((theater) => {
