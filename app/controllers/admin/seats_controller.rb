@@ -12,7 +12,8 @@ module Admin
       end
     end
 
-    def new; end
+    def new
+    end
 
     def create
       @added = @cinema.seats.new({ seat_list: params[:added], category: 'added' })
@@ -21,7 +22,7 @@ module Admin
       @not_added = @cinema.seats.new({ seat_list: params[:notAdded], category: 'not_added' })
       @not_added.save
 
-      redirect_to admin_movies_path
+      redirect_to admin_theater_cinemas_path(@cinema.theater_id)
     end
 
     def edit
@@ -46,5 +47,6 @@ module Admin
     def find_cinema
       @cinema = Cinema.find(params[:cinema_id])
     end
+
   end
 end

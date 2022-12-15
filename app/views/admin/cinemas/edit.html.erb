@@ -1,10 +1,10 @@
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href=<%= admin_movies_path %>>後台首頁</a>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href=<%= admin_movies_path %>>後台首頁</a>
         </li>
         <li class="breadcrumb-item" aria-current="page">
-            <a href=<%= admin_cinemas_path %>>影廳列表</a>
+            <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
             編輯影廳
@@ -14,42 +14,34 @@
 
 <% if @cinema.errors.any? %>
   <ul>
-    <% @cinema.errors.full_messages.each do |message| %>
-      <li> <%= message %> </li>
+        <% @cinema.errors.full_messages.each do |message| %>
+          <li> <%= message %> </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
-
-<%= form_with(model: @cinema, url: admin_cinema_path, method: "patch") do |f| %>
-  <div>
-    <%= f.label "影廳名稱" %>
-  </div>
-  <div>
-    <%= f.text_field :name %>
-  </div>
-
-  <br>
-
-  <div>
-    <%= f.label "最大排數" %>
-  </div>
-  <div>
-    <%= f.text_field :max_row %>
-  </div>
-
-  <br>
-
-  <div>
-    <%= f.label "最大欄數" %>
-  </div>
-  <div>
-    <%= f.text_field :max_column %>
-  </div>
-
-  <br>
-
-  <div>
-    <%= f.submit "修改影廳" %>
-  </div>
-<% end %>
-
+    <%= form_with(model: @cinema, url: admin_cinema_path, method: "patch") do |f| %>
+      <div>
+        <%= f.label "影廳名稱" %>
+      </div>
+      <div>
+        <%= f.text_field :name %>
+      </div>
+      <br>
+      <div>
+        <%= f.label "最大排數" %>
+      </div>
+      <div>
+        <%= f.text_field :max_row %>
+      </div>
+      <br>
+      <div>
+        <%= f.label "最大欄數" %>
+      </div>
+      <div>
+        <%= f.text_field :max_column %>
+      </div>
+      <br>
+      <div>
+        <%= f.submit "修改影廳" %>
+      </div>
+    <% end %>

@@ -15,9 +15,9 @@ module Admin
     end
 
     def create
-      # render html:params
-
+      @showtimes = Showtime.all
       @showtime = Showtime.new(showtime_params)
+
 
       showtime_start = showtime_params[:started_at].to_datetime.to_i
       showtime_end = showtime_params[:end_at].to_datetime.to_i
@@ -36,14 +36,16 @@ module Admin
           false
         end
       end
+      
       if showtime_condition.include?(false) ||    
          showtime_start > showtime_end ||      
          showtime_start < current_time || 
          showtime_start == showtime_end 
-        redirect_to admin_movie_showtimes_path, notice: "場次設定有誤,請重新輸入"
+        render :new, notice: "場次設定有誤,請重新輸入"
       else
         @showtime.save
         redirect_to admin_showtimes_path, notice: "場次新增成功"
+
       end
     end
 
@@ -82,7 +84,7 @@ module Admin
 
     def destroy
       @showtime.destroy
-      redirect_to admin_movie_showtimes_path, notice: "刪除場次成功"
+      redirect_to admin_showtimes_path, notice: "刪除場次成功"
     end
 
     private
