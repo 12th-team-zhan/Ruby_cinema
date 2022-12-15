@@ -22,7 +22,6 @@ Rails.application.routes.draw do
     resources :users, only: %i[index edit update delete]
     resources :news
     resources :orders
-    resources :showtimes
 
     resources :theaters do
       resources :cinemas, only: [:index, :new, :create]
@@ -38,7 +37,10 @@ Rails.application.routes.draw do
         delete :delete_images
         post :create_movie_poster
       end
+
+      resources :showtimes, only: [:index, :new, :create, :destroy]
     end
+    resources :showtimes, only: [:show, :edit, :update]
 
   end
 

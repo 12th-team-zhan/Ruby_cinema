@@ -30,7 +30,7 @@
                 <td><%= link_to movie.name, admin_movie_path(movie) %></td>
                 <td><%= link_to "編輯", edit_admin_movie_path(movie) %></td>
                 <td><%= link_to "刪除", admin_movie_path(movie), method:"delete", data:{confirm:"確定刪除？"}  %></td>
-                <td><%= link_to "檢視", admin_showtimes_path(movie) %></td>
+                <td><%= link_to "檢視", admin_movie_showtimes_path(movie) %></td>
                 <td><%= movie.debut_date %></td>
                 <td><%= movie.user.name %></td>
                 <td><%= movie.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
