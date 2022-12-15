@@ -1,21 +1,23 @@
 module Admin
   class ShowtimesController < ApplicationController
     before_action :authenticate_user!
-    before_action :find_movie, only: %i[index new create destroy update]
+    # before_action :find_movie, only: %i[index new create destroy update]
     before_action :find_showtime, only: %i[destroy edit update]
 
     def index
-      @showtimes = @movie.showtimes.all
-      @movies = Movie.all
+      @showtimes = Showtime.all
     end
 
     def new
-      @showtime = @movie.showtimes.new
+      @showtime = Showtime.new
+      @cinemas = Cinema.select("name", "id").map{|cinema| [cinema.name, cinema.id]}
+      @movies = Movie.select("name", "id").map{|movie| [movie.name, movie.id]}
     end
 
     def create
-      @showtime = @movie.showtimes.new(showtime_params)
-      @showtimes = @movie.showtimes.all
+      # render html:params
+
+      @showtime = Showtime.new(showtime_params)
 
       showtime_start = showtime_params[:started_at].to_datetime.to_i
       showtime_end = showtime_params[:end_at].to_datetime.to_i
@@ -41,7 +43,7 @@ module Admin
         redirect_to admin_movie_showtimes_path, notice: "場次設定有誤,請重新輸入"
       else
         @showtime.save
-        redirect_to admin_movie_showtimes_path, notice: "場次新增成功"
+        redirect_to admin_showtimes_path, notice: "場次新增成功"
       end
     end
 
@@ -93,7 +95,7 @@ module Admin
     end
 
     def showtime_params
-      params.require(:showtime).permit(:started_at, :end_at, :deleted_at)
+      params.require(:showtime).permit(:started_at, :end_at, :deleted_at, :movie_id, :cinema_id)
     end
 
   end
