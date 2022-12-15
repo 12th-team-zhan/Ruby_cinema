@@ -1,13 +1,13 @@
 <div class="continer">
   <div class="d-flex ">
-    <%= render "admin/shared/sidebar" %>
+    <%= render "shared/admin/sidebar" %>
     <div class="main flex-grow-1 p-0 ms-1">
       <div class="container container-breadcrumb ">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "Home",movies_path %></li>
-            <li class="breadcrumb-item active"><%= link_to "Movie list",admin_movies_path %></li>
-            <li class="breadcrumb-item active" aria-current="page">Movie edit</li>
+            <li class="breadcrumb-item"><%= link_to "後台首頁",movies_path %></li>
+            <li class="breadcrumb-item active"><%= link_to "電影列表",admin_movies_path %></li>
+            <li class="breadcrumb-item active" aria-current="page">電影編輯</li>
           </ol>
         </nav>
       </div>
@@ -68,29 +68,3 @@
     </div>
   </div>
 </div>
-
-
-
-<% if @movie.scene_images.attached? %>
-  <% @movie.scene_images.each do |image| %>
-    <div>
-      <%= image_tag image ,width:"350", height: "500" %>
-      <%= link_to "刪除圖片", delete_images_admin_movie_path(image.id),
-          method: "DELETE", class: "d-block", data: {confirm: "Are you sure?"} %>
-    </div>
-  <% end %>
-<% else %>
-  <p class="not-find-movie-posters">123</p>
-<% end %>
-
-<% if @movie.scene_images.attached? %>
-  <% @movie.scene_images.each do |image| %>
-    <div>
-      <%= image_tag image ,width:"350", height: "500" %>
-      <%= link_to "刪除圖片", delete_images_admin_movie_path(image.id),
-          method: "DELETE", class: "d-block", data: {confirm: "Are you sure?"} %>
-    </div>
-  <% end %>
-<% else %>
-  <p class="not-find-movie-posters">123</p>
-<% end %>

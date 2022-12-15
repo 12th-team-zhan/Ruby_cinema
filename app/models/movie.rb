@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Movie < ApplicationRecord
+  acts_as_paranoid
+  
   #validates
   validates :name, presence: true
   validates :description, presence: true
