@@ -8,7 +8,7 @@ module Admin
       @theaters = Theater.all
     end
 
-    def show;  end
+    def show; end
 
     def new
       @theater = Theater.new

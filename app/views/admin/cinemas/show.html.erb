@@ -2,9 +2,9 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
       <a href=<%= admin_movies_path %>>後台首頁</a>
-        </li>
-        <li class="breadcrumb-item" aria-current="page">
-          <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
+    </li>
+    <li class="breadcrumb-item" aria-current="page">
+      <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
     </li>
     <li class="breadcrumb-item active" aria-current="page">
       影廳資訊
@@ -19,7 +19,7 @@
   </tr>
   <tr>
     <td><%= @cinema.name %></td>
-        <td><%= @cinema.max_row %></td>
-        <td><%= @cinema.max_column %></td>
-      </tr>
-    </table>
+    <td><%= @cinema.max_row %></td>
+    <td><%= @cinema.max_column %></td>
+  </tr>
+</table>

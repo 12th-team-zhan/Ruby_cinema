@@ -17,10 +17,6 @@ module Api
         movie_id = params[:movie_id]
         theater_id = params[:theater_id]
         @cinemas = Theater.find(params[:theater_id]).cinemas
-        p "111111111111111111111111111111111111"
-        p @cinemas
-        # theater_list = Movie.find(params[:movie_id]).theaters.select("name, theater_id")
-        # render json: theater_list
       end
     end
   end

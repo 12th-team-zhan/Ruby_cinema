@@ -5,7 +5,6 @@ export default class extends Controller {
     static targets = ["theaterList", "ShowtimeList"];
 
     connect() {
-        console.log(123);
     }
 
     addTheaterList(el) {
@@ -53,16 +52,7 @@ export default class extends Controller {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({"movie_id": this.movieId, "theater_id": this.theaterId})
-            })
-        // .then((resp) => {
-        //     return resp.json()
-        // })
-        // .then((data) => {            
-        //     data.forEach((element) => {
-        //         let option = `<option value="${element.theater_id}" >${element.name}</option>`;
-        //         this.theaterListTarget.insertAdjacentHTML("beforeend", option); 
-        //     })
-        // })
+        })
         .catch((err) => {
             console.log(err)
         })

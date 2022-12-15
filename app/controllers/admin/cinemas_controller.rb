@@ -1,5 +1,5 @@
 module Admin
-  class Admin::CinemasController < ApplicationController
+  class CinemasController < ApplicationController
     before_action :find_theater, only: [:index, :new, :create] 
     before_action :find_cinema, only: [:show, :edit, :update, :destroy]
     def index

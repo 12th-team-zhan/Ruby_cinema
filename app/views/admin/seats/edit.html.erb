@@ -5,11 +5,11 @@
       <div class="container container-breadcrumb ">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                  <a href=<%= admin_movies_path %>>後台首頁</a>
+            <li class="breadcrumb-item">
+              <a href=<%= admin_movies_path %>>後台首頁</a>
               </li>
               <li class="breadcrumb-item" aria-current="page">
-                <a href=<%= admin_cinemas_path %>>影廳列表</a>
+                <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
                 編輯座位
@@ -27,13 +27,11 @@
             
             <div data-controller="editseat" data-id="<%= @cinema.id %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-not-added="<%= @not_added.seat_list %>">
                 <div class="grid"></div>
-
                 <br>
-
                 <button class="btn btn-primary" data-action="click->editseat#updateToTable">更新座位</button>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
