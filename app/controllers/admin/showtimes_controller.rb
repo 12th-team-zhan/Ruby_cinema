@@ -57,12 +57,14 @@ module Admin
     def edit; end
 
     def update
+      # @showtimes = @movie.showtimes.all
+      
       if @showtime.update(showtime_params)
         redirect_to admin_movie_showtimes_path(@showtime.movie_id), notice:"成功"
       else
         render :edit
       end
-
+      
       # showtime_start = showtime_params[:started_at].to_datetime.to_i
       # showtime_end = showtime_params[:end_at].to_datetime.to_i
 
