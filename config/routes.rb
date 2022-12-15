@@ -23,13 +23,13 @@ Rails.application.routes.draw do
     resources :news
     resources :theaters
     resources :orders
+    resources :showtimes
 
     resources :movies do
       member do
         delete :delete_images
         post :create_movie_poster
       end
-      resources :showtimes
     end
     
     resources :cinemas do

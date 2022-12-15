@@ -1,18 +1,15 @@
 <h1>管理場次</h1>
-
-<ul> 
+<ul>
   <% @showtimes.each do |showtime| %>
-  <li>
-    <%= showtime.started_at %>
-    <%= showtime.end_at %>
-    <%= link_to "刪除", admin_movie_showtime_path(showtime.movie, showtime), method: "delete", data: {confirm: "確定要刪除場次嗎？"} %>
-     <%= link_to "編輯", edit_admin_movie_showtime_path(showtime.movie, showtime) %>
-  </li>
+    <li>
+      <%= showtime.started_at %>
+      <%= showtime.end_at %>
+      <%= link_to "刪除", admin_showtime_path(showtime), method: "delete", data: {confirm: "確定要刪除場次嗎？"} %>
+      <%= link_to "編輯", edit_admin_showtime_path(showtime) %>
+    </li>
   <% end %>
 </ul>
-
-<%= link_to "新增場次", new_admin_movie_showtime_path %>
+<%= link_to "新增場次", new_admin_showtime_path %>
 <br>
 <br>
 <%= link_to "返回系統首頁", admin_movies_path %>
-
