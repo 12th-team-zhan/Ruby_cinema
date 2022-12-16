@@ -21,8 +21,10 @@ module Api
         render json: showtime_date
       end
 
-      def abc
-        render html:params
+      def go_buy_tickets
+        p "*"*100
+        p params
+       render html:params
       end
 
     end
