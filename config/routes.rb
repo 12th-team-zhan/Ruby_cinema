@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }, skip: :sessions
-  
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' },
+                     skip: :sessions
+
   as :user do
     post '/users/sign_in', to: 'devise/sessions#create', as: :user_session
     delete '/users/sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
@@ -24,12 +25,12 @@ Rails.application.routes.draw do
     resources :orders
 
     resources :theaters do
-      resources :cinemas, only: [:index, :new, :create]
+      resources :cinemas, only: %i[index new create]
     end
-    resources :cinemas, only: [:show, :edit, :update, :destroy] do
+    resources :cinemas, only: %i[show edit update destroy] do
       resources :seats, only: %i[index new create]
-      get "/seats/edit", to: 'seats#edit'
-      patch "/seats/update", to: 'seats#update'
+      get '/seats/edit', to: 'seats#edit'
+      patch '/seats/update', to: 'seats#update'
     end
 
     resources :movies do
@@ -38,10 +39,9 @@ Rails.application.routes.draw do
         post :create_movie_poster
       end
 
-      resources :showtimes, only: [:index, :new, :create, :destroy]
+      resources :showtimes, only: %i[index new create destroy]
     end
-    resources :showtimes, only: [:show, :edit, :update]
-
+    resources :showtimes, only: %i[show edit update]
   end
 
   namespace :api do
