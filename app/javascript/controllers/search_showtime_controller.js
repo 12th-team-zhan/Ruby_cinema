@@ -86,4 +86,10 @@ export default class extends Controller {
       }
     });
   }
+
+  changeLink() {
+    const link = document.querySelector("#abc");
+    // ?前修改為ticket的new
+    link.href = `/admin/movies/new?showtimeid=${this.showtimeTarget.value}`;
+  }
 }
