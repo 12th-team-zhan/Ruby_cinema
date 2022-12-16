@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       get 'movie_list', to: 'getdata#movie_list'
       post 'theater_list', to: 'getdata#theater_list'
       post 'showtime_list', to: 'getdata#showtime_list'
+      post 'abc', to: 'getdata#abc'
     end
   end
 
