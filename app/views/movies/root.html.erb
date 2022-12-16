@@ -86,7 +86,7 @@
             <select class="form-select w-90" 
                     aria-label="select" 
                     data-search-showtime-target="showtime"
-                    name="abced">
+                    id="rootShowtime">
               <option>請選擇場次</option>
             </select>
           </div>
@@ -137,7 +137,12 @@
       </div>
       <div class="container search-bottom d-flex text-light justify-content-around pb-3">
         <span class="my-2 py-1 px-4 bg-primary3">
-          <%= link_to "前往訂票", api_v1_abc_path, method: "post", class: "btn btn-deepskyblue btn-lg" %>
+          <div class="btn btn-deepskyblue btn-lg"
+          data-controller="send-showtime-id"
+          data-action="click->send-showtime-id#send">前往訂票</div>
+        </span>
+        <span data-controller="send-showtime-id">
+          <%= link_to "前往訂票（測）", "admin_movie_path", class: "btn btn-deepskyblue btn-lg", data: {action: "click->send-showtime-id#send"} %>
         </span>
         <span class="my-2 py-1 px-4 bg-primary3">
           <%= link_to "查看座位", "#", class: "btn btn-deepskyblue btn-lg" %>
