@@ -37,8 +37,9 @@ Rails.application.routes.draw do
       member do
         delete :delete_images
         post :create_movie_poster
+        patch :come_out
       end
-
+      resource :movie_theater, only: %i[create destroy]
       resources :showtimes, only: %i[index new create destroy]
     end
     resources :showtimes, only: %i[show edit update]

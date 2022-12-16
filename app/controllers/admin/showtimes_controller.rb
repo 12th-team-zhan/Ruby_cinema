@@ -12,7 +12,11 @@ module Admin
 
     def new
       @showtime = Showtime.new
-      @cinemas = Cinema.select("name", "id").map{|cinema| [cinema.name, cinema.id]}
+      @theaters = @movie.movie_theater.where(movie_id: params[:movie_id]).map{|theater| [Theater.find(theater.theater_id).name]}
+      # @cinemas = Cinema.select("name", "id").map{|cinema| [cinema.name, cinema.id]}
+      @cinemas = Cinema.where()
+      p "*"*100
+      p @cinemas
     end
 
     def create

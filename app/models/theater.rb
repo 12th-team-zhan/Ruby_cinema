@@ -11,6 +11,6 @@ class Theater < ApplicationRecord
   # relationship
   has_one_attached :exterior_img
   has_many :cinemas
-  has_many :movie_theater
+  has_many :movie_theater, dependent: :destroy
   has_many :movies, through: :movie_theater, source: :movie
 end

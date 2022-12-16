@@ -1,0 +1,12 @@
+<div data-controller="movie-comeout">
+  <div>上映影院：</div>
+  <% @theaters.each do |theater| %>
+    <label><%= theater.name %></label>(操作：
+    <% if (theater.movie_theater.find_by(movie_id: @movie.id).nil?) %>
+      <%= link_to "上檔", admin_movie_movie_theater_path(@movie, theater_id: theater.id), method:"post" %>
+    <% else %>
+      <%= link_to "下檔", admin_movie_movie_theater_path(@movie, theater_id: theater.id), method:"delete" %>
+    <% end %>
+    )
+  <% end  %>
+</div>

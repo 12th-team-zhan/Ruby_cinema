@@ -4,7 +4,7 @@ module Admin
   class MoviesController < ApplicationController
     before_action :authenticate_user!
     before_action :current_user_is_staff
-    before_action :find_movie, only: %i[show edit update destroy]
+    before_action :find_movie, only: %i[show edit update destroy come_out]
 
     def index
       @movies = Movie.all
@@ -16,7 +16,9 @@ module Admin
 
     def show; end
 
-    def edit; end
+    def edit
+      @theaters = Theater.all
+    end
 
     def update
       if @movie.update(movie_params)
@@ -29,6 +31,7 @@ module Admin
 
     def create
       @movie = current_user.movies.create(movie_params)
+      
       if @movie.save
         append_movie_poster
         redirect_to admin_movies_path, notice: '成功新增電影!'
@@ -52,10 +55,23 @@ module Admin
       append_movie_poster
     end
 
+    def come_out
+      # if @movie.movie_theater.nil?
+      # p "8"*100
+        # a=@movie.movie_theater.create(movie_id: @movie, theater_id: @theater)
+        # render json: { status: "checked" }
+        # p a
+      # else
+      #   @movie.movie_theater.delete(@movie)
+      #   render json: { status: "check" }
+      # end
+    end
+
     private
 
     def find_movie
       @movie = Movie.find(params[:id])
+      
     end
 
     def movie_params

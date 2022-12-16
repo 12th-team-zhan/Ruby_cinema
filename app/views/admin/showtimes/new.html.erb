@@ -16,6 +16,10 @@
     <br>
   </div>
   <div>
+    <%= form.label :"上映戲院" %>
+    <%= form.select :theater, options_for_select(@theaters) %>
+  </div>
+  <div>
     <%= form.label :cinema_id %>
     <%= form.select :cinema_id, options_for_select(@cinemas) %>
   </div>
