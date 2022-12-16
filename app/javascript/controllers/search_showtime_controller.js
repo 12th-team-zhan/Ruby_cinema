@@ -60,7 +60,7 @@ export default class extends Controller {
       .then((data) => {
         this.showtime = data;
         data.forEach((element) => {
-          let option = `<option data-showtime-id="${element[2]}" value="${element[0]}" >${element[0]}</option>`;
+          let option = `<option value="${element[0]}" >${element[0]}</option>`;
           this.showtimeListTarget.insertAdjacentHTML("beforeend", option);
         });
       })
@@ -76,7 +76,7 @@ export default class extends Controller {
 
     this.showtime.map((showtime) => {
       if (showtime[0] === this.showtimeListTarget.value) {
-        let option = `<option data-showtime-id="${showtime[2]}" >${showtime[1]}</option>`;
+        let option = `<option value="${showtime[2]}" >${showtime[1]}</option>`;
         this.showtimeTarget.insertAdjacentHTML("beforeend", option);
       }
     });
