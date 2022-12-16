@@ -3,12 +3,7 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   static targets = ["theaterList", "showtimeList", "showtime"];
 
-<<<<<<< HEAD
-    connect() {
-    }
-=======
   connect() {}
->>>>>>> 48b5e35 (訂票下拉選單)
 
   addTheaterList(el) {
     this.theaterListTarget.replaceChildren();
