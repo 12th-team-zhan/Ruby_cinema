@@ -7,19 +7,18 @@
 }
 .grid {
   width: 600px;
-  background-color: #fc9;
   display: grid;
   row-gap: 20px;
-  .item {
-    font-size: 14px;
-    color: #fff;
-    background-color: #5bc0de;
-    text-align: center;
-    border: 1px solid #000;
-    border-radius: 3px;
-  }
+}
+.seat-item {
+  font-size: 14px;
+  color: #000;
+  background-color: #5bc0de;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 3px;
 }
 
-.item:hover {
+.seat-item:hover {
   background-color: #ff0;
 }

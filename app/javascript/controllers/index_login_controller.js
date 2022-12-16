@@ -4,7 +4,6 @@ import { Controller } from "stimulus";
 export default class extends Controller {
     static targets = ["password", "email", "passwordLabel", "emailLabel", "login"];
 
-
     initialize() {
         this.emailValue = false
         this.passwordValue = false
@@ -20,8 +19,11 @@ export default class extends Controller {
             case "email":
                 this.emailLabelTarget.classList.add("input-at")
                 break;
+            default:
+                console.log("We don't have the seat status");
         }
     }
+
     removeClassAt(e) {
         if (e.target.value) {
             switch (e.srcElement.autocomplete) {
@@ -82,6 +84,7 @@ export default class extends Controller {
                 break;
         }
     }
+
     clearInput() {
         this.emailTarget.value = ""
         this.passwordTarget.value = ""
@@ -91,6 +94,7 @@ export default class extends Controller {
         this.emailLabelTarget.classList.remove("input-at2")
         this.loginAt()
     }
+
     Modal(e) {
         if (e.target.id === "Modal") {
             this.clearInput()

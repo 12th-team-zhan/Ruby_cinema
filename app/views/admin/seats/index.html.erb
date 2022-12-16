@@ -1,0 +1,26 @@
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href=<%= admin_movies_path %>>後台首頁</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            檢視座位
+        </li>
+    </ol>
+</nav>
+
+<div class="screen">
+    銀幕位置
+</div>
+
+<br>
+
+<div data-controller="showseat" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-not-added="<%= @not_added.seat_list %>">
+    <div class="grid"></div>
+</div>
+
+<br>
+
+<div>
+  <%= link_to "回到影廳列表", admin_cinemas_path, class: "btn btn-primary" %>
+</div>

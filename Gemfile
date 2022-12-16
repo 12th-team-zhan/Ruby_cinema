@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'net-smtp', require: false
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'paranoia', '~> 2.6'
 gem 'pg', '~> 1.1'
