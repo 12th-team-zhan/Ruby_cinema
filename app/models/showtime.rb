@@ -3,5 +3,6 @@ class Showtime < ApplicationRecord
 
   #relationship
   belongs_to :movie
+  belongs_to :cinema
   
 end
