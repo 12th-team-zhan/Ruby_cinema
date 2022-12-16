@@ -5,17 +5,14 @@
       <div class="container container-breadcrumb ">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                  <a href=<%= admin_movies_path %>>後台首頁</a>
-              </li>
-              <li class="breadcrumb-item active" aria-current="page">
-                影廳列表
-              </li>
+            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
+            <li class="breadcrumb-item"><a href=<%= admin_theaters_path %>>戲院列表</a></li>
+            <li class="breadcrumb-item active" aria-current="page">影廳列表</li>
           </ol>
         </nav>
       </div>
       <div class="container">
-        <%= link_to "新增影廳", new_admin_cinema_path, class: "btn btn-primary" %>
+        <%= link_to "新增影廳", new_admin_theater_cinema_path, class: "btn btn-primary" %>
         <table class="table table-striped ">
           <thead>
             <tr>
@@ -30,11 +27,11 @@
           <tbody>
             <% @cinemas.each do |cinema| %>
               <tr>
-                <th scope="row"><%= link_to cinema.name, admin_cinema_path(cinema) %></th>
+                <th scope="row"><%= link_to "#{cinema.name}", admin_cinema_path(cinema) %></th>
                 <td><%= cinema.max_row %></td>
                 <td><%= cinema.max_column %></td>
                 <td><%= link_to "編輯", edit_admin_cinema_path(cinema) %></td>
-                <td><%= link_to "刪除", admin_cinema_path(cinema), method: "delete", data: {confirm: "確定刪除影廳？"} %></td>
+                <td><%= link_to "刪除", admin_cinema_path(cinema), method: "delete", data: {confirm: "確定刪除影廳？"}%></td>
                 <td><%= link_to "座位表", admin_cinema_seats_path(cinema) %></td>
               </tr>
             <% end %>

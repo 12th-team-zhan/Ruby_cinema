@@ -7,5 +7,10 @@ class Theater < ApplicationRecord
   validates :name, presence: true
   validates :address, presence: true
   validates :phone, presence: true
+
+  # relationship
   has_one_attached :exterior_img
+  has_many :cinemas
+  has_many :movie_theater
+  has_many :movies, through: :movie_theater, source: :movie
 end

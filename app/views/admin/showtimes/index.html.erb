@@ -1,18 +1,43 @@
-<h1>管理場次</h1>
-
-<ul> 
-  <% @showtimes.each do |showtime| %>
-  <li>
-    <%= showtime.started_at %>
-    <%= showtime.end_at %>
-    <%= link_to "刪除", admin_movie_showtime_path(showtime.movie, showtime), method: "delete", data: {confirm: "確定要刪除場次嗎？"} %>
-     <%= link_to "編輯", edit_admin_movie_showtime_path(showtime.movie, showtime) %>
-  </li>
-  <% end %>
-</ul>
-
-<%= link_to "新增場次", new_admin_movie_showtime_path %>
-<br>
-<br>
-<%= link_to "返回系統首頁", admin_movies_path %>
-
+<div class="continer vh-100  text-white">
+  <div class="d-flex vh-100">
+    <%= render "shared/admin/sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
+            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>電影列表</a></li>
+            <li class="breadcrumb-item active" aria-current="page">場次列表</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="container">
+        <%= link_to "新增場次", new_admin_movie_showtime_path, class: "btn btn-primary" %>
+        <table class="table table-striped ">
+                <thead>
+                  <tr>
+                    <th scope="col">電影id</th>
+                    <th scope="col">影廳id</th>
+                    <th scope="col">開始時間</th>
+                    <th scope="col">結束時間</th>
+                    <th scope="col">編輯</th>
+                    <th scope="col">刪除</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @showtimes.each do |showtime| %>
+                    <tr>
+                      <td><%= showtime.movie_id %></td>
+                      <td><%= showtime.cinema_id %></td>
+                      <td><%= showtime.started_at %></td>
+                      <td><%= showtime.end_at %></td>
+                      <td><%= link_to "編輯", edit_admin_showtime_path(showtime) %></td>
+                      <td><%= link_to "刪除", admin_movie_showtime_path(@movie.id, showtime), method: "delete", data: {confirm: "確定刪除影廳？"} %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,7 +1,10 @@
 <%= flash[:notice] %>
 <h1>新增場次</h1>
-
-<%= form_with(model: @showtime, url: admin_movie_showtimes_path, method: "post") do |form| %>
+<%= form_with(model: @showtime, url: admin_movie_showtimes_path(@movie.id), method: "post") do |form| %>
+  <div>
+    <%= form.label :"電影" %>
+    <span><%= @movie.name %></span>
+  </div>
   <div>
     <%= form.label :"開始時間" %>
     <input type="datetime-local" name="showtime[started_at]" min="<%= Time.now.strftime("%Y-%m-%dT%H:%M") %>">
@@ -12,7 +15,9 @@
     <input type="datetime-local" name="showtime[end_at]">
     <br>
   </div>
+  <div>
+    <%= form.label :cinema_id %>
+    <%= form.select :cinema_id, options_for_select(@cinemas) %>
+  </div>
   <%= form.submit "送出" %>
-
 <% end %>
-

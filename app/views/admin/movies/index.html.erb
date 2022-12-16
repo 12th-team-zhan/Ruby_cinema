@@ -1,12 +1,12 @@
 <div class="continer vh-100  text-white">
   <div class="d-flex vh-100">
-    <%= render "admin/shared/sidebar" %>
+    <%= render "shared/admin/sidebar" %>
     <div class="main flex-grow-1 p-0 ms-1">
       <div class="container container-breadcrumb ">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "Home",movies_path %></li>
-            <li class="breadcrumb-item active" aria-current="page">Movie list</li>
+            <li class="breadcrumb-item"><%= link_to "後台首頁",admin_movies_path %></li>
+            <li class="breadcrumb-item active" aria-current="page">電影列表</li>
           </ol>
         </nav>
       </div>
@@ -16,25 +16,23 @@
           <thead>
             <tr>
               <th scope="col">電影名稱</th>
-              <th scope="col">場次管理</th>
+              <th scope="col">電影編輯</th>
+              <th scope="col">電影刪除</th>
+              <th scope="col">場次列表</th>
               <th scope="col">上映時間</th>
-              <th scope="col">最後編輯者ID</th>
-              <th scope="col">建立者ID</th>
-              <th scope="col">建立時間</th>
+              <th scope="col">建立者</th>
               <th scope="col">編輯時間</th>
             </tr>
           </thead>
           <% @movies.each do |movie| %>
             <tbody>
               <tr>
-                <th scope="row"><%= link_to movie.name,edit_admin_movie_path(movie) %></th>
-                <td><%= link_to "查看", admin_movie_showtimes_path(movie) %></td>
-                <th scope="row"><%= link_to movie.name,admin_movie_path(movie) %></th>
-                <td>1</td>
+                <td><%= link_to movie.name, admin_movie_path(movie) %></td>
+                <td><%= link_to "編輯", edit_admin_movie_path(movie) %></td>
+                <td><%= link_to "刪除", admin_movie_path(movie), method:"delete", data:{confirm:"確定刪除？"}  %></td>
+                <td><%= link_to "檢視", admin_movie_showtimes_path(movie) %></td>
                 <td><%= movie.debut_date %></td>
-                <td>123</td>
-                <td><%= movie.user_id %></td>
-                <td><%= movie.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+                <td><%= movie.user.name %></td>
                 <td><%= movie.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
               </tr>
             </tbody>

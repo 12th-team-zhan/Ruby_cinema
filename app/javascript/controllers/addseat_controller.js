@@ -68,11 +68,11 @@ export default class extends Controller {
         redirect: 'follow',
         body: JSON.stringify(seats)
       })
-      // .then((resp) => {
-      //   if (resp.redirected) {
-      //     window.location.href = resp.url;
-      //   }
-      // })
+      .then((resp) => {
+        if (resp.redirected) {
+          window.location.href = resp.url;
+        }
+      })
       .catch((err) => {
         console.log(err);
       });
