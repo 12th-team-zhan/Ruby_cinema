@@ -310,7 +310,8 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   # 第三方登入
-  config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_APP_SECRET'], scope: 'public_profile,email', info_fields: 'email,name', callback_url: 'http://localhost:3000/users/auth/facebook/callback'
+  config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_APP_SECRET'], scope: 'public_profile,email',
+                                                                     info_fields: 'email,name', callback_url: 'http://localhost:3000/users/auth/facebook/callback'
 
-  config.omniauth :google_oauth2, ENV["OAUTH_GOOGLE_ID"], ENV["OAUTH_GOOGLE_SECRET"]
+  config.omniauth :google_oauth2, ENV['OAUTH_GOOGLE_ID'], ENV['OAUTH_GOOGLE_SECRET']
 end
