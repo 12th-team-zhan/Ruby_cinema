@@ -25,7 +25,8 @@ module Admin
         render :new
       end
 
-      # showtime_start = showtime_params[:started_at].to_datetime.to_i
+
+     # showtime_start = showtime_params[:started_at].to_datetime.to_i
       # showtime_end = showtime_params[:end_at].to_datetime.to_i
 
       # showtime_all = @showtimes.map {|data| [data.started_at.to_i, data.end_at.to_i]}
@@ -42,7 +43,6 @@ module Admin
       #     false
       #   end
       # end
-
       # if showtime_condition.include?(false) ||
       #    showtime_start > showtime_end ||
       #    showtime_start < current_time ||

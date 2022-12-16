@@ -1,0 +1,39 @@
+<%= @movie.name %>
+<%= @theater.name %>
+<%= @showtime.started_at %>
+
+
+<%= form_with(model: @ticket, url: add_quantity_tickets_path, method: "post" ) do |f| %>
+
+  <%= hidden_field_tag :showtime_id, @showtime.id %>
+  
+  <div class="d-flex">
+    <%= f.label :一般票 %>
+    <%= f.number_field :regular_quantity, :value => 0 %>
+    <span>票價：</span>
+    <%= @ticket_amount - 180 %>
+  </div>
+
+  <div class="d-flex">
+    <%= f.label :優待票 %>
+    <%= f.number_field :concession_quantity, :value => 0 %>
+    <span>票價：</span>
+    <%= @ticket_amount - 200 %>
+  </div>
+  <div class="d-flex">
+    <%= f.label :敬老票 %>
+    <%= f.number_field :elderly_quantity, :value => 0 %>
+    <span>票價：</span>
+    <%= @ticket_amount - 340 %>
+  </div>
+  <div class="d-flex">
+    <%= f.label :愛心票 %>
+    <%= f.number_field :disability_quantity, :value => 0 %>
+    <span>票價：</span>
+    <%= (@ticket_amount - 340) %>
+   </div>
+   <div>
+     <%= f.submit "送" %>
+   </div>
+<% end %>
+

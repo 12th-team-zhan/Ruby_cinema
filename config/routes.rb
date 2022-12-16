@@ -18,6 +18,14 @@ Rails.application.routes.draw do
       patch :cancel
     end
   end
+  resources :tickets, only: %i[index show new create] do
+    member do
+      get :buy
+    end
+    collection do
+      post :add_quantity
+    end
+  end
 
   namespace :admin do
     resources :users, only: %i[index edit update delete]

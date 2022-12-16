@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_14_032834) do
+ActiveRecord::Schema.define(version: 2022_12_16_081248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,11 @@ ActiveRecord::Schema.define(version: 2022_12_14_032834) do
     t.integer "max_row", default: 1
     t.integer "max_column", default: 1
     t.bigint "theater_id"
+    t.decimal "ticket_amount", precision: 7, scale: 2
+    t.integer "regular_quantity", default: 0
+    t.integer "concession_quantity", default: 0
+    t.integer "elderly_quantity", default: 0
+    t.integer "disability_quantity", default: 0
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
     t.index ["theater_id"], name: "index_cinemas_on_theater_id"
   end
@@ -132,6 +137,13 @@ ActiveRecord::Schema.define(version: 2022_12_14_032834) do
     t.integer "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "regular_quantity", default: 0
+    t.integer "concession_quantity", default: 0
+    t.integer "elderly_quantity", default: 0
+    t.integer "disability_quantity", default: 0
+    t.string "movie_name"
+    t.string "cinema_name"
+    t.string "theater_name"
   end
 
   create_table "users", force: :cascade do |t|

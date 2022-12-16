@@ -11,4 +11,6 @@ class Cinema < ApplicationRecord
   has_many :seats
   has_many :showtimes
   belongs_to :theater
+  has_many :movies, through: :showtimes, source: :movie
+  
 end
