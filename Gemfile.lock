@@ -303,8 +303,8 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
-  x86_64-linux
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)

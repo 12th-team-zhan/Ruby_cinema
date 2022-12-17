@@ -16,7 +16,7 @@ class Mpg
       MerchantID: @mid,
       TradeInfo: trade_info,
       TradeSha: trade_sha,
-      Version: '2.0'
+      Version: '1.5'
     }
   end
 
@@ -33,7 +33,7 @@ class Mpg
   def set_info
     info[:MerchantID] = @mid
     info[:TimeStamp] = Time.now.to_i
-    info[:Version] = '2.0'
+    info[:Version] = '1.5'
     info[:RespondType] = 'JSON'
     info[:MerchantOrderNo] = ''
     info[:Amt] = '10'
@@ -43,7 +43,7 @@ class Mpg
     info[:Email] = ''
     info[:LoginType] = 0
     info[:CREDIT] =  1,
-                     info[:VACC] = 1
+    info[:VACC] = 1
   end
 
   def url_encoded_query_string
