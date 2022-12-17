@@ -1,0 +1,46 @@
+.movie {
+  .list-group {
+    border-radius: 0%;
+    border-bottom: 1px solid #9dbde5;
+
+    .title {
+      letter-spacing: 0.5rem;
+    }
+
+    &:nth-child(3) {
+      border-bottom: none;
+    }
+  }
+  .body {
+    border-bottom: 1px solid #9dbde5;
+    border-top: 1px solid #9dbde5;
+
+    .select-title {
+      width: 200px;
+      text-align: center;
+      letter-spacing: 0.87rem;
+    }
+    .next{
+      letter-spacing: 0.3rem;
+      line-height: 1.5rem;
+    }
+    
+  }
+}
+
+.ticket {
+  .title,
+  .item {
+    border-bottom: 1px solid#9dbde5;
+  }
+
+  .select {
+    position: relative;
+    display: block;
+    width: 70%;
+    height: 70%;
+    max-width: 40px;
+    margin: 0.5rem auto;
+    font-size: 1rem;
+  }
+}

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
                      skip: :sessions
 
   as :user do
-    post '/users/sign_in', to: 'devise/sessions#create', as: :user_session
+    post '/users/sign_in', to: 'users/sessions#create', as: :user_session
     delete '/users/sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
@@ -52,6 +52,14 @@ Rails.application.routes.draw do
     resources :showtimes, only: %i[show edit update]
   end
 
+  resources :ticketing, only: %i[show] do
+    collection do
+      get :select_tickets
+      get :select_seats
+      post :seat_reservation, to: 'ticketing#seat_reservation'
+    end
+  end
+  
   namespace :api do
     namespace :v1 do
       get 'movie_list', to: 'getdata#movie_list'

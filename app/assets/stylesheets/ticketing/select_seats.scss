@@ -1,0 +1,44 @@
+.movie {
+
+  .body {
+    .time{
+      letter-spacing: 0.2rem;
+    }
+  }
+
+  .select {
+    perspective: 200px;
+
+    .screen {
+      background-color: rgb(37, 41, 45);
+      border: none;
+      margin: 15px;
+      transform: rotateX(-70deg);
+      box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+    }
+
+    .seat-grid {
+      width: 600px;
+      display: grid;
+      row-gap: 20px;
+      gap: 15px;
+    }
+
+    .item {
+      border: 1px solid black;
+      text-align: center;
+    }
+    .item-hidden {
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    .item-alphabet{
+      border: 0px solid black;
+      text-align: center;
+    }
+    button[disabled]{
+      color: white;
+    }
+  }
+}

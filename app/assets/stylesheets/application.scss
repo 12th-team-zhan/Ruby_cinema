@@ -11,11 +11,12 @@
 @import "root.scss";
 @import "theater.scss";
 @import "orders";
-
+@import "ticketing/select_seats.scss";
+@import "ticketing/select_tickets.scss";
 button {
   all: unset;
-  cursor: pointer;
 }
+
 ul {
   list-style: none;
 }

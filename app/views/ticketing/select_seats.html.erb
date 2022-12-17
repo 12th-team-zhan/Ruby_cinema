@@ -1,0 +1,47 @@
+<%= render "shared/nav" %>
+<div class="movie position-relative">
+  <div class="movie-info container-md d-flex px-lg-4p pt-4">
+    <div class="poster me-3 d-none d-sm-block">
+      <img src="https://picsum.photos/seed/picsum/200/300" alt="">
+    </div>
+    <div class="text flex-grow-1 gap-2">
+      <ul class="list-group pb-3">
+        <li class="list-group-item ps-0 pt-0 fs-3 title">阿凡達：水之道</li>
+        <li class="list-group-item ps-0 fw-semibold">級別</li>
+        <li class="list-group-item ps-0 fw-semibold">地點</li>
+        <li class="list-group-item ps-0 fw-semibold">開演時間</li>
+      </ul>
+      <ul class="list-group">
+        <li class="list-group-item ps-0 py-4 fw-semibold">票種</li>
+      </ul>
+      <ul class="list-group">
+        <li class="list-group-item ps-0 py-4 fw-semibold">
+          總計 <span class="fs-3 fw-semibold">$0</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="body">
+    <div class="container-md px-lg-4p py-2 d-flex justify-content-between">
+      <div class="select-title">
+        <p class="fs-4 fw-light m-0 py-2">選取座位</p>
+      </div>
+      <div class="time" data-controller="alarm-clock">
+        <p class="fs-4 fw-light m-0 py-2">剩餘時間<span data-alarm-clock-target="time"></span></p>
+      </div>
+      <div class="next"></div>
+    </div>
+  </div>
+  <div class="select d-flex flex-column align-items-center w-100">
+    <div class="screen text-white">
+      Screen
+    </div>
+    <br>
+    <div data-controller="select-seat" data-notseatlist="<%= @not_seat.seat_list %>"
+         data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>">
+      <div class="seat-grid" data-select-seat-target="seatGrid"></div>
+      <br>
+      <button class="btn btn-primary" data-action="">確認訂單</button>
+    </div>
+  </div>
+</div>
