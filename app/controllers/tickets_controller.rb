@@ -35,6 +35,7 @@ class TicketsController < ApplicationController
   def new
     @ticket = Ticket.new
     @info = session[:cart9487]
+    # @form_info = Mpg.new.form_info
   end
 
   def create
