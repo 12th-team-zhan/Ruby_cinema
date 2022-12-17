@@ -9,5 +9,6 @@ class Cinema < ApplicationRecord
 
   # relationship
   has_many :seats
+  has_many :showtimes
   belongs_to :theater
 end

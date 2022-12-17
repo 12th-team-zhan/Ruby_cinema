@@ -39,7 +39,7 @@ module Admin
 
     def destroy
       @movie.destroy
-      redirect_to admin_movies_path, notice:"刪除成功"
+      redirect_to admin_movies_path, notice: '刪除成功'
     end
 
     def delete_images

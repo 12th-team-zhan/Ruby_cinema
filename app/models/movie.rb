@@ -2,8 +2,8 @@
 
 class Movie < ApplicationRecord
   acts_as_paranoid
-  
-  #validates
+
+  # validates
   validates :name, presence: true
   validates :description, presence: true
 

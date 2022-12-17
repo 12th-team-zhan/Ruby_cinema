@@ -1,5 +1,4 @@
 <%= render "shared/nav" %>
-
 <div id="carousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="5000">
@@ -30,7 +29,6 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
 <article class="d-md-flex gap-2 my-md-5 container mx-lg-auto p-0">
   <div class="container search d-flex col-12 col-md-6 py-3 " >
     <div class="qalist d-none d-lg-block col-lg-3 ">
@@ -45,7 +43,7 @@
       <div class="container search-top d-flex text-light justify-content-around">
         <button class="py-2 btn btn-cerulean py-3"  disabled= "disabled"
                 data-index-search-form-target="ticketBtn"
-                data-action="click->index-search-form#formSwitch"><span class="fs-4 fs-scale">快速定票</span>
+                data-action="click->index-search-form#formSwitch"><span class="fs-4 fs-scale">快速訂票</span>
         </button>
         <button class="py-2 btn btn-cerulean py-3"  
                 data-index-search-form-target="setBtn"
@@ -56,7 +54,9 @@
         <div class="item d-grid gap-2 " data-index-search-form-target="ticketForm" data-controller="search-showtime">
           <div class="d-flex justify-content-around align-items-center">
             <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-            <select class="form-select w-90" aria-label="select" data-action="change->search-showtime#addTheaterList">
+            <select class="form-select w-90" 
+                    aria-label="select" 
+                    data-action="change->search-showtime#addTheaterList">
               <option>請選擇電影</option>
               <% @movies.each do |movie| %>
                 <option value="<%= movie.id %>" ><%= movie.name %></option>
@@ -65,19 +65,28 @@
           </div>
           <div class="d-flex justify-content-around align-items-center">
             <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
-            <select class="form-select w-90" aria-label="select" data-action="change->search-showtime#addShowtimeList" data-search-showtime-target="theaterList">
+            <select class="form-select w-90" 
+                    aria-label="select" 
+                    data-action="change->search-showtime#addShowtimeList" 
+                    data-search-showtime-target="theaterList">
               <option>請選擇影城</option>
             </select>
           </div>
           <div class="d-flex justify-content-around align-items-center">
             <div class="icon"><i class="m-0 fa-regular fa-calendar-days text-white"></i></div>
-            <select class="form-select w-90" aria-label="select" data-search-showtime-target="ShowtimeList">
+            <select class="form-select w-90" 
+                    aria-label="select" 
+                    data-search-showtime-target="showtimeList"
+                    data-action="change->search-showtime#addShowtime">
               <option>請選擇日期</option>
             </select>
           </div>
           <div class="d-flex justify-content-around align-items-center">
             <div class="icon"><i class="m-0 fa-regular fa-clock text-white"></i></div>
-            <select class="form-select w-90" aria-label="select" data-index-search-form-target="showTime">
+            <select class="form-select w-90" 
+                    aria-label="select" 
+                    data-search-showtime-target="showtime"
+                    data-action="change->search-showtime#changeLink">
               <option>請選擇場次</option>
             </select>
           </div>
@@ -85,27 +94,26 @@
         <div class="item d-grid gap-2 item-hidden" data-index-search-form-target="setForm">
           <div class="d-flex justify-content-around align-items-center">
             <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-            <select class="form-select w-90" aria-label="select" data-index-search-form-target="theater"
-                  data-action="change->index-search-form#test">
+            <select class="form-select w-90" aria-label="select">
               <option>請選擇地區</option>
             </select>
           </div>
           <div class="d-flex justify-content-around align-items-center">
             <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
-            <select class="form-select w-90" aria-label="select" data-index-search-form-target="movie">
+            <select class="form-select w-90" aria-label="select">
               <option>請選擇影片</option>
             </select>
           </div>
           <div class="d-flex">
             <div class="d-flex justify-content-around align-items-center col">
               <div class="icon"><i class="m-0 fa-regular fa-calendar-days text-white"></i></div>
-              <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="date">
+              <select class="form-select w-90 col" aria-label="select">
                 <option>請選擇日期</option>
               </select>
             </div>
             <div class="d-flex justify-content-around align-items-center col">
               <div class="icon"><i class="m-0 fa-solid fa-user text-white"></i></div>
-              <select class="form-select w-90 col " aria-label="select" data-index-search-form-target="date">
+              <select class="form-select w-90 col " aria-label="select">
                 <option >幾人</option>
               </select>
             </div>
@@ -113,13 +121,13 @@
           <div class="d-flex">
             <div class="d-flex justify-content-around align-items-center col">
               <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-              <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="showtime">
+              <select class="form-select w-90 col" aria-label="select">
                 <option>時段(起)</option>
               </select>
             </div>
             <div class="d-flex justify-content-around align-items-center col">
               <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-              <select class="form-select w-90 col" aria-label="select" data-index-search-form-target="showtime">
+              <select class="form-select w-90 col" aria-label="select">
                 <option>時段(迄)</option>
               </select>
             </div>
@@ -128,7 +136,7 @@
       </div>
       <div class="container search-bottom d-flex text-light justify-content-around pb-3">
         <span class="my-2 py-1 px-4 bg-primary3">
-          <%= link_to "前往定票", "#", class: "btn btn-deepskyblue btn-lg" %>
+          <%= link_to "前往訂票", "#", class: "btn btn-deepskyblue btn-lg", id: "rootBuyTickets" %>
         </span>
         <span class="my-2 py-1 px-4 bg-primary3">
           <%= link_to "查看座位", "#", class: "btn btn-deepskyblue btn-lg" %>
