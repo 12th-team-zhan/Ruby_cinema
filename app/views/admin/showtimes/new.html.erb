@@ -1,27 +1,36 @@
 <%= flash[:notice] %>
 <h1>新增場次</h1>
-<%= form_with(model: @showtime, url: admin_movie_showtimes_path(@movie.id), method: "post") do |form| %>
-  <div>
-    <%= form.label :"電影" %>
-    <span><%= @movie.name %></span>
-  </div>
-  <div>
-    <%= form.label :"開始時間" %>
-    <input type="datetime-local" name="showtime[started_at]" min="<%= Time.now.strftime("%Y-%m-%dT%H:%M") %>">
-    <br>
-  </div>
-  <div>
-    <%= form.label :"結束時間" %>
-    <input type="datetime-local" name="showtime[end_at]">
-    <br>
-  </div>
-  <div>
-    <%= form.label :"上映戲院" %>
-    <%= form.select :theater, options_for_select(@theaters) %>
-  </div>
-  <div>
-    <%= form.label :cinema_id %>
-    <%= form.select :cinema_id, options_for_select(@cinemas) %>
-  </div>
-  <%= form.submit "送出" %>
-<% end %>
+<div data-controller="add-cinema-list">
+  <%= form_with(model: @showtime, url: admin_movie_showtimes_path(@movie.id), method: "post") do |form| %>
+    <div>
+      <%= form.label :"電影" %>
+      <span><%= @movie.name %></span>
+    </div>
+    <div>
+      <%= form.label :"開始時間" %>
+      <input type="datetime-local" name="showtime[started_at]" min="<%= Time.now.strftime("%Y-%m-%dT%H:%M") %>">
+      <br>
+    </div>
+    <div>
+      <%= form.label :"結束時間" %>
+      <input type="datetime-local" name="showtime[end_at]">
+      <br>
+    </div>
+    <div data-action="change->add-cinema-list#addCinemaList" class="d-flex">
+      <p>上映戲院:</p>
+      <select data-add-cinema-list-target="theater">
+        <option>請選擇戲院</option>
+        <% @theaters.each do |theater| %>
+          <option value="<%= theater[1] %>" ><%= theater[0] %></option>
+        <% end %>
+      </select>
+    </div>
+    <div>
+      <%= form.label :cinema_id %>
+      <select name="showtime[cinema_id]" data-add-cinema-list-target="cinemaList">
+        <option>請選擇影廳</option>
+      </select>
+    </div>
+    <%= form.submit "送出" %>
+  <% end %>
+</div>

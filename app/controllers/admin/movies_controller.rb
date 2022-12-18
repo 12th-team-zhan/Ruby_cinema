@@ -4,7 +4,7 @@ module Admin
   class MoviesController < ApplicationController
     before_action :authenticate_user!
     before_action :current_user_is_staff
-    before_action :find_movie, only: %i[show edit update destroy come_out]
+    before_action :find_movie, only: %i[show edit update destroy]
 
     def index
       @movies = Movie.all
@@ -53,18 +53,6 @@ module Admin
 
     def create_movie_poster
       append_movie_poster
-    end
-
-    def come_out
-      # if @movie.movie_theater.nil?
-      # p "8"*100
-        # a=@movie.movie_theater.create(movie_id: @movie, theater_id: @theater)
-        # render json: { status: "checked" }
-        # p a
-      # else
-      #   @movie.movie_theater.delete(@movie)
-      #   render json: { status: "check" }
-      # end
     end
 
     private

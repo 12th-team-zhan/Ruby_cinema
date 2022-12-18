@@ -4,6 +4,7 @@ module Admin
   class ShowtimesController < ApplicationController
     before_action :authenticate_user!
     before_action :find_movie, only: %i[index new create destroy]
+    before_action :find_theater, only: %i[new create]
     before_action :find_showtime, only: %i[destroy edit update]
 
     def index
@@ -12,11 +13,7 @@ module Admin
 
     def new
       @showtime = Showtime.new
-      @theaters = @movie.movie_theater.where(movie_id: params[:movie_id]).map{|theater| [Theater.find(theater.theater_id).name]}
-      # @cinemas = Cinema.select("name", "id").map{|cinema| [cinema.name, cinema.id]}
-      @cinemas = Cinema.where()
-      p "*"*100
-      p @cinemas
+      @cinemas = Cinema.select("name", "id").map{|cinema| [cinema.name, cinema.id]}
     end
 
     def create
@@ -107,6 +104,10 @@ module Admin
 
     def find_movie
       @movie = Movie.find(params[:movie_id])
+    end
+
+    def find_theater
+      @theaters = @movie.movie_theater.where(movie_id: params[:movie_id]).map{|cinema| [cinema.theater.name, cinema.theater_id]}
     end
 
     def find_showtime
