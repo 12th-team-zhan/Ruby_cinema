@@ -1,7 +1,35 @@
-<h1>影城資訊(<%= @theater.name %>)</h1>
-<ul>
-  <li>地址：<%= @theater.address %></li>
-  <li>電話：<%= @theater.phone %></li>
-  <li><%= link_to "查看影廳", admin_theater_cinemas_path(@theater) %></li>
-</ul>
-<%= link_to "回影城列表", admin_theaters_path %>
+<div class="continer vh-100  text-white">
+  <div class="d-flex vh-100">
+    <%= render "shared/admin/sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
+            <li class="breadcrumb-item" aria-current="page">
+              <%= link_to "電影院列表", admin_theaters_path %>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">電影院資訊</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="container text-dark">
+        <h1><%= @theater.name %></h1>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex">
+            <i class="fa-solid fa-phone"></i>
+            <div class="mx-2">電話：<%= @theater.phone %></div>
+          </li>
+          <li class="list-group-item d-flex">
+            <i class="fa-solid fa-location-dot"></i>
+            <div class="mx-2">地址：<%= @theater.address %></div>
+          </li>
+          <li class="list-group-item"><%= link_to "查看影廳", admin_theater_cinemas_path(@theater) %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

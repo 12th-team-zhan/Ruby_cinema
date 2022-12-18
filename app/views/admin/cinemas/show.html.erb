@@ -1,25 +1,25 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a href=<%= admin_movies_path %>>後台首頁</a>
-    </li>
-    <li class="breadcrumb-item" aria-current="page">
-      <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-      <%= @cinema.name %>
-    </li>
-      </ol>
-    </nav>
-    <table>
-      <tr>
-        <td>影廳名稱</td>
-        <td>最大排數</td>
-        <td>最大欄數</td>
-      </tr>
-      <tr>
-        <td><%= @cinema.name %></td>
-        <td><%= @cinema.max_row %></td>
-        <td><%= @cinema.max_column %></td>
-      </tr>
-    </table>
+<div class="continer vh-100  text-white">
+  <div class="d-flex vh-100">
+    <%= render "shared/admin/sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
+          <li class="breadcrumb-item" aria-current="page">
+            <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">影廳資訊</li>
+        </ol>
+      </nav>
+      </div>
+      <div class="container text-dark">
+        <h1><%= @cinema.name %></h1>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex">最大排數 : <%= @cinema.max_row %></li>
+          <li class="list-group-item d-flex">最大欄數 : <%= @cinema.max_column %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
