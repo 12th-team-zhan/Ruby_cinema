@@ -3,11 +3,11 @@
 class MpgResponse
   attr_reader :status, :message, :result, :order_no, :trans_no
 
-  def initialize
+  def initialize(params)
     @key = ENV['MPG_KEY']
     @iv = ENV['MPG_IV']
 
-    response = decrypy
+    response = decrypy(params)
     @status = response['Status']
     @message = response['Message']
     @result = response['Result']
