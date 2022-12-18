@@ -5,33 +5,29 @@
       <div class="container container-breadcrumb ">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href=<%= admin_movies_path %>>後台首頁</a>
-              </li>
-              <li class="breadcrumb-item" aria-current="page">
-                <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
-              </li>
-              <li class="breadcrumb-item active" aria-current="page">
-                檢視座位
-              </li>
+            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
+            <li class="breadcrumb-item" aria-current="page">
+              <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">檢視座位</li>
           </ol>
         </nav>
       </div>
       <div class="container">
         <div>
-            <%= link_to "編輯座位", admin_cinema_seats_edit_path, class: "btn btn-primary" %>
+          <%= link_to "編輯座位", edit_admin_cinema_seats_path, class: "btn btn-primary" %>
         </div>
-                <br>
-                <div>
-                  <div class="screen">
-                    銀幕位置
-                  </div>
-                  <br>
-                  <div data-controller="showseat" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-not-added="<%= @not_added.seat_list %>">
-                    <div class="grid"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <br>
+        <div>
+          <div class="screen">
+            銀幕位置
+          </div>
+          <br>
+          <div data-controller="showseat" data-id="<%= @cinema.id %>">
+            <div class="grid"></div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>

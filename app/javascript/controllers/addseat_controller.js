@@ -3,13 +3,29 @@ import { Controller } from "stimulus";
 
 export default class extends Controller {
     connect() {
-        this.maxRow = this.element.dataset.maxrow;
-        this.maxColumn = this.element.dataset.maxcolumn;
+      const token = document.querySelector("meta[name='csrf-token']").content;
+      const cinemaId = this.element.dataset.id;
+      
+      fetch(`/admin/cinemas/${cinemaId}/seats/new.json`, {
+        method: "GET",
+        headers: {
+          "X-csrf-Token": token,
+        },
+      })
+      .then((resp) => {
+        return resp.json()
+      })
+      .then(({seatsArr}) => {
+        this.seatsAll = seatsArr;
 
-        this.seatsAll = [...Array(this.maxRow * this.maxColumn).keys()].map(x => x + 1);
-        this.seatsNotAdded = [];
+        this.maxRow = seatsArr.length;
+        this.maxColumn = seatsArr[0].length;
 
         this.makeSeatingChart(this.maxRow, this.maxColumn);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
 
     makeSeatingChart(maxR, maxC) {
@@ -28,8 +44,9 @@ export default class extends Controller {
     }
 
     changeSeatStatus(el) {
-        const seatId = +el.target.dataset.seatId;
-        let seatStatus = el.target.dataset.status;
+      const rowId = +el.target.dataset.rowId;
+      const columnId = +el.target.dataset.columnId;
+      let seatStatus = el.target.dataset.status;
 
         switch (seatStatus) {
             case "not added":
@@ -37,19 +54,18 @@ export default class extends Controller {
 
                 el.target.dataset.status = "added";
 
-                const index = this.seatsNotAdded.indexOf(seatId);
-                this.seatsNotAdded.splice(index, 1);
+                this.seatsAll[rowId][columnId] = 0;
                 break;
             case "added":
                 el.target.classList.add("bg-transparent");
 
                 el.target.dataset.status = "not added";
 
-                this.seatsNotAdded.push(seatId);
+                this.seatsAll[rowId][columnId] = 1;
                 break;
             default:
                 console.log("We don't have the seat status");
-        }
+        }        
     }
 
 
@@ -57,25 +73,24 @@ export default class extends Controller {
         const token = document.querySelector("meta[name='csrf-token']").content;
         const cinemaId = this.element.dataset.id;
 
-        this.seatsAdded = this.seatsAll.filter(s => !this.seatsNotAdded.includes(s));
-        const seats = { "added": this.seatsAdded, "notAdded": this.seatsNotAdded }
+        const seats = {"seats": this.seatsAll}
 
         fetch(`/admin/cinemas/${cinemaId}/seats`, {
-            method: "POST",
-            headers: {
-                "X-csrf-Token": token,
-                "Content-Type": "application/json"
-            },
-            redirect: 'follow',
-            body: JSON.stringify(seats)
+          method: "POST",
+          headers: {
+            "X-csrf-Token": token,
+            "Content-Type": "application/json"
+          },
+          redirect: 'follow',
+          body: JSON.stringify(seats)
         })
-            .then((resp) => {
-                if (resp.redirected) {
-                    window.location.href = resp.url;
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        .then((resp) => {
+          if (resp.redirected) {
+            window.location.href = resp.url;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 }

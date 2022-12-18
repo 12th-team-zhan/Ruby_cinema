@@ -5,23 +5,31 @@ module Admin
     before_action :find_cinema, only: %i[index new create edit update]
 
     def index
-      @not_added = @cinema.seats.find_by({ category: 'not_added' })
+      @seats = @cinema.seats.first
 
-      return unless @not_added.nil?
-
-      redirect_to new_admin_cinema_seat_path(@cinema)
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: { seatsArr: @seats.seat_list } }
+      end
     end
 
-    def new; end
+    def new
+      seats_arr = Array.new(@cinema.max_row) { Array.new(@cinema.max_column, 0) }
+
+      respond_to do |format|
+        format.html
+        format.json { render json: { seatsArr: seats_arr } }
+      end
+    end
 
     def create
-      @added = @cinema.seats.new({ seat_list: params[:added], category: 'added' })
-      @added.save
+      @seats = @cinema.seats.new({seat_list: params[:seats]})
 
-      @not_added = @cinema.seats.new({ seat_list: params[:notAdded], category: 'not_added' })
-      @not_added.save
-
-      redirect_to admin_theater_cinemas_path(@cinema.theater_id)
+      if @seats.save
+        redirect_to admin_theater_cinemas_path(@cinema.theater_id), notice: '成功新增座位'
+      else
+        redirect_to new_admin_cinema_seats_path(@cinema)
+      end
     end
 
     def edit
@@ -39,11 +47,6 @@ module Admin
     end
 
     private
-
-    def seat_params
-      params.permit(:added, :notAdded)
-    end
-
     def find_cinema
       @cinema = Cinema.find(params[:cinema_id])
     end

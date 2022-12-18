@@ -32,7 +32,7 @@
                 <td><%= cinema.max_column %></td>
                 <td><%= link_to "編輯", edit_admin_cinema_path(cinema) %></td>
                 <td><%= link_to "刪除", admin_cinema_path(cinema), method: "delete", data: {confirm: "確定刪除影廳？"}%></td>
-                <td><%= link_to "檢視", admin_cinema_seats_path(cinema) %></td>
+                <td><%= link_to "檢視", admin_cinema_seats_index_path(cinema) %></td>
               </tr>
             </thead>
             <tbody>
