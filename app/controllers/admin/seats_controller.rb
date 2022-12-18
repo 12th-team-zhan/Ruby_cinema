@@ -33,17 +33,22 @@ module Admin
     end
 
     def edit
-      @not_added = @cinema.seats.find_by({ category: 'not_added' })
+      @seats = @cinema.seats.first
+
+      respond_to do |format|
+        format.html { render :edit }
+        format.json { render json: { seatsArr: @seats.seat_list } }
+      end
     end
 
     def update
-      @added = @cinema.seats.find_by({ category: 'added' })
-      @added.update({ seat_list: params[:added] })
+      @seats = @cinema.seats.first
 
-      @not_added = @cinema.seats.find_by({ category: 'not_added' })
-      @not_added.update({ seat_list: params[:notAdded] })
-
-      redirect_to admin_cinema_seats_path
+      if @seats.update({seat_list: params[:seats]})
+        redirect_to admin_theater_cinemas_path(@cinema.theater_id), notice: '成功更新座位'
+      else
+        redirect_to edit_admin_cinema_seats_path(@cinema)
+      end
     end
 
     private
