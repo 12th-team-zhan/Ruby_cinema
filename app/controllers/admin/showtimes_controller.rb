@@ -13,7 +13,7 @@ module Admin
 
     def new
       @showtime = Showtime.new
-      @cinemas = Cinema.select("name", "id").map{|cinema| [cinema.name, cinema.id]}
+      @cinemas = Cinema.select('name', 'id').map { |cinema| [cinema.name, cinema.id] }
     end
 
     def create
@@ -60,13 +60,13 @@ module Admin
 
     def update
       # @showtimes = @movie.showtimes.all
-      
+
       if @showtime.update(showtime_params)
         redirect_to admin_movie_showtimes_path(@showtime.movie_id), notice: '成功'
       else
         render :edit
       end
-      
+
       # showtime_start = showtime_params[:started_at].to_datetime.to_i
       # showtime_end = showtime_params[:end_at].to_datetime.to_i
 
@@ -107,7 +107,9 @@ module Admin
     end
 
     def find_theater
-      @theaters = @movie.movie_theater.where(movie_id: params[:movie_id]).map{|cinema| [cinema.theater.name, cinema.theater_id]}
+      @theaters = @movie.movie_theater.where(movie_id: params[:movie_id]).map do |cinema|
+        [cinema.theater.name, cinema.theater_id]
+      end
     end
 
     def find_showtime

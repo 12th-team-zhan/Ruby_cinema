@@ -34,6 +34,14 @@
   <div class="input-group mb-3">
     <%= f.file_field :movie_poster %>
   </div>
+  <div>
+    <div>
+      <% @theaters.each do |theater| %>
+        <%= check_box_tag "theater[]", theater.id %>
+        <%= label_tag(:theater_id, theater.name) %>
+      <% end %>
+    </div>
+  </div>
   <div class="input-group mb-3">
     <%= f.submit %>
   </div>
