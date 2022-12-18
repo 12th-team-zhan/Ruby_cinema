@@ -38,7 +38,7 @@ module Admin
         append_movie_poster
 
         @theaters = params.require(:theater).map do |theater|
-          @movie_theater = MovieTheater.create(movie_id: @movie.id, theater_id: theater.to_i)
+          MovieTheater.create(movie_id: @movie.id, theater_id: theater.to_i)
         end
 
         redirect_to admin_movies_path, notice: '成功新增電影!'
@@ -66,7 +66,6 @@ module Admin
 
     def find_movie
       @movie = Movie.find(params[:id])
-      
     end
 
     def movie_params

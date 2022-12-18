@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  acts_as_paranoid
   belongs_to :user
   # has_many :tickets
 
