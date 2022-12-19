@@ -14,12 +14,11 @@ class MoviesController < ApplicationController
     @news = News.all.order(created_at: :desc).limit(6)
   end
 
-  def show
-    
-  end
+  def show; end
 
   private
+
   def find_movie
-    @movie=Movie.find(params[:id])
+    @movie = Movie.find(params[:id])
   end
 end

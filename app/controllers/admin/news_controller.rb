@@ -15,7 +15,7 @@ module Admin
     def create
       @news = current_user.news.create(params_news)
       if @news.save
-        redirect_to admin_news_index_path, notice: "成功新增消息"
+        redirect_to admin_news_index_path, notice: '成功新增消息'
       else
         render :new
       end

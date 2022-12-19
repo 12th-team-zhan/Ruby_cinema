@@ -11,7 +11,8 @@ class SelectseatChannel < ApplicationCable::Channel
   def self.speak(params)
     case params[:status]
     when 'selected'
-      ActionCable.server.broadcast('selectseat_channel', { status: 'selected', seat_id: params[:seat_id],id: params[:id] })
+      ActionCable.server.broadcast('selectseat_channel',
+                                   { status: 'selected', seat_id: params[:seat_id], id: params[:id] })
       @@select_seat[params[:id]] = if (@@select_seat[params[:id]]).nil?
                                      [params[:seat_id]]
                                    else
@@ -20,7 +21,8 @@ class SelectseatChannel < ApplicationCable::Channel
 
       Rails.logger.debug @@select_seat
     when 'cancel'
-      ActionCable.server.broadcast('selectseat_channel', { status: 'cancel', seat_id: params[:seat_id],id: params[:id] })
+      ActionCable.server.broadcast('selectseat_channel',
+                                   { status: 'cancel', seat_id: params[:seat_id], id: params[:id] })
       @@select_seat[params[:id]] = @@select_seat[params[:id]].delete(params[:seat_id])
     end
   end
