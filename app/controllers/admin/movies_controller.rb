@@ -12,11 +12,14 @@ module Admin
 
     def new
       @movie = Movie.new
+      @theaters = Theater.all
     end
 
     def show; end
 
-    def edit; end
+    def edit
+      @theaters = Theater.all
+    end
 
     def update
       if @movie.update(movie_params)
@@ -29,8 +32,14 @@ module Admin
 
     def create
       @movie = current_user.movies.create(movie_params)
+
       if @movie.save
         append_movie_poster
+
+        @theaters = params.require(:theater).map do |theater|
+          MovieTheater.create(movie_id: @movie.id, theater_id: theater.to_i)
+        end
+
         redirect_to admin_movies_path, notice: '成功新增電影!'
       else
         render :new

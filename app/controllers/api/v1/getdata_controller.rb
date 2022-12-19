@@ -13,9 +13,12 @@ module Api
         render json: theater_list
       end
 
+      def cinema_list
+        cinema_list = Cinema.where(theater_id: params[:theater_id])
+        render json: cinema_list
+      end
+
       def showtime_list
-        movie_id = params[:movie_id]
-        theater_id = params[:theater_id]
         @cinemas = Theater.find(params[:theater_id]).cinemas.pluck(:id)
         showtime_date = Showtime.where(cinema_id: @cinemas, movie_id: params[:movie_id]).pluck(:started_at,
                                                                                                :id).map do |showtime, id|

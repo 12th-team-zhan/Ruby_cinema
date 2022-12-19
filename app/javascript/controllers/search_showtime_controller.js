@@ -69,7 +69,7 @@ export default class extends Controller {
       });
   }
 
-  addShowtime(el) {
+  addShowtime() {
     this.showtimeTarget.replaceChildren();
     let option = `<option>請選擇場次</option>`;
     this.showtimeTarget.insertAdjacentHTML("beforeend", option);

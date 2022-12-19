@@ -8,8 +8,8 @@ class Cinema < ApplicationRecord
   acts_as_paranoid
 
   # relationship
-  has_many :seats
-  has_many :showtimes
+  has_many :seats, dependent: :destroy
+  has_many :showtimes, dependent: :destroy
   belongs_to :theater
   has_many :movies, through: :showtimes, source: :movie
   

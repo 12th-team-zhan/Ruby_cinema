@@ -46,7 +46,7 @@ Rails.application.routes.draw do
         delete :delete_images
         post :create_movie_poster
       end
-
+      resource :movie_theater, only: %i[create destroy]
       resources :showtimes, only: %i[index new create destroy]
     end
     resources :showtimes, only: %i[show edit update]
@@ -57,6 +57,7 @@ Rails.application.routes.draw do
       get 'movie_list', to: 'getdata#movie_list'
       post 'theater_list', to: 'getdata#theater_list'
       post 'showtime_list', to: 'getdata#showtime_list'
+      post 'cinema_list', to: 'getdata#cinema_list'
     end
   end
 
