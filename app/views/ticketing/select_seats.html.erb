@@ -1,15 +1,17 @@
 <%= render "shared/nav" %>
-<div class="movie position-relative">
+<div class="movie position-relative" data-controller="select-seat" 
+     data-notseatlist="<%= @not_seat.seat_list %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>">
   <div class="movie-info container-md d-flex px-lg-4p pt-4">
     <div class="poster me-3 d-none d-sm-block">
       <img src="https://picsum.photos/seed/picsum/200/300" alt="">
     </div>
     <div class="text flex-grow-1 gap-2">
       <ul class="list-group pb-3">
-        <li class="list-group-item ps-0 pt-0 fs-3 title">阿凡達：水之道</li>
+        <li class="list-group-item ps-0 pt-0 fs-3 title"><%= @showtime.movie.name %></li>
         <li class="list-group-item ps-0 fw-semibold">級別</li>
-        <li class="list-group-item ps-0 fw-semibold">地點</li>
-        <li class="list-group-item ps-0 fw-semibold">開演時間</li>
+        <li class="list-group-item ps-0 fw-semibold">地點
+          <%= @showtime.cinema.theater.name %><%= @showtime.cinema.name %>廳</li>
+        <li class="list-group-item ps-0 fw-semibold">開演時間<%= @showtime.started_at %></li>
       </ul>
       <ul class="list-group">
         <li class="list-group-item ps-0 py-4 fw-semibold">票種</li>
@@ -29,7 +31,11 @@
       <div class="time" data-controller="alarm-clock">
         <p class="fs-4 fw-light m-0 py-2">剩餘時間<span data-alarm-clock-target="time"></span></p>
       </div>
-      <div class="next"></div>
+      <%= link_to pay_ticketing_index_path, 
+          class: "col-md-4 col-lg-3 text-center my-auto next",
+          data: {select_seat_target: "next"}  do %>
+        <p class="fw-light m-0">確認訂單</p>
+      <% end %>
     </div>
   </div>
   <div class="select d-flex flex-column align-items-center w-100">
@@ -37,11 +43,9 @@
       Screen
     </div>
     <br>
-    <div data-controller="select-seat" data-notseatlist="<%= @not_seat.seat_list %>"
-         data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>">
+    <div>
       <div class="seat-grid" data-select-seat-target="seatGrid"></div>
       <br>
-      <button class="btn btn-primary" data-action="">確認訂單</button>
     </div>
   </div>
 </div>

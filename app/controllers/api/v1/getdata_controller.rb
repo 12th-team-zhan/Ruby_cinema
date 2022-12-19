@@ -25,6 +25,11 @@ module Api
         end
         render json: showtime_date
       end
+
+      def selected_tickets
+        @channle_user_select_seat = SelectseatChannel.channle_user_select_seat
+        render json: @channle_user_select_seat
+      end
     end
   end
 end

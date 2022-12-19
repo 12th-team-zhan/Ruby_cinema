@@ -3,7 +3,9 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   static targets = ["theaterList", "showtimeList", "showtime"];
 
-  connect() {}
+  connect() {
+    this.changeLink()
+  }
 
   addTheaterList(el) {
     this.theaterListTarget.replaceChildren();
@@ -85,6 +87,8 @@ export default class extends Controller {
   changeLink() {
     const link = document.querySelector("#rootBuyTickets");
     // ?前修改為ticket的new
-    link.href = `/admin/movies/new?showtimeid=${this.showtimeTarget.value}`;
+    // link.href = `/admin/movies/new?showtimeid=${this.showtimeTarget.value}`;
+    link.href = `/ticketing/select_tickets?showtimeid=2`;
+
   }
 }

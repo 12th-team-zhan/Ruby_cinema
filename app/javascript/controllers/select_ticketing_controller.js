@@ -6,7 +6,7 @@ export default class extends Controller {
     connect() {
         this.calcAllTotal()
         let params = new URLSearchParams(location.search);
-        // console.log(params.get('showtime_id'));
+        this.showtimeId = params.get('showtimeid')
     }
     select(e) {
         e.path[2].children[2].textContent = "$" + Number(e.srcElement.value) * Number(e.path[2].children[0].textContent.substring(1))
@@ -36,6 +36,10 @@ export default class extends Controller {
             allAmount = allAmount + Number(e.value)
         })
         this.allAmountTarget.textContent = allAmount
+        this.changeLink(allAmount)
 
+    }
+    changeLink(amount) {
+        this.nextTarget.href = `/ticketing/select_seats?showtimeid=2&amount=${amount}`;
     }
 }

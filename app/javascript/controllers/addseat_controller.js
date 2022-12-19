@@ -22,13 +22,7 @@ export default class extends Controller {
             for (let c = 1; c <= maxC; c++) {
                 const item = `<div class="seat-item" data-seat-id=${(r - 1) * maxC + c} data-status="added" data-action="click->addseat#changeSeatStatus">${row_index}${String(c).padStart(2, '0')}</div>`;
 
-                for (var r = 1; r <= maxR; r++) {
-                    for (let c = 1; c <= maxC; c++) {
-                        const item = `<div class="item" data-status="added" data-action="click->addseat#changeSeatStatus">${(r - 1) * maxC + c}</div>`;
-
-                        grid.insertAdjacentHTML("beforeend", item);
-                    }
-                }
+                grid.insertAdjacentHTML("beforeend", item);
             }
         }
     }

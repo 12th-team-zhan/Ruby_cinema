@@ -27,9 +27,9 @@
     <span class="input-group-text">上映日期</span>
     <%= f.date_select :debut_date, start_year: Date.today.year   %>
   </div>
-  <div class="input-group mb-3">
+  <div class="">
     <span class="input-group-text">簡介</span>
-    <%= f.text_area :description %>
+     <%= f.rich_text_area :description %>
   </div>
   <div class="input-group mb-3">
     <%= f.file_field :movie_poster %>

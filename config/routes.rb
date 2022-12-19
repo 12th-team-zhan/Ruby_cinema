@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' },
-                     skip: :sessions
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }, skip: :sessions
 
   as :user do
     post '/users/sign_in', to: 'users/sessions#create', as: :user_session
@@ -54,6 +53,7 @@ Rails.application.routes.draw do
 
   resources :ticketing, only: %i[show] do
     collection do
+      get :pay
       get :select_tickets
       get :select_seats
       post :seat_reservation, to: 'ticketing#seat_reservation'
@@ -65,6 +65,7 @@ Rails.application.routes.draw do
       get 'movie_list', to: 'getdata#movie_list'
       post 'theater_list', to: 'getdata#theater_list'
       post 'showtime_list', to: 'getdata#showtime_list'
+      post 'selected_tickets', to:'getdata#selected_tickets'
       post 'cinema_list', to: 'getdata#cinema_list'
     end
   end

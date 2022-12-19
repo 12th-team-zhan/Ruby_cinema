@@ -2,22 +2,20 @@
 
 class TicketingController < ApplicationController
   def select_tickets
-    # session["ticketing_id"]=123
-    # render html:params
+    @showtime=Showtime.find(params[:showtimeid])
   end
 
   def select_seats
-    @channle_user_select_seat = SelectseatChannel.channle_user_select_seat
-    @cinema = Cinema.find(12)
-    @not_seat = Seat.find_by(cinema: 12, category: 'not_added')
-    respond_to do |format|
-      format.html
-      format.json { render json: @channle_user_select_seat }
-    end
+    @showtime=Showtime.find(params[:showtimeid])
+    @cinema = Cinema.find(@showtime.cinema.id)
+    @not_seat = Seat.find_by(cinema_id: @showtime.cinema.id, category: 'not_added')
   end
 
   def seat_reservation
     SelectseatChannel.speak(params)
     render json: { status: 'ok', params: }
+  end
+  def pay
+    render html:params
   end
 end

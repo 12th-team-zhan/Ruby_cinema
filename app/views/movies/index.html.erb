@@ -12,15 +12,15 @@
   <div class="movie-list">
     <div class="d-flex flex-wrap ">
       <% @movie.each do |movie| %>
-        <div class="card p-4">
-        <% if movie.movie_poster.attached? %>
-          <%= image_tag movie.movie_poster, size: "190x280" %>
-        <% end %> 
+        <%= link_to movie_path(movie), class: "card p-4" do%>
+          <% if movie.movie_poster.attached? %>
+            <%= image_tag movie.movie_poster, size: "190x280" %>
+          <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= movie.name %></h5>
             <p class="card-text"><%= movie.debut_date %></p>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

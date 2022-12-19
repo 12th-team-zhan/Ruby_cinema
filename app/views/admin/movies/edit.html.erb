@@ -58,9 +58,9 @@
             <%= render "come_out_theater" %>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">簡介</span>
-          <%= f.text_area :description, cols: 30, rows: 30, class: "form-control" %>
+        <div data-controller="edit">
+          <span>簡介</span>
+          <%= f.rich_text_area :description %>
         </div>
         <div class="input-group mb-3">
           <%= f.submit %>

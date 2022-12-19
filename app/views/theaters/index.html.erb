@@ -13,11 +13,11 @@
     <% @theaters.each do |theater| %>
       <div class="card theater-card col-12 col-xl-6 py-4 ">
         <div class="d-flex flex-column flex-sm-row">
-          <div class="img">
+          <%= link_to theater_path(theater), class: "img" do %>
             <% if theater.exterior_img.attached? %>
-              <%= image_tag theater.exterior_img, size: "300x200" %>
+              <%= image_tag theater.exterior_img, size: "240x165" %>
             <% end %>
-          </div>
+          <% end %>
           <div class="card-body px-0 px-sm-3">
             <h5 class="card-title"><%= theater.name %></h5>
             <div class="d-flex position-relative">
@@ -37,4 +37,5 @@
       </div>
     <% end %>
   </div>
+</div>
 </div>

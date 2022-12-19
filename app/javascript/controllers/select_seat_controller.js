@@ -2,8 +2,11 @@ import { Controller } from "stimulus";
 import consumer from '../channels/consumer';
 
 export default class extends Controller {
-    static targets = ["seatGrid"];
+    static targets = ["seatGrid", "next"];
     connect() {
+        let params = new URLSearchParams(location.search);
+        this.ticketAmount = Number(params.get('amount'));
+        this.showtimeId = Number(params.get('showtimeid'));
         this.token = document.querySelector("meta[name='csrf-token']").content;
         //去空隔 [] 轉陣列
         this.notSeatList = this.element.dataset.notseatlist.replace(/[\"\[\]\s]/g, "").split(",").map(v => Number(v));
@@ -13,9 +16,10 @@ export default class extends Controller {
         this.makeSeatingChart(this.maxRow, this.maxColumn);
         this.otherSeat = {}
         this.selectSeat = [];
-        //向API查詢以被選擇位子
-        fetch(`${window.location.pathname}.json`, {
-            method: "get",
+        //向API查詢以被選擇位子selected_tickets
+        console.log(window.location.host);
+        fetch(`/api/v1/selected_tickets`, {
+            method: "POST",
             headers: {
                 "X-CSRF-Token": this.token,
             },
@@ -69,12 +73,32 @@ export default class extends Controller {
     changeSeatStatus(el) {
         const seatId = +el.target.value
         let seatStatus = el.target.dataset.status;
+        if (this.selectSeat.length === this.ticketAmount && seatStatus === "empty") {
+            let firstSelect = this.selectSeat.shift()
+            let seatElement = document.querySelector(`.item${firstSelect}`)
+            seatElement.classList.remove("bg-DodgerBlue");
+            seatElement.dataset.status = "empty";
+            fetch(`/ticketing/seat_reservation`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-Token": this.token,
+                },
+                body: JSON.stringify({
+                    status: "cancel",
+                    seat_id: firstSelect,
+                    id: this.id,
+                })
+            }).catch(() => {
+                console.log("error!!");
+            });
+        }
         switch (seatStatus) {
             case "empty":
                 el.target.classList.add("bg-DodgerBlue")
                 el.target.dataset.status = "selected";
                 this.selectSeat.push(seatId);
-                fetch(`http://127.0.0.1:3000/ticketing/seat_reservation`, {
+                fetch(`/ticketing/seat_reservation`, {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -85,13 +109,11 @@ export default class extends Controller {
                         seat_id: el.target.value,
                         id: this.id,
                     })
-                })
-                    .then((resp) => resp.json())
-                    .then(() => {
-                    })
-                    .catch(() => {
-                        console.log("error!!");
-                    });
+                }).then(() => {
+                    this.changeLink()
+                }).catch(() => {
+                    console.log("error!!");
+                });
 
                 break;
             case "selected":
@@ -99,7 +121,7 @@ export default class extends Controller {
                 el.target.dataset.status = "empty";
                 const index = this.selectSeat.indexOf(seatId);
                 this.selectSeat.splice(index, 1);
-                fetch(`http://127.0.0.1:3000/ticketing/seat_reservation`, {
+                fetch(`/ticketing/seat_reservation`, {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -110,14 +132,9 @@ export default class extends Controller {
                         seat_id: el.target.value,
                         id: this.id,
                     })
-                })
-                    .then((resp) => resp.json())
-                    .then((x) => {
-                        console.log(x);
-                    })
-                    .catch(() => {
-                        console.log("error!!");
-                    });
+                }).catch(() => {
+                    console.log("error!!");
+                });
 
                 break;
             default:
@@ -176,4 +193,8 @@ export default class extends Controller {
     otherCancel(id, seat_id) {
         this.otherSeat[id] = this.otherSeat[id].filter(item => item !== seat_id)
     }
+    changeLink() {
+        this.nextTarget.href = `/ticketing/pay?showtimeId=${this.showtimeId}&seatId=${this.selectSeat}`;
+    }
+
 }
