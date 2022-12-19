@@ -20,5 +20,8 @@ module RubyCinema
     #
     # config.time_zone = 'Taipei'
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # ngrok setting
+    # config.hosts << ENV['NGROK_URL']
   end
 end
