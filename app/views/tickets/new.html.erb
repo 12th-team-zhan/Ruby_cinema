@@ -1,0 +1,38 @@
+<h1>購票資訊確認</h1>
+
+<%= form_with(model: @ticket, url: tickets_path, method: "post") do |form| %>
+  <div class="d-flex">
+    <nav>電影名稱：</nav>
+    <%= form.text_field :movie_name, value: @info["movie_name"], readonly: true %>
+  </div>
+
+  <div class="d-flex">
+    <nav>影廳：</nav>
+    <%= form.text_field :cinema_name, value: @info["cinema_name"], readonly: true %>
+  </div>
+
+  <div class="d-flex">
+    <nav>一般票數量：</nav>
+    <%= form.text_field :regular_quantity, value: @info["regular_quantity"], readonly: true %>
+  </div>
+
+  <div class="d-flex">
+    <nav>優待票數量：</nav>
+    <%= form.text_field :concession_quantity, value: @info["concession_quantity"], readonly: true %>
+  </div>
+
+  <div class="d-flex">
+    <nav>敬老票數量：</nav>
+    <%= form.text_field :elderly_quantity, value: @info["elderly_quantity"], readonly: true %>
+  </div>
+
+  <div class="d-flex">
+    <nav>愛心票數量：</nav>
+    <%= form.text_field :disability_quantity, value: @info["disability_quantity"], readonly: true %>
+  </div>
+
+  <%= form.submit "結帳" %>
+    
+<% end %>
+
+

@@ -42,7 +42,7 @@ module Admin
     private
 
     def cinema_params
-      params.require(:cinema).permit(:name, :max_row, :max_column)
+      params.require(:cinema).permit(:name, :max_row, :max_column, :ticket_amount)
     end
 
     def find_cinema
