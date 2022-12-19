@@ -7,9 +7,13 @@ module Admin
     def index
       @seats = @cinema.seats.first
 
-      respond_to do |format|
-        format.html { render :index }
-        format.json { render json: { seatsArr: @seats.seat_list } }
+      if @seats.nil?
+        redirect_to new_admin_cinema_seats_path(@cinema)
+      else
+        respond_to do |format|
+          format.html { render :index }
+          format.json { render json: { seatsArr: @seats.seat_list } }
+        end
       end
     end
 
@@ -23,7 +27,7 @@ module Admin
     end
 
     def create
-      @seats = @cinema.seats.new({seat_list: params[:seats]})
+      @seats = @cinema.seats.new({seat_list: params[:seats], seat_list_users: params[:seats]})
 
       if @seats.save
         redirect_to admin_theater_cinemas_path(@cinema.theater_id), notice: '成功新增座位'
@@ -44,7 +48,7 @@ module Admin
     def update
       @seats = @cinema.seats.first
 
-      if @seats.update({seat_list: params[:seats]})
+      if @seats.update({seat_list: params[:seats], seat_list_users: params[:seats]})
         redirect_to admin_theater_cinemas_path(@cinema.theater_id), notice: '成功更新座位'
       else
         redirect_to edit_admin_cinema_seats_path(@cinema)

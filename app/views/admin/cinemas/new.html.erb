@@ -37,6 +37,34 @@
           </div>
           <br>
           <div class="form-group row">
+            <%= form.label :regular_price, "一般票價格", class: "col-sm-1 col-form-label" %>
+            <div class="col-sm-11">
+              <%= form.number_field :regular_price, step: 0.00, class: "form-control" %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row">
+            <%= form.label :concession_price, "優待票價格", class: "col-sm-1 col-form-label" %>
+            <div class="col-sm-11">
+              <%= form.number_field :concession_price, step: 0.00, class: "form-control" %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row">
+            <%= form.label :disabled_price, "愛心票價格", class: "col-sm-1 col-form-label" %>
+            <div class="col-sm-11">
+              <%= form.number_field :disabled_price, step: 0.00, class: "form-control" %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row">
+            <%= form.label :elderly_price, "敬老票價格", class: "col-sm-1 col-form-label" %>
+            <div class="col-sm-11">
+              <%= form.number_field :elderly_price, step: 0.00, class: "form-control" %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row">
             <div class="col-sm-10">
               <%= form.submit "建立影廳", class: "btn btn-primary" %>
             </div>

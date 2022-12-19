@@ -27,10 +27,22 @@ module Admin
     def edit; end
 
     def update
+      @seats = @cinema.seats.first
+      seat_list_raw = @seats.seat_list
+      seat_list_users_raw = @seats.seat_list_users
+
+      seat_list_new = update_seat_list(seat_list_raw, cinema_params[:max_row], cinema_params[:max_column])
+
+      seat_list_users_new = update_seat_list(seat_list_users_raw, cinema_params[:max_row], cinema_params[:max_column])
+
+      if not @seats.update({seat_list: seat_list_new, seat_list_users: seat_list_users_new})
+        render :edit, alert: '座位更新問題，導致更新失敗'
+      end
+
       if @cinema.update(cinema_params)
-        redirect_to admin_theater_cinemas_path(@cinema.theater_id), notice: '成功更新影廳資訊'
+        redirect_to admin_theater_cinemas_path(@cinema.theater_id), notice: '成功更新影廳'
       else
-        render :edit
+        render :edit, alert: '更新影廳失敗'
       end
     end
 
@@ -42,7 +54,7 @@ module Admin
     private
 
     def cinema_params
-      params.require(:cinema).permit(:name, :max_row, :max_column, :ticket_amount)
+      params.require(:cinema).permit(:name, :max_row, :max_column, :regular_price, :concession_price, :disabled_price, :elderly_price)
     end
 
     def find_cinema
@@ -52,5 +64,25 @@ module Admin
     def find_theater
       @theater = Theater.find(params[:theater_id])
     end
+
+    def update_seat_list(seats_raw, new_row, new_column)
+      seats_raw_flatten = seats_raw.flatten
+      seats_raw_row = seats_raw.length
+      seats_raw_column = seats_raw[0].length
+
+      if seats_raw_row != new_row || seats_raw_column != new_column
+        seats_new = Array.new(new_row) { Array.new(new_column, 0) }
+
+        seats_raw_flatten.each_with_index do |item, index|
+          seat_index = index.divmod(seats_raw_row)
+          if item != "0" && seat_index[0] <= new_row && seat_index[1] <= new_column
+            
+            seats_new[seat_index[0]][seat_index[1]] = item
+          end
+        end
+      end
+
+      return seats_new
+    end  
   end
 end

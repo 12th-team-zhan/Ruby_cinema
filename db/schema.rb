@@ -61,7 +61,10 @@ ActiveRecord::Schema.define(version: 2022_12_20_062855) do
     t.integer "max_row", default: 1
     t.integer "max_column", default: 1
     t.bigint "theater_id"
-    t.decimal "ticket_amount", precision: 7, scale: 2
+    t.decimal "regular_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "concession_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "disabled_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "elderly_price", precision: 7, scale: 2, default: "0.0"
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
     t.index ["theater_id"], name: "index_cinemas_on_theater_id"
   end
@@ -117,6 +120,7 @@ ActiveRecord::Schema.define(version: 2022_12_20_062855) do
     t.bigint "cinema_id"
     t.text "seat_list", default: [], array: true
     t.string "category", default: "added"
+    t.text "seat_list_users", default: [], array: true
     t.index ["cinema_id"], name: "index_seats_on_cinema_id"
   end
 
