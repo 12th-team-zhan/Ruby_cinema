@@ -4,7 +4,6 @@
     <%= image_tag 'logo_modified.png', width:"50", height: "30" %>
     <span>Ruby Theater</span>
   </a>
-
   <button type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -16,7 +15,6 @@
     <span class="toggler-icon middle-bar"></span>
     <span class="toggler-icon bottom-bar"></span>
   </button>
-
   <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
     <ul class="navbar-nav active">
       <li class="nav-item active">
@@ -25,7 +23,6 @@
       <li class="nav-item active">
         <a href="#" class="nav-link text-white p-3">電影介紹</a>
       </li>
-
       <% if user_signed_in? %>
         <li class="nav-item active dropdown">
           <a href="#" class="nav-link text-white p-3 dropdown-toggle"
@@ -56,7 +53,6 @@
     </ul>
   </div>
 </nav>
-
 <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"
      data-controller="index-login" data-action="click->index-login#Modal">
   <div class="modal-dialog modal-dialog-centered">
@@ -92,8 +88,7 @@
             <%= f.submit "登入" , class:"px-5 py-3 rounded-3", disabled: "disabled", data:{ index_login_target: "login" }%>
           </div>
           <div>
-            <%= link_to "<i class=\"fa-brands fa-facebook text-primary \"></i> Facebook登入".html_safe, user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark"  %>
-
+            <%= link_to "<i class=\"fa-brands fa-facebook text-primary \"></i> Facebook登入".html_safe, user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark" %>
             <%= link_to "<i class=\"fa-brands fa-google\"></i> Google登入".html_safe, user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark" %>
           </div>
           <div class="sing-up">

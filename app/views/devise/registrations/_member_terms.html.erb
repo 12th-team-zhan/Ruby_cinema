@@ -1,17 +1,4 @@
 <div class="card text-center">
-  <div class="card-header bg-primary">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <p class="nav-link disabled text-black-50 fw-lighter">會員權益</p>
-      </li>
-      <li class="nav-item">
-        <p class="nav-link active">會員條款</p>
-      </li>
-      <li class="nav-item">
-        <p class="nav-link disabled text-black-50 fw-lighter">會員基本資料</p>
-      </li>
-    </ul>
-  </div>
   <div class="card-body">
     <h2 class="card-title">會員條款</h2>
     <div class="container ">
@@ -55,7 +42,7 @@
         <div>
           <input type="checkbox" 
                  data-action="click->user-register#confirm"
-          id="TermsCheckbox">
+                 id="TermsCheckbox">
           <label>我已閱讀以上條款</label>
         </div>
         <section>
@@ -66,7 +53,7 @@
                         data-action="click->user-register#termsBack">上一步</button>
                 <button type="button" class="btn btn-secondary btn-lg mx-3 disabled"
                         data-action="click->user-register#termsNext"
-                  data-user-register-target="termsConfirmed">下一步</button>
+                        data-user-register-target="termsConfirmed">下一步</button>
               </div>
             </div>
           </div>
