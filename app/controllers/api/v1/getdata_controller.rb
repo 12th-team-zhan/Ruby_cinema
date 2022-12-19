@@ -19,8 +19,6 @@ module Api
       end
 
       def showtime_list
-        movie_id = params[:movie_id]
-        theater_id = params[:theater_id]
         @cinemas = Theater.find(params[:theater_id]).cinemas.pluck(:id)
         showtime_date = Showtime.where(cinema_id: @cinemas, movie_id: params[:movie_id]).pluck(:started_at,
                                                                                                :id).map do |showtime, id|

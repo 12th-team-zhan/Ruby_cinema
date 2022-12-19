@@ -32,7 +32,6 @@ module Admin
 
     def create
       @movie = current_user.movies.create(movie_params)
-      @theaters = Theater.all
 
       if @movie.save
         append_movie_poster

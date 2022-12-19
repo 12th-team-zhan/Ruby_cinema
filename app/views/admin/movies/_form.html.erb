@@ -34,7 +34,8 @@
   <div class="input-group mb-3">
     <%= f.file_field :movie_poster %>
   </div>
-  <div>
+  <div class="d-flex align-items-center">
+    <span class="input-group-text">上映戲院</span>
     <% @theaters.each do |theater| %>
       <%= check_box_tag "theater[]", theater.id %>
       <%= label_tag(:theater_id, theater.name) %>
