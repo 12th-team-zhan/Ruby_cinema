@@ -7,6 +7,10 @@ export default class extends Controller {
         let params = new URLSearchParams(location.search);
         this.ticketAmount = Number(params.get('amount'));
         this.showtimeId = Number(params.get('showtimeid'));
+        this.regularAmount = Number(params.get('regularAmount'));
+        this.concessionAmount = Number(params.get('concessionAmount'));
+        this.elderlyAmount = Number(params.get('elderlyAmount'));
+        this.disabilityAmount = Number(params.get('disabilityAmount'));
         this.token = document.querySelector("meta[name='csrf-token']").content;
         //去空隔 [] 轉陣列
         this.notSeatList = this.element.dataset.notseatlist.replace(/[\"\[\]\s]/g, "").split(",").map(v => Number(v));
@@ -194,7 +198,7 @@ export default class extends Controller {
         this.otherSeat[id] = this.otherSeat[id].filter(item => item !== seat_id)
     }
     changeLink() {
-        this.nextTarget.href = `/ticketing/pay?showtimeId=${this.showtimeId}&seatId=${this.selectSeat}`;
+        this.nextTarget.href = `/ticketing/pay?showtimeId=${this.showtimeId}&seatId=${this.selectSeat}&regularAmount=${this.regularAmount}&concessionAmount=${this.concessionAmount}&elderlyAmount=${this.elderlyAmount}&disabilityAmount=${this.disabilityAmount}`;
     }
 
 }

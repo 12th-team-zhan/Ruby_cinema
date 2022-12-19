@@ -9,7 +9,7 @@
         <li class="list-group-item ps-0 pt-0 fs-3 title"><%= @showtime.movie.name %></li>
         <li class="list-group-item ps-0 fw-semibold">級別</li>
         <li class="list-group-item ps-0 fw-semibold">地點
-        <%= @showtime.cinema.theater.name %><%= @showtime.cinema.name %>廳</li>
+          <%= @showtime.cinema.theater.name %><%= @showtime.cinema.name %>廳</li>
         <li class="list-group-item ps-0 fw-semibold">開演時間<%= @showtime.started_at %></li>
       </ul>
       <ul class="list-group">
@@ -55,7 +55,67 @@
         <div class="col-4 fw-bold text-center p-2 price">$123</div>
         <div class="col-4 fw-bold text-center" >
           <select class="select" data-action="change->select-ticketing#select"
-            data-select-ticketing-target="amount">
+            data-select-ticketing-target="amount regularAmount">
+            <option selected>0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="col-4 fw-bold text-center p-2 total" data-select-ticketing-target="total">0</div>
+      </div>
+    </div>
+    <div class="d-flex p-3 justify-content-around item">
+      <div class="col-6 col-md-9">
+        <div class="fw-bold p-2">優待票</div>
+      </div>
+      <div class="col-6 col-md-3 d-flex">
+        <div class="col-4 fw-bold text-center p-2 price">$123</div>
+        <div class="col-4 fw-bold text-center" >
+          <select class="select" data-action="change->select-ticketing#select"
+            data-select-ticketing-target="amount concessionAmount">
+            <option selected>0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="col-4 fw-bold text-center p-2 total" data-select-ticketing-target="total">0</div>
+      </div>
+    </div>
+    <div class="d-flex p-3 justify-content-around item">
+      <div class="col-6 col-md-9">
+        <div class="fw-bold p-2">敬老票</div>
+      </div>
+      <div class="col-6 col-md-3 d-flex">
+        <div class="col-4 fw-bold text-center p-2 price">$123</div>
+        <div class="col-4 fw-bold text-center" >
+          <select class="select" data-action="change->select-ticketing#select"
+            data-select-ticketing-target="amount elderlyAmount">
+            <option selected>0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="col-4 fw-bold text-center p-2 total" data-select-ticketing-target="total">0</div>
+      </div>
+    </div>
+    <div class="d-flex p-3 justify-content-around item">
+      <div class="col-6 col-md-9">
+        <div class="fw-bold p-2">愛心票</div>
+      </div>
+      <div class="col-6 col-md-3 d-flex">
+        <div class="col-4 fw-bold text-center p-2 price">$123</div>
+        <div class="col-4 fw-bold text-center" >
+          <select class="select" data-action="change->select-ticketing#select"
+            data-select-ticketing-target="amount disabilityAmount">
             <option selected>0</option>
             <option value="1">1</option>
             <option value="2">2</option>

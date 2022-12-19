@@ -1,9 +1,10 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-    static targets = ["ticketType", "allTotal", "next", "total", "allAmount", "amount"]
+    static targets = ["ticketType", "allTotal", "next", "total", "allAmount", "amount", "regularAmount", "concessionAmount", "elderlyAmount", "disabilityAmount"]
 
     connect() {
+        console.log(this.regularAmountTarget.value);
         this.calcAllTotal()
         let params = new URLSearchParams(location.search);
         this.showtimeId = params.get('showtimeid')
@@ -40,6 +41,7 @@ export default class extends Controller {
 
     }
     changeLink(amount) {
-        this.nextTarget.href = `/ticketing/select_seats?showtimeid=2&amount=${amount}`;
+        console.log(this.regularAmountTarget.value);
+        this.nextTarget.href = `/ticketing/select_seats?showtimeid=2&amount=${amount}&regularAmount=${this.regularAmountTarget.value}&concessionAmount=${this.concessionAmountTarget.value}&elderlyAmount=${this.elderlyAmountTarget.value}&disabilityAmount=${this.disabilityAmountTarget.value}`;
     }
 }
