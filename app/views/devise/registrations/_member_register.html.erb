@@ -2,13 +2,13 @@
   <div class="card-header bg-primary">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link disabled  text-white">會員權益</a>
+        <p class="nav-link disabled text-black-50 fw-lighter">會員權益</p>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled  text-white" >會員條款</a>
+        <p class="nav-link disabled text-black-50 fw-lighter">會員條款</p>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="true" href="#">會員基本資料</a>
+        <p class="nav-link active">會員基本資料</p>
       </li>
     </ul>
   </div>
@@ -69,7 +69,6 @@
               </section>
               <div>
                 <%= link_to "<i class=\"fa-brands fa-facebook text-primary \"></i> Facebook登入".html_safe, user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark"  %>
-
                 <%= link_to "<i class=\"fa-brands fa-google\"></i> Google登入".html_safe, user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark" %>
               </div>
             <% end %>
@@ -77,4 +76,7 @@
         </div>
       </div>
     </section>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">註冊進度: 3/3</div>
+    </div>
   </div>
