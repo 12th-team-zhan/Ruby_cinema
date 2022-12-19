@@ -1,0 +1,15 @@
+<form method="post" action="https://ccore.newebpay.com/MPG/mpg_gateway" >
+    MID: 
+    <input name="MerchantID" value="<%= @form_info[:MerchantID] %>" readonly>
+    <br>
+    Version: 
+    <input name="Version" value="2.0" readonly>
+    <br>
+    TradeInfo:
+    <input name="TradeInfo" value="<%= @form_info[:TradeInfo] %>" readonly>
+    <br>
+    TradeSha:
+    <input name="TradeSha" value="<%= @form_info[:TradeSha] %>" readonly>
+    <br>
+    <input type="submit" value="新增購票">
+</form>
