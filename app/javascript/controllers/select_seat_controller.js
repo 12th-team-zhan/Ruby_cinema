@@ -198,7 +198,7 @@ export default class extends Controller {
         this.otherSeat[id] = this.otherSeat[id].filter(item => item !== seat_id)
     }
     changeLink() {
-        this.nextTarget.href = `/ticketing/pay?showtimeId=${this.showtimeId}&seatId=${this.selectSeat}&regularAmount=${this.regularAmount}&concessionAmount=${this.concessionAmount}&elderlyAmount=${this.elderlyAmount}&disabilityAmount=${this.disabilityAmount}`;
+        this.nextTarget.href = `/tickets?showtime_id=${this.showtimeId}&seat_list=${this.selectSeat}&regular_quantity=${this.regularAmount}&concession_quantity=${this.concessionAmount}&elderly_quantity=${this.elderlyAmount}&disability_quantity=${this.disabilityAmount}`;
     }
 
 }

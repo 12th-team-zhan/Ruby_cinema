@@ -1,0 +1,40 @@
+<h1>訂單資訊</h1>
+<%= form_with(model: @ticket, url: "https://ccore.newebpay.com/MPG/mpg_gateway", method: "post" ) do |f| %>
+  <div class="d-flex">
+    <span>電影:</span>
+    <span><%= @ticket.movie_name %></span>
+  </div>
+  <div class="d-flex">
+    <span>電影院:</span>
+    <span><%= @ticket.theater_name %></span>
+  </div>
+  <div class="d-flex">
+    <span>電影廳:</span>
+    <span><%= @ticket.cinema_name %></span>
+  </div>
+  <div class="d-flex">
+    <span>座位:</span>
+    <span><%= @ticket.seat_list %></span>
+  </div>
+  <div class="d-flex">
+    <span>一般票:</span>
+    <span><%= @ticket.regular_quantity %></span>
+  </div>
+  <div class="d-flex">
+    <span>優待票:</span>
+    <span><%= @ticket.concession_quantity %></span>
+  </div>
+  <div class="d-flex">
+    <span>敬老票:</span>
+    <span><%= @ticket.elderly_quantity %></span>
+  </div>
+  <div class="d-flex">
+    <span>愛心票:</span>
+    <span><%= @ticket.disability_quantity %></span>
+  </div>
+  <div class="d-flex">
+    <span>總價:</span>
+    <span><%= 500 %></span>
+  </div>
+<% end %>
+  
