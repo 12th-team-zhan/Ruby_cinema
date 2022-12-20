@@ -7,9 +7,16 @@ export default class extends Controller {
 
   addTheaterList(el) {
     this.theaterListTarget.replaceChildren();
+    this.showtimeListTarget.replaceChildren();
+    this.showtimeTarget.replaceChildren();
 
-    let option = `<option>請選擇影城</option>`;
-    this.theaterListTarget.insertAdjacentHTML("beforeend", option);
+    let theaterOption = `<option>請選擇影城</option>`;
+    let dateOption = `<option>請選擇日期</option>`;
+    let timeOption = `<option>請選擇場次</option>`;
+
+    this.theaterListTarget.insertAdjacentHTML("beforeend", theaterOption);
+    this.showtimeListTarget.insertAdjacentHTML("beforeend", dateOption);
+    this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
 
     const token = document.querySelector("meta[name='csrf-token']").content;
     this.movieId = el.target.value;
@@ -37,9 +44,13 @@ export default class extends Controller {
 
   addShowtimeList(el) {
     this.showtimeListTarget.replaceChildren();
+    this.showtimeTarget.replaceChildren();
 
-    let option = `<option>請選擇日期</option>`;
-    this.showtimeListTarget.insertAdjacentHTML("beforeend", option);
+    let dateOption = `<option>請選擇日期</option>`;
+    let timeOption = `<option>請選擇場次</option>`;
+
+    this.showtimeListTarget.insertAdjacentHTML("beforeend", dateOption);
+    this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
 
     const token = document.querySelector("meta[name='csrf-token']").content;
     this.theaterId = el.target.value;
