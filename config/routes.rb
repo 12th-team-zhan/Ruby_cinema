@@ -18,12 +18,12 @@ Rails.application.routes.draw do
       patch :cancel
     end
   end
-  resources :tickets, only: %i[index show new create] do
+  resources :tickets, only: %i[index show new create destroy] do
     member do
-      get :buy
+      get :pay
     end
     collection do
-      post :add_quantity
+      post :checkout
     end
   end
 

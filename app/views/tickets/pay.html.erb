@@ -1,0 +1,49 @@
+<%= form_with(model: @ticket, url: "https://ccore.newebpay.com/MPG/mpg_gateway", method: "post" ) do |f| %>
+  <div class="d-flex">
+    <span>電影:</span>
+    <span><%= @ticket.movie_name %></span>
+  </div>
+  <div class="d-flex">
+    <span>電影院:</span>
+    <span><%= @ticket.theater_name %></span>
+  </div>
+  <div class="d-flex">
+    <span>電影廳:</span>
+    <span><%= @ticket.cinema_name %></span>
+  </div>
+  <div class="d-flex">
+    <span>座位:</span>
+    <span><%= @ticket.seat_list %></span>
+  </div>
+  <div class="d-flex">
+    <span>一般票:</span>
+    <span><%= @ticket.regular_quantity %></span>
+  </div>
+  <div class="d-flex">
+    <span>優待票:</span>
+    <span><%= @ticket.concession_quantity %></span>
+  </div>
+  <div class="d-flex">
+    <span>敬老票:</span>
+    <span><%= @ticket.elderly_quantity %></span>
+  </div>
+  <div class="d-flex">
+    <span>愛心票:</span>
+    <span><%= @ticket.disability_quantity %></span>
+  </div>
+  <div class="d-flex">
+    <span>總價:</span>
+    <span><%= 500 %></span>
+  </div>
+  <div>
+    <input type="hidden" name="MerchantID" value="<%= @form_info[:MerchantID] %>" readonly>
+    <input type="hidden" name="Version" value="2.0" readonly>
+    <input type="hidden" name="TradeInfo" value="<%= @form_info[:TradeInfo] %>" readonly>
+    <input type="hidden" name="TradeSha" value="<%= @form_info[:TradeSha] %>" readonly>
+  </div>
+  <div>
+    <%= f.submit "購買" %>
+    <%= link_to "取消", ticket_path(@ticket), method: "delete" %>
+  </div>
+<% end %>
+  

@@ -22,6 +22,6 @@ module RubyCinema
     # config.eager_load_paths << Rails.root.join("extras")
 
     # ngrok setting
-    # config.hosts << ENV['NGROK_URL']
+    config.hosts << ENV['NGROK_URL']
   end
 end

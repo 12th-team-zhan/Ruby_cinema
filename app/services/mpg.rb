@@ -32,18 +32,18 @@ class Mpg
 
   def set_info(order)
     info[:MerchantID] = @mid
-    info[:MerchantOrderNo] = order.slug
-    info[:Amt] = order.amount 
-    info[:ItemDesc] = order.name 
-    info[:Email] = order.email 
+    info[:MerchantOrderNo] = order[:slug]
+    info[:Amt] = order[:amount] 
+    info[:ItemDesc] = order[:name] 
+    info[:Email] = order[:email] 
     info[:TimeStamp] = Time.now.to_i 
     info[:RespondType] = "JSON"
     info[:Version] = "2.0"
     info[:ReturnURL] = ENV['RETURN_URL']
-    info[:NotifyURL] = ENV['NOTIFY_URL']
+    # info[:NotifyURL] = ENV['NOTIFY_URL']
     info[:LoginType] = 0 
     info[:CREDIT] =  1,
-                     info[:VACC] = 1
+    info[:VACC] = 1
   end
 
   def url_encoded_query_string

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_19_042848) do
+ActiveRecord::Schema.define(version: 2022_12_20_062855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,12 +60,12 @@ ActiveRecord::Schema.define(version: 2022_12_19_042848) do
     t.datetime "deleted_at"
     t.integer "max_row", default: 1
     t.integer "max_column", default: 1
-    t.decimal "ticket_amount", precision: 7, scale: 2
-    t.integer "regular_quantity", default: 0
-    t.integer "concession_quantity", default: 0
-    t.integer "elderly_quantity", default: 0
-    t.integer "disability_quantity", default: 0
     t.bigint "theater_id"
+    t.decimal "regular_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "concession_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "disabled_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "elderly_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "ticket_amount", precision: 7, scale: 2
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
     t.index ["theater_id"], name: "index_cinemas_on_theater_id"
   end
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 2022_12_19_042848) do
     t.bigint "cinema_id"
     t.text "seat_list", default: [], array: true
     t.string "category", default: "added"
+    t.text "seat_list_users", default: [], array: true
     t.index ["cinema_id"], name: "index_seats_on_cinema_id"
   end
 
@@ -152,7 +153,6 @@ ActiveRecord::Schema.define(version: 2022_12_19_042848) do
     t.integer "category"
     t.datetime "deleted_at"
     t.integer "showtime_id"
-    t.integer "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "regular_quantity", default: 0
