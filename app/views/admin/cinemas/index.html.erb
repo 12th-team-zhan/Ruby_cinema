@@ -27,7 +27,7 @@
             <tbody>
               <% @cinemas.each do |cinema| %>
                 <tr>
-                  <th scope="row"><%= link_to "#{cinema.name}", admin_cinema_path(cinema) %></th>
+                  <td><%= link_to "#{cinema.name}", admin_cinema_path(cinema) %></td>
                   <td><%= cinema.max_row %></td>
                   <td><%= cinema.max_column %></td>
                   <td><%= link_to "編輯", edit_admin_cinema_path(cinema) %></td>

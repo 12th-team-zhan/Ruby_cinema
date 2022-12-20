@@ -61,7 +61,7 @@ module Admin
       # @showtimes = @movie.showtimes.all
 
       if @showtime.update(showtime_params)
-        redirect_to edit_admin_showtime_path(showtime), notice: '場次更新成功'
+        redirect_to admin_movie_showtimes_path(@showtime.movie_id), notice: '場次修改成功'
       else
         render :edit
       end
