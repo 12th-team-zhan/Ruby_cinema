@@ -12,5 +12,4 @@ class Cinema < ApplicationRecord
   has_many :showtimes, dependent: :destroy
   belongs_to :theater
   has_many :movies, through: :showtimes, source: :movie
-  
 end

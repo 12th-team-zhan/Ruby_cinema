@@ -14,6 +14,7 @@ class Movie < ApplicationRecord
   has_many :showtimes, dependent: :destroy
   has_many :movie_theater, dependent: :destroy
   has_many :theaters, through: :movie_theater, source: :theater
+  has_rich_text :description
 
   enum film_rating: { general: 0, parental_guidance: 1, parental_guidance12: 2, parental_guidance15: 3, restricted: 4 }
 end

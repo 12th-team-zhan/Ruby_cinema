@@ -11,6 +11,7 @@ class User < ApplicationRecord
   # relationship
   has_many :movies, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :news, dependent: :destroy
 
   enum role: { user: 0, staff: 1, admin: 2 }
 

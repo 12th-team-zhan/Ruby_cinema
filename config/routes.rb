@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' },
-                     skip: :sessions
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", sessions: "users/sessions" }, skip: :sessions
 
   as :user do
-    post '/users/sign_in', to: 'devise/sessions#create', as: :user_session
-    delete '/users/sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+    post "/users/sign_in", to: "users/sessions#create", as: :user_session
+    delete "/users/sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
   end
 
   resources :movies, only: %i[index show]
@@ -37,8 +36,8 @@ Rails.application.routes.draw do
     end
     resources :cinemas, only: %i[show edit update destroy] do
       resources :seats, only: %i[index new create]
-      get '/seats/edit', to: 'seats#edit'
-      patch '/seats/update', to: 'seats#update'
+      get "/seats/edit", to: "seats#edit"
+      patch "/seats/update", to: "seats#update"
     end
 
     resources :movies do
@@ -52,14 +51,24 @@ Rails.application.routes.draw do
     resources :showtimes, only: %i[show edit update]
   end
 
-  namespace :api do
-    namespace :v1 do
-      get 'movie_list', to: 'getdata#movie_list'
-      post 'theater_list', to: 'getdata#theater_list'
-      post 'showtime_list', to: 'getdata#showtime_list'
-      post 'cinema_list', to: 'getdata#cinema_list'
+  resources :ticketing, only: %i[show] do
+    collection do
+      get :pay
+      get :select_tickets
+      get :select_seats
+      post :seat_reservation, to: "ticketing#seat_reservation"
     end
   end
 
-  root 'movies#root'
+  namespace :api do
+    namespace :v1 do
+      get "movie_list", to: "getdata#movie_list"
+      post "theater_list", to: "getdata#theater_list"
+      post "showtime_list", to: "getdata#showtime_list"
+      post "selected_tickets", to: "getdata#selected_tickets"
+      post "cinema_list", to: "getdata#cinema_list"
+    end
+  end
+
+  root "movies#root"
 end

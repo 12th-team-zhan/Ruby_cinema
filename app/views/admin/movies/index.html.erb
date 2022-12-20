@@ -27,7 +27,7 @@
           <% @movies.each do |movie| %>
             <tbody>
               <tr>
-                <td><%= link_to movie.name, admin_movie_path(movie) %></td>
+                <td><%= movie.name %></td>
                 <td><%= link_to "編輯", edit_admin_movie_path(movie) %></td>
                 <td><%= link_to "刪除", admin_movie_path(movie), method:"delete", data:{confirm:"確定刪除？"}  %></td>
                 <td><%= link_to "檢視", admin_movie_showtimes_path(movie) %></td>

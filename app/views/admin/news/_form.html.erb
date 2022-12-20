@@ -1,0 +1,13 @@
+<%= form_with model: [:admin, @news] do |f| %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">標題</span>
+    <%= f.text_field :title %>
+  </div>
+  <div class="">
+    <span class="">內容</span>
+     <%= f.rich_text_area :description %>
+  </div>
+  
+  <div class="input-group mb-3">
+    <%= f.submit %>
+  <% end %>

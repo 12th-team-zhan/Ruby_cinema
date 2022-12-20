@@ -1,7 +1,7 @@
 <nav class="navbar px-2 navbar-expand-sm p-0 navbar-light justify-content-sm-around bg-cerulean
             text-white">
   <div class="container px-lg-4p">
-    <a class="navbar-brand  m-sm-0" href=<%= root_path %>>
+    <a class="navbar-brand m-sm-0 text-white" href=<%= root_path %>>
     <%= image_tag 'ruby.png' ,width:"30", height: "30" %> 寶石影城
     </a>
       <button type="button"
@@ -68,17 +68,18 @@
       </div>
       <div class="modal-body" >
         <%= form_for User.new , url: user_session_path ,method:"post" do |f| %>
+        <%= f.hidden_field "path", value: request.url %>
           <div class="field mt-5 position-relative d-flex">
             <%= f.email_field :email, autocomplete: "email",class:"form-control",
                 data:{ action: "click->index-login#addClassAt focusout->index-login#removeClassAt
-                            keyup->index-login#keyup",index_login_target: "email"}%>
+                                keyup->index-login#keyup",index_login_target: "email"}%>
             <%= f.label :email,class:"form-inline position-absolute ",
                 data:{ index_login_target: "emailLabel" }%>
           </div>
           <div class="field mt-5 mb-3 position-relative d-flex">
             <%= f.password_field :password, autocomplete: "current-password" ,class:"form-control",
                 data:{ action: "click->index-login#addClassAt focusout->index-login#removeClassAt
-                            keyup->index-login#keyup",index_login_target: "password"}%>
+                                keyup->index-login#keyup",index_login_target: "password"}%>
             <%= f.label :password ,class:"form-inline position-absolute ",
                 data:{ index_login_target: "passwordLabel" }%>
           </div>

@@ -1,10 +1,8 @@
 /*--------------search-------------*/
 article {
-  .container {
-    max-width: 1400px;
-  }
   .search {
     min-width: 300px;
+
     i {
       font-size: 20px;
       margin: 0px 5px;
@@ -54,7 +52,7 @@ article {
   .list-group-item {
     border: none;
   }
-  
+
   .new-text:hover {
     color: #1ea1f7;
   }

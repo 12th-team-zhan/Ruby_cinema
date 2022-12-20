@@ -43,7 +43,7 @@ class Mpg
     info[:Email] = ''
     info[:LoginType] = 0
     info[:CREDIT] =  1,
-    info[:VACC] = 1
+                     info[:VACC] = 1
   end
 
   def url_encoded_query_string

@@ -29,8 +29,9 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-<article class="d-md-flex gap-2 my-md-5 container mx-lg-auto p-0">
-  <div class="container search d-flex col-12 col-md-6 py-3 " >
+<article class="d-md-flex container-xl p-0">
+  <div class="container-md d-flex col-12 col-md-7 px-md-auto py-3 px-sm-5p px-md-4 mx-0 
+              justify-content-center search" >
     <div class="qalist d-none d-lg-block col-lg-3 ">
       <ul class="bg-secondary mt-4 p-0">
         <li class="bg-darkgray ps-4 py-2 border-bottom text-white">線上定票</li>
@@ -39,7 +40,7 @@
         <li class="bg-darkgray ps-4 py-2 border-bottom text-white">場次查詢</li>
       </ul>
     </div>
-    <div class="container col-12 col-md-12 col-lg-9 mx-md-0 bg-cerulean rounded-4" data-controller="index-search-form">
+    <div class="container col-12 col-lg-9 mx-md-0 px-4 bg-cerulean rounded-4 body" data-controller="index-search-form">
       <div class="container search-top d-flex text-light justify-content-around">
         <button class="py-2 btn btn-cerulean py-3"  disabled= "disabled"
                 data-index-search-form-target="ticketBtn"
@@ -68,7 +69,7 @@
             <select class="form-select w-90" 
                     aria-label="select" 
                     data-action="change->search-showtime#addShowtimeList" 
-                    data-search-showtime-target="theaterList">
+              data-search-showtime-target="theaterList">
               <option>請選擇影城</option>
             </select>
           </div>
@@ -144,40 +145,24 @@
       </div>
     </div>
   </div>
-  <div class="container new d-flex flex-column col-9  col-md-6 col-lg-5 py-3 ">
+  <div class="container d-flex col-12 col-md-5 py-3 col-lg-5  flex-column new">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb align-items-baseline m-0 ">
         <li class="breadcrumb-item">
           <p class="fs-4 text-deepskyblue" >最新公告</p>
         </li>
-        <li class="breadcrumb-item active text-dark" aria-current="page"><a href="" class="link-dark">MORE</a></li>
+        <li class="breadcrumb-item active text-dark" aria-current="page">
+          <%= link_to "MORE", news_index_path, class: "link-dark"%></li>
       </ol>
     </nav>
     <ul class="list-group gap-1 flex-grow-1 justify-content-around">
-      <li class="list-group-item ps-0">
-        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-        <span class="new-text">213213</span>
-      </li>
-      <li class="list-group-item ps-0">
-        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-        <span class="new-text">2313213</span>
-      </li>
-      <li class="list-group-item ps-0">
-        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-        <span class="new-text">24124214</span>
-      </li>
-      <li class="list-group-item ps-0">
-        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-        <span class="new-text">3213123123</span>
-      </li>
-      <li class="list-group-item ps-0">
-        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-        <span class="new-text">21424</span>
-      </li>
-      <li class="list-group-item ps-0">
-        <span class="new-date bg-deepskyblue text-light p-1 me-3">2022/11/22</span>
-        <span class="new-text">2131244</span>
-      </li>
+      <% @news.each do |news| %>
+        <li class="list-group-item ps-0">
+          <span class="new-date bg-deepskyblue text-light p-1 me-3">
+            <%= news.created_at.strftime("%Y/%m/%d") %></span>
+          <%= link_to news.title, news_path(news), class: "new-text" %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </article>
