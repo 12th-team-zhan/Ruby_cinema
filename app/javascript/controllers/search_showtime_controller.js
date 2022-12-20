@@ -3,9 +3,7 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   static targets = ["theaterList", "showtimeList", "showtime"];
 
-  connect() {
-
-  }
+  connect() {}
 
   addTheaterList(el) {
     this.theaterListTarget.replaceChildren();
@@ -61,8 +59,16 @@ export default class extends Controller {
       })
       .then((data) => {
         this.showtime = data;
-        data.forEach((element) => {
-          let option = `<option value="${element[0]}" >${element[0]}</option>`;
+
+        const date = [];
+
+        data.map((element) => {
+          if (date.indexOf(element[0]) === -1) {
+            date.push(element[0]);
+          }
+        });
+        date.forEach((element) => {
+          let option = `<option value="${element}" >${element}</option>`;
           this.showtimeListTarget.insertAdjacentHTML("beforeend", option);
         });
       })
@@ -86,7 +92,7 @@ export default class extends Controller {
 
   changeLink(e) {
     if (e.srcElement.value === "請選擇場次") {
-      return
+      return;
     }
     const link = document.querySelector("#rootBuyTickets");
     link.href = `/ticketing/select_tickets?showtimeid=${e.srcElement.value}`;
