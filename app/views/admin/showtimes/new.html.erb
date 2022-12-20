@@ -1,10 +1,13 @@
-<%= flash[:notice] %>
 <h1>新增場次</h1>
 <div data-controller="add-cinema-list">
   <%= form_with(model: @showtime, url: admin_movie_showtimes_path(@movie.id), method: "post") do |form| %>
     <div>
-      <%= form.label :"電影" %>
+      <%= form.label :"電影：" %>
       <span><%= @movie.name %></span>
+    </div>
+    <div>
+      <%= form.label :"片長：" %>
+      <span><%= @movie.duration %></span>
     </div>
     <div>
       <%= form.label :"開始時間" %>
@@ -33,4 +36,5 @@
     </div>
     <%= form.submit "送出" %>
   <% end %>
+  <%= link_to "回場次列表", admin_movie_showtimes_path(@movie) %>
 </div>

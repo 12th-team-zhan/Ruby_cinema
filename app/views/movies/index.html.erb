@@ -10,11 +10,11 @@
 <div class="container px-lg-4p">
   <h1 class="text-deepskyblue">熱售中</h1>
   <div class="movie-list">
-    <div class="d-flex flex-wrap ">
+    <div class="d-flex flex-wrap">
       <% @movie.each do |movie| %>
-        <%= link_to movie_path(movie), class: "card p-4" do%>
+        <%= link_to movie_path(movie), class: "card p-4 col-12 col-md-4 col-lg-3" do%>
           <% if movie.movie_poster.attached? %>
-            <%= image_tag movie.movie_poster, size: "190x280" %>
+            <%= image_tag movie.movie_poster, class: "m-auto w-100" %>
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= movie.name %></h5>

@@ -6,7 +6,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
-            <li class="breadcrumb-item active" aria-current="page">Theater list</li>
+            <li class="breadcrumb-item active" aria-current="page">影城列表</li>
           </ol>
         </nav>
       </div>
@@ -15,25 +15,25 @@
         <table class="table table-striped ">
           <thead>
             <tr>
-              <th scope="col">戲院名稱</th>
-              <th scope="col">編輯戲院</th>
-              <th scope="col">查看影廳</th>
-              <th scope="col">最後編輯者ID</th>
-              <th scope="col">建立者ID</th>
+              <th scope="col">影城編號</th>
+              <th scope="col">影城名稱</th>
               <th scope="col">電話</th>
               <th scope="col">地址</th>
+              <th scope="col">查看影廳</th>
+              <th scope="col">編輯影城</th>
+              <th scope="col">刪除影城</th>
             </tr>
           </thead>
           <% @theaters.each do |theater| %>
             <tbody>
               <tr>
-                <th scope="row"><%= link_to theater.name, admin_theater_path(theater) %></th>
-                <th scope="row"><%= link_to "編輯", edit_admin_theater_path(theater) %></th>
-                <td><%= link_to "查看影廳", admin_theater_cinemas_path(theater) %></td>
-                <td>123</td>
                 <td><%= theater.id %></td>
+                <th scope="row"><%= link_to theater.name, admin_theater_path(theater) %></th>
                 <td><%= theater.phone %></td>
                 <td><%= theater.address%></td>
+                <td><%= link_to "查看影廳", admin_theater_cinemas_path(theater) %></td>
+                <td><%= link_to "編輯", edit_admin_theater_path(theater) %></td>
+                <td><%= link_to "刪除", admin_theater_path(theater), method:"delete", data:{confirm:"確定要刪除#{ theater.name }？"} %></td>
               </tr>
             </tbody>
           <% end %>
