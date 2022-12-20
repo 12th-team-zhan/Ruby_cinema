@@ -30,7 +30,7 @@ class TicketsController < ApplicationController
 
   def pay
     @ticket = Ticket.find(params[:id])
-    order = {slug: @ticket.id, amount: 500, name: '電影票', email: current_user.email}
+    order = {slug: @ticket.serial, amount: 500, name: '電影票', email: current_user.email}
     @form_info = Mpg.new(order).form_info
   end
 
@@ -45,7 +45,7 @@ class TicketsController < ApplicationController
 
     if response.status == "SUCCESS"
       @result = response.result
-      @ticket = Ticket.find(@result["MerchantOrderNo"].to_i)
+      @ticket = Ticket.find_by(serial: @result["MerchantOrderNo"])
       render :checkout
     else
       redirect_to root_path, alert: "付款過程報錯，付款失敗"

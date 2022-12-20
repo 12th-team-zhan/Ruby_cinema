@@ -1,3 +1,3 @@
-web: rvmsudo rails server -p 80
+web: ./bin/rails server -p 3000
 webpack: ./bin/webpack-dev-server
 css: bin/rails dartsass:watch
