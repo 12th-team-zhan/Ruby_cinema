@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", sessions: "users/sessions" }, skip: :sessions
 
   as :user do
-    post "/users/sign_in", to: "users/sessions#create", as: :user_session
-    delete "/users/sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
+    post '/users/sign_in', to: 'devise/sessions#create', as: :user_session
+    delete '/users/sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+    get "/users" => "devise/registrations#new"
   end
 
   resources :movies, only: %i[index show]
