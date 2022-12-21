@@ -47,7 +47,7 @@ module Admin
     end
 
     def params_theater
-      params.require(:theater).permit(:name, :address, :phone, :deleted_at)
+      params.require(:theater).permit(:name, :area, :address, :phone, :deleted_at)
     end
 
     def append_exterior_img
