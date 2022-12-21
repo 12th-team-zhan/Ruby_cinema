@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
     @user = User.new
     @movies = Movie.all
     @news = News.all.order(created_at: :desc).limit(6)
+    @theater_areas = Theater.areas
   end
 
   def show; end

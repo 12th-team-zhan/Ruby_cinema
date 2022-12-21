@@ -9,9 +9,11 @@ Rails.application.routes.draw do
     get "/users" => "devise/registrations#new"
   end
 
-  resources :movies, only: %i[index show]
+  get '/find_showtime', to: 'find_showtime#search'
+
   resources :news, only: %i[index show]
   resources :theaters, only: %i[index show]
+  resources :movies, only: %i[index show]
 
   resources :orders do
     member do
@@ -68,6 +70,8 @@ Rails.application.routes.draw do
       post "showtime_list", to: "getdata#showtime_list"
       post "selected_tickets", to: "getdata#selected_tickets"
       post "cinema_list", to: "getdata#cinema_list"
+      post "search_seat_movie_list", to: "getdata#search_seat_movie_list"
+      post "search_seat_showtime_list", to: "getdata#search_seat_showtime_list"
     end
   end
 

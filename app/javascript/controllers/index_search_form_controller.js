@@ -14,7 +14,7 @@ export default class extends Controller {
         this.setFormTarget.classList.add("item-hidden");
         this.ticketFormTarget.classList.remove("item-hidden");
         break;
-      case "快搜空位":
+      case "快搜場次":
         this.ticketBtnTarget.children[0].classList.remove("fs-scale");
         this.ticketBtnTarget.disabled = false;
         this.setBtnTarget.children[0].classList.add("fs-scale");

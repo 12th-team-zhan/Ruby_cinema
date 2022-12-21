@@ -15,5 +15,5 @@ class Theater < ApplicationRecord
   has_many :movie_theater, dependent: :destroy
   has_many :movies, through: :movie_theater, source: :movie
 
-  enum area:{ north: 0, west:1, south:2, east:3 }
+  enum area:{ north: 0, middle:1, south:2, east:3 }
 end
