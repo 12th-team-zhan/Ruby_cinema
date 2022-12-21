@@ -40,7 +40,7 @@
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">級數</span>
-              <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), 
+              <%= f.select :film_rating, options_for_select(human_attribute_film_ratings, 
                 @movie.film_rating),{}, {class: "form-select" }%>
             </div>
             <div class="input-group mb-3">
