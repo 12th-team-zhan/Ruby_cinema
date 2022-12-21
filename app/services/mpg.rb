@@ -3,12 +3,12 @@
 class Mpg
   attr_accessor :info
 
-  def initialize
+  def initialize(params)
     @key = ENV['MPG_KEY']
     @iv = ENV['MPG_IV']
     @mid = ENV['MPG_MERCHANT_ID']
     @info = {}
-    set_info
+    set_info(params)
   end
 
   def form_info
@@ -30,20 +30,20 @@ class Mpg
     sha256_encode(@key, @iv, trade_info)
   end
 
-  def set_info
+  def set_info(order)
     info[:MerchantID] = @mid
-    info[:TimeStamp] = Time.now.to_i
-    info[:Version] = '1.5'
-    info[:RespondType] = 'JSON'
-    info[:MerchantOrderNo] = ''
-    info[:Amt] = '10'
+    info[:MerchantOrderNo] = order[:slug]
+    info[:Amt] = order[:amount] 
+    info[:ItemDesc] = order[:name] 
+    info[:Email] = order[:email] 
+    info[:TimeStamp] = Time.now.to_i 
+    info[:RespondType] = "JSON"
+    info[:Version] = "2.0"
     info[:ReturnURL] = ENV['RETURN_URL']
-    info[:NotifyURL] = ENV['NOTIFY_URL']
-    info[:ItemDesc] = '電影票'
-    info[:Email] = ''
-    info[:LoginType] = 0
+    # info[:NotifyURL] = ENV['NOTIFY_URL']
+    info[:LoginType] = 0 
     info[:CREDIT] =  1,
-                     info[:VACC] = 1
+    info[:VACC] = 1
   end
 
   def url_encoded_query_string

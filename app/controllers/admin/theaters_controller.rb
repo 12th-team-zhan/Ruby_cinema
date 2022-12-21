@@ -5,7 +5,7 @@ module Admin
     before_action :find_theater, only: %i[show edit update destroy]
 
     def index
-      @theaters = Theater.all
+      @theaters = Theater.all.order(id: :desc)
     end
 
     def show; end

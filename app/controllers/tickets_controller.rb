@@ -1,53 +1,55 @@
 # frozen_string_literal: true
 
 class TicketsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :pay]
+  skip_before_action :verify_authenticity_token, only: [:checkout, :change_status]
 
   def index
-    @ticket = Ticket.new
-    @theater = Theater.first
-    @showtime = Showtime.first
-    @movie = @showtime.movie
-    @cinema = Cinema.second
-
-    # @cinema = @showtime.cinema
-    # @theater = @cinema.theater
-    @ticket_amount = @cinema.ticket_amount
-  end
-
-  def add_quantity
-    # session[:cart9487] = params[:ticket]
-    @showtime = Showtime.find(params[:showtime_id])
-    movie_name = @showtime.movie.name
-    # cinema_name = @showtime.cinema.name
-    cinema_name = '1'
-
-    ticket_info = params[:ticket]
-    session[:cart9487] = ticket_info.merge!(movie_name:, cinema_name:)
-
-    redirect_to new_ticket_path
+    @tickets = Ticket.all
   end
 
   def show; end
 
-  def new
-    @ticket = Ticket.new
-    @info = session[:cart9487]
-    # @form_info = Mpg.new.form_info
-  end
-
   def create
-    @info = session[:cart9487]
-    @ticket = Ticket.new(@info)
-    @ticket.save
-    render html: params
+    info = ticket_params
+
+    @showtime = Showtime.find(ticket_params["showtime_id"].to_i)
+    @cinema = @showtime.cinema
+    @theater = @cinema.theater
+    info[:movie_name] = @showtime.movie.name
+    info[:cinema_name] = @cinema.name
+    info[:theater_name] = @theater.name
+
+    @ticket = Ticket.new(info)
+    if @ticket.save
+      redirect_to pay_ticket_path(@ticket)
+    else
+      redirect_to root_path
+    end
   end
 
-  def buy; end
+  def pay
+    @ticket = Ticket.find(params[:id])
+    order = {slug: @ticket.serial, amount: 500, name: '電影票', email: current_user.email}
+    @form_info = Mpg.new(order).form_info
+  end
 
   def destroy
+    @ticket = Ticket.find(params[:id])
     @ticket.destroy
-    redirect_to
+    redirect_to root_path
+  end
+
+  def checkout
+    response = MpgResponse.new(params[:TradeInfo])
+
+    if response.status == "SUCCESS"
+      @result = response.result
+      @ticket = Ticket.find_by(serial: @result["MerchantOrderNo"])
+      render :checkout
+    else
+      redirect_to root_path, alert: "付款過程報錯，付款失敗"
+    end
   end
 
   private
@@ -57,7 +59,7 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:regular_quantity, :concession_quantity, :elderly_quantity, :disability_quantity,
-                                   :movie_name, :cinema_name)
+    permitted = params.permit(:showtime_id, :regular_quantity, :concession_quantity, :elderly_quantity, :disability_quantity, :seat_list)
+    permitted.to_h || {}
   end
 end

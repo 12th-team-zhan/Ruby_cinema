@@ -8,7 +8,8 @@ module Admin
     before_action :find_showtime, only: %i[destroy edit update]
 
     def index
-      @showtimes = @movie.showtimes
+      @movie_theaters = @movie.movie_theater.where(movie_id: params[:movie_id])
+      @showtimes = @movie.showtimes.order(cinema_id: :desc)
     end
 
     def new

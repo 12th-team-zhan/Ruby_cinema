@@ -7,7 +7,7 @@ module Admin
     before_action :find_movie, only: %i[show edit update destroy]
 
     def index
-      @movies = Movie.all
+      @movies = Movie.all.order(id: :desc)
     end
 
     def new

@@ -5,7 +5,7 @@ module Admin
     before_action :find_news, only: %i[show edit update destroy]
 
     def index
-      @news = News.all
+      @news = News.all.order(id: :desc)
     end
 
     def new
