@@ -27,7 +27,7 @@
                   <tbody>
                     <% @showtimes.each do |showtime| %>
                       <tr>
-                        <td><%= showtime.cinema.name %></td>
+                        <td><%= showtime.cinema.id %></td>
                         <td><%= showtime.started_at %></td>
                         <td><%= showtime.end_at %></td>
                         <td><%= link_to "編輯", edit_admin_showtime_path(showtime) %></td>

@@ -18,82 +18,61 @@ module Admin
     end
 
     def create
-      @showtimes = @movie.showtimes
+      @showtimes = @movie.showtimes.all
       @showtime = @movie.showtimes.new(showtime_params)
 
-      if @showtime.save
-        redirect_to new_admin_movie_showtime_path(@movie.id), notice: '場次新增成功，新增下一筆'
+      showtime_start = showtime_params[:started_at].to_datetime.to_i
+      showtime_end = showtime_params[:end_at].to_datetime.to_i
+
+      showtime_all = @showtimes.map {|showtime| [showtime.started_at.to_i, showtime.end_at.to_i]}
+      current_time = Time.current.to_i
+      showtime_condition = showtime_all.map do |arr|
+        if showtime_start < arr[0]
+          showtime_end < arr[0]
+        elsif showtime_start > arr[1]
+          showtime_end > arr[1]
+        else
+          false
+        end
+    end
+
+      if not showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
+        @showtime.save
+        redirect_to admin_movie_showtimes_path(@movie.id), notice:"場次新增成功"
       else
-        render :new
+        redirect_to admin_movie_showtimes_path(@movie.id), alert:"場次設定有誤,請重新輸入"
       end
-
-      # showtime_start = showtime_params[:started_at].to_datetime.to_i
-      # showtime_end = showtime_params[:end_at].to_datetime.to_i
-
-      # showtime_all = @showtimes.map {|data| [data.started_at.to_i, data.end_at.to_i]}
-      # current_time = Time.current.to_i
-
-      # showtime_condition = showtime_all.map do |arr|
-      #   if showtime_start < arr[0] || showtime_start > arr[1]
-      #     if showtime_start < arr[0]
-      #       showtime_end < arr[0]
-      #     else
-      #       showtime_end > arr[1]
-      #     end
-      #   else
-      #     false
-      #   end
-      # end
-      # if showtime_condition.include?(false) ||
-      #    showtime_start > showtime_end ||
-      #    showtime_start < current_time ||
-      #    showtime_start == showtime_end
-      #   # render :new, notice: "場次設定有誤,請重新輸入"
-      #   redirect_to admin_movie_showtimes_path(@movie.id), alert:"場次設定有誤,請重新輸入"
-      # else
-      #   @showtime.save
-      #   redirect_to admin_movie_showtimes_path(@movie.id), notice:"場次新增成功"
-      # end
     end
 
     def edit; end
 
     def update
-      # @showtimes = @movie.showtimes.all
+      @movie = @showtime.movie
+      @showtimes = @movie.showtimes.all
+      
+      showtime_start = showtime_params[:started_at].to_datetime.to_i
+      showtime_end = showtime_params[:end_at].to_datetime.to_i
 
-      if @showtime.update(showtime_params)
-        redirect_to admin_movie_showtimes_path(@showtime.movie_id), notice: '場次修改成功'
-      else
-        render :edit
+      showtime_all = @showtimes.map {|showtime| [showtime.started_at.to_i, showtime.end_at.to_i]}
+      current_time = Time.current.to_i
+
+      showtime_condition = showtime_all.map do |arr|
+        if showtime_start < arr[0]
+          showtime_end < arr[0]
+        elsif showtime_start > arr[1]
+          showtime_end > arr[1]
+        else
+          false
+        end
       end
-
-      # showtime_start = showtime_params[:started_at].to_datetime.to_i
-      # showtime_end = showtime_params[:end_at].to_datetime.to_i
-
-      # showtime_all = @showtimes.map {|data| [data.started_at.to_i, data.end_at.to_i]}
-      # current_time = DateTime.now.to_i
-
-      # showtime_condition = showtime_all.map do |arr|
-      #   if showtime_start < arr[0] || showtime_start > arr[1]
-      #     if showtime_start < arr[0]
-      #       showtime_end < arr[0]
-      #     else
-      #       showtime_end > arr[1]
-      #     end
-      #   else
-      #     false
-      #   end
-      # end
-      # if showtime_condition.include?(false) ||
-      #    showtime_start > showtime_end ||
-      #    showtime_start < current_time ||
-      #    showtime_start == showtime_end
-      #   redirect_to :edit, notice: "場次更新設定有誤,請重新輸入"
-      # else
-      #   @showtime.update(showtime_params)
-      #   redirect_to admin_movie_showtimes_path, notice: "場次更新成功"
-      # end
+      if not showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
+        @showtime.save
+        redirect_to admin_movie_showtimes_path(@movie.id), notice:"場次新增成功"
+      else
+        redirect_to admin_movie_showtimes_path(@movie.id), alert:"場次設定有誤,請重新輸入"
+      end
     end
+
 
     def destroy
       @showtime.destroy

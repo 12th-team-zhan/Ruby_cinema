@@ -60,8 +60,12 @@ ActiveRecord::Schema.define(version: 2022_12_20_062855) do
     t.datetime "deleted_at"
     t.integer "max_row", default: 1
     t.integer "max_column", default: 1
-    t.bigint "theater_id"
     t.decimal "ticket_amount", precision: 7, scale: 2
+    t.integer "regular_quantity", default: 0
+    t.integer "concession_quantity", default: 0
+    t.integer "elderly_quantity", default: 0
+    t.integer "disability_quantity", default: 0
+    t.bigint "theater_id"
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
     t.index ["theater_id"], name: "index_cinemas_on_theater_id"
   end
@@ -179,13 +183,11 @@ ActiveRecord::Schema.define(version: 2022_12_20_062855) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "fb_uid"
+    t.string "fb_token"
     t.string "name"
     t.datetime "deleted_at"
     t.integer "role", default: 0
-    t.string "fb_uid"
-    t.string "fb_token"
-    t.string "google_uid"
-    t.string "google_token"
     t.string "provider"
     t.string "uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
