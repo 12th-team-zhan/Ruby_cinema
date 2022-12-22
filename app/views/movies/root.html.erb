@@ -141,13 +141,14 @@
               <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
               <select class="form-select w-90 col" 
                       aria-label="select"
-                      data-search-showtime-by-area-target="endTime">
+                      data-search-showtime-by-area-target="endTime"
+                      data-action="change->search-showtime-by-area#changeLink">
                 <option>時段(迄)</option>
               </select>
             </div>
           </div>
           <div class="container search-bottom d-flex text-light justify-content-around pb-3">
-            <span class="my-2 py-1 px-4 bg-primary3", data-action="click->search-showtime-by-area#changeLink">
+            <span class="my-2 py-1 px-4 bg-primary3">
               <%= link_to "查詢場次", "#", class: "btn btn-deepskyblue btn-lg", id: "rootSearchShowtime" %>
             </span>
           </div>

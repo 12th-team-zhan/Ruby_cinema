@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get "/users" => "devise/registrations#new"
   end
 
-  get '/find_showtime', to: 'find_showtime#search'
+  get '/find_showtimes', to: 'find_showtimes#search'
 
   resources :news, only: %i[index show]
   resources :theaters, only: %i[index show]

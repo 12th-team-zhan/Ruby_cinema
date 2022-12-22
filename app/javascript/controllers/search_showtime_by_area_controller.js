@@ -85,10 +85,12 @@ export default class extends Controller {
     }
   }
 
-  changeLink(e) {
-    e.preventDefault();
-    console.log(this.movieListTarget.value);
-    const link = document.querySelector("#rootSearchShowtime");
-    // link.href = `/movies/:id/find_showtime?movieid=${this.movieListTarget.value}&startTime=${this.startedTimeTarget.value}&endTime=${this.startedTimeTarget.value}`;
+  changeLink() {
+    if (this.startTimeTarget.value < this.endTimeTarget.value) {
+      const link = document.querySelector("#rootSearchShowtime");
+      link.href = `/find_showtimes?movie_id=${this.movieListTarget.value}&startTime=${this.startTimeTarget.value}&endTime=${this.endTimeTarget.value}`;
+    } else {
+      alert("開始時間不得晚於結束時間");
+    }
   }
 }
