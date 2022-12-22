@@ -1,20 +1,24 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["movieList", "showtimeList", "startTime", "endTime"];
+  static targets = [
+    "area",
+    "movieList",
+    "showtimeList",
+    "startTime",
+    "endTime",
+  ];
 
-  connect() {
-    this.addTimeSelect();
-  }
+  connect() {}
 
   addMovieList(el) {
-    this.movieListTarget.replaceChildren();
-    let movieOption = `<option>請選擇電影</option>`;
-    this.movieListTarget.insertAdjacentHTML("beforeend", movieOption);
+    this.resetMovie();
+    this.resetShowtime();
+    this.resetTimeSelect();
 
     const token = document.querySelector("meta[name='csrf-token']").content;
     this.areaId = el.target.value;
-    fetch("/api/v1/search_seat_movie_list", {
+    fetch("/find_showtimes/add_movie_list", {
       method: "POST",
       headers: {
         "X-csrf-Token": token,
@@ -37,15 +41,12 @@ export default class extends Controller {
   }
 
   addShowtimeList(el) {
-    this.showtimeListTarget.replaceChildren();
-
-    let dateOption = `<option>請選擇日期</option>`;
-
-    this.showtimeListTarget.insertAdjacentHTML("beforeend", dateOption);
+    this.resetShowtime();
+    this.resetTimeSelect();
 
     const token = document.querySelector("meta[name='csrf-token']").content;
     this.movieId = el.target.value;
-    fetch("/api/v1/search_seat_showtime_list", {
+    fetch("/find_showtimes/add_showtime_list", {
       method: "POST",
       headers: {
         "X-csrf-Token": token,
@@ -77,20 +78,60 @@ export default class extends Controller {
   }
 
   addTimeSelect() {
+    this.resetTimeSelect();
     var i = 0;
     for (i = 0; i < 24; i++) {
-      let option = `<option value="${i}" >${i}:00</option>`;
-      this.startTimeTarget.insertAdjacentHTML("beforeend", option);
-      this.endTimeTarget.insertAdjacentHTML("beforeend", option);
+      if (i < 10) {
+        let option = `<option value="0${i}:00" >0${i}:00</option>`;
+        this.startTimeTarget.insertAdjacentHTML("beforeend", option);
+        this.endTimeTarget.insertAdjacentHTML("beforeend", option);
+      } else {
+        let option = `<option value="${i}:00:00" >${i}:00</option>`;
+        this.startTimeTarget.insertAdjacentHTML("beforeend", option);
+        this.endTimeTarget.insertAdjacentHTML("beforeend", option);
+      }
     }
   }
 
   changeLink() {
-    if (this.startTimeTarget.value < this.endTimeTarget.value) {
+    if (this.startTimeTarget.value <= this.endTimeTarget.value) {
       const link = document.querySelector("#rootSearchShowtime");
-      link.href = `/find_showtimes?movie_id=${this.movieListTarget.value}&startTime=${this.startTimeTarget.value}&endTime=${this.endTimeTarget.value}`;
+      link.href = `/find_showtimes/search?area=${this.areaTarget.value}&movie_id=${this.movieListTarget.value}&showtime=${this.showtimeListTarget.value}&startTime=${this.startTimeTarget.value}&endTime=${this.endTimeTarget.value}`;
     } else {
       alert("開始時間不得晚於結束時間");
     }
+  }
+
+  checkAreaData() {
+    if (
+      this.startTimeTarget.value === "0" ||
+      this.endTimeTarget.value === "0"
+    ) {
+      const link = document.querySelector("#rootSearchShowtime");
+      link.href = `#`;
+      alert("請填寫查詢時段");
+    }
+  }
+
+  resetMovie() {
+    this.movieListTarget.replaceChildren();
+    let movieOption = `<option>請選擇電影</option>`;
+    this.movieListTarget.insertAdjacentHTML("beforeend", movieOption);
+  }
+
+  resetShowtime() {
+    this.showtimeListTarget.replaceChildren();
+    let dateOption = `<option>請選擇日期</option>`;
+    this.showtimeListTarget.insertAdjacentHTML("beforeend", dateOption);
+  }
+
+  resetTimeSelect() {
+    this.startTimeTarget.replaceChildren();
+    this.endTimeTarget.replaceChildren();
+
+    let startTimeOption = `<option value="0">時段(起)</option>`;
+    let endTimeOption = `<option value="0">時段(迄)</option>`;
+    this.startTimeTarget.insertAdjacentHTML("beforeend", startTimeOption);
+    this.endTimeTarget.insertAdjacentHTML("beforeend", endTimeOption);
   }
 }

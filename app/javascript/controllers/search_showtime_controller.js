@@ -1,22 +1,14 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["theaterList", "showtimeList", "showtime", "movieList"];
+  static targets = ["theaterList", "showtimeDate", "showtime", "movieList"];
 
   connect() {}
 
   addTheaterList(el) {
-    this.theaterListTarget.replaceChildren();
-    this.showtimeListTarget.replaceChildren();
-    this.showtimeTarget.replaceChildren();
-
-    let theaterOption = `<option>請選擇影城</option>`;
-    let dateOption = `<option>請選擇日期</option>`;
-    let timeOption = `<option>請選擇場次</option>`;
-
-    this.theaterListTarget.insertAdjacentHTML("beforeend", theaterOption);
-    this.showtimeListTarget.insertAdjacentHTML("beforeend", dateOption);
-    this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
+    this.resetTheaterList();
+    this.resetShowtimeDate();
+    this.resetShowtime();
 
     const token = document.querySelector("meta[name='csrf-token']").content;
     this.movieId = el.target.value;
@@ -42,15 +34,9 @@ export default class extends Controller {
       });
   }
 
-  addShowtimeList(el) {
-    this.showtimeListTarget.replaceChildren();
-    this.showtimeTarget.replaceChildren();
-
-    let dateOption = `<option>請選擇日期</option>`;
-    let timeOption = `<option>請選擇場次</option>`;
-
-    this.showtimeListTarget.insertAdjacentHTML("beforeend", dateOption);
-    this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
+  addShowtimeDate(el) {
+    this.resetShowtimeDate();
+    this.resetShowtime();
 
     const token = document.querySelector("meta[name='csrf-token']").content;
     this.theaterId = el.target.value;
@@ -80,7 +66,7 @@ export default class extends Controller {
         });
         date.forEach((element) => {
           let option = `<option value="${element}" >${element}</option>`;
-          this.showtimeListTarget.insertAdjacentHTML("beforeend", option);
+          this.showtimeDateTarget.insertAdjacentHTML("beforeend", option);
         });
       })
       .catch((err) => {
@@ -89,12 +75,10 @@ export default class extends Controller {
   }
 
   addShowtime() {
-    this.showtimeTarget.replaceChildren();
-    let option = `<option>請選擇場次</option>`;
-    this.showtimeTarget.insertAdjacentHTML("beforeend", option);
+    this.resetShowtime();
 
     this.showtime.map((showtime) => {
-      if (showtime[0] === this.showtimeListTarget.value) {
+      if (showtime[0] === this.showtimeDateTarget.value) {
         let option = `<option value="${showtime[2]}" >${showtime[1]}</option>`;
         this.showtimeTarget.insertAdjacentHTML("beforeend", option);
       }
@@ -107,5 +91,23 @@ export default class extends Controller {
     }
     const link = document.querySelector("#rootBuyTickets");
     link.href = `/ticketing/select_tickets?showtimeid=${e.srcElement.value}`;
+  }
+
+  resetTheaterList() {
+    this.theaterListTarget.replaceChildren();
+    let theaterOption = `<option>請選擇影城</option>`;
+    this.theaterListTarget.insertAdjacentHTML("beforeend", theaterOption);
+  }
+
+  resetShowtimeDate() {
+    this.showtimeDateTarget.replaceChildren();
+    let dateOption = `<option>請選擇日期</option>`;
+    this.showtimeDateTarget.insertAdjacentHTML("beforeend", dateOption);
+  }
+
+  resetShowtime() {
+    this.showtimeTarget.replaceChildren();
+    let timeOption = `<option>請選擇場次</option>`;
+    this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
   }
 }

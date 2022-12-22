@@ -9,7 +9,14 @@ Rails.application.routes.draw do
     get "/users" => "devise/registrations#new"
   end
 
-  get '/find_showtimes', to: 'find_showtimes#search'
+  resource :find_showtimes, only: [] do
+    get "search"
+    member do
+      post "add_movie_list", to: "find_showtimes#add_movie_list"
+      post "add_showtime_list", to: "find_showtimes#add_showtime_list"
+    end
+  end
+  
 
   resources :news, only: %i[index show]
   resources :theaters, only: %i[index show]
@@ -70,8 +77,8 @@ Rails.application.routes.draw do
       post "showtime_list", to: "getdata#showtime_list"
       post "selected_tickets", to: "getdata#selected_tickets"
       post "cinema_list", to: "getdata#cinema_list"
-      post "search_seat_movie_list", to: "getdata#search_seat_movie_list"
-      post "search_seat_showtime_list", to: "getdata#search_seat_showtime_list"
+      # post "search_area_movie_list", to: "getdata#search_area_movie_list"
+      # post "search_area_showtime_list", to: "getdata#search_area_showtime_list"
     end
   end
 

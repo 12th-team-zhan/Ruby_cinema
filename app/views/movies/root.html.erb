@@ -68,7 +68,7 @@
             <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
             <select class="form-select w-90" 
                     aria-label="select" 
-                    data-action="change->search-showtime#addShowtimeList" 
+                    data-action="change->search-showtime#addShowtimeDate" 
               data-search-showtime-target="theaterList">
               <option>請選擇影城</option>
             </select>
@@ -77,7 +77,7 @@
             <div class="icon"><i class="m-0 fa-regular fa-calendar-days text-white"></i></div>
             <select class="form-select w-90" 
                     aria-label="select" 
-                    data-search-showtime-target="showtimeList"
+                    data-search-showtime-target="showtimeDate"
                     data-action="change->search-showtime#addShowtime">
               <option>請選擇日期</option>
             </select>
@@ -102,7 +102,8 @@
             <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
             <select class="form-select w-90" 
                     aria-label="select" 
-                    data-action="change->search-showtime-by-area#addMovieList">
+                    data-action="change->search-showtime-by-area#addMovieList"
+              data-search-showtime-by-area-target="area">
               <option>請選擇地區</option>
               <% @theater_areas.each do |theater_area| %>
                 <option value="<%= theater_area[1] %>" ><%= theater_area[0] %></option>
@@ -123,7 +124,8 @@
               <div class="icon"><i class="m-0 fa-regular fa-calendar-days text-white"></i></div>
               <select class="form-select w-90 col" 
                       aria-label="select"
-                      data-search-showtime-by-area-target="showtimeList">
+                      data-search-showtime-by-area-target="showtimeList"
+                      data-action="change->search-showtime-by-area#addTimeSelect">
                 <option>請選擇日期</option>
               </select>
             </div>
@@ -134,7 +136,7 @@
               <select class="form-select w-90 col" 
                       aria-label="select"
                       data-search-showtime-by-area-target="startTime">
-                <option>時段(起)</option>
+                <option value="0">時段(起)</option>
               </select>
             </div>
             <div class="d-flex justify-content-around align-items-center col">
@@ -143,12 +145,13 @@
                       aria-label="select"
                       data-search-showtime-by-area-target="endTime"
                       data-action="change->search-showtime-by-area#changeLink">
-                <option>時段(迄)</option>
+                <option value="0">時段(迄)</option>
               </select>
             </div>
           </div>
           <div class="container search-bottom d-flex text-light justify-content-around pb-3">
-            <span class="my-2 py-1 px-4 bg-primary3">
+            <span class="my-2 py-1 px-4 bg-primary3" 
+                  data-action="click->search-showtime-by-area#checkAreaData">
               <%= link_to "查詢場次", "#", class: "btn btn-deepskyblue btn-lg", id: "rootSearchShowtime" %>
             </span>
           </div>
