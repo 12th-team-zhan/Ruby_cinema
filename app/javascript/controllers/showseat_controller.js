@@ -35,10 +35,10 @@ export default class extends Controller {
     for (var r = 0; r < maxR; r++) {
       let row_index = String.fromCharCode(r + 65);
       for (let c = 0; c < maxC; c++) {
-        let item = `<div class="seat-item">${row_index}${String(c + 1).padStart(2, '0')}</div>`;
+        let item = `<div class="seat-item" data-row-id=${r} data-column-id=${c} data-status="added" data-action="click->editseat#changeSeatStatus">${row_index}${String(c + 1).padStart(2, '0')}</div>`;
 
         if (seats[r][c] == 1) {
-          item = `<div class="seat-item bg-transparent">${row_index}${String(c + 1).padStart(2, '0')}</div>`;
+          item = `<div class="seat-item bg-transparent" data-row-id=${r} data-column-id=${c} data-status="not added" data-action="click->editseat#changeSeatStatus">${row_index}${String(c + 1).padStart(2, '0')}</div>`;
         }
 
         grid.insertAdjacentHTML("beforeend", item);      

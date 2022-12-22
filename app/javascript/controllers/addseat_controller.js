@@ -33,10 +33,10 @@ export default class extends Controller {
 
         grid.style.cssText += `grid-template-rows: repeat(${maxR}, 1fr);grid-template-columns: repeat(${maxC}, 1fr);`;
 
-        for (var r = 1; r <= maxR; r++) {
-            let row_index = String.fromCharCode(r + 64);
-            for (let c = 1; c <= maxC; c++) {
-                const item = `<div class="seat-item" data-seat-id=${(r - 1) * maxC + c} data-status="added" data-action="click->addseat#changeSeatStatus">${row_index}${String(c).padStart(2, '0')}</div>`;
+        for (var r = 0; r < maxR; r++) {
+            let row_index = String.fromCharCode(r + 65);
+            for (let c = 0; c < maxC; c++) {
+                let item = `<div class="seat-item" data-row-id=${r} data-column-id=${c} data-status="added" data-action="click->addseat#changeSeatStatus">${row_index}${String(c + 1).padStart(2, '0')}</div>`;
 
                 grid.insertAdjacentHTML("beforeend", item);
             }

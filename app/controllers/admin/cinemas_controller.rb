@@ -28,21 +28,23 @@ module Admin
 
     def update
       @seats = @cinema.seats.first
-      seat_list_raw = @seats.seat_list
-      seat_list_users_raw = @seats.seat_list_users
 
-      seat_list_new = update_seat_list(seat_list_raw, cinema_params[:max_row], cinema_params[:max_column])
-
-      seat_list_users_new = update_seat_list(seat_list_users_raw, cinema_params[:max_row], cinema_params[:max_column])
-
-      if not @seats.update({seat_list: seat_list_new, seat_list_users: seat_list_users_new})
-        render :edit, alert: '座位更新問題，導致更新失敗'
-      end
-
-      if @cinema.update(cinema_params)
-        redirect_to admin_theater_cinemas_path(@cinema.theater_id), notice: '成功更新影廳'
+      if @seats.nil?
+        redirect_to admin_theater_cinemas_path(@cinema.theater_id), alert: '影廳座位未建立'
       else
-        render :edit, alert: '更新影廳失敗'
+        seat_list_raw = @seats.seat_list
+
+        seat_list_new = update_seat_list(seat_list_raw, cinema_params[:max_row].to_i, cinema_params[:max_column].to_i)
+  
+        if not @seats.update({seat_list: seat_list_new})
+          render :edit
+        end
+
+        if @cinema.update(cinema_params)
+          redirect_to admin_theater_cinemas_path(@cinema.theater_id), notice: '成功更新影廳'
+        else
+          render :edit
+        end
       end
     end
 

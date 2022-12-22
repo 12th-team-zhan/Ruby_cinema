@@ -20,9 +20,7 @@
               <th scope="col">查看影廳</th>
               <th scope="col">電話</th>
               <th scope="col">地址</th>
-              <th scope="col">查看影廳</th>
-              <th scope="col">編輯影城</th>
-              <th scope="col">刪除影城</th>
+              <th scope="col">刪除</th>
             </tr>
           </thead>
           <% @theaters.each do |theater| %>
@@ -33,9 +31,7 @@
                 <td><%= link_to "查看", admin_theater_cinemas_path(theater) %></td>
                 <td><%= theater.phone %></td>
                 <td><%= theater.address%></td>
-                <td><%= link_to "查看影廳", admin_theater_cinemas_path(theater) %></td>
-                <td><%= link_to "編輯", edit_admin_theater_path(theater) %></td>
-                <td><%= link_to "刪除", admin_theater_path(theater), method:"delete", data:{confirm:"確定要刪除#{ theater.name }？"} %></td>
+                <th scope="row"><%= link_to "刪除", admin_theater_path(theater), method: "delete" %></th>
               </tr>
             </tbody>
           <% end %>

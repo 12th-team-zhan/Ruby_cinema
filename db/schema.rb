@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_20_062855) do
+ActiveRecord::Schema.define(version: 2022_12_22_062747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,8 +119,6 @@ ActiveRecord::Schema.define(version: 2022_12_20_062855) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "cinema_id"
     t.text "seat_list", default: [], array: true
-    t.string "category", default: "added"
-    t.text "seat_list_users", default: [], array: true
     t.index ["cinema_id"], name: "index_seats_on_cinema_id"
   end
 
@@ -183,13 +181,11 @@ ActiveRecord::Schema.define(version: 2022_12_20_062855) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "fb_uid"
+    t.string "fb_token"
     t.string "name"
     t.datetime "deleted_at"
     t.integer "role", default: 0
-    t.string "fb_uid"
-    t.string "fb_token"
-    t.string "google_uid"
-    t.string "google_token"
     t.string "provider"
     t.string "uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
