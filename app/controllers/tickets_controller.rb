@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class TicketsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :pay]
-  skip_before_action :verify_authenticity_token, only: [:checkout, :change_status]
+  before_action :authenticate_user!, only: %i[create pay]
+  skip_before_action :verify_authenticity_token, only: %i[checkout change_status]
 
   def index
     @tickets = Ticket.all
@@ -13,7 +13,7 @@ class TicketsController < ApplicationController
   def create
     info = ticket_params
 
-    @showtime = Showtime.find(ticket_params["showtime_id"].to_i)
+    @showtime = Showtime.find(ticket_params['showtime_id'].to_i)
     @cinema = @showtime.cinema
     @theater = @cinema.theater
     info[:movie_name] = @showtime.movie.name
@@ -30,7 +30,7 @@ class TicketsController < ApplicationController
 
   def pay
     @ticket = Ticket.find(params[:id])
-    order = {slug: @ticket.serial, amount: 500, name: '電影票', email: current_user.email}
+    order = { slug: @ticket.serial, amount: 500, name: '電影票', email: current_user.email }
     @form_info = Mpg.new(order).form_info
   end
 
@@ -43,12 +43,12 @@ class TicketsController < ApplicationController
   def checkout
     response = MpgResponse.new(params[:TradeInfo])
 
-    if response.status == "SUCCESS"
+    if response.status == 'SUCCESS'
       @result = response.result
-      @ticket = Ticket.find_by(serial: @result["MerchantOrderNo"])
+      @ticket = Ticket.find_by(serial: @result['MerchantOrderNo'])
       render :checkout
     else
-      redirect_to root_path, alert: "付款過程報錯，付款失敗"
+      redirect_to root_path, alert: '付款過程報錯，付款失敗'
     end
   end
 
@@ -59,7 +59,8 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    permitted = params.permit(:showtime_id, :regular_quantity, :concession_quantity, :elderly_quantity, :disability_quantity, :seat_list)
+    permitted = params.permit(:showtime_id, :regular_quantity, :concession_quantity, :elderly_quantity,
+                              :disability_quantity, :seat_list)
     permitted.to_h || {}
   end
 end

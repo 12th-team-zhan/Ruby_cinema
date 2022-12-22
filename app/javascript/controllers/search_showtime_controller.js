@@ -85,12 +85,18 @@ export default class extends Controller {
     });
   }
 
-  changeLink(e) {
-    if (e.srcElement.value === "請選擇場次") {
-      return;
-    }
+  changeLink() {
     const link = document.querySelector("#rootBuyTickets");
-    link.href = `/ticketing/select_tickets?showtimeid=${e.srcElement.value}`;
+    link.href = `/ticketing/select_tickets?showtimeid=${this.showtimeTarget.value}`;
+  }
+
+  checkBookingData(e) {
+    if (this.showtimeTarget.value === "0") {
+      e.preventDefault();
+      const link = document.querySelector("#rootSearchShowtime");
+      link.href = `#`;
+      alert("請填寫查詢時段");
+    }
   }
 
   resetTheaterList() {
@@ -107,7 +113,7 @@ export default class extends Controller {
 
   resetShowtime() {
     this.showtimeTarget.replaceChildren();
-    let timeOption = `<option>請選擇場次</option>`;
+    let timeOption = `<option value="0">請選擇場次</option>`;
     this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
   }
 }

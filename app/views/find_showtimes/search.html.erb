@@ -1,7 +1,7 @@
 <%= render "shared/nav" %>
 <div class="container text-center py-5 w-75 ">
   <div class="row align-items-start">
-    <h2>快搜條件</h2>
+    <h2 class="text-primary">快搜條件</h2>
     <div class="d-flex" data-controller="search-showtime-by-area">
       <div class="col-10 d-flex">
         <div class="col">
@@ -73,19 +73,21 @@
     </div>
   </div>
   <section class="py-5">
-    <h2>快搜空位結果</h2>
-    <h3><%= @movie.name %></h3>
+    <h2 class="text-primary">快搜空位結果</h2>
+    <h3 class="text-secondary fs-4"><%= @movie.name %></h3>
     <article class="py-3">
       <% if (@movie.present? && @showtimes.present?) %>
-        <table class="table">
+        <table class="table fs-5">
           <thead class="table-primary">
             <th>影城</th>
+            <th>影廳</th>
             <th>日期</th>
             <th>開始時間</th>
             <th>前往購票</th>
           </thead>
           <% @showtimes.each do |showtime| %>
             <tbody>
+              <td><%= showtime.cinema.theater.name%></td>
               <td><%= showtime.cinema.theater.name%></td>
               <td><%= showtime.started_at.strftime("%Y-%m-%d") %></td>
               <td><%= showtime.started_at.strftime("%I:%M %p") %></td>
@@ -94,7 +96,7 @@
           <% end %>
         </table>
       <% else %>
-        <h3>查無場次</h3>
+        <h4 class="text-secondary">查無場次</h3>
       <% end %>
     </article>
   </section>

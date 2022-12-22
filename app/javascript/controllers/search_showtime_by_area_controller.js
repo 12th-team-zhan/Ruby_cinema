@@ -79,8 +79,8 @@ export default class extends Controller {
 
   addTimeSelect() {
     this.resetTimeSelect();
-    var i = 0;
-    for (i = 0; i < 24; i++) {
+    var i = 6;
+    for (i; i < 24; i++) {
       if (i < 10) {
         let option = `<option value="0${i}:00" >0${i}:00</option>`;
         this.startTimeTarget.insertAdjacentHTML("beforeend", option);
@@ -93,20 +93,22 @@ export default class extends Controller {
     }
   }
 
-  changeLink() {
+  changeLink(e) {
     if (this.startTimeTarget.value <= this.endTimeTarget.value) {
       const link = document.querySelector("#rootSearchShowtime");
       link.href = `/find_showtimes/search?area=${this.areaTarget.value}&movie_id=${this.movieListTarget.value}&showtime=${this.showtimeListTarget.value}&startTime=${this.startTimeTarget.value}&endTime=${this.endTimeTarget.value}`;
     } else {
+      e.preventDefault();
       alert("開始時間不得晚於結束時間");
     }
   }
 
-  checkAreaData() {
+  checkAreaData(e) {
     if (
       this.startTimeTarget.value === "0" ||
       this.endTimeTarget.value === "0"
     ) {
+      e.preventDefault();
       const link = document.querySelector("#rootSearchShowtime");
       link.href = `#`;
       alert("請填寫查詢時段");
