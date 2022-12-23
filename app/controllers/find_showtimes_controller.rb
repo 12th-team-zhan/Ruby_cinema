@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class FindShowtimesController < ApplicationController
+  def index
+    @theater_areas = Theater.areas
+  end
+
   def search
     start_time = "#{params[:showtime]} #{params[:startTime]}".to_datetime.to_s(:db)
     end_time = "#{params[:showtime]} #{params[:endTime]}".to_datetime.to_s(:db)

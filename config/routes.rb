@@ -7,15 +7,7 @@ Rails.application.routes.draw do
   as :user do
     post '/users/sign_in', to: 'devise/sessions#create', as: :user_session
     delete '/users/sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
-    get '/users' => 'devise/registrations#new'
-  end
-
-  resource :find_showtimes, only: [] do
-    get 'search'
-    member do
-      post 'add_movie_list', to: 'find_showtimes#add_movie_list'
-      post 'add_showtime_list', to: 'find_showtimes#add_showtime_list'
-    end
+    get '/users', to: 'devise/registrations#new'
   end
 
   resources :news, only: %i[index show]
@@ -27,12 +19,21 @@ Rails.application.routes.draw do
       patch :cancel
     end
   end
+
   resources :tickets, only: %i[index show new create destroy] do
     member do
       get :pay
     end
     collection do
       post :checkout
+    end
+  end
+
+  resources :find_showtimes, only: %i[index] do
+    collection do
+      get 'search'
+      post 'add_movie_list'
+      post 'add_showtime_list'
     end
   end
 
