@@ -47,9 +47,9 @@ Rails.application.routes.draw do
         post :create_movie_poster
       end
       resource :movie_theater, only: %i[create destroy]
-      resources :showtimes, only: %i[index new create destroy]
+      resources :showtimes, only: %i[index create destroy]
     end
-    resources :showtimes, only: %i[show edit update]
+    resources :showtimes, only: %i[show]
   end
 
   resources :ticketing, only: %i[show] do

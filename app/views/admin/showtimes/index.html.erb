@@ -30,7 +30,6 @@
                         <td><%= showtime.cinema.name %></td>
                         <td><%= showtime.started_at %></td>
                         <td><%= showtime.end_at %></td>
-                        <td><%= link_to "編輯", edit_admin_showtime_path(showtime) %></td>
                         <td><%= link_to "刪除", admin_movie_showtime_path(@movie.id, showtime), method: "delete", data: {confirm: "確定刪除場次？"} %></td>
                       </tr>
                     <% end %>
