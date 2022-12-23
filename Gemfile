@@ -19,6 +19,7 @@ gem 'paranoia', '~> 2.6'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.7'
+gem 'redis'
 gem 'sidekiq', '~> 7.0', '>= 7.0.1'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
