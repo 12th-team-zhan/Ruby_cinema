@@ -1,38 +1,34 @@
 # frozen_string_literal: true
 
 class SelectseatChannel < ApplicationCable::Channel
-  @@select_seat = {}
-
   def subscribed
-    stream_from 'selectseat_channel'
+    stream_from "selectseat_channel#{params[:showtime_id]}"
     @user_id = params[:id]
+    @showtime_id = params[:showtime_id]
+    $redis.sadd("showtime_#{@showtime_id}", @user_id)
   end
 
-  def self.speak(params)
-    case params[:status]
-    when 'selected'
-      ActionCable.server.broadcast('selectseat_channel',
-                                   { status: 'selected', seat_id: params[:seat_id], id: params[:id] })
-      @@select_seat[params[:id]] = if (@@select_seat[params[:id]]).nil?
-                                     [params[:seat_id]]
-                                   else
-                                     @@select_seat[params[:id]] << params[:seat_id]
-                                   end
-
-      Rails.logger.debug @@select_seat
-    when 'cancel'
-      ActionCable.server.broadcast('selectseat_channel',
-                                   { status: 'cancel', seat_id: params[:seat_id], id: params[:id] })
-      @@select_seat[params[:id]] = @@select_seat[params[:id]].delete(params[:seat_id])
+  def self.speak(status, showtime_id, seat_id, user_id, result)
+    if result
+      case status
+      when 'selected'
+        $redis.sadd(user_id, seat_id)
+        ActionCable.server.broadcast("selectseat_channel#{showtime_id}",
+                                     { status: 'selected', seat_id:, id: user_id })
+      when 'cancel'
+        $redis.srem(user_id, seat_id)
+        ActionCable.server.broadcast("selectseat_channel#{showtime_id}",
+                                     { status: 'cancel', seat_id:, id: user_id })
+      end
+    else
+      ActionCable.server.broadcast("selectseat_channel#{showtime_id}",
+                                   { status: 'fail', seat_id:, id: user_id })
     end
   end
 
-  def self.channle_user_select_seat
-    @@select_seat
-  end
-
   def unsubscribed
-    ActionCable.server.broadcast('selectseat_channel', { status: 'other_unsubscribed', id: @user_id })
-    @@select_seat.delete(@user_id)
+    ActionCable.server.broadcast("selectseat_channel#{@showtime_id}", { status: 'other_unsubscribed', id: @user_id })
+    $redis.del(@user_id)
+    $redis.srem("showtime_#{@showtime_id}", @user_id)
   end
 end

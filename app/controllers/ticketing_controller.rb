@@ -12,8 +12,8 @@ class TicketingController < ApplicationController
   end
 
   def seat_reservation
-    SelectseatChannel.speak(params)
-    render json: { status: 'ok', params: }
+    SelectSeatJob.perform_async(params[:status], params[:showtime_id], params[:seat_id], params[:id])
+    render json: { status: 'ok' }
   end
 
   def pay
