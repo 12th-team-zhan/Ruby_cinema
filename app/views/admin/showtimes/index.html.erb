@@ -1,41 +1,37 @@
-<div class="continer vh-100  text-white">
-  <div class="d-flex vh-100">
+<div class="continer vh-100">
+  <div class="d-flex">
     <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1">
-      <div class="container container-breadcrumb ">
+    <div class="main flex-grow-1 p-0 ms-1 text-dark">
+      <div class="container container-breadcrumb">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
-            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>電影列表</a></li>
+            <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
+            <li class="breadcrumb-item"><%= @movie.name %></li>
             <li class="breadcrumb-item active" aria-current="page">場次列表</li>
           </ol>
         </nav>
       </div>
       <div class="container">
-        <h2 class="text-dark">電影：<br/><%= @movie.name %></h2>
-                <%= link_to "新增場次", new_admin_movie_showtime_path, class: "btn btn-primary" %>
-                <table class="table table-striped ">
-                  <thead>
-                    <tr>
-                      <th scope="col">影廳</th>
-                      <th scope="col">開始時間</th>
-                      <th scope="col">結束時間</th>
-                      <th scope="col">編輯</th>
-                      <th scope="col">刪除</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @showtimes.each do |showtime| %>
-                      <tr>
-                        <td><%= showtime.cinema.name %></td>
-                        <td><%= showtime.started_at %></td>
-                        <td><%= showtime.end_at %></td>
-                        <td><%= link_to "刪除", admin_movie_showtime_path(@movie.id, showtime), method: "delete", data: {confirm: "確定刪除場次？"} %></td>
-                      </tr>
-                    <% end %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h2 class="text-dark fs-6">片長：<%= @movie.duration %>分鐘</h2>
+        <%= render "new" %>
+        <table class="table table-striped my-3">
+          <thead>
+            <tr>
+              <th scope="col" class=" text-bg-slategray">影城</th>
+              <th scope="col" class=" text-bg-slategray">影廳</th>
+              <th scope="col" class=" text-bg-slategray">開始時間</th>
+              <th scope="col" class=" text-bg-slategray">結束時間</th>
+              <th scope="col" class=" text-bg-slategray">刪除</th>
+            </tr>
+          </thead>
+          <tbody class="showtimes">
+            <%= render @showtimes %>
+          </tbody>
+        </table>
+        <%= will_paginate @showtimes, class:"text-center" %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
