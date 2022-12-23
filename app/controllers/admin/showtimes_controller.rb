@@ -34,7 +34,7 @@ module Admin
         else
           false
         end
-    end
+      end
 
       if not showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
         @showtime.save
@@ -43,36 +43,6 @@ module Admin
         redirect_to admin_movie_showtimes_path(@movie.id), alert:"場次設定有誤,請重新輸入"
       end
     end
-
-    def edit; end
-
-    def update
-      @movie = @showtime.movie
-      @showtimes = @movie.showtimes.all
-      
-      showtime_start = showtime_params[:started_at].to_datetime.to_i
-      showtime_end = showtime_params[:end_at].to_datetime.to_i
-
-      showtime_all = @showtimes.map {|showtime| [showtime.started_at.to_i, showtime.end_at.to_i]}
-      current_time = Time.current.to_i
-
-      showtime_condition = showtime_all.map do |arr|
-        if showtime_start < arr[0]
-          showtime_end < arr[0]
-        elsif showtime_start > arr[1]
-          showtime_end > arr[1]
-        else
-          false
-        end
-      end
-      if not showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
-        @showtime.save
-        redirect_to admin_movie_showtimes_path(@movie.id), notice:"場次新增成功"
-      else
-        redirect_to admin_movie_showtimes_path(@movie.id), alert:"場次設定有誤,請重新輸入"
-      end
-    end
-
 
     def destroy
       @showtime.destroy
