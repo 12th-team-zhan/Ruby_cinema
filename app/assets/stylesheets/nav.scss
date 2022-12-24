@@ -70,6 +70,12 @@
   }
 }
 
+.dropdown {
+  a {
+    cursor: pointer;
+  }
+}
+
 .nav-link:hover {
   background-color: #154178;
 }
