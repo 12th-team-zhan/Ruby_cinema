@@ -5,7 +5,7 @@ export default class extends Controller {
     static targets = ["seatGrid", "next"];
     connect() {
         let params = new URLSearchParams(location.search);
-        this.url = new URL('http://127.0.0.1:3000/ticketing/pay')
+        this.url = new URL('http://127.0.0.1:3000/tickets')
         this.url.searchParams.append('showtimeId', params.get('showtimeid'));
         for (const [key, value] of params) {
             this.url.searchParams.append(key, value);
