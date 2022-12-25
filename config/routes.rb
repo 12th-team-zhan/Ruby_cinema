@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     get '/users', to: 'devise/registrations#new'
   end
 
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :movies, only: %i[index show]
   resources :news, only: %i[index show]
   resources :theaters, only: %i[index show]
