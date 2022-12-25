@@ -79,24 +79,28 @@ export default class extends Controller {
 
   addTimeSelect() {
     this.resetTimeSelect();
+
     var i = 6;
-    for (i; i < 24; i++) {
-      if (i < 10) {
-        let option = `<option value="0${i}:00" >0${i}:00</option>`;
-        this.startTimeTarget.insertAdjacentHTML("beforeend", option);
-        this.endTimeTarget.insertAdjacentHTML("beforeend", option);
-      } else {
-        let option = `<option value="${i}:00:00" >${i}:00</option>`;
-        this.startTimeTarget.insertAdjacentHTML("beforeend", option);
-        this.endTimeTarget.insertAdjacentHTML("beforeend", option);
-      }
+    for (i; i < 25; i++) {
+      let option = `<option value="${this.autoSupplement(
+        i.toString()
+      )}:00" >${this.autoSupplement(i.toString())}:00</option>`;
+      this.startTimeTarget.insertAdjacentHTML("beforeend", option);
+      this.endTimeTarget.insertAdjacentHTML("beforeend", option);
     }
   }
 
   changeLink(e) {
     if (this.startTimeTarget.value <= this.endTimeTarget.value) {
       const link = document.querySelector("#rootSearchShowtime");
-      link.href = `/find_showtimes/search?area=${this.areaTarget.value}&movie_id=${this.movieListTarget.value}&showtime=${this.showtimeListTarget.value}&startTime=${this.startTimeTarget.value}&endTime=${this.endTimeTarget.value}`;
+      const params = new URLSearchParams({
+        area: this.areaTarget.value.toString(),
+        movie_id: this.movieListTarget.value.toString(),
+        showtime: this.showtimeListTarget.value.toString(),
+        startTime: this.startTimeTarget.value.toString(),
+        endTime: this.endTimeTarget.value.toString(),
+      });
+      link.href = `/find_showtimes/search?${params}`;
     } else {
       e.preventDefault();
       alert("開始時間不得晚於結束時間");
@@ -135,5 +139,9 @@ export default class extends Controller {
     let endTimeOption = `<option value="0">時段(迄)</option>`;
     this.startTimeTarget.insertAdjacentHTML("beforeend", startTimeOption);
     this.endTimeTarget.insertAdjacentHTML("beforeend", endTimeOption);
+  }
+
+  autoSupplement(timeHour) {
+    return timeHour.padStart(2, "0");
   }
 }
