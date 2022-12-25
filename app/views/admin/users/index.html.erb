@@ -1,4 +1,5 @@
 <h1>使用者管理介面</h1>
+<div>
 <%= link_to "回首頁", root_path %>
 <p>--------------user-----------------</p>
 <%= render "form", users: User.user %>
@@ -6,3 +7,4 @@
 <%= render "form", users: User.staff %>
 <p>--------------admin-----------------</p>
 <%= render "form", users: User.admin %>
+</div>

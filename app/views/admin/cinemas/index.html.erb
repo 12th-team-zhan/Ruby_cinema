@@ -1,11 +1,8 @@
-<div class="continer vh-100  text-white">
-  <div class="d-flex vh-100">
-    <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1">
-      <div class="container container-breadcrumb ">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
+<div class="main flex-grow-1 p-0 ms-1">
+  <div class="container container-breadcrumb ">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
             <li class="breadcrumb-item"><a href=<%= admin_theaters_path %>><%= @theater.name %></a></li>
             <li class="breadcrumb-item active" aria-current="page">影廳列表</li>
             </ol>
@@ -48,4 +45,3 @@
         </div>
       </div>
     </div>
-  </div>
