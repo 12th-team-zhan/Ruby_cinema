@@ -10,13 +10,9 @@ module Users
     # end
 
     # POST /resource/sign_in
-    def create
-      self.resource = warden.authenticate!(auth_options)
-      set_flash_message!(:notice, :signed_in)
-      sign_in(resource_name, resource)
-      yield resource if block_given?
-      redirect_to params[:user][:path]
-    end
+    # def create
+    #   super
+    # end
 
     # DELETE /resource/sign_out
     # def destroy
@@ -29,5 +25,7 @@ module Users
     # def configure_sign_in_params
     #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
     # end
+
+   
   end
 end
