@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 module Admin
-  class OrdersController < ApplicationController
+  class OrdersController < AdminController
     before_action :authenticate_user!
-    before_action :current_user_is_staff
     before_action :find_order, only: %i[edit update show destroy]
 
     def index

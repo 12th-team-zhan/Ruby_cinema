@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 module Admin
-  class MoviesController < ApplicationController
+  class MoviesController < AdminController
     before_action :authenticate_user!
-    before_action :current_user_is_staff
     before_action :find_movie, only: %i[show edit update destroy]
 
     def index

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class NewsController < ApplicationController
+  class NewsController < AdminController
     before_action :find_news, only: %i[show edit update destroy]
 
     def index
