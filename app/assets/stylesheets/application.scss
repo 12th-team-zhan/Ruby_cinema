@@ -5,7 +5,6 @@
 
 //user
 @import "bootstrap";
-@import "index";
 @import "nav";
 @import "users";
 @import "root.scss";
@@ -16,6 +15,7 @@
 @import "actiontext.scss";
 @import "news.scss";
 @import "login.scss";
+@import "movie/index.scss";
 
 button {
   all: unset;
