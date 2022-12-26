@@ -3,7 +3,6 @@
 class TicketingController < ApplicationController
   def select_tickets
     @showtime = Showtime.find(params[:showtimeid])
-    
   end
 
   def select_seats

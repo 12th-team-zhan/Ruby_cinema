@@ -15,17 +15,17 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.new(clean_order_params)
     if @order.save
-      redirect_to orders_path, notice: "訂單已成立"
+      redirect_to orders_path, notice: '訂單已成立'
     else
-      render :new, alert: "建立失敗"
+      render :new, alert: '建立失敗'
     end
   end
 
   def show; end
 
   def cancel
-    @order.update(status: "cancel")
-    render json: { status: "cancel" }
+    @order.update(status: 'cancel')
+    render json: { status: 'cancel' }
   end
 
   private

@@ -2,7 +2,7 @@
             text-white">
   <div class="container px-lg-4p">
     <a class="navbar-brand m-sm-0 text-white" href=<%= root_path %>>
-    <%= image_tag 'ruby.png' ,width:"30", height: "30" %> 寶石影城
+    <%= image_tag 'ruby_cinema.png' ,width:"50", height: "30" %> Ruby Cinema
     </a>
       <button type="button"
           data-bs-toggle="collapse"
@@ -22,6 +22,9 @@
           </li>
           <li class="nav-item active">
             <%= link_to "電影介紹", movies_path, class: "nav-link text-white p-3" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "場次搜尋", find_showtimes_path, class: "nav-link text-white p-3" %>
           </li>
           <li class="nav-item active dropdown">
             <% if user_signed_in? %>
