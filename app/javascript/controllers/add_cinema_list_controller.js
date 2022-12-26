@@ -3,12 +3,11 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   static targets = ["theater", "cinemaList"];
 
-  connect() {
-  }
+  connect() {}
 
   addCinemaList(el) {
     this.cinemaListTarget.replaceChildren();
-    let option = `<option>請選擇影廳</option>`;
+    let option = `<option class="form-control mr-sm-2">請選擇影廳</option>`;
     this.cinemaListTarget.insertAdjacentHTML("beforeend", option);
 
     const token = document.querySelector("meta[name='csrf-token']").content;
@@ -26,7 +25,7 @@ export default class extends Controller {
       })
       .then((data) => {
         data.forEach((element) => {
-          let option = `<option value="${element.id}" >${element.name}</option>`;
+          let option = `<option class="form-control mr-sm-2" value="${element.id}" >${element.name}</option>`;
           this.cinemaListTarget.insertAdjacentHTML("beforeend", option);
         });
       })

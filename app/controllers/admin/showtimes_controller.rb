@@ -4,17 +4,12 @@ module Admin
   class ShowtimesController < ApplicationController
     before_action :authenticate_user!
     before_action :find_movie, only: %i[index new create destroy]
-    before_action :find_theater, only: %i[new]
-    before_action :find_showtime, only: %i[destroy edit update]
+    before_action :find_theater, only: %i[new index]
+    before_action :find_showtime, only: %i[destroy]
 
     def index
       @movie_theaters = @movie.movie_theater.where(movie_id: params[:movie_id])
-      @showtimes = @movie.showtimes.order(cinema_id: :desc)
-    end
-
-    def new
-      @showtime = Showtime.new
-      @cinemas = Cinema.select('name', 'id').map { |cinema| [cinema.name, cinema.id] }
+      @showtimes = @movie.showtimes.paginate(page: params[:page], per_page: 10).order(started_at: :desc)
     end
 
     def create
@@ -36,9 +31,8 @@ module Admin
         end
       end
 
-      if not showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
+      unless showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
         @showtime.save
-        redirect_to admin_movie_showtimes_path(@movie.id), notice:"場次新增成功"
       else
         redirect_to admin_movie_showtimes_path(@movie.id), alert:"場次設定有誤,請重新輸入"
       end
@@ -46,7 +40,6 @@ module Admin
 
     def destroy
       @showtime.destroy
-      redirect_to admin_movie_showtimes_path(@movie.id), notice: '刪除場次成功'
     end
 
     private
