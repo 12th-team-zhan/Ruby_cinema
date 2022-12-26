@@ -1,17 +1,26 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="front-breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="<%= root_path %>">首頁</a></li>
-    <li class="breadcrumb-item"><a href="#">即將上映</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @movie.name %></li>
-  </ol>
-</nav>
+<div class="w-100 bg-Silver">
+  <nav
+  style="--bs-breadcrumb-divider: '>'"
+    aria-label="breadcrumb"
+    class="front-breadcrumb w-75 m-auto"
+    >
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="<%= root_path %>">首頁</a></li>
+      <li class="breadcrumb-item"><a href="<%= movies_path %>">電影列表</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <%= @movie.name %>
+      </li>
+    </ol>
+  </nav>
+</div>
+<!-- 電影資訊 -->
 <div class="container w-75 py-5">
   <section class="row">
-    <div  class="d-flex">
+    <div class="d-flex">
       <div class="col-4 poster me-3">
         <%= image_tag @movie.movie_poster, class: "m-auto w-100" %>
       </div>
-      <div class="col-8 text flex-grow-1">
+      <div class="col-8 text">
         <ul class="list-group pb-3">
           <li class="list-group-item ps-0 pt-0 fs-3 title">
             <h2><%= @movie.name %></h2>
@@ -19,10 +28,12 @@
           <li class="list-group-item ps-0 pt-0 fs-3 title text-info">
             <h2><%= @movie.eng_name %></h2>
           </li>
-          <li class="list-group-item ps-0 pt-0 title">級別：
+          <li class="list-group-item ps-0 pt-0 title">
+            級別：
             <h2><%= @movie.film_rating %></h2>
           </li>
-          <li class="list-group-item ps-0 pt-0 title">上映日期：
+          <li class="list-group-item ps-0 pt-0 title">
+            上映日期：
             <h2><%= @movie.debut_date %></h2>
           </li>
         </ul>
@@ -36,22 +47,35 @@
     </div>
   </section>
 </div>
-<div class="bg-darkgray">
-  <section class="container w-75 py-5">
-    <h2>預告片</h2>
-    <iframe class="w-100" height="450" src="https://www.youtube.com/embed/_jjmm9-uxAA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </section>
-</div>
+<!-- 預告片 -->
+<% if @movie.youtube_iframe.present? %>
+  <div class="bg-darkgray">
+    <section class="container w-75 py-5">
+      <div class="py-2">
+        <h2 class="text-white">精彩預告</h2>
+      </div>
+      <iframe
+      class="w-100"
+      height="500"
+      src="<%= @movie.youtube_iframe %>"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+    </section>
+  </div>
+<% end %>
 <div class="container w-75 py-5">
   <section>
-    <h2>電影簡介</h2>
+    <div class="d-flex text-center align-items-end mb-3">
+      <h2 class="text-info mb-0">電影簡介</h2>
+      <p class="mb-0">/ABOUT THE STORY</p>
+    </div>
     <%= @movie.description %>
-    <article>
-    </article>
+    <article></article>
   </section>
-</div>
-<div class="container w-75 py-5">
-  <section>
-    輪播圖
-  </section>
+  <div class="d-flex justify-content-center">
+    <%= link_to "回列表", movies_path, class: "btn btn-lg search-bottom"%>
+  </div>
 </div>

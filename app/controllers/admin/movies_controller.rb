@@ -6,7 +6,7 @@ module Admin
     before_action :find_movie, only: %i[show edit update destroy]
 
     def index
-      @movies = Movie.all.order(id: :desc)
+      @movies = Movie.order(id: :desc)
     end
 
     def new
@@ -23,6 +23,7 @@ module Admin
     def update
       if @movie.update(movie_params)
         append_movie_poster
+
         redirect_to admin_movies_path, notice: '成功修改'
       else
         render :edit

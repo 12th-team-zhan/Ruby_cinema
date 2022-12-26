@@ -7,6 +7,6 @@
     <% else %>
       <%= link_to "下檔", admin_movie_movie_theater_path(@movie, theater_id: theater.id), method:"delete", data:{confirm:"這部電影將在#{theater.name}下檔"} %>
     <% end %>
-    )
+    )<br>
   <% end  %>
 </div>

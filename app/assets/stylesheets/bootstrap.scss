@@ -9,7 +9,7 @@ $white: #fff;
 $slategray: #3c3f48;
 $Silver: #f5f1f1;
 $DodgerBlue: #338eff;
-$MediumPurple: #795DBB;
+$MediumPurple: #795dbb;
 $card-border-width: 0px;
 
 $custom-theme-colors: (
@@ -20,7 +20,7 @@ $custom-theme-colors: (
   "slategray": $slategray,
   "Silver": $Silver,
   "DodgerBlue": $DodgerBlue,
-  "MediumPurple":$MediumPurple,
+  "MediumPurple": $MediumPurple,
 );
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
@@ -35,8 +35,8 @@ $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 $spacers: (
   0: 0,
-  1: $spacer * .25,
-  2: $spacer * .5,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
   3: $spacer,
   4: $spacer * 1.5,
   5: $spacer * 3,
@@ -45,14 +45,13 @@ $spacers: (
   8: $spacer * 4.5,
   9: $spacer * 5,
   10: $spacer * 5.5,
-  50px:50px,
-  100px:100px,
-  4p:4%,
-  5p:5%,
-  10p:10%,
-  20p:20%
+  50px: 50px,
+  100px: 100px,
+  4p: 4%,
+  5p: 5%,
+  10p: 10%,
+  20p: 20%,
 );
-
 
 $utilities: (
   "width": (
@@ -149,7 +148,7 @@ $utilities: (
 
 .btn-cerulean {
   --bs-btn-color: var(--bs-gray-300);
-  --bs-btn-disabled-bg:none;
+  --bs-btn-disabled-bg: none;
   --bs-btn-border-color: none;
   --bs-btn-active-bg: none;
   --bs-btn-hover-bg: none;
@@ -157,7 +156,7 @@ $utilities: (
   --bs-btn-disabled-opacity: 1;
   span {
     display: block;
-    transition: transform 0.2s ,border-bottom 1s;
+    transition: transform 0.2s, border-bottom 1s;
     transform: scale(1);
     transform-origin: center;
     border-bottom: 2px solid $cerulean;
@@ -173,6 +172,8 @@ $utilities: (
 }
 
 .front-breadcrumb {
+  --bs-breadcrumb-bg: var(--bs-Silver);
+
   .breadcrumb {
     --bs-breadcrumb-bg: var(--bs-Silver);
     --bs-breadcrumb-padding-y:5px;
