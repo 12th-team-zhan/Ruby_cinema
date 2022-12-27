@@ -1,31 +1,20 @@
+  
 <div class="container w-50 py-5 text-center">
   <h2 class="text-center py-5">修改會員資料</h2>
   <section class="w-75 mx-auto">
     <%= form_with(model: @user, url: admin_user_path, method:"patch") do |f| %>
-      <!-- name -->
       <div class="my-3">
         <div>
-          <label class="form-label" for="form1Example13">您的姓名</label>
-          <div>
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control text-center" %>
-          </div>
-        </div>
-        <!-- email -->
-        <div class="my-3">
-          <div>
-            <label class="form-label" for="form1Example13">網路帳號信箱</label>
-          </div>
-          <div>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control text-center" %>
-          </div>
+          <%= f.label :name, "您的姓名", class: "form-label" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control text-center" %>
         </div>
         <div class="my-3">
-          <div>
-            <label class="form-label" for="form1Example13">使用者身份</label>
-          </div>
-          <div>
-            <%= f.select :role, options_for_select(User.roles.keys, @user.role), {}, class: "form-select text-center" %>
-          </div>
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control text-center" %>
+        </div>
+        <div class="my-3">
+          <%= f.label :role, "使用者身份", class: "form-label" %>
+          <%= f.select :role, options_for_select(User.roles.keys, @user.role), {}, class: "form-select text-center" %>
         </div>
         <div class="actions mb-5">
           <%= f.submit("修改", class: "btn btn-md btn-outline-primary") %>

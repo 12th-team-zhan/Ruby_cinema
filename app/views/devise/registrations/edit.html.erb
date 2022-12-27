@@ -1,65 +1,42 @@
 <div class="container w-50 py-5 text-center">
-  <h2 class="text-center py-5">修改會員資料</h2>
+  <h2 class="text-center">修改會員資料</h2>
   <section class="w-75 mx-auto border-bottom border-primary border-">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <!-- name -->
       <div class="my-3">
-        <div>
-          <label class="form-label" for="form1Example13">您的姓名</label>
-          <div>
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control text-center" %>
-          </div>
-        </div>
-        <!-- email -->
+        <%= f.label :name, "您的姓名", class: "form-label" %>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control text-center" %>
         <div class="my-3">
-          <div>
-            <label class="form-label" for="form1Example13">網路帳號信箱</label>
-          </div>
-          <div>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control text-center" %>
-          </div>
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control text-center" %>
         </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-        <!-- password  -->
         <div class="my-3">
           <div>
-            <label class="form-label" for="form1Example13">新密碼</label>
-          </div>
-          <div>
+            <%= f.label :password, "新密碼", class: "form-label" %>
             <%= f.password_field :password, autocomplete: "new-password", class: "form-control text-center", placeholder: "至少要有#{@minimum_password_length}個字元，不更改密碼則不需填寫" %>
           </div>
-        </div>
-        <!-- password_confirmation  -->
-        <div class="my-3">
-          <div>
+          <div class="my-3">
             <label class="form-label" for="form1Example13">確認新密碼</label>
-          </div>
-          <div>
+            <%= f.label :password_confirmation, "確認新密碼", class: "form-label" %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control text-center" %>
           </div>
-        </div>
-        <!-- current_password -->
-        <div class="my-3">
-          <div>
-            <label class="form-label" for="form1Example13">輸入原密碼以儲存變更</label>
-          </div>
-          <div>
+          <div class="my-3">
+            <%= f.label :current_password, "輸入原密碼以儲存變更", class: "form-label" %>
             <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control text-center" %>
           </div>
-        </div>
-        <div class="actions mb-5">
-          <%= f.submit("修改", class: "btn btn-md btn-outline-primary") %>
-        </div>
-      <% end %>
-    </section>
-    <section class="py-5">
-      <h3>刪除帳號</h3>
-      <p>不再使用本帳號? 
-        <%= button_to "刪除帳號", registration_path(resource_name), data: { confirm: "確定刪除帳號?" }, method: :delete, class: "btn btn-md btn-outline-danger" %></p>
-    </section>
-    <div class="d-flex justify-content-center">
-      <%= link_to "回首頁", root_path, class: "btn btn-lg search-bottom"%>
+          <div class="actions mb-5">
+            <%= f.submit("修改", class: "btn btn-md btn-outline-primary px-4") %>
+          </div>
+        <% end %>
+      </section>
+      <section class="py-5">
+        <h3>刪除帳號</h3>
+        <p>不再使用本帳號? 
+          <%= button_to "刪除帳號", registration_path(resource_name), data: { confirm: "確定刪除帳號?" }, method: :delete, class: "btn btn-md btn-outline-danger" %></p>
+      </section>
+      <div class="d-flex justify-content-center">
+        <%= link_to "回首頁", root_path, class: "btn btn-lg search-bottom"%>
+      </div>
     </div>
-  </div>

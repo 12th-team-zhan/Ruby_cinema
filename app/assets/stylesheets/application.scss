@@ -5,17 +5,18 @@
 
 //user
 @import "bootstrap";
-@import "nav";
-@import "users";
+@import "nav.scss";
+@import "users.scss";
 @import "root.scss";
 @import "theater.scss";
-@import "orders";
+@import "orders.scss";
 @import "ticketing/select_seats.scss";
 @import "ticketing/select_tickets.scss";
 @import "actiontext.scss";
 @import "news.scss";
 @import "login.scss";
 @import "movie/index.scss";
+@import "find_showtimes.scss";
 
 button {
   all: unset;
@@ -27,9 +28,4 @@ ul {
 
 a {
   text-decoration: none;
-}
-
-.search-bottom {
-  background-color: #365FA4;
-  color: white;
 }
