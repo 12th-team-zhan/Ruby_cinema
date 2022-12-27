@@ -3,7 +3,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }, skip: :sessions
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
+                                    registrations: 'users/registrations'},
+                                    skip: :sessions
 
   as :user do
     post '/users/sign_in', to: 'devise/sessions#create', as: :user_session
