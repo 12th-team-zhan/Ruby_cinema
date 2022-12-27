@@ -17,7 +17,7 @@
   </div>
   <div>
     <%= form.label :area %>
-    <%= form.select :area, options_for_select(Theater.areas.keys, @theater.area) %>
+    <%= form.select :area, options_for_select(human_attribute_areas, @theater.area) %>
   </div>
   <div>
     <%= form.label :address %>
