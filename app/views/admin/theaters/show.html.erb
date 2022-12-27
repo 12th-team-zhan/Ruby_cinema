@@ -1,0 +1,9 @@
+<h1>影城資訊(<%= @theater.name %>)</h1>
+<ul>
+  <li>地址：<%= @theater.address %></li>
+  <li>電話：<%= @theater.phone %></li>
+  <li>簡介：<%= @theater.description %></li>
+  <li>交通：<%= @theater.transportation %></li>
+  <li><%= link_to "查看影廳", admin_theater_cinemas_path(@theater) %></li>
+</ul>
+<%= link_to "回影城列表", admin_theaters_path %>

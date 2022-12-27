@@ -75,7 +75,9 @@
     <%= @movie.description %>
     <article></article>
   </section>
-  <div class="d-flex justify-content-center">
-    <%= link_to "回列表", movies_path, class: "btn btn-lg search-bottom"%>
-  </div>
+  <section class="text-center">
+    <span class="my-2 py-1 px-4">
+      <%= link_to "回電影列表", movies_path, class: "btn btn-cerulean-confirm btn-lg " %>
+    </span>
+  </section>
 </div>
