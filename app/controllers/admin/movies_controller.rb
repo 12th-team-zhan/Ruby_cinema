@@ -32,7 +32,6 @@ module Admin
 
     def create
       @movie = current_user.movies.create(movie_params)
-
       if @movie.save
         append_movie_poster
 
@@ -68,8 +67,7 @@ module Admin
     end
 
     def movie_params
-      params.require(:movie).permit(:name, :eng_name, :duration, :film_rating, :director, :actor, :debut_date,
-                                    :description)
+      params.require(:movie).permit(:name, :eng_name, :duration, :film_rating, :director, :actor, :debut_date, :description)
     end
 
     def append_movie_poster
