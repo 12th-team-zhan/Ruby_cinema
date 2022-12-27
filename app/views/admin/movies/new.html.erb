@@ -1,2 +1,19 @@
-<h1>新增電影</h1>
-<%= render "form", movie: @movie, url: admin_movies_path, method:"post" %>
+<div class="continer">
+  <div class="d-flex">
+    <%= render "shared/admin/sidebar" %>
+    <div class="main px-5 mx-auto">
+      <div class="container container-breadcrumb p-0">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "後台首頁",movies_path %></li>
+            <li class="breadcrumb-item active"><%= link_to "電影列表",admin_movies_path %></li>
+            <li class="breadcrumb-item active" aria-current="page">新增電影</li>
+          </ol>
+        </nav>
+      </div>
+      <section class="py-4">
+        <%= render "form", movie: @movie, url: admin_movies_path, method:"post" %>
+      </section>
+    </div>
+  </div>
+</div>
