@@ -1,47 +1,47 @@
 <%= form_with model: [:admin, @movie] do |f| %>
   <div class="input-group mb-3">
-    <span class="input-group-text">電影名稱</span>
+    <%= f.label :name, "電影名稱", class: "input-group-text" %>
     <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text">電影英文名稱</span>
+    <%= f.label :eng_name, "電影英文名稱", class: "input-group-text" %>
     <%= f.text_field :eng_name, class: "form-control" %>
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text">時長</span>
+    <%= f.label :duration, "時長", class: "input-group-text" %>
     <%= f.number_field :duration, class: "form-control" %>
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text">級數</span>
+    <%= f.label :film_rating, "級數", class: "input-group-text" %>
     <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), @movie.film_rating), {}, class: "form-control" %>
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text">導演</span>
+    <%= f.label :director, "導演", class: "input-group-text" %>
     <%= f.text_field :director, class: "form-control" %>
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text">主演</span>
+    <%= f.label :actor, "主演", class: "input-group-text" %>
     <%= f.text_field :actor, class: "form-control" %>
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text">上映日期</span>
+    <%= f.label :debut_date, "上映日期", class: "input-group-text" %>
     <%= f.date_select :debut_date, start_year: Date.today.year, class: "form-control" %>
   </div>
-  <div class="">
-    <span class="input-group-text">簡介</span>
+  <div>
+    <%= f.label :description, "簡介", class: "input-group-text" %>
     <%= f.rich_text_area :description %>
   </div>
-  <div class="input-group mb-3">
-    <%= f.file_field :movie_poster %>
+  <div class="my-3 d-flex">
+    <%= f.file_field :movie_poster, class:"input-group-text w-100" %>
   </div>
-  <div class="d-flex align-items-center">
+  <div class="d-block align-items-center">
     <span class="input-group-text">上映戲院</span>
     <% @theaters.each do |theater| %>
       <%= check_box_tag "theater[]", theater.id %>
       <%= label_tag(:theater_id, theater.name) %>
     <% end %>
   </div>
-  <div class="input-group mb-3">
-    <%= f.submit %>
+  <div class="input-group my-3">
+    <%= f.submit "新增電影", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,8 +1,8 @@
 <div class="continer">
-  <div class="d-flex ">
+  <div class="d-flex">
     <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1">
-      <div class="container container-breadcrumb ">
+    <div class="main px-5 mx-auto">
+      <div class="container container-breadcrumb p-0">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><%= link_to "後台首頁",movies_path %></li>
@@ -11,8 +11,9 @@
           </ol>
         </nav>
       </div>
-      <%= render "form", movie: @movie, url: admin_movies_path, method:"post" %>
+      <section class="py-4">
+        <%= render "form", movie: @movie, url: admin_movies_path, method:"post" %>
+      </section>
     </div>
   </div>
-</div>
 </div>
