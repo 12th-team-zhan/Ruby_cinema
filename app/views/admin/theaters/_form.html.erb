@@ -1,0 +1,39 @@
+  <%= form_with(model: theater) do |form| %>
+  <div class="form-group row d-flex">
+    <div class="col-4 d-flex align-items-center">
+      <% if @theater.exterior_img.attached? %>
+        <div class="d-block w-100">
+          <%= image_tag  @theater.exterior_img, class:"w-100" %>
+          <%= link_to "刪除圖片", delete_images_admin_movie_path(@theater.exterior_img.id),
+                    method: "DELETE", class: "d-block", data: {confirm: "Are you sure?"} %>
+        </div>
+      <% else %>
+        <div>
+          <%= form.label "上傳圖片", for: "theater_exterior_img", class: "input-group " %>
+          <%= form.file_field :exterior_img %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-8">
+      <div class="input-group d-flex my-3">
+        <%= form.label :name, "戲院名稱", class: "input-group-text" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+      <div class="input-group d-flex my-3">
+        <%= form.label :area, "戲院地區", class: "input-group-text" %>
+        <%= form.select :area, options_for_select(human_attribute_areas, @theater.area), {}, class:"form-select" %>
+      </div>
+      <div class="input-group d-flex my-3">
+        <%= form.label :address, "戲院地址", class: "input-group-text" %>
+        <%= form.text_field :address, class: "form-control" %>
+      </div>
+      <div class="input-group d-flex my-3">
+        <%= form.label :phone, "連絡電話", class: "input-group-text" %>
+        <%= form.text_field :phone, class: "form-control" %>
+      </div>
+      <div class="input-group d-flex my-4 justify-content-start">
+        <%= form.submit "修改影城資訊", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>

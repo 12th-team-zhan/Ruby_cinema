@@ -1,5 +1,5 @@
 <div class="continer vh-100  text-white">
-  <div class="d-flex vh-100">
+  <div class="d-flex">
     <%= render "shared/admin/sidebar" %>
     <div class="main flex-grow-1 p-0 ms-1">
       <div class="container container-breadcrumb ">
@@ -21,44 +21,30 @@
             <% end %>
           </ul>
         <% end%>
-      
         <%= form_with(model: @theater, url: admin_theaters_path, method: "post") do |form| %>
-          <div class="form-group row">
-            <%= form.label :exterior_img, "戲院照片" %>
-            <%= form.file_field :exterior_img, class: "form-control-file" %>
-          </div>
-          <br>
-          <div class="form-group row">
-            <%= form.label :name, "戲院名稱", class: "col-sm-1 col-form-label" %>
-            <div class="col-sm-11">
+          <div class="form-group row d-flex theater-form">
+            <div class="input-group d-flex my-3">
+              <%= form.label :name, "戲院名稱", class: "input-group-text" %>
               <%= form.text_field :name, class: "form-control" %>
             </div>
-          </div>
-          <br>
-          <div class="form-group row">
-            <%= form.label :area, "戲院地區", class: "col-sm-1 col-form-label" %>
-            <div class="col-sm-11">
-              <%= form.select :area, options_for_select(human_attribute_areas) %>
+            <div class="input-group d-flex my-3">
+              <%= form.label :area, "戲院地區", class: "input-group-text" %>
+              <%= form.select :area, options_for_select(human_attribute_areas, @theater.area), {}, class:"form-select" %>
             </div>
-          </div>
-          <br>
-          <div class="form-group row">
-            <%= form.label :address, "戲院地址", class: "col-sm-1 col-form-label" %>
-            <div class="col-sm-11">
+            <div class="input-group d-flex my-3">
+              <%= form.label :address, "戲院地址", class: "input-group-text" %>
               <%= form.text_field :address, class: "form-control" %>
             </div>
-          </div>
-          <br>
-          <div class="form-group row">
-            <%= form.label :phone, "連絡電話", class: "col-sm-1 col-form-label" %>
-            <div class="col-sm-11">
+            <div class="input-group d-flex my-3">
+              <%= form.label :phone, "連絡電話", class: "input-group-text" %>
               <%= form.text_field :phone, class: "form-control" %>
             </div>
-          </div>
-          <br>
-          <div class="form-group row">
-            <div class="col-sm-10">
-              <%= form.submit "新增影城", class: "btn btn-primary" %>
+            <div>
+              <%= form.label "上傳圖片", for: "theater_exterior_img", class: "input-group d-none" %>
+              <%= form.file_field :exterior_img %>
+            </div>
+            <div class="input-group d-flex my-4 justify-content-start">
+              <%= form.submit "修改影城資訊", class: "btn btn-primary" %>
             </div>
           </div>
         <% end %>
@@ -66,4 +52,3 @@
     </div>
   </div>
 </div>
-
