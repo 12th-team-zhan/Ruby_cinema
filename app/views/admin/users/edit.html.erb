@@ -1,16 +1,38 @@
-<h1>變更使用者資料</h1>
-<%= form_with(model: @user, url: admin_user_path, method:"patch") do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<div class="container w-50 py-5 text-center">
+  <h2 class="text-center py-5">修改會員資料</h2>
+  <section class="w-75 mx-auto">
+    <%= form_with(model: @user, url: admin_user_path, method:"patch") do |f| %>
+      <!-- name -->
+      <div class="my-3">
+        <div>
+          <label class="form-label" for="form1Example13">您的姓名</label>
+          <div>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control text-center" %>
+          </div>
+        </div>
+        <!-- email -->
+        <div class="my-3">
+          <div>
+            <label class="form-label" for="form1Example13">網路帳號信箱</label>
+          </div>
+          <div>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control text-center" %>
+          </div>
+        </div>
+        <div class="my-3">
+          <div>
+            <label class="form-label" for="form1Example13">使用者身份</label>
+          </div>
+          <div>
+            <%= f.select :role, options_for_select(User.roles.keys, @user.role), {}, class: "form-select text-center" %>
+          </div>
+        </div>
+        <div class="actions mb-5">
+          <%= f.submit("修改", class: "btn btn-md btn-outline-primary") %>
+        </div>
+      <% end %>
+    </section>
+    <div class="d-flex justify-content-center">
+      <%= link_to "回列表", admin_users_path, class: "btn btn-lg search-bottom"%>
+    </div>
   </div>
-  <div>
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-  <div>
-    <%= form.label :role %>
-    <%= form.select :role, options_for_select(User.roles.keys, @user.role) %>
-  </div>
-  <%= form.submit %>
-<% end %>
