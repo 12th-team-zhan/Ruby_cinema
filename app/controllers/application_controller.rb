@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    if params[:user][:path] == "http://127.0.0.1:3000/users/sign_in"
+    if params[:user][:path] == "/users/sign_in"
       return root_path
     end
     params[:user][:path]

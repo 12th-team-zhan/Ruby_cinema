@@ -192,7 +192,7 @@ export default class extends Controller {
                     break
 
                 case "fail":
-                    alert("位子以被選取")
+                    alert("位子已被選取")
                     break
             }
             this.changeLink()
