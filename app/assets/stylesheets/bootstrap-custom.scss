@@ -188,3 +188,13 @@ $utilities: (
     --bs-breadcrumb-font-size:15px;
   }
 }
+
+.btn-cerulean-confirm {
+  --bs-btn-color: var(--bs-gray-300);
+  --bs-btn-bg: var(--bs-cerulean);
+  --bs-btn-disabled-bg: none;
+  --bs-btn-border-color: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-hover-bg: var(--bs-deepskyblue);
+  --bs-btn-hover-color: #eaebed;
+}

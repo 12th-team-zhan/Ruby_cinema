@@ -47,9 +47,9 @@
                     </tr>
                   </tbody>
                 </table>
-                <div>
-                  <%= f.submit "確認購買" %>
-                  <%= link_to "取消", ticket_path(@ticket), method: "delete" %>
+                <div class="d-flex justify-content-center gap-3">
+                  <%= f.submit("確認購買", class: "btn btn-cerulean-confirm btn-lg w-25") %>
+                  <%= link_to "取消", ticket_path(@ticket), method: "delete", class: "btn btn-cerulean-confirm btn-lg w-25" %>
                 </div>
               <% end %>
             </div>
