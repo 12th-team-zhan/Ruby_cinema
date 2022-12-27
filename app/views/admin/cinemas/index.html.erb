@@ -19,6 +19,10 @@
                 <th scope="col">影廳名稱</th>
                 <th scope="col">最大排數</th>
                 <th scope="col">最大欄數</th>
+                <th scope="col">一般票價格</th>
+                <th scope="col">優待票價格</th>
+                <th scope="col">愛心票價格</th>
+                <th scope="col">敬老票價格</th>
                 <th scope="col">編輯影廳</th>
                 <th scope="col">刪除影廳</th>
                 <th scope="col">座位表</th>
@@ -30,6 +34,10 @@
                   <td><%= cinema.name%></td>
                   <td><%= cinema.max_row %></td>
                   <td><%= cinema.max_column %></td>
+                  <td><%= cinema.regular_price %></td>
+                  <td><%= cinema.concession_price %></td>
+                  <td><%= cinema.disability_price %></td>
+                  <td><%= cinema.elderly_price %></td>
                   <td><%= link_to "編輯", edit_admin_cinema_path(cinema) %></td>
                   <td><%= link_to "刪除", admin_cinema_path(cinema), method: "delete", data: {confirm: "確定刪除#{cinema.name}？"}%></td>
                   <td><%= link_to "檢視", admin_cinema_seats_path(cinema) %></td>

@@ -30,7 +30,7 @@
           <div class="form-group row">
             <%= form.label :area, "戲院地區", class: "col-sm-1 col-form-label" %>
             <div class="col-sm-11">
-              <%= form.select :area, options_for_select(human_attribute_areas, Theater.areas[@theater.area]) %>
+              <%= form.select :area, options_for_select(human_attribute_areas, @theater.area) %>
             </div>
           </div>
           <br>
