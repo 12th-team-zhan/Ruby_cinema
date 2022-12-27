@@ -2,13 +2,11 @@
 
 module Admin
   class TheatersController < ApplicationController
-    before_action :find_theater, only: %i[show edit update destroy]
+    before_action :find_theater, only: %i[edit update destroy]
 
     def index
       @theaters = Theater.all.order(id: :desc)
     end
-
-    def show; end
 
     def new
       @theater = Theater.new

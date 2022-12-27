@@ -3,12 +3,10 @@
 module Admin
   class CinemasController < ApplicationController
     before_action :find_theater, only: %i[index new create]
-    before_action :find_cinema, only: %i[show edit update destroy]
+    before_action :find_cinema, only: %i[edit update destroy]
     def index
       @cinemas = @theater.cinemas.order(id: :desc)
     end
-
-    def show; end
 
     def new
       @cinema = Cinema.new

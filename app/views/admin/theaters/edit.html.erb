@@ -1,31 +1,60 @@
-<h1>編輯影城資訊</h1>
-<% if @theater.errors.any? %>
-  <ul>
-    <% @theater.errors.full_messages.each do |message| %>
-      <li> <%= message %> </li>
-    <% end %>
-  </ul>
-<% end %>
-<%= form_with(model: @theater, url: admin_theater_path, method: "patch") do |form| %>
-  <div>
-    <%= form.label :exterior_img %>
-    <%= form.file_field :exterior_img %>
+<div class="continer vh-100  text-white">
+  <div class="d-flex vh-100">
+    <%= render "shared/admin/sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
+            <li class="breadcrumb-item" aria-current="page">
+              <%= link_to "影城列表", admin_theaters_path %>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">編輯影城</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="container text-dark">   
+        <%= form_with(model: @theater, url:admin_theater_path, method: "patch") do |form| %>
+          <div class="form-group row">
+            <%= form.label :exterior_img, "戲院照片" %>
+            <%= form.file_field :exterior_img, class: "form-control-file" %>
+          </div>
+          <br>
+          <div class="form-group row">
+            <%= form.label :name, "戲院名稱", class: "col-sm-1 col-form-label" %>
+            <div class="col-sm-11">
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row">
+            <%= form.label :area, "戲院地區", class: "col-sm-1 col-form-label" %>
+            <div class="col-sm-11">
+              <%= form.select :area, options_for_select(human_attribute_areas, Theater.areas[@theater.area]) %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row">
+            <%= form.label :address, "戲院地址", class: "col-sm-1 col-form-label" %>
+            <div class="col-sm-11">
+              <%= form.text_field :address, class: "form-control" %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row">
+            <%= form.label :phone, "連絡電話", class: "col-sm-1 col-form-label" %>
+            <div class="col-sm-11">
+              <%= form.text_field :phone, class: "form-control" %>
+            </div>
+          </div>
+          <br>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <%= form.submit "編輯影城", class: "btn btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-  <div>
-    <%= form.label :area %>
-    <%= form.select :area, options_for_select(human_attribute_areas, @theater.area) %>
-  </div>
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-  <div>
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
-  <%= form.submit "送出" %>
-<% end %>
+</div>
