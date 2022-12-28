@@ -4,3 +4,9 @@
     text-align: center;
   }
 }
+
+.theater-form .field_with_errors {
+  input {
+    border: 1px solid red;
+  }
+}

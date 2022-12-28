@@ -2,20 +2,18 @@
 
 module Admin
   class TheatersController < ApplicationController
-    before_action :find_theater, only: %i[show edit update destroy]
+    before_action :find_theater, only: %i[edit update destroy]
 
     def index
       @theaters = Theater.all.order(id: :desc)
     end
-
-    def show; end
 
     def new
       @theater = Theater.new
     end
 
     def create
-      @theater = Theater.new(params_theater)
+      @theater = Theater.new(theater_params)
       if @theater.save
         append_exterior_img
         redirect_to admin_theaters_path, notice: '新增影城'
@@ -27,7 +25,7 @@ module Admin
     def edit; end
 
     def update
-      if @theater.update(params_theater)
+      if @theater.update(theater_params)
         append_exterior_img
         redirect_to admin_theaters_path
       else
@@ -46,7 +44,7 @@ module Admin
       @theater = Theater.find(params[:id])
     end
 
-    def params_theater
+    def theater_params
       params.require(:theater).permit(:name, :area, :address, :phone, :deleted_at)
     end
 

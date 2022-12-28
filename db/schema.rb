@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_21_074523) do
+ActiveRecord::Schema.define(version: 2022_12_27_065056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,12 +60,11 @@ ActiveRecord::Schema.define(version: 2022_12_21_074523) do
     t.datetime "deleted_at"
     t.integer "max_row", default: 1
     t.integer "max_column", default: 1
-    t.decimal "ticket_amount", precision: 7, scale: 2
-    t.integer "regular_quantity", default: 0
-    t.integer "concession_quantity", default: 0
-    t.integer "elderly_quantity", default: 0
-    t.integer "disability_quantity", default: 0
     t.bigint "theater_id"
+    t.decimal "regular_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "concession_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "elderly_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "disability_price", precision: 7, scale: 2, default: "0.0"
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
     t.index ["theater_id"], name: "index_cinemas_on_theater_id"
   end
@@ -91,6 +90,7 @@ ActiveRecord::Schema.define(version: 2022_12_21_074523) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "youtube_iframe"
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
@@ -133,6 +133,15 @@ ActiveRecord::Schema.define(version: 2022_12_21_074523) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deleted_at"], name: "index_showtimes_on_deleted_at"
+  end
+
+  create_table "theater_showtimes", force: :cascade do |t|
+    t.bigint "showtime_id", null: false
+    t.bigint "theater_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["showtime_id"], name: "index_theater_showtimes_on_showtime_id"
+    t.index ["theater_id"], name: "index_theater_showtimes_on_theater_id"
   end
 
   create_table "theaters", force: :cascade do |t|
@@ -184,11 +193,13 @@ ActiveRecord::Schema.define(version: 2022_12_21_074523) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "fb_uid"
-    t.string "fb_token"
     t.string "name"
     t.datetime "deleted_at"
     t.integer "role", default: 0
+    t.string "fb_uid"
+    t.string "fb_token"
+    t.string "google_uid"
+    t.string "google_token"
     t.string "provider"
     t.string "uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -206,4 +217,6 @@ ActiveRecord::Schema.define(version: 2022_12_21_074523) do
   add_foreign_key "movies", "users"
   add_foreign_key "news", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "theater_showtimes", "showtimes"
+  add_foreign_key "theater_showtimes", "theaters"
 end

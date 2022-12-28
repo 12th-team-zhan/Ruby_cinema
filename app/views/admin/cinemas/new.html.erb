@@ -1,42 +1,57 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a href=<%= admin_movies_path %>>後台首頁</a>
-        </li>
-        <li class="breadcrumb-item" aria-current="page">
-            <a href=<%= admin_theater_cinemas_path(@theater.id) %>>影廳列表</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">
-            新增影廳
-        </li>
-    </ol>
-</nav>
-
-<div>
-    <%= form_with(url: admin_theater_cinemas_path, model: @cinema, method: "post") do |f| %>
-      <div>
-        <%= f.label "影廳名稱" %>
+<div class="continer vh-100  text-white">
+  <div class="d-flex">
+    <%= render "shared/admin/sidebar" %>
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
+            <li class="breadcrumb-item" aria-current="page">
+              <a href=<%= admin_theater_cinemas_path(@theater.id) %>>影廳列表</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">新增影廳</li>
+          </ol>
+        </nav>
       </div>
-      <div>
-        <%= f.text_field :name %>
+      <div class="container text-dark py-4">
+        <%= form_with(model: @cinema, url: admin_theater_cinemas_path, method: "post") do |form| %>
+        <div class="w-25">
+                <div class="input-group d-flex my-3">
+                  <%= form.label :name, "影廳名稱", class: "input-group-text" %>
+                  <%= form.text_field :name, class: "form-control" %>
+                </div>
+                <div class="input-group d-flex my-3">
+                  <%= form.label :max_row, "最大排數", class: "input-group-text" %>
+                  <%= form.number_field :max_row, class: "form-control" %>
+                </div>
+                <div class="input-group d-flex my-3">
+                  <%= form.label :max_column, "最大欄數", class: "input-group-text" %>
+                  <%= form.number_field :max_column, class: "form-control" %>
+                </div>
+                <div class="input-group d-flex my-3">
+                  <%= form.label :regular_price, "一般票價格", class: "input-group-text" %>
+                  <%= form.number_field :regular_price, step: 0.00, class: "form-control" %>
+                </div>
+                <div class="input-group d-flex my-3">
+                  <%= form.label :concession_price, "優待票價格", class: "input-group-text" %>
+                  <%= form.number_field :concession_price, step: 0.00, class: "form-control" %>
+                </div>
+                <div class="input-group d-flex my-3">
+                  <%= form.label :disability_price, "愛心票價格", class: "input-group-text" %>
+                  <%= form.number_field :disability_price, step: 0.00, class: "form-control" %>
+                </div>
+                <div class="input-group d-flex my-3">
+                  <%= form.label :elderly_price, "敬老票價格", class: "input-group-text" %>
+                  <%= form.number_field :elderly_price, step: 0.00, class: "form-control" %>
+                </div>
+                <div class="input-group d-flex my-3">
+                  <%= form.submit "建立影廳", class: "btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-      <br>
-      <div>
-        <%= f.label "最大排數" %>
-      </div>
-      <div>
-        <%= f.text_field :max_row %>
-      </div>
-      <br>
-      <div>
-        <%= f.label "最大欄數" %>
-      </div>
-      <div>
-        <%= f.text_field :max_column %>
-      </div>
-      <br>
-      <div>
-        <%= f.submit "建立影廳" %>
-      </div>
-    <% end %>
+    </div>
+  </div>
 </div>

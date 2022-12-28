@@ -1,11 +1,11 @@
-.user_terms{
+.user_terms {
   padding-left: 0;
 }
 
-.user_register_form{
+.user_register_form {
   input[type="text"],
   input[type="password"],
-  input[type="email"]{
+  input[type="email"] {
     display: block;
     width: 100%;
     border-radius: 5px;
@@ -16,9 +16,7 @@
 
 .field_with_errors {
   input[type="email"],
-  input[type="password"]{
+  input[type="password"] {
     border: 1px solid red;
   }
 }
-
-
