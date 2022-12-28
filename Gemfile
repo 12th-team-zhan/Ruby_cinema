@@ -8,6 +8,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 5.2.2'
 gem 'dartsass-rails', '~> 0.4.0'
 gem 'devise', '~> 4.8'
+gem 'friendly_id', '~> 5.4.0'
 gem 'foreman', '~> 0.87.2'
 gem 'image_processing'
 gem 'jbuilder', '~> 2.7'
