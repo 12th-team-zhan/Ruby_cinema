@@ -6,10 +6,14 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    if params[:user][:path] == "/users/sign_in"
-      return root_path
+    if params[:user]
+      if params[:user][:path] == "/users/sign_in"
+        root_path
+      end
+      params[:user][:path]
+    else 
+      root_path
     end
-    params[:user][:path]
   end
 
   def current_user_is_admin
