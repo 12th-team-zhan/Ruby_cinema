@@ -1,28 +1,22 @@
-<div class="continer">
-  <div class="d-flex ">
-    <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1">
-      <div class="container container-breadcrumb ">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "後台首頁", movies_path %></li>
-            <li class="breadcrumb-item active"><%= link_to "電影列表", admin_movies_path %></li>
-            <li class="breadcrumb-item active" aria-current="page">電影資訊</li>
-          </ol>
-        </nav>
-      </div>
-      <%= form_with model: [:admin, @movie] do |f| %>
-        <div class="edit container d-flex">
-          <div class="movie_posters">
-            <% if @movie.movie_poster.attached? %>
-              <div>
-                <%= image_tag  @movie.movie_poster ,width:"350", height: "500" %>
-              </div>
-            <% else %>
-              <%= f.label "上傳海報圖", for: "movie_movie_poster" %>
-              <%= f.file_field :movie_poster, class: "d-none" %>
-            <% end %>
+    
+<div class="main flex-grow-1 p-0 ms-1">
+  <div class="container container-breadcrumb ">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "後台首頁", movies_path %></li>
+        <li class="breadcrumb-item active"><%= link_to "電影列表", admin_movies_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">電影資訊</li>
+      </ol>
+    </nav>
+  </div>
+  <%= form_with model: [:admin, @movie] do |f| %>
+    <div class="edit container d-flex">
+      <div class="movie_posters">
+        <% if @movie.movie_poster.attached? %>
+          <div>
+            <%= image_tag  @movie.movie_poster ,width:"350", height: "500" %>
           </div>
+<<<<<<< HEAD
           <div class="input flex-grow-1 d-flex flex-column justify-content-around">
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">電影名稱</span>
@@ -54,6 +48,43 @@
               <%= f.date_select :debut_date , {discard_year: true}, {class: "form-select"} %>
             </div>
           </div>
+        </div>
+=======
+        <% else %>
+          <%= f.label "上傳海報圖", for: "movie_movie_poster" %>
+          <%= f.file_field :movie_poster, class: "d-none" %>
+        <% end %>
+>>>>>>> 99acbc7 (Move sidebar / nav to layout)
+      </div>
+      <div class="input flex-grow-1 d-flex flex-column justify-content-around">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">電影名稱</span>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">電影英文名稱</span>
+          <%= f.text_field :eng_name, class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">時長</span>
+          <%= f.number_field :duration, class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">級數</span>
+          <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), 
+                @movie.film_rating),{}, {class: "form-select" }%>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">導演</span>
+          <%= f.text_field :director, class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">主演</span>
+          <%= f.text_field :actor, class: "form-control" %>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">上映日期</span>
+          <%= f.date_select :debut_date , {discard_year: true}, {class: "form-select"} %>
         </div>
       </div>
     </div>

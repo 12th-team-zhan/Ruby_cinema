@@ -1,11 +1,8 @@
-<div class="continer vh-100  text-white">
-  <div class="d-flex vh-100">
-    <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1">
-      <div class="container container-breadcrumb ">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
+<div class="main flex-grow-1 p-0 ms-1">
+  <div class="container container-breadcrumb ">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href=<%= admin_movies_path %>>後台首頁</a></li>
             <li class="breadcrumb-item" aria-current="page">
               <a href=<%= admin_theater_cinemas_path(@cinema.theater_id) %>>影廳列表</a>
             </li>
@@ -16,42 +13,39 @@
       <div class="container text-dark py-4">
         <%= form_with(model: @cinema, url:admin_cinema_path, method: "patch") do |form| %>
         <div class="w-25">
-                <div class="input-group d-flex my-3">
-                  <%= form.label :name, "影廳名稱", class: "input-group-text" %>
-                  <%= form.text_field :name, class: "form-control" %>
-                </div>
-                <div class="input-group d-flex my-3">
-                  <%= form.label :max_row, "最大排數", class: "input-group-text" %>
-                  <%= form.number_field :max_row, class: "form-control" %>
-                </div>
-                <div class="input-group d-flex my-3">
-                  <%= form.label :max_column, "最大欄數", class: "input-group-text" %>
-                  <%= form.number_field :max_column, class: "form-control" %>
-                </div>
-                <div class="input-group d-flex my-3">
-                  <%= form.label :regular_price, "一般票價格", class: "input-group-text" %>
-                  <%= form.number_field :regular_price, step: 0.00, class: "form-control" %>
-                </div>
-                <div class="input-group d-flex my-3">
-                  <%= form.label :concession_price, "優待票價格", class: "input-group-text" %>
-                  <%= form.number_field :concession_price, step: 0.00, class: "form-control" %>
-                </div>
-                <div class="input-group d-flex my-3">
-                  <%= form.label :disability_price, "愛心票價格", class: "input-group-text" %>
-                  <%= form.number_field :disability_price, step: 0.00, class: "form-control" %>
-                </div>
-                <div class="input-group d-flex my-3">
-                  <%= form.label :elderly_price, "敬老票價格", class: "input-group-text" %>
-                  <%= form.number_field :elderly_price, step: 0.00, class: "form-control" %>
-                </div>
-                <div class="input-group d-flex my-3">
-                  <%= form.submit "儲存變更", class: "btn btn-primary" %>
-                </div>
-              </div>
+            <div class="input-group d-flex my-3">
+              <%= form.label :name, "影廳名稱", class: "input-group-text" %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+            <div class="input-group d-flex my-3">
+              <%= form.label :max_row, "最大排數", class: "input-group-text" %>
+              <%= form.number_field :max_row, class: "form-control" %>
+            </div>
+            <div class="input-group d-flex my-3">
+              <%= form.label :max_column, "最大欄數", class: "input-group-text" %>
+              <%= form.number_field :max_column, class: "form-control" %>
+            </div>
+            <div class="input-group d-flex my-3">
+              <%= form.label :regular_price, "一般票價格", class: "input-group-text" %>
+              <%= form.number_field :regular_price, step: 0.00, class: "form-control" %>
+            </div>
+            <div class="input-group d-flex my-3">
+              <%= form.label :concession_price, "優待票價格", class: "input-group-text" %>
+              <%= form.number_field :concession_price, step: 0.00, class: "form-control" %>
+            </div>
+            <div class="input-group d-flex my-3">
+              <%= form.label :disability_price, "愛心票價格", class: "input-group-text" %>
+              <%= form.number_field :disability_price, step: 0.00, class: "form-control" %>
+            </div>
+            <div class="input-group d-flex my-3">
+              <%= form.label :elderly_price, "敬老票價格", class: "input-group-text" %>
+              <%= form.number_field :elderly_price, step: 0.00, class: "form-control" %>
+            </div>
+            <div class="input-group d-flex my-3">
+              <%= form.submit "儲存變更", class: "btn btn-primary" %>
             </div>
           </div>
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
-</div>
