@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 class TicketingController < ApplicationController
+  before_action :calc_amount, only: %i[create]
+  before_action :calc_ticket_category_arr, only: %i[create]
+
   def select_tickets
-    @showtime = Showtime.find(params[:showtimeid])
+    @showtime = Showtime.includes([:movie, { cinema: :theater }]).where(id: params[:showtimeid]).references(:movie,
+                                                                                                            :cinema)
+    @showtime = @showtime.first
   end
 
   def select_seats
@@ -16,7 +21,63 @@ class TicketingController < ApplicationController
     render json: { status: 'ok' }
   end
 
+  def create
+    showtime_id = params[:showtimeid]
+
+    @order_data = { amount: @amount }
+    @order = current_user.orders.new(@order_data)
+    @order.save
+
+    i = 0
+    params[:seatId].split(',').each do |seatId|
+      serial = generate_serial
+      ticket_data = { seat: seatId, showtime_id:, category: @tickets_category[i],
+                      order_id: @order.id }
+      @ticket = Ticket.new(ticket_data)
+      @ticket.save
+      i += 1
+    end
+
+    session[:order_id] = @order.id
+    session[:showtime_id] = showtime_id
+    redirect_to pay_ticketing_index_path
+  end
+
+  def destroy
+    @order = Order.find(session[:order_id])
+    @order.destroy
+    redirect_to root_path
+  end
+
   def pay
-    render html: params
+    @order = Order.find(session[:order_id])
+    @ticket = Ticket.includes(showtime: [:movie, {
+                                cinema: :theater
+                              }]).where(order_id: @order.id).limit(1).references(:showtime)
+    @ticket = @ticket.first
+    order = { slug: @order.serial, amount: @order.amount, name: '電影票', email: current_user.email }
+    @form_info = Mpg.new(order).form_info
+  end
+
+  private
+
+  def calc_amount
+    @showtime = Showtime.includes(:cinema).where(id: params[:showtimeid]).references(:cinema)
+    @amount = params[:regularAmount].to_i * @showtime.first.cinema.regular_price +
+              params[:concessionAmount].to_i * @showtime.first.cinema.concession_price +
+              params[:elderlyAmount].to_i * @showtime.first.cinema.elderly_price +
+              params[:disabilityAmount].to_i * @showtime.first.cinema.disability_price
+  end
+
+  def calc_ticket_category_arr
+    @tickets_category = []
+    @tickets_category.concat([0] * params[:regularAmount].to_i)
+    @tickets_category.concat([1] * params[:concessionAmount].to_i)
+    @tickets_category.concat([2] * params[:elderlyAmount].to_i)
+    @tickets_category.concat([3] * params[:disabilityAmount].to_i)
+  end
+
+  def generate_serial
+    serial = SecureRandom.alphanumeric(10)
   end
 end
