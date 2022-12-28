@@ -1,26 +1,30 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
-
+  rescue_from ActiveRecord::RecordNotFound ,with: :record_not_found
+  
   private
 
   def after_sign_in_path_for(resource)
-    if params[:user][:path] == "/users/sign_in"
-      return root_path
+    if params[:user]
+      if params[:user][:path] == "/users/sign_in"
+        root_path
+      end
+      params[:user][:path]
+    else 
+      root_path
     end
-    params[:user][:path]
-  end
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
   def current_user_is_admin
-    render plain: "404 Not Found", status: :not_found unless current_user.admin?
+    render file: "#{Rails.root}/public/404.html", layout: false, status: 400 unless current_user.admin?
   end
 
   def current_user_is_staff
-    render plain: "404 Not Found", status: :not_found unless current_user.admin? || current_user.staff?
+    render file: "#{Rails.root}/public/404.html", layout: false,  status: 400 unless current_user.admin? || current_user.staff?
+  end
+
+  def record_not_found
+    render file: "#{Rails.root}/public/404.html", status: 400, layout: false 
   end
 end
