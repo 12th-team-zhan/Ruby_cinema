@@ -1,24 +1,26 @@
-<table>
-  <ul>
-    <tr>
-      <td>序號</td>
-      <td>操作</td>
-      <td></td>
-      <td>身份</td>
-      <td>使用者姓名</td>
-    </tr>
+<div class="container my-3">
+  <table class="table table-striped">
+    <thead class=" text-bg-slategray">
+      <tr>
+        <th scope="col" class="col-1">序號</th>
+        <th scope="col" class="col-1">操作</th>
+        <th scope="col" class="col-1"></th>
+        <th scope="col" class="col-2">身份</th>
+        <th scope="col" class="col-3">使用者姓名</th>
+        <th scope="col" class="col-4">信箱</th>
+      </tr>
+    </thead>
     <% users.each do |user| %>
-    <tr>
-      <td> <%= user.id %></td>
-      <td> <%= link_to "編輯" , edit_admin_user_path(user) %></td>
-      <td> <%= link_to "刪除" , user_registration_path(user),method:"delete",data:{confirm:"確定刪除？"} %></td>
-      <td> <%= user.role %></td>
-      <td> <%= user.name %></td>
-      <td> <%= user.email %></td>
-
-    </tr>
+      <tbody>
+        <tr>
+          <td> <%= user.id %></td>
+          <td> <%= link_to "編輯" , edit_admin_user_path(user) %></td>
+          <td> <%= link_to "刪除" , user_registration_path(user),method:"delete",data:{confirm:"確定刪除？"} %></td>
+          <td> <%= user.role %></td>
+          <td> <%= user.name %></td>
+          <td> <%= user.email %></td>
+        </tr>
+      </tbody>
     <% end %>
-
-  </ul>
-
-</table>
+  </table>
+</div>

@@ -1,10 +1,30 @@
-<h1>使用者管理介面</h1>
-<div>
-<%= link_to "回首頁", root_path %>
-<p>--------------user-----------------</p>
-<%= render "form", users: User.user %>
-<p>--------------staff-----------------</p>
-<%= render "form", users: User.staff %>
-<p>--------------admin-----------------</p>
-<%= render "form", users: User.admin %>
+<div class="continer vh-100  text-white w-75 mx-auto">
+  <div class="d-flex">
+    <div class="main flex-grow-1 p-0 ms-1">
+      <div class="container container-breadcrumb ">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "後台首頁",admin_movies_path %></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              <h2 class="text-nowrap">使用者管理介面</h2>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div class="text-dark">
+        <section>
+          <h3 class="text-center">管理員</h3>
+          <%= render "form", users: @admins %>
+        </section>
+        <section>
+          <h3 class="text-center">員工</h3>
+          <%= render "form", users: @staffs %>
+        </section>
+        <section>
+          <h3 class="text-center">顧客</h3>
+          <%= render "form", users: @customers %>
+        </section>
+      </div>
+    </div>
+  </div>
 </div>

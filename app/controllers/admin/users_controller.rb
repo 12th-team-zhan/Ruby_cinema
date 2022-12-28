@@ -7,7 +7,9 @@ module Admin
     before_action :current_user_is_admin
 
     def index
-      @users = User.all
+      @customers = User.user
+      @staffs = User.staff
+      @admins = User.admin
     end
 
     def edit; end
