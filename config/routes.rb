@@ -4,8 +4,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
-                                    registrations: 'users/registrations'},
-                                    skip: :sessions
+                                    registrations: 'users/registrations' },
+                     skip: :sessions
 
   as :user do
     post '/users/sign_in', to: 'devise/sessions#create', as: :user_session
@@ -55,8 +55,8 @@ Rails.application.routes.draw do
     end
     resources :cinemas, only: %i[edit update destroy] do
       resources :seats, only: %i[index new create]
-      get "/seats/edit", to: "seats#edit"
-      patch "/seats/update", to: "seats#update"
+      get '/seats/edit', to: 'seats#edit'
+      patch '/seats/update', to: 'seats#update'
     end
 
     resources :movies do
@@ -70,7 +70,7 @@ Rails.application.routes.draw do
     resources :showtimes, only: %i[show]
   end
 
-  resources :ticketing, only: %i[show] do
+  resources :ticketing, only: %i[show create destroy] do
     collection do
       get :pay
       get :select_tickets

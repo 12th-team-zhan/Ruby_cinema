@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_27_065056) do
+ActiveRecord::Schema.define(version: 2022_12_27_093904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,13 +61,19 @@ ActiveRecord::Schema.define(version: 2022_12_27_065056) do
     t.integer "max_row", default: 1
     t.integer "max_column", default: 1
     t.bigint "theater_id"
-    t.decimal "regular_price", precision: 7, scale: 2, default: "0.0"
-    t.decimal "concession_price", precision: 7, scale: 2, default: "0.0"
-    t.decimal "elderly_price", precision: 7, scale: 2, default: "0.0"
-    t.decimal "disability_price", precision: 7, scale: 2, default: "0.0"
-    t.decimal "ticket_amount", precision: 7, scale: 2
+    t.integer "regular_price", default: 0
+    t.integer "concession_price", default: 0
+    t.integer "elderly_price", default: 0
+    t.integer "disability_price", default: 0
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
     t.index ["theater_id"], name: "index_cinemas_on_theater_id"
+  end
+
+  create_table "customers", id: :integer, default: nil, force: :cascade do |t|
+    t.integer "c_id"
+    t.string "name", limit: 50
+    t.string "address", limit: 255
+    t.string "phone", limit: 20
   end
 
   create_table "movie_theaters", force: :cascade do |t|
@@ -106,13 +112,13 @@ ActiveRecord::Schema.define(version: 2022_12_27_065056) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.decimal "amount"
     t.string "serial"
     t.integer "status", default: 0
     t.integer "payment_method", default: 0
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "amount", default: 0
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -136,15 +142,6 @@ ActiveRecord::Schema.define(version: 2022_12_27_065056) do
     t.index ["deleted_at"], name: "index_showtimes_on_deleted_at"
   end
 
-  create_table "theater_showtimes", force: :cascade do |t|
-    t.bigint "showtime_id", null: false
-    t.bigint "theater_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["showtime_id"], name: "index_theater_showtimes_on_showtime_id"
-    t.index ["theater_id"], name: "index_theater_showtimes_on_theater_id"
-  end
-
   create_table "theaters", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -157,7 +154,7 @@ ActiveRecord::Schema.define(version: 2022_12_27_065056) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string "seat_list"
+    t.string "seat"
     t.integer "status"
     t.string "serial"
     t.integer "category"
@@ -165,13 +162,11 @@ ActiveRecord::Schema.define(version: 2022_12_27_065056) do
     t.integer "showtime_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "regular_quantity", default: 0
-    t.integer "concession_quantity", default: 0
-    t.integer "elderly_quantity", default: 0
-    t.integer "disability_quantity", default: 0
     t.string "movie_name"
     t.string "cinema_name"
     t.string "theater_name"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_tickets_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -194,13 +189,11 @@ ActiveRecord::Schema.define(version: 2022_12_27_065056) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "fb_uid"
+    t.string "fb_token"
     t.string "name"
     t.datetime "deleted_at"
     t.integer "role", default: 0
-    t.string "fb_uid"
-    t.string "fb_token"
-    t.string "google_uid"
-    t.string "google_token"
     t.string "provider"
     t.string "uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -218,6 +211,4 @@ ActiveRecord::Schema.define(version: 2022_12_27_065056) do
   add_foreign_key "movies", "users"
   add_foreign_key "news", "users"
   add_foreign_key "orders", "users"
-  add_foreign_key "theater_showtimes", "showtimes"
-  add_foreign_key "theater_showtimes", "theaters"
 end
