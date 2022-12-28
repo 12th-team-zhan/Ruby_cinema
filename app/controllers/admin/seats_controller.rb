@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class SeatsController < ApplicationController
+  class SeatsController < AdminController
     before_action :find_cinema, only: %i[index new create edit update]
 
     def index

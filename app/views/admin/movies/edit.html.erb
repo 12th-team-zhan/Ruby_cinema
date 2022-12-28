@@ -1,29 +1,21 @@
-<div class="continer">
-  <div class="d-flex ">
-    <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1">
-      <div class="container container-breadcrumb ">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "後台首頁",movies_path %></li>
-            <li class="breadcrumb-item active"><%= link_to "電影列表",admin_movies_path %></li>
-            <li class="breadcrumb-item active" aria-current="page">電影編輯</li>
-          </ol>
-        </nav>
-      </div>
-      <%= form_with model: [:admin, @movie] do |f| %>
-        <div class="edit container d-flex">
-          <div class="movie_posters">
-            <% if @movie.movie_poster.attached? %>
-              <div>
-                <%= image_tag  @movie.movie_poster ,width:"350", height: "500" %>
-                <%= link_to "刪除圖片", delete_images_admin_movie_path(@movie.movie_poster.id),
+<div class="main flex-grow-1 p-0 ms-1">
+  <div class="container container-breadcrumb ">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "後台首頁",movies_path %></li>
+        <li class="breadcrumb-item active"><%= link_to "電影列表",admin_movies_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">電影編輯</li>
+      </ol>
+    </nav>
+  </div>
+  <%= form_with model: [:admin, @movie] do |f| %>
+    <div class="edit container">
+      <div class="movie_posters  d-flex">
+        <% if @movie.movie_poster.attached? %>
+          <div>
+            <%= image_tag  @movie.movie_poster ,width:"350", height: "500" %>
+            <%= link_to "刪除圖片", delete_images_admin_movie_path(@movie.movie_poster.id),
                     method: "DELETE", class: "d-block", data: {confirm: "Are you sure?"} %>
-              </div>
-            <% else %>
-              <%= f.label "上傳海報圖", for: "movie_movie_poster" %>
-              <%= f.file_field :movie_poster, class: "d-none" %>
-            <% end %>
           </div>
           <div class="input flex-grow-1 d-flex flex-column justify-content-around">
             <div class="input-group mb-3">
@@ -65,6 +57,5 @@
           <%= f.submit %>
         <% end %>
       </div>
-    </div>
+    <% end %>
   </div>
-</div>

@@ -1,1 +1,9 @@
-<%= @movie.description %>
+<div class="front-breadcrumb bg-Silver">
+  <nav class="container px-lg-4p" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "首頁", root_path, class: "text-muted"  %></li>
+      <li class="breadcrumb-item" ><%= link_to "電影介紹", theaters_path, class: "text-muted"  %></li>
+      <li class="breadcrumb-item active text-deepskyblue" aria-current="page"><%= @movie.name %></li>
+    </ol>
+  </nav>
+</div>

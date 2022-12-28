@@ -4,12 +4,10 @@ class MoviesController < ApplicationController
   before_action :find_movie, only: %i[show]
 
   def index
-    @user = User.new
     @movie = Movie.all
   end
 
   def root
-    @user = User.new
     @movies = Movie.all
     @news = News.all.order(created_at: :desc).limit(6)
     @theater_areas = Theater.areas

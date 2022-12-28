@@ -1,4 +1,4 @@
-<nav class="navbar px-2 navbar-expand-sm p-0 navbar-light justify-content-sm-around bg-cerulean
+<nav class="navbar px-2 navbar-expand-md p-0 navbar-light justify-content-sm-around bg-cerulean
             text-white">
   <div class="container px-lg-4p">
     <a class="navbar-brand m-sm-0 text-white" href=<%= root_path %>>
@@ -7,7 +7,7 @@
       <button type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          class="navbar-toggler collapsed d-flex d-sm-none flex-column justify-content-around m-0"
+          class="navbar-toggler collapsed d-flex d-md-none flex-column justify-content-around m-0"
           aria-controls="collapse"
           aria-expanded="false"
           aria-label="Toggle navigation">
@@ -45,9 +45,9 @@
             </li>
           <% else %>
             <!-- Button trigger modal -->
-            <button class="nav-link text-white p-3" data-bs-toggle="modal" data-bs-target="#Modal">
+            <a class="nav-link text-white p-3" data-bs-toggle="modal" data-bs-target="#Modal">
               登入
-            </button>
+            </a>
           </li>
           <li class="nav-item active">
             <%= link_to "註冊", new_user_registration_path, class: "nav-link text-white p-3" %></span>

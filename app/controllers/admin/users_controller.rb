@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < AdminController
     before_action :find_user, only: %i[edit update destroy]
     before_action :authenticate_user!
     before_action :current_user_is_admin

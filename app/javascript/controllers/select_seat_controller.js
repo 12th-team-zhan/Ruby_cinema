@@ -5,12 +5,13 @@ export default class extends Controller {
     static targets = ["seatGrid", "next"];
     connect() {
         let params = new URLSearchParams(location.search);
+        this.url = new URL('http://127.0.0.1:3000/tickets')
+        this.url.searchParams.append('showtimeId', params.get('showtimeid'));
+        for (const [key, value] of params) {
+            this.url.searchParams.append(key, value);
+        }
+        this.showtime_id = params.get('showtimeid')
         this.ticketAmount = Number(params.get('amount'));
-        this.showtimeId = Number(params.get('showtimeid'));
-        this.regularAmount = Number(params.get('regularAmount'));
-        this.concessionAmount = Number(params.get('concessionAmount'));
-        this.elderlyAmount = Number(params.get('elderlyAmount'));
-        this.disabilityAmount = Number(params.get('disabilityAmount'));
         this.token = document.querySelector("meta[name='csrf-token']").content;
         //去空隔 [] 轉陣列
         this.notSeatList = this.element.dataset.notseatlist.replace(/[\"\[\]\s]/g, "").split(",").map(v => Number(v));
@@ -21,12 +22,15 @@ export default class extends Controller {
         this.otherSeat = {}
         this.selectSeat = [];
         //向API查詢以被選擇位子selected_tickets
-        console.log(window.location.host);
         fetch(`/api/v1/selected_tickets`, {
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "X-CSRF-Token": this.token,
             },
+            body: JSON.stringify({
+                showtime_id: this.showtime_id,
+            })
         })
             .then((resp) => resp.json())
             .then((json) => {
@@ -46,7 +50,10 @@ export default class extends Controller {
                 console.log("error!!");
             });
         this.id = Math.round(Date.now() + Math.random())
-        this.channel = consumer.subscriptions.create({ channel: 'SelectseatChannel', id: this.id }, {
+        this.channel = consumer.subscriptions.create({
+            channel: 'SelectseatChannel', id: this.id,
+            showtime_id: params.get('showtimeid')
+        }, {
             connected: this._cableConnected.bind(this),
             disconnected: this._cableDisconnected.bind(this),
             received: this._cableReceived.bind(this),
@@ -75,35 +82,52 @@ export default class extends Controller {
     }
 
     changeSeatStatus(el) {
-        const seatId = +el.target.value
         let seatStatus = el.target.dataset.status;
-        if (this.selectSeat.length === this.ticketAmount && seatStatus === "empty") {
-            let firstSelect = this.selectSeat.shift()
-            let seatElement = document.querySelector(`.item${firstSelect}`)
-            seatElement.classList.remove("bg-DodgerBlue");
-            seatElement.dataset.status = "empty";
-            fetch(`/ticketing/seat_reservation`, {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-Token": this.token,
-                },
-                body: JSON.stringify({
-                    status: "cancel",
-                    seat_id: firstSelect,
-                    id: this.id,
-                })
-            }).catch(() => {
-                console.log("error!!");
-            });
+        if (this.selectSeat.length >= this.ticketAmount) {
+            switch (seatStatus) {
+                case "empty":
+                    let firstSelect = String(this.selectSeat.shift())
+                    fetch(`/ticketing/seat_reservation`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-Token": this.token,
+                        },
+                        body: JSON.stringify({
+                            status: "cancel",
+                            seat_id: firstSelect,
+                            showtime_id: this.showtime_id,
+                            id: this.id,
+                        })
+                    }).catch(() => {
+                        console.log("error!!");
+                    });
+                    break;
+                case "selected":
+                    const index = this.selectSeat.indexOf(el.target.value);
+                    this.selectSeat.splice(index, 1);
+                    fetch(`/ticketing/seat_reservation`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-Token": this.token,
+                        },
+                        body: JSON.stringify({
+                            status: "cancel",
+                            seat_id: el.target.value,
+                            showtime_id: this.showtime_id,
+                            id: this.id,
+                        })
+                    }).catch(() => {
+                        console.log("error!!");
+                    });
+                    break;
+            }
         }
         switch (seatStatus) {
             case "empty":
-                el.target.classList.add("bg-DodgerBlue")
-                el.target.dataset.status = "selected";
-                this.selectSeat.push(seatId);
                 fetch(`/ticketing/seat_reservation`, {
-                    method: "post",
+                    method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         "X-CSRF-Token": this.token,
@@ -111,22 +135,17 @@ export default class extends Controller {
                     body: JSON.stringify({
                         status: "selected",
                         seat_id: el.target.value,
+                        showtime_id: this.showtime_id,
                         id: this.id,
                     })
-                }).then(() => {
-                    this.changeLink()
                 }).catch(() => {
                     console.log("error!!");
                 });
 
                 break;
             case "selected":
-                el.target.classList.remove("bg-DodgerBlue");
-                el.target.dataset.status = "empty";
-                const index = this.selectSeat.indexOf(seatId);
-                this.selectSeat.splice(index, 1);
                 fetch(`/ticketing/seat_reservation`, {
-                    method: "post",
+                    method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         "X-CSRF-Token": this.token,
@@ -134,6 +153,7 @@ export default class extends Controller {
                     body: JSON.stringify({
                         status: "cancel",
                         seat_id: el.target.value,
+                        showtime_id: this.showtime_id,
                         id: this.id,
                     })
                 }).catch(() => {
@@ -145,7 +165,6 @@ export default class extends Controller {
                 console.log("We don't have the seat status");
         }
     }
-
     _cableConnected() {
         // Called when the subscription is ready for use on the server.
     }
@@ -155,9 +174,31 @@ export default class extends Controller {
     }
 
     _cableReceived(data) {
+        let seatElement;
 
-        if (data.id != this.id) {
-            let seatElement;
+        if (data.id === this.id) {
+            switch (data.status) {
+                case "selected":
+                    seatElement = document.querySelector(`.item${data.seat_id}`)
+                    seatElement.dataset.status = "selected";
+                    seatElement.classList.add("bg-DodgerBlue")
+                    this.selectSeat.push(data.seat_id);
+                    break
+
+                case "cancel":
+                    seatElement = document.querySelector(`.item${data.seat_id}`)
+                    seatElement.classList.remove("bg-DodgerBlue");
+                    seatElement.dataset.status = "empty";
+                    break
+
+                case "fail":
+                    alert("位子已被選取")
+                    break
+            }
+            this.changeLink()
+        }
+
+        else {
             switch (data.status) {
                 case "selected":
                     seatElement = document.querySelector(`.item${data.seat_id}`)
@@ -194,11 +235,15 @@ export default class extends Controller {
             this.otherSeat[id].push(seat_id)
         }
     }
+
     otherCancel(id, seat_id) {
         this.otherSeat[id] = this.otherSeat[id].filter(item => item !== seat_id)
     }
+
     changeLink() {
-        this.nextTarget.href = `/tickets?showtime_id=${this.showtimeId}&seat_list=${this.selectSeat}&regular_quantity=${this.regularAmount}&concession_quantity=${this.concessionAmount}&elderly_quantity=${this.elderlyAmount}&disability_quantity=${this.disabilityAmount}`;
+        this.url.searchParams.append("seatId", this.selectSeat);
+        this.nextTarget.href = this.url
     }
 
-}
+
+} 

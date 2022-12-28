@@ -11,6 +11,8 @@
       <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "訂單管理", admin_orders_path,
           class:"p-3 my-1 d-block text-center" %></li>
       <% if current_user.admin? %>
+        <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "Sidekiq", sidekiq_web_path, 
+          class: "p-3 my-1 d-block text-center" %></li>
         <li class="list-group-item m-0 p-0 bg-slategray"><%= link_to "人員管理", admin_users_path, 
           class: "p-3 my-1 d-block text-center" %></li>
       <% end %>

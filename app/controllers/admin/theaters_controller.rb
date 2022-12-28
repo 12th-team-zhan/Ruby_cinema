@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Admin
-  class TheatersController < ApplicationController
-    before_action :find_theater, only: %i[edit update destroy]
+  class TheatersController < AdminController
+    before_action :find_theater, only: %i[show edit update destroy]
 
     def index
       @theaters = Theater.all.order(id: :desc)

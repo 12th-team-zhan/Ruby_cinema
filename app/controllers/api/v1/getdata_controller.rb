@@ -28,8 +28,11 @@ module Api
       end
 
       def selected_tickets
-        @channle_user_select_seat = SelectseatChannel.channle_user_select_seat
-        render json: @channle_user_select_seat
+        user_selected = {}
+        $redis.smembers("showtime_#{params[:showtime_id]}").each do |user_id|
+          user_selected[user_id] = $redis.smembers(user_id)
+        end
+        render json: user_selected
       end
     end
   end

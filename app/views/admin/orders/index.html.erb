@@ -1,46 +1,40 @@
-<div class="continer vh-100  text-white">
-  <div class="d-flex vh-100">
-    <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1">
-      <div class="container container-breadcrumb ">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
-            <li class="breadcrumb-item active" aria-current="page">Order</li>
-          </ol>
-        </nav>
-      </div>
-      <div class="container">
-        <table class="table table-striped ">
-          <thead>
-            <tr>
-              <th scope="col">訂單編號</th>
-              <th scope="col">訂單狀態</th>
-              <th scope="col">訂購者</th>
-              <th scope="col">最後編輯者ID</th>
-              <th scope="col">建立時間</th>
-              <th scope="col">編輯時間</th>
-              <th scope="col">刪除訂單</th>
-            </tr>
-          </thead>
-          <% @orders.each do |order| %>
-            <tbody>
-              <tr>
-                <th scope="row"><%= link_to order.serial, admin_order_path(order) %></th>
-                <td><%= order.status %></td>
-                <td><%= order.user.name %></td>
-                <td>X</td>
-                <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-                <td><%= order.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-                <td><%= link_to "刪除", admin_order_path(order), method:"delete", data:{confirm:"確定刪除？"} %></td>
-              </tr>
-            </tbody>
-          <% end %>
-        </table>
-        <%= will_paginate @orders %>
-      </div>
-    </div>
+<div class="main flex-grow-1 p-0 ms-1">
+  <div class="container container-breadcrumb ">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">Order</li>
+      </ol>
+    </nav>
   </div>
-</div>
-<!-- 測試用，連上購物車就刪除 -->
-<%= link_to "新增訂單", new_admin_order_path, class: "btn btn-primary" %>
+  <div class="container">
+    <table class="table table-striped ">
+      <thead>
+        <tr>
+          <th scope="col">訂單編號</th>
+          <th scope="col">訂單狀態</th>
+          <th scope="col">訂購者</th>
+          <th scope="col">最後編輯者ID</th>
+          <th scope="col">建立時間</th>
+          <th scope="col">編輯時間</th>
+          <th scope="col">刪除訂單</th>
+        </tr>
+      </thead>
+      <% @orders.each do |order| %>
+        <tbody>
+          <tr>
+            <th scope="row"><%= link_to order.serial, admin_order_path(order) %></th>
+            <td><%= order.status %></td>
+            <td><%= order.user.name %></td>
+            <td>X</td>
+            <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td><%= order.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td><%= link_to "刪除", admin_order_path(order), method:"delete", data:{confirm:"確定刪除？"} %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <%= will_paginate @orders %>
+  </div>
+  <!-- 測試用，連上購物車就刪除 -->
+  <%= link_to "新增訂單", new_admin_order_path, class: "btn btn-primary" %>

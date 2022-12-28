@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ruby Cinema</title>
+    <title>Ruby Theater</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,7 +10,12 @@
   </head>
   <body>
     <%= render "shared/flash" %>
-    <%= render "shared/nav" %>
-    <%= yield %>
-  </body>
+    <div class="continer vh-100">
+      <div class="d-flex vh-100">
+        <%= render "shared/admin/sidebar" %>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

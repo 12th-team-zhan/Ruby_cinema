@@ -1,0 +1,14 @@
+.login{
+    background-color: #d9e0e9;
+    padding-top: 170px;
+    .modal-content{
+        width: 500px !important;
+        background-color: white;
+        border-radius: 5%;
+    }
+    .modal-footer,
+    .modal-body,
+    .modal-header{
+        padding: 16px;
+    }
+}

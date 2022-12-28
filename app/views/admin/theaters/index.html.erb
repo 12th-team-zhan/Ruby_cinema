@@ -1,44 +1,41 @@
-<div class="continer vh-100  text-white">
-  <div class="d-flex vh-100">
-    <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1">
-      <div class="container container-breadcrumb ">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
-            <li class="breadcrumb-item active" aria-current="page">影城列表</li>
-          </ol>
-        </nav>
-      </div>
-      <div class="container">
-        <%= link_to "新增影城", new_admin_theater_path, class: "btn btn-primary" %>
-        <table class="table table-striped ">
-          <thead>
-            <tr>
-              <th scope="col">影城名稱</th>
-              <th scope="col"><i class="fa-solid fa-phone"></i>電話</th>
-              <th scope="col"><i class="fa-solid fa-location-dot"></i>區域</th>
-              <th scope="col"><i class="fa-solid fa-location-dot"></i>地址</th>
-              <th scope="col">查看影廳</th>
-              <th scope="col">編輯影城</th>
-              <th scope="col">刪除影城</th>
-            </tr>
-          </thead>
-          <% @theaters.each do |theater| %>
-            <tbody>
-              <tr>
-                <td scope="row"><%= theater.name %></td>
-                <td><%= theater.phone %></td>
-                <td><%= Theater.human_attribute_name("area.#{theater.area}") %></td>
-                <td><%= theater.address %></td>
-                <td><%= link_to "查看", admin_theater_cinemas_path(theater) %></td>
-                <td><%= link_to "編輯", edit_admin_theater_path(theater) %></td>
-                <td><%= link_to "刪除", admin_theater_path(theater), method:"delete", data:{confirm:"確定要刪除#{ theater.name }？"} %></td>
-              </tr>
-            </tbody>
-          <% end %>
-        </table>
-      </div>
-    </div>
+    
+<div class="main flex-grow-1 p-0 ms-1">
+  <div class="container container-breadcrumb ">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">影城列表</li>
+      </ol>
+    </nav>
   </div>
-</div>
+  <div class="container">
+    <%= link_to "新增影城", new_admin_theater_path, class: "btn btn-primary" %>
+    <table class="table table-striped ">
+      <thead>
+        <tr>
+          <th scope="col">影城編號</th>
+          <th scope="col">影城名稱</th>
+          <th scope="col">電話</th>
+          <th scope="col">區域</th>
+          <th scope="col">地址</th>
+          <th scope="col">查看影廳</th>
+          <th scope="col">編輯影城</th>
+          <th scope="col">刪除影城</th>
+        </tr>
+      </thead>
+      <% @theaters.each do |theater| %>
+        <tbody>
+          <tr>
+            <td><%= theater.id %></td>
+            <td scope="row"><%= theater.name %></td>
+            <td><%= theater.phone %></td>
+            <td><%= theater.area %></td>
+            <td><%= theater.address %></td>
+            <td><%= link_to "查看影廳", admin_theater_cinemas_path(theater) %></td>
+            <td><%= link_to "編輯", edit_admin_theater_path(theater) %></td>
+            <td><%= link_to "刪除", admin_theater_path(theater), method:"delete", data:{confirm:"確定要刪除#{ theater.name }？"} %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>

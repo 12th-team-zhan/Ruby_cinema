@@ -1,0 +1,28 @@
+.container {
+  .movie-list {
+    .card {
+      &:hover {
+        background-color: rgba(109, 138, 211, 0.156);
+      }
+    }
+    .pic {
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    .movie-list {
+      .card {
+        &:hover {
+          background-color: rgba(109, 138, 211, 0.156);
+        }
+      }
+      .pic {
+        img {
+          aspect-ratio: 2 / 3;
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class ShowtimesController < ApplicationController
+  class ShowtimesController < AdminController
     before_action :authenticate_user!
     before_action :find_movie, only: %i[index new create destroy]
     before_action :find_theater, only: %i[new index]
@@ -19,7 +19,7 @@ module Admin
       showtime_start = showtime_params[:started_at].to_datetime.to_i
       showtime_end = showtime_params[:end_at].to_datetime.to_i
 
-      showtime_all = @showtimes.map {|showtime| [showtime.started_at.to_i, showtime.end_at.to_i]}
+      showtime_all = @showtimes.map { |showtime| [showtime.started_at.to_i, showtime.end_at.to_i] }
       current_time = Time.current.to_i
       showtime_condition = showtime_all.map do |arr|
         if showtime_start < arr[0]
@@ -34,7 +34,7 @@ module Admin
       unless showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
         @showtime.save
       else
-        redirect_to admin_movie_showtimes_path(@movie.id), alert:"場次設定有誤,請重新輸入"
+        redirect_to admin_movie_showtimes_path(@movie.id), alert: '場次設定有誤,請重新輸入'
       end
     end
 

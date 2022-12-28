@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }, skip: :sessions
 
@@ -9,6 +11,11 @@ Rails.application.routes.draw do
     get '/users', to: 'devise/registrations#new'
   end
 
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  resources :movies, only: %i[index show]
   resources :news, only: %i[index show]
   resources :theaters, only: %i[index show]
   resources :movies, only: %i[index show]
@@ -46,8 +53,8 @@ Rails.application.routes.draw do
     end
     resources :cinemas, only: %i[edit update destroy] do
       resources :seats, only: %i[index new create]
-      get '/seats/edit', to: 'seats#edit'
-      patch '/seats/update', to: 'seats#update'
+      get "/seats/edit", to: "seats#edit"
+      patch "/seats/update", to: "seats#update"
     end
 
     resources :movies do
@@ -76,6 +83,7 @@ Rails.application.routes.draw do
       post 'theater_list', to: 'getdata#theater_list'
       post 'showtime_list', to: 'getdata#showtime_list'
       post 'selected_tickets', to: 'getdata#selected_tickets'
+      get 'selected_tickets', to: 'getdata#selected_tickets'
       post 'cinema_list', to: 'getdata#cinema_list'
     end
   end

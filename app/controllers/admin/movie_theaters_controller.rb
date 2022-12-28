@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class MovieTheatersController < ApplicationController
+  class MovieTheatersController < AdminController
     before_action :find_movie
     before_action :find_theater
 

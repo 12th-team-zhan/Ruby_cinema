@@ -1,37 +1,31 @@
-<div class="continer vh-100">
-  <div class="d-flex">
-    <%= render "shared/admin/sidebar" %>
-    <div class="main flex-grow-1 p-0 ms-1 text-dark">
-      <div class="container container-breadcrumb">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
-            <li class="breadcrumb-item"><%= @movie.name %></li>
-            <li class="breadcrumb-item active" aria-current="page">場次列表</li>
-          </ol>
-        </nav>
-      </div>
-      <div class="container">
-        <h2 class="text-dark fs-6">片長：<%= @movie.duration %>分鐘</h2>
-        <%= render "new" %>
-        <table class="table table-striped my-3">
-          <thead>
-            <tr>
-              <th scope="col" class=" text-bg-slategray">影城</th>
-              <th scope="col" class=" text-bg-slategray">影廳</th>
-              <th scope="col" class=" text-bg-slategray">開始時間</th>
-              <th scope="col" class=" text-bg-slategray">結束時間</th>
-              <th scope="col" class=" text-bg-slategray">刪除</th>
-            </tr>
-          </thead>
-          <tbody class="showtimes">
-            <%= render @showtimes %>
-          </tbody>
-        </table>
-        <%= will_paginate @showtimes, class:"text-center" %>
-      </div>
-    </div>
+<div class="main flex-grow-1 p-0 ms-1 text-dark">
+  <div class="container container-breadcrumb">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
+        <li class="breadcrumb-item"><%= @movie.name %></li>
+        <li class="breadcrumb-item active" aria-current="page">場次列表</li>
+      </ol>
+    </nav>
   </div>
-</div>
+  <div class="container">
+    <h2 class="text-dark fs-6">片長：<%= @movie.duration %>分鐘</h2>
+    <%= render "new" %>
+    <table class="table table-striped my-3">
+      <thead>
+        <tr>
+          <th scope="col" class=" text-bg-slategray">影城</th>
+          <th scope="col" class=" text-bg-slategray">影廳</th>
+          <th scope="col" class=" text-bg-slategray">開始時間</th>
+          <th scope="col" class=" text-bg-slategray">結束時間</th>
+          <th scope="col" class=" text-bg-slategray">刪除</th>
+        </tr>
+      </thead>
+      <tbody class="showtimes">
+        <%= render @showtimes %>
+      </tbody>
+    </table>
+    <%= will_paginate @showtimes, class:"text-center" %>
+  </div>
 </div>
 </div>
