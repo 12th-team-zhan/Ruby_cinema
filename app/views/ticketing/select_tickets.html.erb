@@ -1,5 +1,5 @@
 <div class="movie position-relative" data-controller="select-ticketing" data-id="<%= @showtime.id %>">
-<%= render "movie_info" %>
+  <%= render "movie_info" %>
   <div class="body">
     <div class="container-md px-lg-4p my-3 d-flex justify-content-between">
       <div class="select-title">
@@ -29,7 +29,7 @@
         <div class="fw-bold p-2">全票</div>
       </div>
       <div class="col-6 col-md-3 d-flex">
-        <div class="col-4 fw-bold text-center p-2 price">$350</div>
+        <div class="col-4 fw-bold text-center p-2 price"><%= @showtime.cinema.regular_price %></div>
         <div class="col-4 fw-bold text-center" >
           <select class="select" data-action="change->select-ticketing#select"
             data-select-ticketing-target="amount regularAmount">
@@ -49,7 +49,7 @@
         <div class="fw-bold p-2">優待票</div>
       </div>
       <div class="col-6 col-md-3 d-flex">
-        <div class="col-4 fw-bold text-center p-2 price">$250</div>
+        <div class="col-4 fw-bold text-center p-2 price"><%= @showtime.cinema.concession_price %></div>
         <div class="col-4 fw-bold text-center" >
           <select class="select" data-action="change->select-ticketing#select"
             data-select-ticketing-target="amount concessionAmount">
@@ -69,7 +69,7 @@
         <div class="fw-bold p-2">敬老票</div>
       </div>
       <div class="col-6 col-md-3 d-flex">
-        <div class="col-4 fw-bold text-center p-2 price">$150</div>
+        <div class="col-4 fw-bold text-center p-2 price"><%= @showtime.cinema.elderly_price %></div>
         <div class="col-4 fw-bold text-center" >
           <select class="select" data-action="change->select-ticketing#select"
             data-select-ticketing-target="amount elderlyAmount">
@@ -89,7 +89,7 @@
         <div class="fw-bold p-2">愛心票</div>
       </div>
       <div class="col-6 col-md-3 d-flex">
-        <div class="col-4 fw-bold text-center p-2 price">$100</div>
+        <div class="col-4 fw-bold text-center p-2 price"><%= @showtime.cinema.disability_price %></div>
         <div class="col-4 fw-bold text-center" >
           <select class="select" data-action="change->select-ticketing#select"
             data-select-ticketing-target="amount disabilityAmount">
