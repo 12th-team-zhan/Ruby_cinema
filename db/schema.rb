@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2022_12_27_065056) do
     t.decimal "concession_price", precision: 7, scale: 2, default: "0.0"
     t.decimal "elderly_price", precision: 7, scale: 2, default: "0.0"
     t.decimal "disability_price", precision: 7, scale: 2, default: "0.0"
+    t.decimal "ticket_amount", precision: 7, scale: 2
     t.index ["deleted_at"], name: "index_cinemas_on_deleted_at"
     t.index ["theater_id"], name: "index_cinemas_on_theater_id"
   end

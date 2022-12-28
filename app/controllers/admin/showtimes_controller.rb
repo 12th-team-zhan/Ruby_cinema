@@ -8,7 +8,6 @@ module Admin
     before_action :find_showtime, only: %i[destroy]
 
     def index
-      @movie_theaters = @movie.movie_theater.where(movie_id: params[:movie_id])
       @showtimes = @movie.showtimes.paginate(page: params[:page], per_page: 10).order(started_at: :desc)
     end
 
