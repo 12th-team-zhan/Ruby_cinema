@@ -23,8 +23,7 @@
                 <thead>
                   <tr class="table-secondary">
                     <th scope="col" class="col-2 col-md-3">訂購時間</th>
-                    <th scope="col" class="col-7 col-md-6">訂購內容</th>
-                    <th scope="col" class="col-2 col-md-3"></th>
+                    <th scope="col" colspan="2" class="col-7 col-md-6">訂購內容</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -32,28 +31,22 @@
                     <tr>
                       <td>
                         <p><%= order.created_at.strftime("%Y/%m/%d %I:%M") %></p>
-                        <div
-                          data-controller="order-cancelbtn"
-                          data-id="<%= order.id %>"
-                          data-canceled="<%= order.status %>">
+                        <div data-controller="order-cancelbtn"
+                             data-id="<%= order.id %>"
+                             data-canceled="<%= order.status %>">
                           <p data-order-cancelbtn-target="orderStatus">
                             <%= order.status %>
                           </p>
-                          <button
-                            method="patch"
-                            class="btn btn-secondary btn-md mx-2"
-                            data-order-cancelbtn-target="cancelBtn"
-                            data-action="click->order-cancelbtn#cancel"
-                            data-confirm="Are you sure？">
-                            取消訂單
+                          <button method="patch"
+                                  class="btn btn-secondary btn-md mx-2"
+                                  data-order-cancelbtn-target="cancelBtn"
+                                  data-action="click->order-cancelbtn#cancel"
+                            data-confirm="Are you sure？"> 取消訂單
                           </button>
                         </div>
                       </td>
                       <td class="text-start mx-3">
-                        <p>取票序號: <%= order.serial %></p>
-                        <p>電影名稱：</p>
-                        <p>影城：</p>
-                        <p>場次： 2022-11-20 16:25</p>
+                        <%= order_list(order) %>
                         <div class="d-flex justify-content-between">
                           <p>總計金額: <%= order.amount %></p>
                         </div>

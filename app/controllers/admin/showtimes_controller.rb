@@ -30,10 +30,10 @@ module Admin
         end
       end
 
-      unless showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
-        @showtime.save
-      else
+      if showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
         redirect_to admin_movie_showtimes_path(@movie.id), alert: '場次設定有誤,請重新輸入'
+      else
+        @showtime.save
       end
     end
 

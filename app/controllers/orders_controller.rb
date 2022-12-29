@@ -5,7 +5,9 @@ class OrdersController < ApplicationController
   before_action :find_order, only: %i[show cancel]
 
   def index
-    @orders = current_user.orders.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
+    @orders = Order.includes(tickets: [showtime: [:movie, { cinema: :theater }]]).where(user_id: current_user.id).references(:tickets).paginate(
+      page: params[:page], per_page: 5
+    ).order(created_at: :desc)
   end
 
   def new

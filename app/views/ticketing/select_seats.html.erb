@@ -9,7 +9,7 @@
       <div class="time" data-controller="alarm-clock">
         <p class="fs-4 fw-light m-0 py-2">剩餘時間<span data-alarm-clock-target="time"></span></p>
       </div>
-      <%= link_to pay_ticketing_index_path, 
+      <%= link_to ticketing_index_path, 
           class: "col-md-4 col-lg-3 text-center my-auto next",
           data: {select_seat_target: "next"}, 
           method: "post" do %>
