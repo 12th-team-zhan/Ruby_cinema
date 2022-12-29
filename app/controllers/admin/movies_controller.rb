@@ -69,7 +69,7 @@ module Admin
     def movie_params
       params.require(:movie).permit(:name, :eng_name, :duration, :film_rating,        
                                     :director, :actor, :debut_date,
-                                    :description)
+                                    :description, images: [])
     end
 
     def append_movie_poster
