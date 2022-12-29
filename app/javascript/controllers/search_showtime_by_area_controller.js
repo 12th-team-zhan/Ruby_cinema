@@ -31,8 +31,9 @@ export default class extends Controller {
       })
       .then((data) => {
         data.forEach((element) => {
-          let option = `<option value="${element[0]}" >${element[1]}</option>`;
-          this.movieListTarget.insertAdjacentHTML("beforeend", option);
+          let options = "";
+          options += `<option value="${element[0]}" >${element[1]}</option>`;
+          this.movieListTarget.insertAdjacentHTML("beforeend", options);
         });
       })
       .catch((err) => {
@@ -68,8 +69,9 @@ export default class extends Controller {
           }
         });
         date.forEach((element) => {
-          let option = `<option value="${element}" >${element}</option>`;
-          this.showtimeListTarget.insertAdjacentHTML("beforeend", option);
+          let options = "";
+          options += `<option value="${element}" >${element}</option>`;
+          this.showtimeListTarget.insertAdjacentHTML("beforeend", options);
         });
       })
       .catch((err) => {
@@ -82,11 +84,12 @@ export default class extends Controller {
 
     var i = 6;
     for (i; i < 25; i++) {
-      let option = `<option value="${this.autoSupplement(
+      let options = ""
+      options += `<option value="${this.autoSupplement(
         i.toString()
       )}:00" >${this.autoSupplement(i.toString())}:00</option>`;
-      this.startTimeTarget.insertAdjacentHTML("beforeend", option);
-      this.endTimeTarget.insertAdjacentHTML("beforeend", option);
+      this.startTimeTarget.insertAdjacentHTML("beforeend", options);
+      this.endTimeTarget.insertAdjacentHTML("beforeend", options);
     }
   }
 

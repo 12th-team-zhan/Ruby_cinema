@@ -3,8 +3,8 @@
 module Admin
   class ShowtimesController < AdminController
     before_action :authenticate_user!
-    before_action :find_movie, only: %i[index new create destroy]
-    before_action :find_theater, only: %i[new index]
+    before_action :find_movie, only: %i[index create destroy]
+    before_action :find_theater, only: %i[index]
     before_action :find_showtime, only: %i[destroy]
 
     def index

@@ -25,8 +25,9 @@ export default class extends Controller {
       })
       .then((data) => {
         data.forEach((element) => {
-          let option = `<option value="${element.theater_id}" >${element.name}</option>`;
-          this.theaterListTarget.insertAdjacentHTML("beforeend", option);
+          let options =""
+          options+= `<option value="${element.theater_id}" >${element.name}</option>`;
+          this.theaterListTarget.insertAdjacentHTML("beforeend", options);
         });
       })
       .catch((err) => {
@@ -65,8 +66,9 @@ export default class extends Controller {
           }
         });
         date.forEach((element) => {
-          let option = `<option value="${element}" >${element}</option>`;
-          this.showtimeDateTarget.insertAdjacentHTML("beforeend", option);
+          let options =""
+          options += `<option value="${element}" >${element}</option>`;
+          this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
         });
       })
       .catch((err) => {
@@ -79,8 +81,9 @@ export default class extends Controller {
 
     this.showtime.map((showtime) => {
       if (showtime[0] === this.showtimeDateTarget.value) {
-        let option = `<option value="${showtime[2]}" >${showtime[1]}</option>`;
-        this.showtimeTarget.insertAdjacentHTML("beforeend", option);
+        let options =""
+        options += `<option value="${showtime[2]}" >${showtime[1]}</option>`;
+        this.showtimeTarget.insertAdjacentHTML("beforeend", options);
       }
     });
   }
@@ -95,7 +98,7 @@ export default class extends Controller {
       e.preventDefault();
       const link = document.querySelector("#rootSearchShowtime");
       link.href = `#`;
-      alert("請填寫查詢時段");
+      alert("請填寫查詢場次");
     }
   }
 

@@ -47,6 +47,10 @@ zh-TW:
         concession_ticket: 優待票
         elderly_ticket: 敬老票
         disability_ticket: 愛心票
+      user/role:
+        user: 會員
+        staff: 員工
+        admin: 系統管理員
     models:
       user: 使用者
   date:
