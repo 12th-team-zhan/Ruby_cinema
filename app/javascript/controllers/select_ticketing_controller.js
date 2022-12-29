@@ -2,7 +2,6 @@ import { Controller } from "stimulus";
 
 export default class extends Controller {
   static targets = [
-    "ticketType",
     "allTotal",
     "next",
     "total",
@@ -21,13 +20,21 @@ export default class extends Controller {
   }
 
   select(e) {
-    console.log(e.path[2].children[0].textContent);
     e.path[2].children[2].textContent =
       "$" +
       Number(e.srcElement.value) *
         Number(e.path[2].children[0].textContent.substring(1));
+
     this.calcAllTotal();
     this.calcAllAmount();
+
+    const event = new CustomEvent("update-typelist", {
+      detail: {
+        Quantity: e.target.value,
+        ticketType: e.path[3].children[0].children[0].textContent,
+      },
+    });
+    window.dispatchEvent(event);
   }
 
   calcAllTotal() {
@@ -43,6 +50,7 @@ export default class extends Controller {
       this.nextTarget.classList.add("d-none");
     }
   }
+
   calcAllAmount() {
     let allAmount = 0;
     this.allAmountTarget.textContent = "";
@@ -52,7 +60,16 @@ export default class extends Controller {
     this.allAmountTarget.textContent = allAmount;
     this.changeLink(allAmount);
   }
+
   changeLink(amount) {
-    this.nextTarget.href = `/ticketing/select_seats?showtimeid=${this.showtimeId}&amount=${amount}&regularAmount=${this.regularAmountTarget.value}&concessionAmount=${this.concessionAmountTarget.value}&elderlyAmount=${this.elderlyAmountTarget.value}&disabilityAmount=${this.disabilityAmountTarget.value}`;
+    const params = new URLSearchParams({
+      showtimeid: this.showtimeId.toString(),
+      amount: amount,
+      regularAmount: this.regularAmountTarget.value.toString(),
+      concessionAmount: this.concessionAmountTarget.value.toString(),
+      elderlyAmount: this.elderlyAmountTarget.value.toString(),
+      disabilityAmount: this.disabilityAmountTarget.value.toString(),
+    });
+    this.nextTarget.href = `/ticketing/select_seats?${params}`;
   }
 }

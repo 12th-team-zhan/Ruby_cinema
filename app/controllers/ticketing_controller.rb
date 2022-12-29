@@ -14,6 +14,10 @@ class TicketingController < ApplicationController
     @showtime = Showtime.find(params[:showtimeid])
     @cinema = Cinema.find(@showtime.cinema.id)
     @not_seat = Seat.find_by(cinema_id: @showtime.cinema.id, category: 'not_added')
+    @ticket_list = [("全票#{params[:regularAmount]}" unless params[:regularAmount] == '0').to_s,
+                    ("優待票#{params[:concessionAmount]}" unless params[:concessionAmount] == '0').to_s,
+                    ("敬老票#{params[:elderlyAmount]}" unless params[:elderlyAmount] == '0').to_s,
+                    ("愛心票#{params[:disabilityAmount]}" unless params[:disabilityAmount] == '0').to_s]
   end
 
   def seat_reservation

@@ -42,6 +42,11 @@ zh-TW:
         middle: 中部
         south: 南部
         east: 東部
+      ticket/category:
+        regular_ticket: 全票
+        concession_ticket: 優待票
+        elderly_ticket: 敬老票
+        disability_ticket: 愛心票
     models:
       user: 使用者
   date:
