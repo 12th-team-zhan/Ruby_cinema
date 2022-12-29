@@ -20,10 +20,10 @@ module Api
 
       def showtime_list
         @cinemas = Theater.find(params[:theater_id]).cinemas.pluck(:id)
-        showtime_date = Showtime.where(cinema_id: @cinemas, movie_id: params[:movie_id]).pluck(:started_at,
-                                                                                               :id).map do |showtime, id|
-          [showtime.strftime('%Y-%m-%d'), showtime.strftime('%I:%M %p'), id]
-        end
+        showtime_date = Showtime.where('movie_id = ? AND cinema_id IN (?) AND started_at > (?)', params[:movie_id], @cinemas, Time.now.to_s(:db)).pluck(:started_at,
+          :id).map do |showtime, id|
+            [showtime.strftime('%Y-%m-%d'), showtime.strftime('%I:%M %p'), id]
+          end
         render json: showtime_date
       end
 
