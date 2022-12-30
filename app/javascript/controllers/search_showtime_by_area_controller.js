@@ -62,17 +62,20 @@ export default class extends Controller {
       })
       .then((data) => {
         const date = [];
-
-        data.map((element) => {
-          if (date.indexOf(element[0]) === -1) {
-            date.push(element[0]);
-          }
-        });
-        date.forEach((element) => {
-          let options = "";
-          options += `<option value="${element}" >${element}</option>`;
-          this.showtimeListTarget.insertAdjacentHTML("beforeend", options);
-        });
+        if (data.length !== 0) {
+          data.map((element) => {
+            if (date.indexOf(element[0]) === -1) {
+              date.push(element[0]);
+            }
+          });
+          date.forEach((element) => {
+            let options = "";
+            options += `<option value="${element}" >${element}</option>`;
+            this.showtimeListTarget.insertAdjacentHTML("beforeend", options);
+          });
+        } else {
+          this.noComeOut();
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -84,7 +87,7 @@ export default class extends Controller {
 
     var i = 6;
     for (i; i < 25; i++) {
-      let options = ""
+      let options = "";
       options += `<option value="${this.autoSupplement(
         i.toString()
       )}:00" >${this.autoSupplement(i.toString())}:00</option>`;
@@ -146,5 +149,11 @@ export default class extends Controller {
 
   autoSupplement(timeHour) {
     return timeHour.padStart(2, "0");
+  }
+
+  noComeOut() {
+    this.showtimeListTarget.replaceChildren();
+    let Option = `<option>目前沒有場次</option>`;
+    this.showtimeListTarget.insertAdjacentHTML("beforeend", Option);
   }
 }

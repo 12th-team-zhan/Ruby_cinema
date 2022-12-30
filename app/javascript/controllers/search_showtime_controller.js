@@ -25,8 +25,8 @@ export default class extends Controller {
       })
       .then((data) => {
         data.forEach((element) => {
-          let options =""
-          options+= `<option value="${element.theater_id}" >${element.name}</option>`;
+          let options = "";
+          options += `<option value="${element.theater_id}" >${element.name}</option>`;
           this.theaterListTarget.insertAdjacentHTML("beforeend", options);
         });
       })
@@ -56,20 +56,24 @@ export default class extends Controller {
         return resp.json();
       })
       .then((data) => {
-        this.showtime = data;
+        if (data.length !== 0) {
+          this.showtime = data;
 
-        const date = [];
+          const date = [];
 
-        data.map((element) => {
-          if (date.indexOf(element[0]) === -1) {
-            date.push(element[0]);
-          }
-        });
-        date.forEach((element) => {
-          let options =""
-          options += `<option value="${element}" >${element}</option>`;
-          this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
-        });
+          data.map((element) => {
+            if (date.indexOf(element[0]) === -1) {
+              date.push(element[0]);
+            }
+          });
+          date.forEach((element) => {
+            let options = "";
+            options += `<option value="${element}" >${element}</option>`;
+            this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
+          });
+        } else {
+          this.noComeOut();
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -81,7 +85,7 @@ export default class extends Controller {
 
     this.showtime.map((showtime) => {
       if (showtime[0] === this.showtimeDateTarget.value) {
-        let options =""
+        let options = "";
         options += `<option value="${showtime[2]}" >${showtime[1]}</option>`;
         this.showtimeTarget.insertAdjacentHTML("beforeend", options);
       }
@@ -117,6 +121,15 @@ export default class extends Controller {
   resetShowtime() {
     this.showtimeTarget.replaceChildren();
     let timeOption = `<option value="0">請選擇場次</option>`;
+    this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
+  }
+
+  noComeOut() {
+    this.showtimeDateTarget.replaceChildren();
+    this.showtimeTarget.replaceChildren();
+    let dateOption = `<option>目前沒有場次</option>`;
+    let timeOption = `<option value="0">目前沒有場次</option>`;
+    this.showtimeDateTarget.insertAdjacentHTML("beforeend", dateOption);
     this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
   }
 }

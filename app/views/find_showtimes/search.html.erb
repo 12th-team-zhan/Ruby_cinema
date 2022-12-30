@@ -84,7 +84,7 @@
           <% @showtimes.each do |showtime| %>
             <tbody>
               <td><%= showtime.cinema.theater.name%></td>
-              <td><%= showtime.cinema.name%></td>
+              <td><%= showtime.cinema.name %></td>
               <td><%= showtime.started_at.strftime("%Y-%m-%d") %></td>
               <td><%= showtime.started_at.strftime("%I:%M %p") %></td>
               <td><%= link_to "前往購票", "/ticketing/select_tickets?showtimeid=#{showtime.id}" %></td>

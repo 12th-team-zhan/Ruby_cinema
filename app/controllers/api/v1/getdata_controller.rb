@@ -24,7 +24,7 @@ module Api
                                                                                                                                                              :id).map do |showtime, id|
           [showtime.strftime('%Y-%m-%d'), showtime.strftime('%I:%M %p'), id]
         end
-        render json: showtime_date
+          render json: showtime_date
       end
 
       def selected_tickets
