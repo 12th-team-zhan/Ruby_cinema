@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_28_134538) do
+ActiveRecord::Schema.define(version: 2022_12_28_154629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,7 +168,7 @@ ActiveRecord::Schema.define(version: 2022_12_28_134538) do
 
   create_table "tickets", force: :cascade do |t|
     t.string "seat"
-    t.integer "status"
+    t.integer "status", default: 0
     t.string "serial"
     t.integer "category"
     t.datetime "deleted_at"
