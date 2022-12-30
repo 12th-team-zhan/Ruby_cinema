@@ -1,4 +1,4 @@
-<section>
+<section class="order-show" data-controller="qr-code">
   <h2>訂單編號：<%= @order.serial %></h2>
   <article>
     <h3>訂單金額 <%= @order.amount %></h3>
@@ -6,4 +6,9 @@
     <!-- 電影票明細 -->
     <div>訂單明細：</div>
   </article>
+  <% @order.tickets.each do |ticket|%>
+    <%= ticket.seat %>
+     <%= ticket.status %>
+    <canvas data-qr-code-target="canvas" data-serial=<%= ticket.serial %>></canvas>
+  <% end %>
 </section>
