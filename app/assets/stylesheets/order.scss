@@ -1,0 +1,65 @@
+.pay {
+  .img {
+    top: 25%;
+    left: 5%;
+    .order-img {
+      z-index: 0;
+    }
+  }
+
+  .order {
+    z-index: 1;
+  }
+  .submit {
+    background-color: #b1cae7;
+    border: none;
+  }
+
+  .submit:hover, .cancel:hover  {
+    background-color: #a5bdd9;;
+  }
+  
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .pay {
+    .img {
+      top: 22%;
+      left: -8%;
+      .order-img {
+        z-index: 0;
+      }
+    }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .pay {
+    .img {
+      top: 20%;
+      left: -3%;
+      .order-img {
+        z-index: 0;
+      }
+    }
+  }
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .pay {
+    .img {
+      top: 20%;
+      left: 10%;
+      .order-img {
+        z-index: 0;
+      }
+    }
+  }
+}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) {
+}
