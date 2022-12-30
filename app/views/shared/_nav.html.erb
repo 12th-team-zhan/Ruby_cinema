@@ -36,6 +36,7 @@
                 <li><%= link_to "訂票查詢", orders_path,
                         class:"dropdown-item text-white p-3" %></li>
                 <% if current_user.admin? || current_user.staff?%>
+                  <li><%= link_to "掃票API", admin_ticket_checking_index_path, class: "dropdown-item text-white p-3" %></li>
                   <li><%= link_to "影城管理", admin_movies_path, class: "dropdown-item text-white p-3" %></li>
                 <% end %>
               </ul>
@@ -72,6 +73,7 @@
       <div class="modal-body" >
         <%= form_for User.new , url: user_session_path ,method:"post" do |f| %>
           <%= f.hidden_field "path", value: request.url %>
+          <%= f.hidden_field "base_path", value: request.base_url %>
           <div class="field mt-5 position-relative d-flex">
             <%= f.email_field :email, autocomplete: "email",class:"form-control",
                 data:{ action: "click->index-login#addClassAt focusout->index-login#removeClassAt
