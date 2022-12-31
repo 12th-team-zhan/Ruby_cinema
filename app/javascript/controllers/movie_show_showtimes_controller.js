@@ -29,28 +29,28 @@ export default class extends Controller {
       .then((data) => {
         console.log(data);
 
-        data.forEach((element) => {
-          let content = "";
-          content += `<tr>
-          <td></td>
-          <td>${element[0]}</td> %>
-          <td>${element[1]}</td> %>
-          <td><a href="/ticketing/select_tickets?showtimeid=${element[2]}">前往購票</a></td>
-        </tr>`;
-          this.showtimeDateTarget.insertAdjacentHTML("beforeend", content);
+        // data.forEach((element) => {
+        //   let content = "";
+        //   content += `<tr>
+        //   <td><%%></td>
+        //   <td>${element[0]}</td> %>
+        //   <td>${element[1]}</td> %>
+        //   <td><a href="/ticketing/select_tickets?showtimeid=${element[2]}">前往購票</a></td>
+        // </tr>`;
+        //   this.showtimeDateTarget.insertAdjacentHTML("beforeend", content);
+        // });
+
+        const date = [];
+
+        data.map((element) => {
+          if (date.indexOf(element[0]) === -1) {
+            date.push(element[0]);
+          }
         });
-
-        // const date = [];
-
-        // data.map((element) => {
-        //   if (date.indexOf(element[0]) === -1) {
-        //     date.push(element[0]);
-        //   }
-        // });
-        // date.forEach((element) => {
-        //   let option = `<option value="${element}" >${element}</option>`;
-        //   this.showtimeDateTarget.insertAdjacentHTML("beforeend", option);
-        // });
+        date.forEach((element) => {
+          let option = `<option value="${element}" >${element}</option>`;
+          this.showtimeDateTarget.insertAdjacentHTML("beforeend", option);
+        });
       })
       .catch((err) => {
         console.log(err);
