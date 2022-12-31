@@ -41,8 +41,8 @@ module Admin
     private
 
     def cinema_params
-      params.require(:cinema).permit(:name, :max_row, :max_column, :regular_price, 
-                                     :concession_price,:disability_price, :elderly_price)
+      params.require(:cinema).permit(:name, :max_row, :max_column, :regular_price,
+                                     :concession_price, :disability_price, :elderly_price)
     end
 
     def find_cinema
