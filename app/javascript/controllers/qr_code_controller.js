@@ -5,7 +5,6 @@ export default class extends Controller {
     static targets = ["canvas"];
 
     connect() {
-        console.log(QRCode);
         this.url = location.origin + "/admin/ticket_checking"
 
         this.canvasTargets.forEach(e => {

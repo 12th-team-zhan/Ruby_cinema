@@ -17,7 +17,7 @@ module Admin
       # @ticket.update(status: 1)
       else
         res = 'fail'
-        text = '此票以使用過，如有問題請洽詢櫃檯人員'
+        text = '此票已使用過，如有問題請洽詢櫃檯人員'
       end
 
       render json: { res:, text: }

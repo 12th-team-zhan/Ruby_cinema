@@ -8,11 +8,9 @@ export default class extends Controller {
     connect() {
         const token = document.querySelector("meta[name='csrf-token']").content;
 
-        console.log(this.videoTarget);
         this.qrScanner = new QrScanner(
             this.videoTarget,
             result => {
-                console.log('decoded qr code:', result.data);
                 fetch("/admin/ticket_checking/scan", {
                     method: "POST",
                     headers: {
@@ -72,6 +70,3 @@ export default class extends Controller {
         }
     }
 }
-// 'Good job!',
-//     'You clicked the button!',
-//     'success'
