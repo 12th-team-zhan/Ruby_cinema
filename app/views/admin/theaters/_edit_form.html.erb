@@ -1,4 +1,4 @@
-  <%= form_with(model: theater) do |form| %>
+  <%= form_with(model: @theater, url:admin_theater_path, method: "patch") do |form| %>
   <div class="form-group row d-flex">
     <div class="col-4 d-flex align-items-center">
       <% if @theater.exterior_img.attached? %>
@@ -31,9 +31,17 @@
         <%= form.label :phone, "連絡電話", class: "input-group-text" %>
         <%= form.text_field :phone, class: "form-control" %>
       </div>
-      <div class="input-group d-flex my-4 justify-content-start">
-        <%= form.submit "修改影城資訊", class: "btn btn-primary" %>
-      </div>
+    </div>
+    <div class="my-3">
+      <%= form.label :description, "簡介", class: "input-group-text w-100" %>
+      <%= form.rich_text_area :description, class: "w-100" %>
+    </div>
+    <div class="my-3">
+      <%= form.label :transportation, "交通資訊", class: "input-group-text w-100" %>
+      <%= form.rich_text_area :transportation, class: "w-100" %>
+    </div>
+    <div class="input-group d-flex my-4 justify-content-start">
+      <%= form.submit "修改影城資訊", class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>
