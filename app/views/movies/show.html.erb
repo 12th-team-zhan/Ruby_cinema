@@ -15,35 +15,12 @@
 </div>
 <!-- 電影資訊 -->
 <div class="container w-75 py-5">
-  <section class="row">
-    <div class="d-flex">
-      <div class="col-4 poster me-3">
-        <%= image_tag @movie.movie_poster, class: "m-auto w-100" %>
-      </div>
-      <div class="col-8 text">
-        <ul class="list-group pb-3">
-          <li class="list-group-item ps-0 pt-0 fs-3 title">
-            <h2><%= @movie.name %></h2>
-          </li>
-          <li class="list-group-item ps-0 pt-0 fs-3 title text-info">
-            <h2><%= @movie.eng_name %></h2>
-          </li>
-          <li class="list-group-item ps-0 pt-0 title">
-            級別：
-            <h2><%= human_attribute_film_ratings[@movie.film_rating.to_i][0] %></h2>
-          </li>
-          <li class="list-group-item ps-0 pt-0 title">
-            上映日期：
-            <h2><%= @movie.debut_date %></h2>
-          </li>
-        </ul>
-        <ul class="list-group">
-          <h3 class="text-secondary">MOVIE INFO</h3>
-          <li>導演：<%= @movie.director %></li>
-          <li>主演：<%= @movie.actor %></li>
-          <li>時長：<%= @movie.duration %></li>
-        </ul>
-      </div>
+  <section class="row gap-5 gap-lg-0">
+    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+      <%= render "movie_info" %>
+    </div>
+    <div class="col-12 col-md-10 col-lg-4 mx-auto">
+      <%= render "showtime_table" %>
     </div>
   </section>
 </div>
