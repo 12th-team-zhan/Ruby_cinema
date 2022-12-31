@@ -1,13 +1,21 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["theater", "showtimeDate"];
+  static targets = [
+    "theater",
+    "showtimeDate",
+    "showtime",
+    "dateDropdownBtn",
+    "showtimeSelect",
+    "showtimeTable",
+  ];
 
   connect() {}
 
-  addShowtime(el) {
-    // console.log(el.target);
-    this.showtimeDateTarget.replaceChildren();
+  addShowtimeDate(el) {
+    this.resetshowtimeDate();
+
+    this.dateDropdownBtnTarget.textContent = `《${el.target.textContent}》請選擇日期`;
 
     const token = document.querySelector("meta[name='csrf-token']").content;
     this.movieId = el.target.dataset.movieId;
@@ -27,18 +35,7 @@ export default class extends Controller {
         return resp.json();
       })
       .then((data) => {
-        console.log(data);
-
-        // data.forEach((element) => {
-        //   let content = "";
-        //   content += `<tr>
-        //   <td><%%></td>
-        //   <td>${element[0]}</td> %>
-        //   <td>${element[1]}</td> %>
-        //   <td><a href="/ticketing/select_tickets?showtimeid=${element[2]}">前往購票</a></td>
-        // </tr>`;
-        //   this.showtimeDateTarget.insertAdjacentHTML("beforeend", content);
-        // });
+        this.showtime = data;
 
         const date = [];
 
@@ -48,12 +45,50 @@ export default class extends Controller {
           }
         });
         date.forEach((element) => {
-          let option = `<option value="${element}" >${element}</option>`;
-          this.showtimeDateTarget.insertAdjacentHTML("beforeend", option);
+          let options = "";
+          options += `<li class="dropdown-item bg-white text-center" data-action="click->movie-show-showtimes#addShowtime">${element}</li>`;
+          this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
         });
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  addShowtime(el) {
+    this.resetshowtimeTable();
+
+    const list = [];
+
+    this.showtime.map((showtime) => {
+      if (showtime[0] === el.target.textContent) {
+        list.push(showtime);
+      }
+    });
+
+    list.forEach((showtime) => {
+      let content = "";
+      content += `<tr>
+            <td>${showtime[0]}</td>
+            <td>${showtime[1]}</td>
+            <td class="align-middle">
+              <button class="btn btn-outline-Silver p-0 m-auto">
+                <a href="/ticketing/select_tickets?showtimeid=${showtime[2]}" class="link-Silver d-block px-4 py-1">Go</a>
+              </button>
+            </td>
+          </tr>`;
+      this.showtimeTarget.insertAdjacentHTML("beforeend", content);
+    });
+  }
+
+  resetshowtimeDate() {
+    this.showtimeDateTarget.replaceChildren();
+    this.showtimeSelectTarget.classList.replace("d-none", "d-block");
+    this.showtimeTableTarget.classList.replace("d-block", "d-none");
+  }
+
+  resetshowtimeTable() {
+    this.showtimeTarget.replaceChildren();
+    this.showtimeTableTarget.classList.replace("d-none", "d-block");
   }
 }

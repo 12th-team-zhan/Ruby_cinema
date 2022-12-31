@@ -15,12 +15,16 @@
 </div>
 <!-- 電影資訊 -->
 <div class="container w-75 py-5">
-  <section class="row gap-5 gap-lg-0">
-    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+  <section class="row gap-5 gap-xl-0">
+    <div class="col-12 col-xl-8 mx-auto">
       <%= render "movie_info" %>
     </div>
-    <div class="col-12 col-md-10 col-lg-4 mx-auto">
-      <%= render "showtime_table" %>
+    <div class="col-12 col-xl-4 mx-auto">
+      <% if @cinema_list.present? %>
+        <%= render "showtime_table" %>
+      <% else %>
+        <h2>目前尚無場次</h2>
+      <% end %>
     </div>
   </section>
 </div>

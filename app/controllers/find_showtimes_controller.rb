@@ -18,7 +18,7 @@ class FindShowtimesController < ApplicationController
 
   def add_movie_list
     @theaters = Theater.where(area: params[:area]).pluck(:id)
-    movie_list = Movie.joins(:movie_theater).where('theater_id IN (?)', @theaters).pluck(:id, :name).uniq
+    movie_list = Movie.joins(:movie_theater).where(:movie_theater => {theater_id: @theaters}).pluck(:id, :name).uniq
     render json: movie_list
   end
 
