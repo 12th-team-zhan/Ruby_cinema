@@ -30,7 +30,7 @@
           </li>
           <li class="list-group-item ps-0 pt-0 title">
             級別：
-            <h2><%= @movie.film_rating %></h2>
+            <h2><%= human_attribute_film_ratings[@movie.film_rating.to_i][0] %></h2>
           </li>
           <li class="list-group-item ps-0 pt-0 title">
             上映日期：
