@@ -31,12 +31,14 @@ export default class extends Controller {
                 this.qrScanner.stop();
             },
             {
-                highlightCodeOutline: true,
+                highlightScanRegion: true,
             },
         );
-        this.qrScanner.start();
-
+        this.qrScanner.start().then(() => {
+            this.addElement("")
+        });
     }
+
 
     swal(data) {
         switch (data.res) {
@@ -44,11 +46,13 @@ export default class extends Controller {
                 Swal.fire(
                     {
                         title: '成功',
-                        text: data.text,
-                        icon: 'error',
+                        html: `<p>${data.text}</p><p>驗證成功</p>`,
+                        icon: 'success',
                         confirmButtonText: '關閉',
                         didClose: () => {
-                            this.qrScanner.start();
+                            this.qrScanner.start().then(() => {
+                                this.addElement(`${data.text}有效`)
+                            });
                         }
                     }
                 )
@@ -61,12 +65,21 @@ export default class extends Controller {
                         icon: 'error',
                         confirmButtonText: '關閉',
                         didClose: () => {
-                            this.qrScanner.start();
+                            this.qrScanner.start().then(() => {
+                                this.addElement("無效的序號")
+                            });
                         }
                     }
                 )
-
                 break;
         }
+    }
+    addElement(message) {
+        const back = `<div class='position-absolute fs-3 w-100 back'>
+                      <a href="/"><i class="fa-solid fa-arrow-left"></i></a></div > `
+        const title = "<div class='position-absolute text-center w-100 fs-3 title'><p>掃描QR Code</p></div>"
+        const text = `<div class='position-absolute text-center w-100 fs-3 text'><p>${message}</p></div > `
+
+        this.videoTarget.insertAdjacentHTML('afterend', back + title + text);
     }
 }

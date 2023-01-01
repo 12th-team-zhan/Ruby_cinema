@@ -1,8 +1,3 @@
-<div data-controller="ticket-checking">
-  <div><%= link_to "<",root_path %></div>
-  <video data-ticket-checking-target="video"></video>
-  <div>
-    <h1>票號:<%#=@ticket.serial%></h1>
-    <h1>結果:<%#=@res%></h1>
-  </div>
+<div class="checking" data-controller="ticket-checking">
+  <video data-ticket-checking-target="video" class="position-relative"></video>
 </div>
