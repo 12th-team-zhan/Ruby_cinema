@@ -1,84 +1,80 @@
-<%= render "shared/nav" %>
-<div class="container text-center py-5 w-75 ">
-  <div class="row align-items-start">
-    <h2 class="text-primary">快搜條件</h2>
-    <div class="d-flex" data-controller="search-showtime-by-area">
-      <div class="col-10 d-flex">
-        <div class="col">
-          <div class="d-flex justify-content-around align-items-center">
-            <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-            <select class="form-select w-90" 
-                        aria-label="select" 
-                        data-action="change->search-showtime-by-area#addMovieList"
-              data-search-showtime-by-area-target="area">
-              <option>請選擇地區</option>
-              <% @theater_areas.each do |theater_area| %>
-                <option value="<%= theater_area[1] %>" ><%= theater_area[0] %></option>
-              <% end %>
-            </select>
-          </div>
+<div class="container text-center px-lg-4p find-showtimes">
+  <h2 class="text-LightCerulean py-3 py-lg-4 m-0"><i class="fa-solid fa-magnifying-glass"></i>快搜條件</h2>
+  <div class="d-flex" data-controller="search-showtime-by-area">
+    <div class="col d-flex flex-wrap">
+      <div class="col-12 col-sm-4 col-xl-2 py-2">
+        <div class="d-flex align-items-center position-relative item">
+          <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot text-LightCerulean"></i></div>
+          <select class="form-select w-90" 
+                    aria-label="select" 
+                    data-action="change->search-showtime-by-area#addMovieList"
+            data-search-showtime-by-area-target="area">
+            <option>請選擇地區</option>
+            <% @theater_areas.each do |theater_area| %>
+              <option value="<%= theater_area[1] %>" ><%= theater_area[0] %></option>
+            <% end %>
+          </select>
         </div>
-        <div class="col">
-          <div class="d-flex justify-content-around align-items-center">
-            <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
-            <select class="form-select w-90" 
+      </div>
+      <div class="col-12 col-sm-4 col-xl-2 py-2">
+        <div class="d-flex align-items-center position-relative item">
+          <div class="icon position-absolute"><i class="m-0 fa-solid fa-video text-LightCerulean"></i></div>
+          <select class="form-select w-90" 
                       aria-label="select"
                       data-search-showtime-by-area-target="movieList"
                       data-action="change->search-showtime-by-area#addShowtimeList">
-              <option>請選擇電影</option>
+            <option>請選擇電影</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-sm-4 col-xl-2 py-2">
+        <div class="d-flex">
+          <div class="col d-flex align-items-center position-relative item ">
+            <div class="icon position-absolute"><i class="m-0 fa-regular fa-calendar-days text-LightCerulean"></i></div>
+            <select class="form-select w-90 col" 
+                          aria-label="select"
+                          data-search-showtime-by-area-target="showtimeList"
+                          data-action="change->search-showtime-by-area#addTimeSelect">
+              <option>請選擇日期</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xl-4 d-flex">
+        <div class="col">
+          <div class="py-2 d-flex align-items-center position-relative item">
+            <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot text-LightCerulean"></i></div>
+            <select class="form-select w-90 col" 
+                          aria-label="select"
+                          data-search-showtime-by-area-target="startTime">
+              <option value="0">時段(起)</option>
             </select>
           </div>
         </div>
         <div class="col">
-          <div class="d-flex">
-            <div class="d-flex justify-content-around align-items-center col">
-              <div class="icon"><i class="m-0 fa-regular fa-calendar-days text-white"></i></div>
-              <select class="form-select w-90 col" 
-                          aria-label="select"
-                          data-search-showtime-by-area-target="showtimeList"
-                          data-action="change->search-showtime-by-area#addTimeSelect">
-                <option>請選擇日期</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="d-flex">
-            <div class="d-flex justify-content-around align-items-center col">
-              <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-              <select class="form-select w-90 col" 
-                          aria-label="select"
-                          data-search-showtime-by-area-target="startTime">
-                <option value="0">時段(起)</option>
-              </select>
-            </div>
-            <div class="d-flex justify-content-around align-items-center col">
-              <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
-              <select class="form-select w-90 col" 
+          <div class="py-2 d-flex align-items-center position-relative item">
+            <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot text-LightCerulean"></i></div>
+            <select class="form-select w-90 col" 
                           aria-label="select"
                           data-search-showtime-by-area-target="endTime"
                           data-action="change->search-showtime-by-area#changeLink">
-                <option value="0">時段(迄)</option>
-              </select>
-            </div>
+              <option value="0">時段(迄)</option>
+            </select>
           </div>
         </div>
       </div>
-      <div class="col-2">
-        <span class="my-2 py-1"
-          data-action="click->search-showtime-by-area#checkAreaData">
-          <%= link_to "查詢場次", "#", class: "btn btn-lg search-bottom", id: "rootSearchShowtime"%>
-        </span>
+      <div class="col-12 col-xl-2 py-2 d-flex align-items-center justify-content-center">
+        <%= link_to "查詢場次", "#", class: "click->search-showtime-by-area#checkAreaData text-center btn btn-LightCerulean search-bottom", id: "rootSearchShowtime"%>
       </div>
     </div>
   </div>
-  <section class="py-5">
-    <h2 class="text-primary">快搜空位結果</h2>
-    <h3 class="text-secondary fs-4"><%= @movie.name %></h3>
-    <article class="py-3">
+  <section class="py-3">
+    <h2 class="text-LightCerulean">快搜空位結果 <%= " : #{@movie.name}"%></h2>
+    <h3 class="text-secondary"></h3>
+    <article class="py-3 test">
       <% if (@movie.present? && @showtimes.present?) %>
-        <table class="table fs-5">
-          <thead class="table-primary">
+        <table class="table fs-lg-5">
+          <thead class="table-LightCerulean">
             <th>影城</th>
             <th>影廳</th>
             <th>日期</th>
@@ -88,7 +84,7 @@
           <% @showtimes.each do |showtime| %>
             <tbody>
               <td><%= showtime.cinema.theater.name%></td>
-              <td><%= showtime.cinema.theater.name%></td>
+              <td><%= showtime.cinema.name%></td>
               <td><%= showtime.started_at.strftime("%Y-%m-%d") %></td>
               <td><%= showtime.started_at.strftime("%I:%M %p") %></td>
               <td><%= link_to "前往購票", "/ticketing/select_tickets?showtimeid=#{showtime.id}" %></td>

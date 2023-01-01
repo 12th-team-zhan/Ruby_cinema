@@ -1,7 +1,6 @@
 @import "bootstrap/mixins/banner";
 @include bsBanner("");
 
-
 // scss-docs-start import-stack
 // Configuration
 @import "bootstrap/functions";
@@ -11,6 +10,7 @@
 
 $cerulean: #2660a9;
 $deepskyblue: #2f96ee;
+$LightCerulean: #2f76cd;
 $darkgray: #999;
 $white: #fff;
 $slategray: #3c3f48;
@@ -28,6 +28,7 @@ $custom-theme-colors: (
   "Silver": $Silver,
   "DodgerBlue": $DodgerBlue,
   "MediumPurple": $MediumPurple,
+  "LightCerulean": $LightCerulean,
 );
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
@@ -110,8 +111,6 @@ $utilities: (
     ),
   ),
 );
-
-
 
 @import "bootstrap/utilities";
 // Layout & components

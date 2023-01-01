@@ -1,49 +1,49 @@
-<div class="container text-center py-5 w-75 find-showtimes">
-  <div class="row">
-    <h2 class="text-primary">快搜條件</h2>
-    <div class="d-flex" data-controller="search-showtime-by-area">
-      <div class="col d-flex">
-        <div class="col">
-          <div class="d-flex justify-content-around align-items-center">
-            <div class="icon"><i class="m-0 fa-solid fa-location-dot "></i></div>
-            <select class="form-select w-90" 
+<div class="container text-center px-lg-4p find-showtimes">
+  <h2 class="text-LightCerulean py-3 py-lg-4 m-0"><i class="fa-solid fa-magnifying-glass"></i>快搜條件</h2>
+  <div class="d-flex" data-controller="search-showtime-by-area">
+    <div class="col d-flex flex-wrap">
+      <div class="col-12 col-sm-4 col-xl-2 py-2">
+        <div class="d-flex align-items-center position-relative item">
+          <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot "></i></div>
+          <select class="form-select w-90" 
                     aria-label="select" 
                     data-action="change->search-showtime-by-area#addMovieList"
-              data-search-showtime-by-area-target="area">
-              <option>請選擇地區</option>
-              <% @theater_areas.each do |theater_area| %>
-                <option value="<%= theater_area[1] %>" ><%= theater_area[0] %></option>
-              <% end %>
-            </select>
-          </div>
+            data-search-showtime-by-area-target="area">
+            <option>請選擇地區</option>
+            <% @theater_areas.each do |theater_area| %>
+              <option value="<%= theater_area[1] %>" ><%= theater_area[0] %></option>
+            <% end %>
+          </select>
         </div>
-        <div class="col">
-          <div class="d-flex justify-content-around align-items-center">
-            <div class="icon"><i class="m-0 fa-solid fa-video "></i></div>
-            <select class="form-select w-90" 
+      </div>
+      <div class="col-12 col-sm-4 col-xl-2 py-2">
+        <div class="d-flex align-items-center position-relative item">
+          <div class="icon position-absolute"><i class="m-0 fa-solid fa-video "></i></div>
+          <select class="form-select w-90" 
                       aria-label="select"
                       data-search-showtime-by-area-target="movieList"
                       data-action="change->search-showtime-by-area#addShowtimeList">
-              <option>請選擇電影</option>
-            </select>
-          </div>
+            <option>請選擇電影</option>
+          </select>
         </div>
-        <div class="col">
-          <div class="d-flex">
-            <div class="d-flex justify-content-around align-items-center col">
-              <div class="icon"><i class="m-0 fa-regular fa-calendar-days"></i></div>
-              <select class="form-select w-90 col" 
+      </div>
+      <div class="col-12 col-sm-4 col-xl-2 py-2">
+        <div class="d-flex">
+          <div class="col d-flex align-items-center position-relative item ">
+            <div class="icon position-absolute"><i class="m-0 fa-regular fa-calendar-days"></i></div>
+            <select class="form-select w-90 col" 
                           aria-label="select"
                           data-search-showtime-by-area-target="showtimeList"
                           data-action="change->search-showtime-by-area#addTimeSelect">
-                <option>請選擇日期</option>
-              </select>
-            </div>
+              <option>請選擇日期</option>
+            </select>
           </div>
         </div>
+      </div>
+      <div class="col-12 col-xl-4 d-flex">
         <div class="col">
-          <div class="d-flex justify-content-around align-items-center col">
-            <div class="icon"><i class="m-0 fa-solid fa-location-dot"></i></div>
+          <div class="py-2 d-flex align-items-center position-relative item">
+            <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot"></i></div>
             <select class="form-select w-90 col" 
                           aria-label="select"
                           data-search-showtime-by-area-target="startTime">
@@ -52,8 +52,8 @@
           </div>
         </div>
         <div class="col">
-          <div class="d-flex justify-content-around align-items-center col">
-            <div class="icon"><i class="m-0 fa-solid fa-location-dot"></i></div>
+          <div class="py-2 d-flex align-items-center position-relative item">
+            <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot"></i></div>
             <select class="form-select w-90 col" 
                           aria-label="select"
                           data-search-showtime-by-area-target="endTime"
@@ -63,12 +63,12 @@
           </div>
         </div>
       </div>
-      <div class="col-2 d-flex align-items-center justify-content-center">
-        <%= link_to "查詢場次", "#", class: "click->search-showtime-by-area#checkAreaData text-center", id: "rootSearchShowtime"%>
+      <div class="col-12 col-xl-2 py-2 pe-lg-5 d-flex align-items-center justify-content-center">
+        <%= link_to "查詢場次", "#", class: "click->search-showtime-by-area#checkAreaData text-center btn btn-LightCerulean", id: "rootSearchShowtime"%>
       </div>
     </div>
   </div>
-  <section class="py-5">
-    <h2 class="text-primary">快搜空位結果</h2>
+  <section class="py-3">
+    <h2 class="text-LightCerulean">快搜空位結果</h2>
   </section>
 </div>

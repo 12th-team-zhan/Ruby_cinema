@@ -1,11 +1,25 @@
 .find-showtimes {
-  .search-bottom {
-    background-color: #365fa4;
-    color: white;
+  min-height: calc(100vh - 176px);
+
+  .item {
+    padding-left: 26px;
+
+    .icon {
+      text-align: center;
+      width: 26px;
+      left: 0px;
+    }
   }
-  .icon {
-    text-align: center;
-    width: 24px;
-    margin: 0px 5px;
+
+  .btn-cerulean {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-hover-bg: #346aad;
+  }
+
+  .test {
+    overflow-x: auto;
+  }
+  table {
+    white-space: nowrap;
   }
 }
