@@ -21,6 +21,6 @@ class MoviesController < ApplicationController
   private
 
   def find_movie
-    @movie = Movie.find(params[:id])
+    @movie = Movie.friendly.find(params[:id])
   end
 end

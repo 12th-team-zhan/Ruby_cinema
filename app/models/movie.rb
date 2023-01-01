@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Movie < ApplicationRecord
+  extend FriendlyId
+
   acts_as_paranoid
 
   # validates
@@ -17,4 +19,6 @@ class Movie < ApplicationRecord
   has_rich_text :description
 
   enum film_rating: { general: 0, parental_guidance: 1, parental_guidance12: 2, parental_guidance15: 3, restricted: 4 }
+  
+  friendly_id :name, use: :slugged
 end

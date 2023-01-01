@@ -6,7 +6,7 @@ class TheatersController < ApplicationController
   end
 
   def show
-    @theater = Theater.find(params[:id])
+    @theater = Theater.friendly.find(params[:id])
     @movies = Movie.joins(:movie_theater).where(:movie_theater =>{theater_id: params[:id]})
   end
 end

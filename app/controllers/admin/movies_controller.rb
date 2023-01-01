@@ -63,7 +63,7 @@ module Admin
     private
 
     def find_movie
-      @movie = Movie.find(params[:id])
+      @movie = Movie.friendly.find(params[:id])
     end
 
     def movie_params

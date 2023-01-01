@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_28_154629) do
+ActiveRecord::Schema.define(version: 2023_01_01_155555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 2022_12_28_154629) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "youtube_iframe"
+    t.string "slug"
+    t.index ["slug"], name: "index_movies_on_slug", unique: true
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
@@ -111,6 +113,8 @@ ActiveRecord::Schema.define(version: 2022_12_28_154629) do
     t.integer "edit_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_news_on_slug", unique: true
     t.index ["user_id"], name: "index_news_on_user_id"
   end
 
@@ -165,7 +169,9 @@ ActiveRecord::Schema.define(version: 2022_12_28_154629) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "area"
+    t.string "slug"
     t.index ["deleted_at"], name: "index_theaters_on_deleted_at"
+    t.index ["slug"], name: "index_theaters_on_slug", unique: true
   end
 
   create_table "tickets", force: :cascade do |t|
