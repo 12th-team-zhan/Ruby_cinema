@@ -1,4 +1,4 @@
-<div class="main px-5 mx-auto">
+<div class="main container flex-fill">
   <div class="container container-breadcrumb p-0">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -11,3 +11,4 @@
   <section class="py-4">
     <%= render "form", movie: @movie, url: admin_movies_path, method:"post" %>
   </section>
+</div>

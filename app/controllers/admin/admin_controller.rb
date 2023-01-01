@@ -18,5 +18,12 @@ module Admin
       render file: "#{Rails.root}/public/404.html", layout: false,
              status: :bad_request
     end
+
+    def current_user_is_admin
+      return if current_user.admin?
+
+      render file: "#{Rails.root}/public/404.html", layout: false,
+             status: :bad_request
+    end
   end
 end

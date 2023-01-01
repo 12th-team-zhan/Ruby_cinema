@@ -1,8 +1,8 @@
 .sidebar {
-  min-width: 110px;
+  min-width: 175px;
   min-height: 100vh;
-  border-right: 3px solid var(--bs-darkgray);
-  
+  border-right: 5px solid var(--bs-darkgray);
+
   .position-sticky {
     align-self: flex-start;
     top: 50px;

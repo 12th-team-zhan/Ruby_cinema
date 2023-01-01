@@ -1,10 +1,13 @@
+//
+@import "bootstrap-custom.scss";
+
 // admin
 @import "admin/movie/edit.scss";
 @import "admin/seats.scss";
 @import "admin/sidebar.scss";
 
 //user
-@import "bootstrap-custom.scss";
+@import "layout.scss";
 @import "nav.scss";
 @import "users.scss";
 @import "root.scss";

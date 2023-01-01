@@ -1,11 +1,8 @@
 .container {
   .movie-list {
     .card {
-      &:hover {
-        background-color: rgba(109, 138, 211, 0.156);
-      }
-    }
-    .pic {
+      background-color: rgba(109, 138, 211, 0.156);
+      margin-bottom: 30px;
     }
   }
 }
@@ -14,6 +11,9 @@
   .container {
     .movie-list {
       .card {
+        background-color: white;
+        margin-bottom: 0px;
+        
         &:hover {
           background-color: rgba(109, 138, 211, 0.156);
         }

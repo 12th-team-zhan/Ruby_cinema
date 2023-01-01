@@ -1,2 +1,17 @@
-<h1>編輯消息</h1>
-<%= render "form", news: @news, url: admin_news_path, method:"patch" %>
+<div class="continer flex-fill">
+  <div class="d-flex">
+    <div class="main flex-grow-1 p-0 ms-1 text-dark">
+      <div class="container container-breadcrumb">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
+            <li class="breadcrumb-item active" aria-current="page">消息編輯</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="continer p-3">
+    <%= render "form", news: @news, url: admin_news_path, method:"patch" %>
+  </div>
+</div>
