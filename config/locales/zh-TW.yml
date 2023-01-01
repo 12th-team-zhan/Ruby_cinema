@@ -51,6 +51,11 @@ zh-TW:
         user: 會員
         staff: 員工
         admin: 系統管理員
+      order:
+        statuses:
+          pending: 待付款
+          paid: 已付款
+          cancel: 已取消
     models:
       user: 使用者
   date:

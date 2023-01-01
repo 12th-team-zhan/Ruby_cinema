@@ -3,6 +3,7 @@
 class TicketingController < ApplicationController
   before_action :calc_amount, only: %i[create]
   before_action :calc_ticket_category_arr, only: %i[create]
+  skip_before_action :verify_authenticity_token, only: %i[checkout]
 
   def select_tickets
     @showtime = Showtime.includes([:movie, { cinema: :theater }]).where(id: params[:showtimeid]).references(:movie,
@@ -55,12 +56,28 @@ class TicketingController < ApplicationController
 
   def pay
     @order = Order.find(session[:order_id])
-    @ticket = Ticket.includes(showtime: [:movie, {
-                                cinema: :theater
-                              }]).where(order_id: @order.id).limit(1).references(:showtime)
+    @ticket = Ticket.includes(showtime: [:movie,
+                                         { cinema: :theater }]).where(order_id: @order.id).limit(1).references(:showtime)
     @ticket = @ticket.first
     order = { slug: @order.serial, amount: @order.amount, name: '電影票', email: current_user.email }
     @form_info = Mpg.new(order).form_info
+  end
+
+  def checkout
+    response = MpgResponse.new(params[:TradeInfo])
+    @order = Order.find_by(serial: response.order_no)
+    @ticket = Ticket.includes(showtime: [:movie,
+                                         { cinema: :theater }]).where(order_id: @order.id).limit(1).references(:showtime)
+    @ticket = @ticket.first
+    user = User.find(@order.user_id)
+    sign_in(user)
+
+    if response.status == 'SUCCESS'
+      @result = 'success'
+      @order.update(status: 1)
+    else
+      @result = 'fail'
+    end
   end
 
   private

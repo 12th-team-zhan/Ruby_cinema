@@ -17,6 +17,7 @@ $slategray: #3c3f48;
 $Silver: #f5f1f1;
 $DodgerBlue: #338eff;
 $MediumPurple: #795dbb;
+$darkblue: #b1cae7;
 $card-border-width: 0px;
 
 $custom-theme-colors: (
@@ -29,6 +30,7 @@ $custom-theme-colors: (
   "DodgerBlue": $DodgerBlue,
   "MediumPurple": $MediumPurple,
   "LightCerulean": $LightCerulean,
+  "darkblue":$darkblue,
 );
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");

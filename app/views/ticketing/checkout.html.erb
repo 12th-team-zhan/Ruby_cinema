@@ -5,7 +5,7 @@
     </div>
     <div class="order col-12 col-md-9 col-lg-8 col-xl-6 bg-darkblue rounded-3 shadow mx-auto my-50px">
       <div class="order-title p-3 p-md-5 text-center">
-        <h2>確認您的訂單</h2>
+        <%= format_order(@result) %>
       </div>
       <div class="order-list mx-sm-5 mx-3 fs-4 d-flex justify-content-between">
         <p class="fw-semibold">訂購時間</p>
@@ -39,15 +39,9 @@
         <p class="fw-semibold">總計金額:</p>
         <p class="fs-1">$<%= @order.amount %></p>
       </div>
-      <%= form_with(model: @ticket, url: "https://ccore.newebpay.com/MPG/mpg_gateway", method: "post" ) do |f| %>
-        <div class="order-list mx-sm-5 mx-3 py-3 fs-4 d-flex justify-content-between">
-          <input type="hidden" name="MerchantID" value="<%= @form_info[:MerchantID] %>" readonly>
-          <input type="hidden" name="Version" value="2.0" readonly>
-          <input type="hidden" name="TradeInfo" value="<%= @form_info[:TradeInfo] %>" readonly>
-          <input type="hidden" name="TradeSha" value="<%= @form_info[:TradeSha] %>" readonly>
-          <%= link_to "取消訂單", "#", method: "delete", class: "cancel text-deepskyblue rounded-3" %>
-          <%=   f.submit"確認購買", class: "submit text-deepskyblue rounded-3"%>
-        <% end %>
+      <div class="order-list mx-sm-5 mx-3 py-3 fs-4 d-flex justify-content-between">
+        <%= link_to "返回首頁", root_path, class: "cancel text-deepskyblue rounded-3" %>
+        <%= link_to "我的帳單", orders_path, class: "cancel text-deepskyblue rounded-3" %>
       </div>
     </div>
   </div>

@@ -37,6 +37,6 @@ class OrdersController < ApplicationController
   end
 
   def find_order
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.orders.friendly.find(params[:id])
   end
 end
