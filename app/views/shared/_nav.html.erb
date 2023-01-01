@@ -71,7 +71,7 @@
         </button>
       </div>
       <div class="modal-body" >
-        <%= form_for User.new , url: user_session_path ,method:"post" do |f| %>
+        <%= form_for User.new, url: user_session_path, method:"post" do |f| %>
           <%= f.hidden_field "path", value: request.url %>
           <%= f.hidden_field "base_path", value: request.base_url %>
           <div class="field mt-5 position-relative d-flex">
