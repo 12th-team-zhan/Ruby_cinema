@@ -1,6 +1,8 @@
 <div class="d-flex row">
   <div class="col-12 col-lg-7 poster mb-3">
-    <%= image_tag @movie.movie_poster, class: "m-auto w-100" %>
+    <% if @movie.movie_poster.persisted?  %>
+      <%= image_tag @movie.movie_poster, class: "m-auto w-100" %>
+    <% end %>
   </div>
   <div class="col-12 col-lg-5">
     <ul class="list-group pb-3">
