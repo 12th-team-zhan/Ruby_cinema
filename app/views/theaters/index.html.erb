@@ -6,7 +6,7 @@
     </ol>
   </nav>
 </div>
-<div class="container px-lg-4p">
+<section class="container px-lg-4p">
   <h1 class="text-deepskyblue">影城據點</h1>
   <div class="theater-list d-flex flex-wrap">
     <% @theaters.each do |theater| %>
@@ -18,7 +18,7 @@
             <% end %>
           <% end %>
           <div class="card-body px-0 px-sm-3">
-            <h5 class="card-title"><%= theater.name %></h5>
+            <h5 class="card-title"><%= link_to theater.name, theater_path(theater) %></h5>
             <div class="d-flex position-relative">
               <div class="icon ps-1">
                 <i class="fa-solid fa-location-dot "></i>
@@ -36,5 +36,9 @@
       </div>
     <% end %>
   </div>
-</div>
-</div>
+</section>
+<section class="text-center">
+  <span class="my-2 py-1 px-4">
+    <%= link_to "回首頁", root_path, class: "btn btn-cerulean-confirm btn-lg " %>
+  </span>
+</section>

@@ -3,6 +3,7 @@
 class TicketingController < ApplicationController
   before_action :calc_amount, only: %i[create]
   before_action :calc_ticket_category_arr, only: %i[create]
+  skip_before_action :verify_authenticity_token, only: %i[checkout]
 
   def select_tickets
     @showtime = Showtime.includes([:movie, { cinema: :theater }]).where(id: params[:showtimeid]).references(:movie,
@@ -14,6 +15,10 @@ class TicketingController < ApplicationController
     @showtime = Showtime.find(params[:showtimeid])
     @cinema = Cinema.find(@showtime.cinema.id)
     @not_seat = Seat.find_by(cinema_id: @showtime.cinema.id, category: 'not_added')
+    @ticket_list = [("全票#{params[:regularAmount]}" unless params[:regularAmount] == '0').to_s,
+                    ("優待票#{params[:concessionAmount]}" unless params[:concessionAmount] == '0').to_s,
+                    ("敬老票#{params[:elderlyAmount]}" unless params[:elderlyAmount] == '0').to_s,
+                    ("愛心票#{params[:disabilityAmount]}" unless params[:disabilityAmount] == '0').to_s]
   end
 
   def seat_reservation
@@ -51,12 +56,28 @@ class TicketingController < ApplicationController
 
   def pay
     @order = Order.find(session[:order_id])
-    @ticket = Ticket.includes(showtime: [:movie, {
-                                cinema: :theater
-                              }]).where(order_id: @order.id).limit(1).references(:showtime)
+    @ticket = Ticket.includes(showtime: [:movie,
+                                         { cinema: :theater }]).where(order_id: @order.id).limit(1).references(:showtime)
     @ticket = @ticket.first
     order = { slug: @order.serial, amount: @order.amount, name: '電影票', email: current_user.email }
     @form_info = Mpg.new(order).form_info
+  end
+
+  def checkout
+    response = MpgResponse.new(params[:TradeInfo])
+    @order = Order.find_by(serial: response.order_no)
+    @ticket = Ticket.includes(showtime: [:movie,
+                                         { cinema: :theater }]).where(order_id: @order.id).limit(1).references(:showtime)
+    @ticket = @ticket.first
+    user = User.find(@order.user_id)
+    sign_in(user)
+
+    if response.status == 'SUCCESS'
+      @result = 'success'
+      @order.update(status: 1)
+    else
+      @result = 'fail'
+    end
   end
 
   private

@@ -123,6 +123,8 @@ GEM
     faraday-net_http (3.0.2)
     ffi (1.15.5)
     foreman (0.87.2)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
@@ -354,6 +356,7 @@ DEPENDENCIES
   devise (~> 4.8)
   dotenv-rails (~> 2.8, >= 2.8.1)
   foreman (~> 0.87.2)
+  friendly_id (~> 5.4.0)
   image_processing
   jbuilder (~> 2.7)
   listen (~> 3.3)

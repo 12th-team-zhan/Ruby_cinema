@@ -53,7 +53,7 @@
       <div class="search-middle py-3" >
         <div class="item d-grid gap-2 " data-index-search-form-target="ticketForm" data-controller="search-showtime">
           <div class="d-flex justify-content-around align-items-center">
-            <div class="icon"><i class="m-0 fa-solid fa-location-dot  text-white"></i></div>
+            <div class="icon"><i class="m-0 fa-solid fa-location-dot text-white"></i></div>
             <select class="form-select w-90" 
                     aria-label="select" 
                     data-action="change->search-showtime#addTheaterList">
@@ -64,11 +64,11 @@
             </select>
           </div>
           <div class="d-flex justify-content-around align-items-center">
-            <div class="icon"><i class="m-0 fa-solid fa-video  text-white"></i></div>
+            <div class="icon"><i class="m-0 fa-solid fa-video text-white"></i></div>
             <select class="form-select w-90" 
                     aria-label="select" 
                     data-action="change->search-showtime#addShowtimeDate" 
-              data-search-showtime-target="theaterList">
+                    data-search-showtime-target="theaterList">
               <option>請選擇影城</option>
             </select>
           </div>
@@ -93,7 +93,7 @@
           <div class="container search-bottom d-flex text-light justify-content-around pb-3">
             <span class="my-2 py-1 px-4 bg-primary3"
                   data-action="click->search-showtime#checkBookingData">
-              <%= link_to "前往訂票", "#",  class: "btn btn-deepskyblue btn-lg", id: "rootBuyTickets" %>
+              <%= link_to "前往訂票", "#", class: "btn btn-deepskyblue btn-lg", id: "rootBuyTickets" %>
             </span>
           </div>
         </div>
@@ -103,9 +103,9 @@
             <select class="form-select w-90" 
                     aria-label="select" 
                     data-action="change->search-showtime-by-area#addMovieList"
-                    data-search-showtime-by-area-target="area">
+              data-search-showtime-by-area-target="area">
               <option>請選擇地區</option>
-              <% @theater_areas.each do |theater_area| %>
+              <% human_attribute_areas.each do |theater_area| %>
                 <option value="<%= theater_area[1] %>" ><%= theater_area[0] %></option>
               <% end %>
             </select>
@@ -174,10 +174,9 @@
         <li class="list-group-item ps-0">
           <span class="new-date bg-deepskyblue text-light p-1 me-3">
             <%= news.created_at.strftime("%Y/%m/%d") %></span>
-          <%= link_to news.title, news_path(news), class: "new-text" %>
+          <%= link_to news.title, news_path(news), class: "new-text text-LightCerulean" %>
         </li>
       <% end %>
     </ul>
   </div>
 </article>
-<footer class="bg-cerulean text-center py-4">Lorem ipsum dolor sit </footer>

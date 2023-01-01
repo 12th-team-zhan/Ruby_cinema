@@ -1,0 +1,48 @@
+<div class="container pay">
+  <div class="d-flex position-relative">
+    <div class="col-12 col-md-9 col-lg-8 col-xl-6 position-absolute img d-none d-md-block">
+      <%= image_tag @ticket.showtime.movie.movie_poster, class: "m-auto w-50  order-img" %>
+    </div>
+    <div class="order col-12 col-md-9 col-lg-8 col-xl-6 bg-darkblue rounded-3 shadow mx-auto my-50px">
+      <div class="order-title p-3 p-md-5 text-center">
+        <%= format_order(@result) %>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 fs-4 d-flex justify-content-between">
+        <p class="fw-semibold">訂購時間</p>
+        <p><%= @order.created_at.strftime("%Y/%m/%d %I:%M") %></p>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 fs-4 d-flex justify-content-between">
+        <p class="fw-semibold">訂單序號</p>
+        <p><%= @order.serial %></p>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 fs-4 d-flex justify-content-between">
+        <p class="fw-semibold">電影名稱</p>
+        <p><%= @ticket.showtime.movie.name %></p>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 fs-4 d-flex justify-content-between">
+        <p class="fw-semibold">影城：</p>
+        <p><%= @ticket.showtime.cinema.theater.name %></p>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 fs-4 d-flex justify-content-between">
+        <p class="fw-semibold">影廳：</p>
+        <p><%= @ticket.showtime.cinema.name %></p>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 fs-4 d-flex justify-content-between">
+        <p class="fw-semibold">座位：</p>
+        <p><%= format_seats(@ticket.showtime.cinema.max_column) %></p>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 pb-3 fs-4 d-flex justify-content-between border-bottom">
+        <p class="fw-semibold">場次：</p>
+        <p><%= @ticket.showtime.started_at.strftime("%Y/%m/%d %I:%M")%></p>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 pt-3 fs-4 d-flex justify-content-between align-items-baseline">
+        <p class="fw-semibold">總計金額:</p>
+        <p class="fs-1">$<%= @order.amount %></p>
+      </div>
+      <div class="order-list mx-sm-5 mx-3 py-3 fs-4 d-flex justify-content-between">
+        <%= link_to "返回首頁", root_path, class: "cancel text-deepskyblue rounded-3" %>
+        <%= link_to "我的帳單", orders_path, class: "cancel text-deepskyblue rounded-3" %>
+      </div>
+    </div>
+  </div>
+</div>

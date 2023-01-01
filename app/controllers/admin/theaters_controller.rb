@@ -51,6 +51,7 @@ module Admin
                                       :phone, 
                                       :deleted_at,  
                                       images: [])
+      params.require(:theater).permit(:name, :area, :address, :phone, :deleted_at, :description, :transportation)
     end
 
     def append_exterior_img

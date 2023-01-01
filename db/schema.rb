@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_27_093904) do
+ActiveRecord::Schema.define(version: 2022_12_28_154629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,11 +69,15 @@ ActiveRecord::Schema.define(version: 2022_12_27_093904) do
     t.index ["theater_id"], name: "index_cinemas_on_theater_id"
   end
 
-  create_table "customers", id: :integer, default: nil, force: :cascade do |t|
-    t.integer "c_id"
-    t.string "name", limit: 50
-    t.string "address", limit: 255
-    t.string "phone", limit: 20
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "movie_theaters", force: :cascade do |t|
@@ -119,6 +123,8 @@ ActiveRecord::Schema.define(version: 2022_12_27_093904) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "amount", default: 0
+    t.string "slug"
+    t.index ["slug"], name: "index_orders_on_slug", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -142,6 +148,15 @@ ActiveRecord::Schema.define(version: 2022_12_27_093904) do
     t.index ["deleted_at"], name: "index_showtimes_on_deleted_at"
   end
 
+  create_table "theater_showtimes", force: :cascade do |t|
+    t.bigint "showtime_id", null: false
+    t.bigint "theater_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["showtime_id"], name: "index_theater_showtimes_on_showtime_id"
+    t.index ["theater_id"], name: "index_theater_showtimes_on_theater_id"
+  end
+
   create_table "theaters", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -155,13 +170,17 @@ ActiveRecord::Schema.define(version: 2022_12_27_093904) do
 
   create_table "tickets", force: :cascade do |t|
     t.string "seat"
-    t.integer "status"
+    t.integer "status", default: 0
     t.string "serial"
     t.integer "category"
     t.datetime "deleted_at"
     t.integer "showtime_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "regular_quantity", default: 0
+    t.integer "concession_quantity", default: 0
+    t.integer "elderly_quantity", default: 0
+    t.integer "disability_quantity", default: 0
     t.string "movie_name"
     t.string "cinema_name"
     t.string "theater_name"
@@ -189,11 +208,13 @@ ActiveRecord::Schema.define(version: 2022_12_27_093904) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "fb_uid"
-    t.string "fb_token"
     t.string "name"
     t.datetime "deleted_at"
     t.integer "role", default: 0
+    t.string "fb_uid"
+    t.string "fb_token"
+    t.string "google_uid"
+    t.string "google_token"
     t.string "provider"
     t.string "uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -211,4 +232,6 @@ ActiveRecord::Schema.define(version: 2022_12_27_093904) do
   add_foreign_key "movies", "users"
   add_foreign_key "news", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "theater_showtimes", "showtimes"
+  add_foreign_key "theater_showtimes", "theaters"
 end

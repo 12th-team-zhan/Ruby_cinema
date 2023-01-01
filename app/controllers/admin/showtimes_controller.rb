@@ -3,8 +3,8 @@
 module Admin
   class ShowtimesController < AdminController
     before_action :authenticate_user!
-    before_action :find_movie, only: %i[index new create destroy]
-    before_action :find_theater, only: %i[new index]
+    before_action :find_movie, only: %i[index create destroy]
+    before_action :find_theater, only: %i[index]
     before_action :find_showtime, only: %i[destroy]
 
     def index
@@ -12,14 +12,15 @@ module Admin
     end
 
     def create
-      @showtimes = @movie.showtimes.all
+      @showtimes = Showtime.where(movie_id:params[:movie_id],cinema_id: showtime_params[:cinema_id])
       @showtime = @movie.showtimes.new(showtime_params)
 
       showtime_start = showtime_params[:started_at].to_datetime.to_i
       showtime_end = showtime_params[:end_at].to_datetime.to_i
 
       showtime_all = @showtimes.map { |showtime| [showtime.started_at.to_i, showtime.end_at.to_i] }
-      current_time = Time.current.to_i
+      current_time = Time.now.to_i
+
       showtime_condition = showtime_all.map do |arr|
         if showtime_start < arr[0]
           showtime_end < arr[0]

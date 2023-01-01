@@ -15,35 +15,16 @@
 </div>
 <!-- 電影資訊 -->
 <div class="container w-75 py-5">
-  <section class="row">
-    <div class="d-flex">
-      <div class="col-4 poster me-3">
-        <%= image_tag @movie.movie_poster, class: "m-auto w-100" %>
-      </div>
-      <div class="col-8 text">
-        <ul class="list-group pb-3">
-          <li class="list-group-item ps-0 pt-0 fs-3 title">
-            <h2><%= @movie.name %></h2>
-          </li>
-          <li class="list-group-item ps-0 pt-0 fs-3 title text-info">
-            <h2><%= @movie.eng_name %></h2>
-          </li>
-          <li class="list-group-item ps-0 pt-0 title">
-            級別：
-            <h2><%= @movie.film_rating %></h2>
-          </li>
-          <li class="list-group-item ps-0 pt-0 title">
-            上映日期：
-            <h2><%= @movie.debut_date %></h2>
-          </li>
-        </ul>
-        <ul class="list-group">
-          <h3 class="text-secondary">MOVIE INFO</h3>
-          <li>導演：<%= @movie.director %></li>
-          <li>主演：<%= @movie.actor %></li>
-          <li>時長：<%= @movie.duration %></li>
-        </ul>
-      </div>
+  <section class="row gap-5 gap-xl-0">
+    <div class="col-12 col-xl-8 mx-auto">
+      <%= render "movie_info" %>
+    </div>
+    <div class="col-12 col-xl-4 mx-auto">
+      <% if @cinema_list.present? %>
+        <%= render "showtime_table" %>
+      <% else %>
+        <h2>目前尚無場次</h2>
+      <% end %>
     </div>
   </section>
 </div>
@@ -75,7 +56,9 @@
     <%= @movie.description %>
     <article></article>
   </section>
-  <div class="d-flex justify-content-center">
-    <%= link_to "回列表", movies_path, class: "btn btn-lg search-bottom"%>
-  </div>
+  <section class="text-center">
+    <span class="my-2 py-1 px-4">
+      <%= link_to "回電影列表", movies_path, class: "btn btn-cerulean-confirm btn-lg " %>
+    </span>
+  </section>
 </div>

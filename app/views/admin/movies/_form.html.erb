@@ -13,7 +13,7 @@
   </div>
   <div class="input-group mb-3">
     <%= f.label :film_rating, "級數", class: "input-group-text" %>
-    <%= f.select :film_rating, options_for_select((Movie.film_ratings.keys), @movie.film_rating), {}, class: "form-control" %>
+    <%= f.select :film_rating, options_for_select(human_attribute_film_ratings, @movie.film_rating), {}, class: "form-control" %>
   </div>
   <div class="input-group mb-3">
     <%= f.label :director, "導演", class: "input-group-text" %>
@@ -29,11 +29,11 @@
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text">預告片嵌入網址</span>
-    <%= f.text_field :youtube_iframe %>
+    <%= f.text_field :youtube_iframe, class: "form-control" %>
   </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text">簡介</span>
-    <%= f.rich_text_area :description %>
+  <div class="mb-3">
+    <span class="input-group-text w-100">簡介</span>
+    <%= f.rich_text_area :description, class: "w-100" %>
   </div>
   <div class="my-3 d-flex">
     <%= f.file_field :movie_poster, class:"input-group-text w-100" %>

@@ -1,7 +1,6 @@
 @import "bootstrap/mixins/banner";
 @include bsBanner("");
 
-
 // scss-docs-start import-stack
 // Configuration
 @import "bootstrap/functions";
@@ -11,12 +10,14 @@
 
 $cerulean: #2660a9;
 $deepskyblue: #2f96ee;
+$LightCerulean: #2f76cd;
 $darkgray: #999;
 $white: #fff;
 $slategray: #3c3f48;
 $Silver: #f5f1f1;
 $DodgerBlue: #338eff;
 $MediumPurple: #795dbb;
+$darkblue: #b1cae7;
 $card-border-width: 0px;
 
 $custom-theme-colors: (
@@ -28,6 +29,8 @@ $custom-theme-colors: (
   "Silver": $Silver,
   "DodgerBlue": $DodgerBlue,
   "MediumPurple": $MediumPurple,
+  "LightCerulean": $LightCerulean,
+  "darkblue":$darkblue,
 );
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
@@ -111,8 +114,6 @@ $utilities: (
   ),
 );
 
-
-
 @import "bootstrap/utilities";
 // Layout & components
 @import "bootstrap/root";
@@ -174,6 +175,7 @@ $utilities: (
     border-bottom: 2px solid white;
   }
 }
+
 .btn-deepskyblue {
   --bs-btn-color: var(--white);
   --bs-btn-hover-bg: var(--bs-backdrop-bg);
@@ -184,7 +186,17 @@ $utilities: (
 
   .breadcrumb {
     --bs-breadcrumb-bg: var(--bs-Silver);
-    --bs-breadcrumb-padding-y:5px;
-    --bs-breadcrumb-font-size:15px;
+    --bs-breadcrumb-padding-y: 5px;
+    --bs-breadcrumb-font-size: 15px;
   }
+}
+
+.btn-cerulean-confirm {
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bs-cerulean);
+  --bs-btn-disabled-bg: none;
+  --bs-btn-border-color: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-hover-bg: var(--bs-deepskyblue);
+  --bs-btn-hover-color: #eaebed;
 }

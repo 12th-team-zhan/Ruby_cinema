@@ -15,6 +15,6 @@ class Ticket < ApplicationRecord
   private
 
   def generate_serial
-    self.serial = SecureRandom.alphanumeric(10)
+    self.serial = SecureRandom.alphanumeric(10) if serial.nil?
   end
 end

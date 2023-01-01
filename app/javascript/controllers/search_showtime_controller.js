@@ -3,8 +3,6 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   static targets = ["theaterList", "showtimeDate", "showtime", "movieList"];
 
-  connect() {}
-
   addTheaterList(el) {
     this.resetTheaterList();
     this.resetShowtimeDate();
@@ -24,10 +22,13 @@ export default class extends Controller {
         return resp.json();
       })
       .then((data) => {
+        let options = "";
+
         data.forEach((element) => {
-          let option = `<option value="${element.theater_id}" >${element.name}</option>`;
-          this.theaterListTarget.insertAdjacentHTML("beforeend", option);
+          options += `<option value="${element.theater_id}" >${element.name}</option>`;
         });
+
+        this.theaterListTarget.insertAdjacentHTML("beforeend", options);
       })
       .catch((err) => {
         console.log(err);
@@ -55,19 +56,25 @@ export default class extends Controller {
         return resp.json();
       })
       .then((data) => {
-        this.showtime = data;
+        if (data.length !== 0) {
+          this.showtime = data;
 
-        const date = [];
+          const date = [];
+          let options = "";
 
-        data.map((element) => {
-          if (date.indexOf(element[0]) === -1) {
-            date.push(element[0]);
-          }
-        });
-        date.forEach((element) => {
-          let option = `<option value="${element}" >${element}</option>`;
-          this.showtimeDateTarget.insertAdjacentHTML("beforeend", option);
-        });
+          data.map((element) => {
+            if (date.indexOf(element[0]) === -1) {
+              date.push(element[0]);
+            }
+          });
+          date.forEach((element) => {
+            options += `<option value="${element}" >${element}</option>`;
+          });
+          this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
+        
+        } else {
+          this.noComeOut();
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -77,12 +84,15 @@ export default class extends Controller {
   addShowtime() {
     this.resetShowtime();
 
+    let options = "";
+
     this.showtime.map((showtime) => {
       if (showtime[0] === this.showtimeDateTarget.value) {
-        let option = `<option value="${showtime[2]}" >${showtime[1]}</option>`;
-        this.showtimeTarget.insertAdjacentHTML("beforeend", option);
+        options += `<option value="${showtime[2]}" >${showtime[1]}</option>`;
       }
     });
+
+    this.showtimeTarget.insertAdjacentHTML("beforeend", options);
   }
 
   changeLink() {
@@ -95,7 +105,7 @@ export default class extends Controller {
       e.preventDefault();
       const link = document.querySelector("#rootSearchShowtime");
       link.href = `#`;
-      alert("請填寫查詢時段");
+      alert("請填寫查詢場次");
     }
   }
 
@@ -114,6 +124,15 @@ export default class extends Controller {
   resetShowtime() {
     this.showtimeTarget.replaceChildren();
     let timeOption = `<option value="0">請選擇場次</option>`;
+    this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
+  }
+
+  noComeOut() {
+    this.showtimeDateTarget.replaceChildren();
+    this.showtimeTarget.replaceChildren();
+    let dateOption = `<option>目前沒有場次</option>`;
+    let timeOption = `<option value="0">目前沒有場次</option>`;
+    this.showtimeDateTarget.insertAdjacentHTML("beforeend", dateOption);
     this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
   }
 }

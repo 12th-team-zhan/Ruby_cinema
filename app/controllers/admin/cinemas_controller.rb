@@ -3,7 +3,7 @@
 module Admin
   class CinemasController < AdminController
     before_action :find_theater, only: %i[index new create]
-    before_action :find_cinema, only: %i[show edit update destroy]
+    before_action :find_cinema, only: %i[edit update destroy]
 
     def index
       @cinemas = @theater.cinemas.order(id: :desc)
@@ -41,8 +41,8 @@ module Admin
     private
 
     def cinema_params
-      params.require(:cinema).permit(:name, :max_row, :max_column, :regular_price, 
-                                     :concession_price,:disability_price, :elderly_price)
+      params.require(:cinema).permit(:name, :max_row, :max_column, :regular_price,
+                                     :concession_price, :disability_price, :elderly_price)
     end
 
     def find_cinema

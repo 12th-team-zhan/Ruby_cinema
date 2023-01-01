@@ -9,8 +9,6 @@ export default class extends Controller {
     "endTime",
   ];
 
-  connect() {}
-
   addMovieList(el) {
     this.resetMovie();
     this.resetShowtime();
@@ -30,10 +28,13 @@ export default class extends Controller {
         return resp.json();
       })
       .then((data) => {
+        let options = "";
+
         data.forEach((element) => {
-          let option = `<option value="${element[0]}" >${element[1]}</option>`;
-          this.movieListTarget.insertAdjacentHTML("beforeend", option);
+          options += `<option value="${element[0]}" >${element[1]}</option>`;
         });
+
+        this.movieListTarget.insertAdjacentHTML("beforeend", options);
       })
       .catch((err) => {
         console.log(err);
@@ -61,16 +62,22 @@ export default class extends Controller {
       })
       .then((data) => {
         const date = [];
+        let options = "";
 
-        data.map((element) => {
-          if (date.indexOf(element[0]) === -1) {
-            date.push(element[0]);
-          }
-        });
-        date.forEach((element) => {
-          let option = `<option value="${element}" >${element}</option>`;
-          this.showtimeListTarget.insertAdjacentHTML("beforeend", option);
-        });
+        if (data.length !== 0) {
+          data.map((element) => {
+            if (date.indexOf(element[0]) === -1) {
+              date.push(element[0]);
+            }
+          });
+          date.forEach((element) => {
+            options += `<option value="${element}" >${element}</option>`;
+          });
+          
+          this.showtimeListTarget.insertAdjacentHTML("beforeend", options);
+        } else {
+          this.noComeOut();
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -80,14 +87,16 @@ export default class extends Controller {
   addTimeSelect() {
     this.resetTimeSelect();
 
+    let options = "";
+
     var i = 6;
     for (i; i < 25; i++) {
-      let option = `<option value="${this.autoSupplement(
+      options += `<option value="${this.autoSupplement(
         i.toString()
       )}:00" >${this.autoSupplement(i.toString())}:00</option>`;
-      this.startTimeTarget.insertAdjacentHTML("beforeend", option);
-      this.endTimeTarget.insertAdjacentHTML("beforeend", option);
     }
+    this.startTimeTarget.insertAdjacentHTML("beforeend", options);
+    this.endTimeTarget.insertAdjacentHTML("beforeend", options);
   }
 
   changeLink(e) {
@@ -143,5 +152,11 @@ export default class extends Controller {
 
   autoSupplement(timeHour) {
     return timeHour.padStart(2, "0");
+  }
+
+  noComeOut() {
+    this.showtimeListTarget.replaceChildren();
+    let Option = `<option>目前沒有場次</option>`;
+    this.showtimeListTarget.insertAdjacentHTML("beforeend", Option);
   }
 }
