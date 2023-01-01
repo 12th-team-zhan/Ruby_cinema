@@ -3,8 +3,6 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   static targets = ["theaterList", "showtimeDate", "showtime", "movieList"];
 
-  connect() {}
-
   addTheaterList(el) {
     this.resetTheaterList();
     this.resetShowtimeDate();
@@ -24,11 +22,13 @@ export default class extends Controller {
         return resp.json();
       })
       .then((data) => {
+        let options = "";
+
         data.forEach((element) => {
-          let options = "";
           options += `<option value="${element.theater_id}" >${element.name}</option>`;
-          this.theaterListTarget.insertAdjacentHTML("beforeend", options);
         });
+
+        this.theaterListTarget.insertAdjacentHTML("beforeend", options);
       })
       .catch((err) => {
         console.log(err);
@@ -60,6 +60,7 @@ export default class extends Controller {
           this.showtime = data;
 
           const date = [];
+          let options = "";
 
           data.map((element) => {
             if (date.indexOf(element[0]) === -1) {
@@ -67,10 +68,10 @@ export default class extends Controller {
             }
           });
           date.forEach((element) => {
-            let options = "";
             options += `<option value="${element}" >${element}</option>`;
-            this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
           });
+          this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
+        
         } else {
           this.noComeOut();
         }
@@ -83,13 +84,15 @@ export default class extends Controller {
   addShowtime() {
     this.resetShowtime();
 
+    let options = "";
+
     this.showtime.map((showtime) => {
       if (showtime[0] === this.showtimeDateTarget.value) {
-        let options = "";
         options += `<option value="${showtime[2]}" >${showtime[1]}</option>`;
-        this.showtimeTarget.insertAdjacentHTML("beforeend", options);
       }
     });
+
+    this.showtimeTarget.insertAdjacentHTML("beforeend", options);
   }
 
   changeLink() {

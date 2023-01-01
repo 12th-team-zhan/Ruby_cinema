@@ -10,10 +10,8 @@ export default class extends Controller {
     "showtimeTable",
   ];
 
-  connect() {}
-
   addShowtimeDate(el) {
-    this.resetshowtimeDate();
+    this.resetShowtimeDate();
 
     this.dateDropdownBtnTarget.textContent = `《${el.target.textContent}》請選擇日期`;
 
@@ -35,20 +33,25 @@ export default class extends Controller {
         return resp.json();
       })
       .then((data) => {
-        this.showtime = data;
-
-        const date = [];
-
-        data.map((element) => {
-          if (date.indexOf(element[0]) === -1) {
-            date.push(element[0]);
-          }
-        });
-        date.forEach((element) => {
+        if (data.length !== 0) {
+          this.showtime = data;
+          const date = [];
           let options = "";
-          options += `<li class="dropdown-item bg-white text-center" data-action="click->theater-show-showtimes#addShowtime">${element}</li>`;
+
+          data.map((element) => {
+            if (date.indexOf(element[0]) === -1) {
+              date.push(element[0]);
+            }
+          });
+
+          date.forEach((element) => {
+            options += `<li class="dropdown-item bg-white text-center" data-action="click->theater-show-showtimes#addShowtime">${element}</li>`;
+          });
+
           this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
-        });
+        } else {
+          this.noComeOut();
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -56,9 +59,10 @@ export default class extends Controller {
   }
 
   addShowtime(el) {
-    this.resetshowtimeTable();
+    this.resetShowtimeTable();
 
     const list = [];
+    let content = "";
 
     this.showtime.map((showtime) => {
       if (showtime[0] === el.target.textContent) {
@@ -67,7 +71,6 @@ export default class extends Controller {
     });
 
     list.forEach((showtime) => {
-      let content = "";
       content += `<tr>
             <td>${showtime[0]}</td>
             <td>${showtime[1]}</td>
@@ -77,18 +80,28 @@ export default class extends Controller {
               </button>
             </td>
           </tr>`;
-      this.showtimeTarget.insertAdjacentHTML("beforeend", content);
     });
+
+    this.showtimeTarget.insertAdjacentHTML("beforeend", content);
   }
 
-  resetshowtimeDate() {
+  resetShowtimeDate() {
     this.showtimeDateTarget.replaceChildren();
     this.showtimeSelectTarget.classList.replace("d-none", "d-block");
     this.showtimeTableTarget.classList.replace("d-block", "d-none");
   }
 
-  resetshowtimeTable() {
+  resetShowtimeTable() {
     this.showtimeTarget.replaceChildren();
     this.showtimeTableTarget.classList.replace("d-none", "d-block");
+  }
+
+  noComeOut() {
+    this.showtimeDateTarget.replaceChildren();
+    this.showtimeTarget.replaceChildren();
+    let dateOption = `<option>目前沒有場次</option>`;
+    let timeOption = `<option value="0">目前沒有場次</option>`;
+    this.showtimeDateTarget.insertAdjacentHTML("beforeend", dateOption);
+    this.showtimeTarget.insertAdjacentHTML("beforeend", timeOption);
   }
 }
