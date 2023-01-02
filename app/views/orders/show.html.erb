@@ -1,14 +1,20 @@
-<section class="order-show" data-controller="qr-code">
-  <h2>訂單編號：<%= @order.serial %></h2>
-  <article>
-    <h3>訂單金額 <%= @order.amount %></h3>
-    <p>付款方式 <%= @order.payment_method %></p>
-    <!-- 電影票明細 -->
-    <div>訂單明細：</div>
-  </article>
-  <% @order.tickets.each do |ticket|%>
-    <%= ticket.seat %>
-     <%= ticket.status %>
-    <canvas data-qr-code-target="canvas" data-serial=<%= ticket.serial %>></canvas>
-  <% end %>
-</section>
+<div class="container px-lg-4p">
+  <div class="order-show py-2" data-controller="qr-code">
+    <h2>電影名稱：<%= @order.tickets.first.showtime.movie.name %></h2>
+    <div>
+      <h3>訂單金額 <%= @order.amount %></h3>
+      <div class="py-2">電影票：</div>
+    </div>
+    <% @order.tickets.each do |ticket|%>
+      <div class="shadow mb-3">
+        <div class="ticket-text d-flex py-2 flex-column align-items-center">
+          <div><%= format_seats(ticket.showtime.cinema.max_column) %></div>
+          <div><%= ticket.status %></div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <canvas data-qr-code-target="canvas" data-serial=<%= ticket.serial %>></canvas>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

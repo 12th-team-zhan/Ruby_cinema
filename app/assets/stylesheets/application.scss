@@ -1,10 +1,13 @@
+//
+@import "bootstrap-custom.scss";
+
 // admin
 @import "admin/movie/edit.scss";
 @import "admin/seats.scss";
-@import "admin/movie/index.scss";
+@import "admin/sidebar.scss";
 
 //user
-@import "bootstrap-custom.scss";
+@import "layout.scss";
 @import "nav.scss";
 @import "users.scss";
 @import "root.scss";
@@ -17,8 +20,9 @@
 @import "login.scss";
 @import "movie/index.scss";
 @import "find_showtimes.scss";
-@import "video.scss";
 @import "order.scss";
+@import "order-show.scss";
+@import "checking.scss";
 
 button {
   all: unset;

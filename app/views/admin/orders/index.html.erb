@@ -3,7 +3,7 @@
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
-        <li class="breadcrumb-item active" aria-current="page">Order</li>
+        <li class="breadcrumb-item active " aria-current="page">訂單列表</li>
       </ol>
     </nav>
   </div>
@@ -34,7 +34,5 @@
         </tbody>
       <% end %>
     </table>
-    <%= will_paginate @orders %>
+    <%= will_paginate @orders, class: "d-flex gap-3 justify-content-center" %>
   </div>
-  <!-- 測試用，連上購物車就刪除 -->
-  <%= link_to "新增訂單", new_admin_order_path, class: "btn btn-primary" %>

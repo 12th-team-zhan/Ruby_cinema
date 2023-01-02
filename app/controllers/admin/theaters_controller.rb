@@ -41,7 +41,7 @@ module Admin
     private
 
     def find_theater
-      @theater = Theater.find(params[:id])
+      @theater = Theater.friendly.find(params[:id])
     end
 
     def theater_params

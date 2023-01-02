@@ -1,5 +1,5 @@
-<div class="continer">
-  <div class="d-flex ">
+<div class="continer flex-fill">
+  <div class="d-flex">
     <div class="main flex-grow-1 ms-1">
       <div class="container container-breadcrumb ">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -62,7 +62,7 @@
             </div>
           </div>
           <div data-controller="edit">
-            <span class="input-group-text">簡介</span>
+            <span class="input-group-text my-3">簡介</span>
             <%= f.rich_text_area :description %>
             <div class="input-group mb-3 mt-2">
               <%= f.submit %>

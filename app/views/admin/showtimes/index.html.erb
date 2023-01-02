@@ -1,11 +1,11 @@
-<div class="continer vh-100">
+<div class="continer flex-fill">
   <div class="d-flex">
     <div class="main flex-grow-1 p-0 ms-1 text-dark">
       <div class="container container-breadcrumb">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><%= link_to "後台首頁", admin_movies_path %></li>
-            <li class="breadcrumb-item"><%= @movie.name %></li>
+            <li class="breadcrumb-item active"><%= @movie.name %></li>
             <li class="breadcrumb-item active" aria-current="page">場次列表</li>
           </ol>
         </nav>

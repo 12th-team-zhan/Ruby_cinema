@@ -1,12 +1,8 @@
 <div class="w-100 bg-Silver">
-  <nav
-  style="--bs-breadcrumb-divider: '>'"
-    aria-label="breadcrumb"
-    class="front-breadcrumb w-75 m-auto"
-    >
+  <nav class="front-breadcrumb container px-lg-4p" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="<%= root_path %>">首頁</a></li>
-      <li class="breadcrumb-item"><a href="<%= movies_path %>">電影列表</a></li>
+      <li class="breadcrumb-item"><a class="text-deepskyblue" href="<%= root_path %>">首頁</a></li>
+      <li class="breadcrumb-item"><a class="text-deepskyblue" href="<%= movies_path %>">電影列表</a></li>
       <li class="breadcrumb-item active" aria-current="page">
         <%= @movie.name %>
       </li>
@@ -14,7 +10,7 @@
   </nav>
 </div>
 <!-- 電影資訊 -->
-<div class="container w-75 py-5">
+<div class="container px-lg-4p py-5">
   <section class="row gap-5 gap-xl-0">
     <div class="col-12 col-xl-8 mx-auto">
       <%= render "movie_info" %>
@@ -31,7 +27,7 @@
 <!-- 預告片 -->
 <% if @movie.youtube_iframe.present? %>
   <div class="bg-darkgray">
-    <section class="container w-75 py-5">
+    <section class="container container px-lg-4p">
       <div class="py-2">
         <h2 class="text-white">精彩預告</h2>
       </div>
@@ -47,7 +43,7 @@
     </section>
   </div>
 <% end %>
-<div class="container w-75 py-5">
+<div class="container container px-lg-4p">
   <section>
     <div class="d-flex text-center align-items-end mb-3">
       <h2 class="text-info mb-0">電影簡介</h2>
@@ -56,9 +52,7 @@
     <%= @movie.description %>
     <article></article>
   </section>
-  <section class="text-center">
-    <span class="my-2 py-1 px-4">
-      <%= link_to "回電影列表", movies_path, class: "btn btn-cerulean-confirm btn-lg " %>
-    </span>
+  <section class="text-center py-3">
+    <%= link_to "回電影列表", movies_path, class: "btn btn-LightCerulean btn-lg" %>
   </section>
 </div>

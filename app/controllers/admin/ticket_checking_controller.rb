@@ -13,7 +13,7 @@ module Admin
         text = '錯誤的序號，如有問題請洽詢櫃檯人員'
       elsif @ticket.status == 'unuses'
         res = 'success'
-        text = '成功'
+        text = "序號#{@ticket.serial}"
       # @ticket.update(status: 1)
       else
         res = 'fail'

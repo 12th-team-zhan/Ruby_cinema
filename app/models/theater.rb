@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Theater < ApplicationRecord
+  extend FriendlyId
   acts_as_paranoid
 
   # validates
@@ -19,4 +20,6 @@ class Theater < ApplicationRecord
   
 
   enum area: { north: 0, middle: 1, south: 2, east: 3 }
+
+  friendly_id :name, use: :slugged
 end

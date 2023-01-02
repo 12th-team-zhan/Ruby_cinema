@@ -1,0 +1,32 @@
+.order-show {
+  .ticket {
+    background-color: none;
+  }
+
+  .ticket-text {
+    position: relative;
+    border-bottom: 1px dashed gray;
+  }
+
+  .ticket-text::after {
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    top: calc(100% - 15px);
+    left: calc(100% - 15px);
+    background-image: linear-gradient(to right, #f3f3f3, #f3f3f3, #ffffff);
+  }
+  
+  .ticket-text::before {
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    top: calc(100% - 15px);
+    right: calc(100% - 15px);
+    background-image: linear-gradient(to right, #ffffff, #f3f3f3, #f3f3f3);
+  }
+}

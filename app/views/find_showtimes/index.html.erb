@@ -1,3 +1,11 @@
+<div class="front-breadcrumb bg-Silver">
+  <nav class="container px-lg-4p" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "首頁", root_path, class: "text-muted"  %></li>
+      <li class="breadcrumb-item active text-deepskyblue" aria-current="page">快搜場次</li>
+    </ol>
+  </nav>
+</div>
 <div class="container text-center px-lg-4p find-showtimes">
   <h2 class="text-LightCerulean py-3 py-lg-4 m-0"><i class="fa-solid fa-magnifying-glass"></i>快搜條件</h2>
   <div class="d-flex" data-controller="search-showtime-by-area">
@@ -63,7 +71,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-xl-2 py-2 pe-lg-5 d-flex align-items-center justify-content-center">
+      <div class="col-12 col-xl-2 py-2 pe-xl-5 d-flex align-items-center justify-content-center">
         <%= link_to "查詢場次", "#", class: "click->search-showtime-by-area#checkAreaData text-center btn btn-LightCerulean", id: "rootSearchShowtime"%>
       </div>
     </div>
