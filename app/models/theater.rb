@@ -21,5 +21,5 @@ class Theater < ApplicationRecord
 
   enum area: { north: 0, middle: 1, south: 2, east: 3 }
 
-  friendly_id :name, use: :slugged
+  friendly_id :name, :use => [:slugged, :finders]
 end
