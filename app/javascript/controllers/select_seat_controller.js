@@ -1,5 +1,6 @@
 import { Controller } from "stimulus";
-import consumer from "../channels/consumer";
+import consumer from '../channels/consumer';
+import Swal from 'sweetalert2'
 
 export default class extends Controller {
   static targets = ["seatGrid", "next"];
@@ -38,16 +39,23 @@ export default class extends Controller {
     })
       .then((resp) => resp.json())
       .then((json) => {
-        if (Object.keys(json).length != 0) {
-          let seat;
-          for (let [key, value] of Object.entries(json)) {
-            value.forEach((seatNumber) => {
-              seat = document.querySelector(`.item${seatNumber}`);
-              seat.classList.add("bg-MediumPurple");
-              seat.disabled = true;
-              this.otherSelect(key, seatNumber);
-            });
+        let seat
+        if (Object.keys(json["user_selected"]).length != 0) {
+          for (let [key, value] of Object.entries(json["user_selected"])) {
+            value.forEach((seatNumber => {
+              seat = document.querySelector(`.item${seatNumber}`)
+              seat.classList.add("bg-MediumPurple")
+              seat.disabled = true
+              this.otherSelect(key, seatNumber)
+            }))
           }
+        }
+        if (json["ticket"].length != 0) {
+          json["ticket"].forEach((seatNumber) => {
+            seat = document.querySelector(`.item${seatNumber["seat"]}`)
+            seat.classList.add("bg-LightRed")
+            seat.disabled = true
+          })
         }
       })
       .catch(() => {
@@ -186,66 +194,96 @@ export default class extends Controller {
     if (data.id === this.id) {
       switch (data.status) {
         case "selected":
-          seatElement = document.querySelector(`.item${data.seat_id}`);
+          seatElement = document.querySelector(`.item${data.seat_id}`)
           seatElement.dataset.status = "selected";
-          seatElement.classList.add("bg-DodgerBlue");
+          seatElement.classList.add("bg-LightCerulean", "text-white")
           this.selectSeat.push(data.seat_id);
-          break;
+          break
 
         case "cancel":
-          seatElement = document.querySelector(`.item${data.seat_id}`);
-          seatElement.classList.remove("bg-DodgerBlue");
+          seatElement = document.querySelector(`.item${data.seat_id}`)
+          seatElement.classList.remove("bg-LightCerulean", "text-white");
           seatElement.dataset.status = "empty";
-          break;
+          break
 
         case "fail":
-          alert("位子已被選取");
-          break;
+          alert("位子已被選取")
+          break
       }
-      this.changeLink();
-    } else {
+      this.changeLink()
+    }
+
+    else {
       switch (data.status) {
         case "selected":
-          seatElement = document.querySelector(`.item${data.seat_id}`);
-          seatElement.classList.add("bg-MediumPurple");
-          seatElement.disabled = true;
-          this.otherSelect(data.id, data.seat_id);
-          break;
+          seatElement = document.querySelector(`.item${data.seat_id}`)
+          seatElement.classList.add("bg-MediumPurple")
+          seatElement.disabled = true
+          this.otherSelect(data.id, data.seat_id)
+          break
 
         case "cancel":
-          seatElement = document.querySelector(`.item${data.seat_id}`);
-          seatElement.classList.remove("bg-MediumPurple");
-          seatElement.disabled = false;
-          this.otherCancel(data.id, data.seat_id);
-          break;
+          seatElement = document.querySelector(`.item${data.seat_id}`)
+          seatElement.classList.remove("bg-MediumPurple")
+          seatElement.disabled = false
+          this.otherCancel(data.id, data.seat_id)
+          break
 
         case "other_unsubscribed":
           if (this.otherSeat[data.id] !== undefined) {
-            this.otherSeat[data.id].forEach((seat_id) => {
-              seatElement = document.querySelector(`.item${seat_id}`);
-              seatElement.classList.remove("bg-MediumPurple");
-              seatElement.disabled = false;
-            });
+            this.otherSeat[data.id].forEach(seat_id => {
+              seatElement = document.querySelector(`.item${seat_id}`)
+              seatElement.classList.remove("bg-MediumPurple")
+              seatElement.disabled = false
+            })
           }
-          break;
+          break
       }
     }
   }
 
   otherSelect(id, seat_id) {
     if (this.otherSeat[id] === undefined) {
-      this.otherSeat[id] = [seat_id];
-    } else {
-      this.otherSeat[id].push(seat_id);
+      this.otherSeat[id] = [seat_id]
+    }
+    else {
+      this.otherSeat[id].push(seat_id)
     }
   }
 
   otherCancel(id, seat_id) {
-    this.otherSeat[id] = this.otherSeat[id].filter((item) => item !== seat_id);
+    this.otherSeat[id] = this.otherSeat[id].filter(item => item !== seat_id)
   }
 
   changeLink() {
     this.url.searchParams.append("seatId", this.selectSeat);
-    this.nextTarget.href = this.url;
+    this.nextTarget.action = this.url
   }
-}
+
+  checkLogin(e) {
+    e.preventDefault();
+    if (this.selectSeat.length != this.ticketAmount) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: `請選擇${this.ticketAmount}個位置！`,
+      })
+
+    }
+    else {
+      if (this.element.dataset.usersinged === "false") {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: '請先登入！',
+        })
+      }
+      else {
+        this.nextTarget.submit()
+      }
+
+    }
+
+
+  }
+} 
