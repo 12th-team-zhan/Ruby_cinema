@@ -35,7 +35,7 @@
               <li><%= link_to "訂票查詢", orders_path,
                         class:"dropdown-item text-white p-3" %></li>
               <% if current_user.admin? || current_user.staff?%>
-                <li><%= link_to "掃票API", admin_ticket_checking_index_path, class: "dropdown-item text-white p-3" %>
+                <li><%= link_to "掃票入場", admin_ticket_checking_index_path, class: "dropdown-item text-white p-3" %>
                 </li>
                 <li><%= link_to "影城管理", admin_movies_path, class: "dropdown-item text-white p-3" %></li>
               <% end %>
