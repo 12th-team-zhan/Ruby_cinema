@@ -17,7 +17,7 @@
           <th scope="col">電影刪除</th>
           <th scope="col">場次列表</th>
           <th scope="col">上映時間</th>
-          <th scope="col">建立者</th>
+          <th scope="col">建立者ID</th>
           <th scope="col">編輯時間</th>
         </tr>
       </thead>
@@ -29,7 +29,7 @@
             <td><%= link_to "刪除", admin_movie_path(movie), method:"delete", data:{confirm:"確定刪除？"}  %></td>
             <td><%= link_to "檢視", admin_movie_showtimes_path(movie) %></td>
             <td><%= movie.debut_date %></td>
-            <td><%= movie.user.name %></td>
+            <td><%= movie.user_id %></td>
             <td><%= movie.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
           </tr>
         </tbody>

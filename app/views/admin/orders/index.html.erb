@@ -13,8 +13,7 @@
         <tr>
           <th scope="col">訂單編號</th>
           <th scope="col">訂單狀態</th>
-          <th scope="col">訂購者</th>
-          <th scope="col">最後編輯者ID</th>
+          <th scope="col">訂購者email</th>
           <th scope="col">建立時間</th>
           <th scope="col">編輯時間</th>
           <th scope="col">刪除訂單</th>
@@ -25,8 +24,7 @@
           <tr>
             <th scope="row"><%= link_to order.serial, admin_order_path(order) %></th>
             <td><%= order.status %></td>
-            <td><%= order.user.name %></td>
-            <td>X</td>
+            <td><%= order.user.email %></td>
             <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
             <td><%= order.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
             <td><%= link_to "刪除", admin_order_path(order), method:"delete", data:{confirm:"確定刪除？"} %></td>
