@@ -27,25 +27,30 @@ class TicketingController < ApplicationController
   end
 
   def create
-    showtime_id = params[:showtimeid]
+    if user_signed_in?
+      showtime_id = params[:showtimeid]
 
-    @order_data = { amount: @amount }
-    @order = current_user.orders.new(@order_data)
-    @order.save
+      @order_data = { amount: @amount }
+      @order = current_user.orders.new(@order_data)
+      @order.save
 
-    i = 0
-    params[:seatId].split(',').each do |seatId|
-      serial = generate_serial
-      ticket_data = { seat: seatId, showtime_id:, category: @tickets_category[i],
-                      order_id: @order.id }
-      @ticket = Ticket.new(ticket_data)
-      @ticket.save
-      i += 1
-    end
+      i = 0
+      params[:seatId].split(',').each do |seatId|
+        serial = generate_serial
+        ticket_data = { seat: seatId, showtime_id:, category: @tickets_category[i],
+                        order_id: @order.id }
+        @ticket = Ticket.new(ticket_data)
+        @ticket.save
+        i += 1
+        end
 
     session[:order_id] = @order.id
     session[:showtime_id] = showtime_id
     redirect_to pay_ticketing_index_path
+    else
+      redirect_to request.env["HTTP_REFERER"]
+    end
+    
   end
 
   def destroy
