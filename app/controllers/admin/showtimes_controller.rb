@@ -12,7 +12,7 @@ module Admin
     end
 
     def create
-      @showtimes = Showtime.where(movie_id:params[:movie_id] ,cinema_id: showtime_params[:cinema_id])
+      @showtimes = Showtime.where(movie_id: @movie.id, cinema_id: showtime_params[:cinema_id])
       @showtime = @movie.showtimes.new(showtime_params)
 
       showtime_start = showtime_params[:started_at].to_datetime.to_i
