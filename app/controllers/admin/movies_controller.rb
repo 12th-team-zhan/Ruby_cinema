@@ -24,7 +24,7 @@ module Admin
       if @movie.update(movie_params)
         append_movie_poster
 
-        redirect_to admin_movies_path, notice: '成功修改'
+        redirect_to admin_movies_path, notice: "成功修改"
       else
         render :edit
       end
@@ -32,6 +32,7 @@ module Admin
 
     def create
       @movie = current_user.movies.create(movie_params)
+      @theaters = Theater.all
       if @movie.save
         append_movie_poster
 
@@ -39,7 +40,7 @@ module Admin
           MovieTheater.create(movie_id: @movie.id, theater_id: theater.to_i)
         end
 
-        redirect_to admin_movies_path, notice: '成功新增電影!'
+        redirect_to admin_movies_path, notice: "成功新增電影!"
       else
         render :new
       end
@@ -47,7 +48,7 @@ module Admin
 
     def destroy
       @movie.destroy
-      redirect_to admin_movies_path, notice: '刪除成功'
+      redirect_to admin_movies_path, notice: "刪除成功"
     end
 
     def delete_images
