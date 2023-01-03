@@ -4,7 +4,7 @@ export default class extends Controller {
     static targets = ["time"]
 
     connect() {
-        let time = 2000
+        let time = 600
         const countDown = setInterval(() => {
             time = time - 1
 

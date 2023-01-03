@@ -5,16 +5,15 @@ import Swal from 'sweetalert2'
 export default class extends Controller {
   static targets = ["seatGrid", "next"];
   connect() {
-    console.log(123);
     let params = new URLSearchParams(location.search);
     this.url = new URL("ticketing", location.origin);
-    this.url.searchParams.append("showtimeId", params.get("showtimeid"));
     for (const [key, value] of params) {
       this.url.searchParams.append(key, value);
     }
     this.showtime_id = params.get("showtimeid");
     this.ticketAmount = Number(params.get("amount"));
     this.token = document.querySelector("meta[name='csrf-token']").content;
+    this.url.searchParams.append("authenticity_token", this.token);
     //去空隔 [] 轉陣列
     this.notSeatList = this.element.dataset.notseatlist
       .replace(/[\"\[\]\s]/g, "")
