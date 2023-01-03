@@ -1,8 +1,0 @@
-ALLCops:
-  Exclude:
-    - db/*
-    - Rakefile
-    - Gemfile
-    - config/**/*
-    - spec/**/*
-    - lib/tasks/**/*
