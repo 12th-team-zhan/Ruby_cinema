@@ -47,6 +47,10 @@ zh-TW:
         concession_ticket: 優待票
         elderly_ticket: 敬老票
         disability_ticket: 愛心票
+      ticket/status:
+        unuses: 未使用
+        used: 已使用
+        no_avail: 無效
       user/role:
         user: 會員
         staff: 員工

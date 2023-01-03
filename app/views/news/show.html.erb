@@ -8,16 +8,16 @@
   </nav>
 </div>
 <div class="container px-lg-4p news-show">
-  <div class="">
+  <div class="text-darkgray">
     <%= @news.created_at.strftime("%Y/%m/%d") %>
   </div>
-  <div class="fs-2">
-    <%= @news.title %>
+  <div class="fs-2 text-cerulean">
+    <h2><%= @news.title %></h2>
   </div>
-  <div class="">
+  <article class="my-3">
     <%= @news.rich_text_description %>
-  </div>
-  <div>
-    <%= link_to "回上一頁", request.referrer %>
-  </div>
+  </article>
+  <section class="text-center py-3">
+    <%= link_to "回消息列表", news_index_path, class: "btn btn-LightCerulean btn-lg" %>
+  </section>
 </div>

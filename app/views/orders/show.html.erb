@@ -3,18 +3,25 @@
     <h2>電影名稱：<%= @order.tickets.first.showtime.movie.name %></h2>
     <div>
       <h3>訂單金額 <%= @order.amount %></h3>
-      <div class="py-2">電影票：</div>
+      <div class="py-2"></div>
     </div>
-    <% @order.tickets.each do |ticket|%>
-      <div class="shadow mb-3">
-        <div class="ticket-text d-flex py-2 flex-column align-items-center">
-          <div><%= format_seats(ticket.showtime.cinema.max_column) %></div>
-          <div><%= ticket.status %></div>
+    <section class="mb-4">
+      <% @order.tickets.each do |ticket|%>
+        <div class="shadow mb-3">
+          <div class="ticket-text d-flex py-2 flex-column align-items-center">
+            <div><%= format_seats(ticket.showtime.cinema.max_column) %></div>
+            <div><%= Ticket.human_attribute_name("status.#{ticket.status}") %></div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <canvas data-qr-code-target="canvas" data-serial=<%= ticket.serial %>></canvas>
+          </div>
         </div>
-        <div class="d-flex justify-content-center">
-          <canvas data-qr-code-target="canvas" data-serial=<%= ticket.serial %>></canvas>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </section>
+    <section class="text-center">
+      <span class="my-2 py-1 px-4">
+        <%= link_to "回訂單列表", orders_path, class: "btn btn-cerulean-confirm btn-lg" %>
+      </span>
+    </section>
   </div>
 </div>
