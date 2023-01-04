@@ -15,7 +15,7 @@ export default class extends Controller {
 
             if (time === 0) {
                 clearInterval(countDown)
-                window.location.href = "http://127.0.0.1:3000/";
+                window.location.href = window.location.origin;
             }
         }, 1000);
     }
