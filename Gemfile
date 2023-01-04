@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 gem 'aws-sdk-s3', require: false
+gem "babosa", "~> 2.0"
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 5.2.2'
 gem 'dartsass-rails', '~> 0.4.0'

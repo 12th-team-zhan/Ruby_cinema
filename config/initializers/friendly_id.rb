@@ -46,7 +46,7 @@ FriendlyId.defaults do |config|
   # performance because it will avoid Rails-internal code that makes runtime
   # calls to `Module.extend`.
   #
-  # config.use :finders
+  config.use :finders
   #
   # ## Slugs
   #
@@ -89,21 +89,21 @@ FriendlyId.defaults do |config|
   # is included after the anonymous module defined in the initializer, so it
   # overrides the `should_generate_new_friendly_id?` method from the anonymous module.
   #
-  # config.use :slugged
-  # config.use Module.new {
-  #   def should_generate_new_friendly_id?
-  #     slug.blank? || <your_column_name_here>_changed?
-  #   end
-  # }
+  config.use :slugged
+  config.use Module.new {
+    def should_generate_new_friendly_id?
+      slug.blank? || name_changed?
+    end
+  }
   #
   # FriendlyId uses Rails's `parameterize` method to generate slugs, but for
   # languages that don't use the Roman alphabet, that's not usually sufficient.
   # Here we use the Babosa library to transliterate Russian Cyrillic slugs to
   # ASCII. If you use this, don't forget to add "babosa" to your Gemfile.
   #
-  # config.use Module.new {
-  #   def normalize_friendly_id(text)
-  #     text.to_slug.normalize! :transliterations => [:russian, :latin]
-  #   end
-  # }
+  config.use Module.new {
+    def normalize_friendly_id(text)
+      text.to_s.to_slug.normalize.to_s
+    end
+  }
 end
