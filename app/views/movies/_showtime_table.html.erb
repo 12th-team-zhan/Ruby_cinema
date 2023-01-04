@@ -1,4 +1,4 @@
-<div class="movie-show-showtime border boder-cerulean bg-cerulean rounded p-3" data-controller="movie-show-showtimes">
+<div class="movie-show-showtime border boder-cerulean bg-cerulean rounded p-3" data-controller="search--movie-show-showtimes">
   <div class="mb-3">
     <h2 class="text-center text-Silver">場次查詢</h2>
   </div>
@@ -10,24 +10,24 @@
     <ul class="dropdown-menu">
       <% @theater_list.each do |theater| %>
         <li class="dropdown-item bg-white text-center" 
-          data-action="click->movie-show-showtimes#addShowtimeDate" 
-          data-movie-show-showtimes-target="theater"
+          data-action="click->search--movie-show-showtimes#addShowtimeDate" 
+          data-search--movie-show-showtimes-target="theater"
           data-movie-id="<%= @movie.id %>"
           value="<%= theater.id %>"><%= theater.name %></li>
       <% end %>
     </ul>
   </div>
-  <div data-movie-show-showtimes-target="showtimeSelect" class="d-none mt-3">
+  <div data-search--movie-show-showtimes-target="showtimeSelect" class="d-none mt-3">
     <div class="btn-group w-100">
       <button type="button" class="btn btn-outline-Silver dropdown-toggle text-wrap" 
               data-bs-toggle="dropdown" 
               aria-expanded="false"
-              data-movie-show-showtimes-target="dateDropdownBtn">
+              data-search--movie-show-showtimes-target="dateDropdownBtn">
       </button>
-      <ul class="dropdown-menu" data-movie-show-showtimes-target="showtimeDate">
+      <ul class="dropdown-menu" data-search--movie-show-showtimes-target="showtimeDate">
       </ul>
     </div>
-    <div class="d-none border rounded mt-3" data-movie-show-showtimes-target="showtimeTable">
+    <div class="d-none border rounded mt-3" data-search--movie-show-showtimes-target="showtimeTable">
       <table class="table fs-5 text-center text-Silver m-0">
         <thead class="bg-Silver text-cerulean">
           <tr>
@@ -36,7 +36,7 @@
             <th>前往購票</th>
           </tr>
         </thead>
-        <tbody data-movie-show-showtimes-target="showtime">
+        <tbody data-search--movie-show-showtimes-target="showtime">
         </tbody>
       </table>
     </div>

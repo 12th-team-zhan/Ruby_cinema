@@ -1,4 +1,6 @@
 import { Controller } from "stimulus";
+import { fetchWithParams } from "../lib/fetcher";
+import { addList } from "../lib/add_options";
 
 export default class extends Controller {
   static targets = [
@@ -15,39 +17,29 @@ export default class extends Controller {
 
     this.dateDropdownBtnTarget.textContent = `《${el.target.textContent}》請選擇日期`;
 
-    const token = document.querySelector("meta[name='csrf-token']").content;
     this.movieId = el.target.dataset.movieId;
     this.theaterId = el.target.value;
-    fetch("/api/v1/showtime_list", {
-      method: "POST",
-      headers: {
-        "X-csrf-Token": token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        movie_id: this.movieId,
-        theater_id: this.theaterId,
-      }),
+
+    fetchWithParams("/api/v1/showtime_list", "POST", {
+      movie_id: this.movieId,
+      theater_id: this.theaterId,
     })
-      .then((resp) => {
-        return resp.json();
-      })
       .then((data) => {
         this.showtime = data;
 
         const date = [];
-        let options = "";
 
         data.map((element) => {
           if (date.indexOf(element[0]) === -1) {
             date.push(element[0]);
           }
         });
-        date.forEach((element) => {
-          options += `<li class="dropdown-item bg-white text-center" data-action="click->movie-show-showtimes#addShowtime">${element}</li>`;
-        });
 
-        this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
+        addList(
+          date,
+          this.showtimeDateTarget,
+          "click->search--movie-show-showtimes#addShowtime"
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -57,16 +49,16 @@ export default class extends Controller {
   addShowtime(el) {
     this.resetShowtimeTable();
 
-    const list = [];
+    const date = [];
     let content = "";
 
     this.showtime.map((showtime) => {
       if (showtime[0] === el.target.textContent) {
-        list.push(showtime);
+        date.push(showtime);
       }
     });
 
-    list.forEach((showtime) => {
+    date.forEach((showtime) => {
       content += `<tr>
             <td>${showtime[0]}</td>
             <td>${showtime[1]}</td>

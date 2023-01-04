@@ -14,7 +14,7 @@
       </div>
       <div class="container text-dark py-4">
         <%= form_with(model: @cinema, url: admin_theater_cinemas_path, method: "post") do |form| %>
-        <div class="w-25">
+        <div class="w-100">
                 <div class="input-group d-flex my-3">
                   <%= form.label :name, "影廳名稱", class: "input-group-text" %>
                   <%= form.text_field :name, class: "form-control" %>

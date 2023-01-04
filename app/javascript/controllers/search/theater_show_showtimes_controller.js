@@ -1,4 +1,6 @@
 import { Controller } from "stimulus";
+import { fetchWithParams } from "../lib/fetcher";
+import { addList } from "../lib/add_options";
 
 export default class extends Controller {
   static targets = [
@@ -15,28 +17,17 @@ export default class extends Controller {
 
     this.dateDropdownBtnTarget.textContent = `《${el.target.textContent}》請選擇日期`;
 
-    const token = document.querySelector("meta[name='csrf-token']").content;
     this.theaterId = el.target.dataset.theaterId;
     this.movieId = el.target.value;
-    fetch("/api/v1/showtime_list", {
-      method: "POST",
-      headers: {
-        "X-csrf-Token": token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        movie_id: this.movieId,
-        theater_id: this.theaterId,
-      }),
+
+    fetchWithParams("/api/v1/showtime_list", "POST", {
+      movie_id: this.movieId,
+      theater_id: this.theaterId,
     })
-      .then((resp) => {
-        return resp.json();
-      })
       .then((data) => {
         if (data.length !== 0) {
           this.showtime = data;
           const date = [];
-          let options = "";
 
           data.map((element) => {
             if (date.indexOf(element[0]) === -1) {
@@ -44,11 +35,11 @@ export default class extends Controller {
             }
           });
 
-          date.forEach((element) => {
-            options += `<li class="dropdown-item bg-white text-center" data-action="click->theater-show-showtimes#addShowtime">${element}</li>`;
-          });
-
-          this.showtimeDateTarget.insertAdjacentHTML("beforeend", options);
+          addList(
+            date,
+            this.showtimeDateTarget,
+            "click->search--theater-show-showtimes#addShowtime"
+          );
         } else {
           this.noComeOut();
         }
