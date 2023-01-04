@@ -1,7 +1,6 @@
 import { Controller } from "stimulus";
 import consumer from '../channels/consumer';
 import Swal from 'sweetalert2'
-
 export default class extends Controller {
   static targets = ["seatGrid", "next"];
   connect() {
@@ -206,7 +205,11 @@ export default class extends Controller {
           break
 
         case "fail":
-          alert("位子已被選取")
+          Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: `位子已被選取!`,
+          })
           break
       }
       this.changeLink()
@@ -275,7 +278,13 @@ export default class extends Controller {
           icon: 'warning',
           title: 'Oops...',
           text: '請先登入！',
+          didClose: () => {
+            console.log("請先登入collback");
+            const event = new CustomEvent('show');
+            window.dispatchEvent(event);
+          }
         })
+
       }
       else {
         this.nextTarget.submit()
@@ -285,4 +294,5 @@ export default class extends Controller {
 
 
   }
+
 } 
