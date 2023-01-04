@@ -1,13 +1,13 @@
 <%= form_with model: [:admin, @news] do |f| %>
   <div class="input-group mb-3">
     <span class="input-group-text">標題</span>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
   <div class="">
-    <span class="input-group-text my-3">內容</span>
-     <%= f.rich_text_area :description %>
+    <span class="input-group-text">內容</span>
+    <%= f.rich_text_area :description %>
   </div>
-  
-  <div class="input-group mb-3">
-    <%= f.submit %>
-  <% end %>
+  <div class="input-group my-3">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

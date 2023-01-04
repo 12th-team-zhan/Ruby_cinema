@@ -20,21 +20,20 @@ export default class extends Controller {
   }
 
   select(e) {
-    e.path[2].children[2].textContent =
+    e.srcElement.parentElement.parentElement.children[2].textContent =
       "$" +
       Number(e.srcElement.value) *
-        Number(e.path[2].children[0].textContent.substring(1));
-
+      Number(e.srcElement.parentElement.parentElement.children[0].textContent.substring(1));
     this.calcAllTotal();
     this.calcAllAmount();
 
     const event = new CustomEvent("update-typelist", {
       detail: {
         Quantity: e.target.value,
-        ticketType: e.path[3].children[0].children[0].textContent,
+        ticketType: e.srcElement.parentElement.parentElement.children[2].textContent,
       },
     });
-    window.dispatchEvent(event);
+    this.element.dispatchEvent(event);
   }
 
   calcAllTotal() {

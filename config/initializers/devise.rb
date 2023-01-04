@@ -311,7 +311,6 @@ Devise.setup do |config|
 
   # 第三方登入
   config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_APP_SECRET'], scope: 'public_profile,email',
-                                                                     info_fields: 'email,name', callback_url: 'http://localhost:3000/users/auth/facebook/callback'
-
+                                                                     info_fields: 'email,name', callback_url: ENV['FB_CALL_BACK']
   config.omniauth :google_oauth2, ENV['OAUTH_GOOGLE_ID'], ENV['OAUTH_GOOGLE_SECRET']
 end

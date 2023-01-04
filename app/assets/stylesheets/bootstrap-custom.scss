@@ -18,7 +18,9 @@ $Silver: #f5f1f1;
 $DodgerBlue: #338eff;
 $MediumPurple: #795dbb;
 $darkblue: #b1cae7;
+$LightRed: #e6434d;
 $card-border-width: 0px;
+$deephoverblue: #163861;
 
 $custom-theme-colors: (
   "cerulean": $cerulean,
@@ -30,7 +32,9 @@ $custom-theme-colors: (
   "DodgerBlue": $DodgerBlue,
   "MediumPurple": $MediumPurple,
   "LightCerulean": $LightCerulean,
-  "darkblue":$darkblue,
+  "darkblue":  $darkblue,
+  "deephoverblue": $deephoverblue,
+  "LightRed": $LightRed,
 );
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
@@ -178,7 +182,8 @@ $utilities: (
 
 .btn-deepskyblue {
   --bs-btn-color: var(--white);
-  --bs-btn-hover-bg: var(--bs-backdrop-bg);
+  --bs-btn-hover-bg: var(--bs-deephoverblue);
+  --bs-btn-hover-color: var(--white);
 }
 
 .front-breadcrumb {

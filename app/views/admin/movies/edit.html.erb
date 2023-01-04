@@ -62,12 +62,12 @@
             </div>
           </div>
           <div data-controller="edit">
-            <span class="input-group-text my-3">簡介</span>
+            <span class="input-group-text">簡介</span>
             <%= f.rich_text_area :description %>
-            <div class="input-group mb-3 mt-2">
-              <%= f.submit %>
-            <% end %>
-          </div>
+            <div class="input-group my-3">
+              <%= f.submit "更新電影資訊", class: "btn btn-primary" %>
+            </div>
+          <% end %>
         </div>
         <%= render "come_out_theater" %>
       </div>

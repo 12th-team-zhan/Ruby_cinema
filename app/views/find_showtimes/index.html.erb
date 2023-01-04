@@ -19,7 +19,7 @@
             data-search-showtime-by-area-target="area">
             <option>請選擇地區</option>
             <% @theater_areas.each do |theater_area| %>
-              <option value="<%= theater_area[1] %>" ><%= theater_area[0] %></option>
+              <option value="<%= theater_area[1] %>" ><%= Theater.human_attribute_name("area.#{theater_area[0]}") %></option>
             <% end %>
           </select>
         </div>
@@ -77,6 +77,6 @@
     </div>
   </div>
   <section class="py-3">
-    <h2 class="text-LightCerulean">快搜空位結果</h2>
+    <h2 class="text-LightCerulean">快搜場次結果</h2>
   </section>
 </div>

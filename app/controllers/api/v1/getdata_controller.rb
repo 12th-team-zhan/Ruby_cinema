@@ -4,12 +4,12 @@ module Api
   module V1
     class GetdataController < ApplicationController
       def movie_list
-        movie_list = Movie.select('name')
+        movie_list = Movie.select("name")
         render json: movie_list
       end
 
       def theater_list
-        theater_list = Movie.find(params[:movie_id]).theaters.select('name, theater_id')
+        theater_list = Movie.find(params[:movie_id]).theaters.select("name, theater_id")
         render json: theater_list
       end
 
@@ -20,11 +20,11 @@ module Api
 
       def showtime_list
         @cinemas = Theater.find(params[:theater_id]).cinemas.pluck(:id)
-        showtime_date = Showtime.where('movie_id = ? AND cinema_id IN (?) AND started_at > (?)', params[:movie_id], @cinemas, Time.zone.now.to_s(:db)).pluck(:started_at,
+        showtime_date = Showtime.where('movie_id = ? AND cinema_id IN (?) AND started_at > (?)', params[:movie_id], @cinemas, Time.current).pluck(:started_at,
                                                                                                                                                              :id).map do |showtime, id|
           [showtime.strftime('%Y-%m-%d'), showtime.strftime('%I:%M %p'), id]
         end
-          render json: showtime_date
+        render json: showtime_date
       end
 
       def selected_tickets
@@ -32,7 +32,10 @@ module Api
         $redis.smembers("showtime_#{params[:showtime_id]}").each do |user_id|
           user_selected[user_id] = $redis.smembers(user_id)
         end
-        render json: user_selected
+
+        ticket = Ticket.select("seat").where(showtime_id: params[:showtime_id])
+
+        render json: { user_selected: user_selected, ticket: ticket }
       end
     end
   end

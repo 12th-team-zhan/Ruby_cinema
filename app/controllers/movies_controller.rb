@@ -14,13 +14,14 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @cinema_list = Showtime.where("movie_id = ? AND started_at > ?", params[:id], Time.zone.now.to_s(:db)).pluck(:cinema_id).uniq
+    @cinema_list = Showtime.where("movie_id = ? AND started_at > (?)", @movie.id, Time.current).pluck(:cinema_id).uniq
     @theater_list = Theater.joins(:cinemas).where(:cinemas => {id: @cinema_list}).uniq
   end
 
   private
 
   def find_movie
-    @movie = Movie.friendly.find(params[:id])
+    @movie = Movie.friendly.find(params[:id]) 
   end
+
 end

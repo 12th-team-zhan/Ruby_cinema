@@ -1,8 +1,9 @@
-<div class="container text-center">
+<div class="container px-lg-4p text-center">
   <div class="row d-flex justify-content-evenly">
-    <div class="col-12 col-md-7 col-lg-8">
+    <div class="col-12 col-md-10 col-lg-10">
       <div class="container p-3">
         <div class="col text-start">
+          <h3 class="card-text">HI! <%= current_user.name %></h3>
           <h2>訂票信箱 <%= current_user.email %></h2>
           <p class="fw-lighter">
             若購票失敗您的付款授權稍後將被取消不會收取任何費用，可於 30
@@ -59,9 +60,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 col-md-5 col-lg-4">
-      <%= render "member_card" %>
     </div>
   </div>
 </div>

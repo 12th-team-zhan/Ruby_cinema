@@ -13,6 +13,7 @@ class SelectseatChannel < ApplicationCable::Channel
       case status
       when 'selected'
         $redis.sadd(user_id, seat_id)
+        $redis.expire(user_id, 600)
         ActionCable.server.broadcast("selectseat_channel#{showtime_id}",
                                      { status: 'selected', seat_id:, id: user_id })
       when 'cancel'

@@ -12,8 +12,8 @@ class FindShowtimesController < ApplicationController
     @theater_areas = Theater.areas
     @theaters_list = Theater.where(area: params[:area]).pluck(:id)
     @movie = Movie.find_by(id: params[:movie_id])
-    @showtimes = Showtime.joins(:cinema).where('theater_id IN (?) AND movie_id = ? AND started_at BETWEEN ? AND ? AND started_at > (?)',
-                                               @theaters_list, params[:movie_id], start_time, end_time, Time.zone.now.to_s(:db))
+    @showtimes = Showtime.joins(:cinema).where('theater_id IN (?) AND movie_id = ? AND started_at > (?) AND started_at > (?) AND started_at < (?)',
+                                               @theaters_list, params[:movie_id], Time.current, start_time, end_time)
   end
 
   def add_movie_list
@@ -23,7 +23,7 @@ class FindShowtimesController < ApplicationController
   end
 
   def add_showtime_list
-    showtime_list = Showtime.where('movie_id = ? AND started_at > (?)', params[:movie_id], Time.zone.now.to_s(:db)).pluck(
+    showtime_list = Showtime.where('movie_id = ? AND started_at > (?)', params[:movie_id], Time.current).pluck(
       :started_at, :id
     ).map do |showtime, id|
       [showtime.strftime('%Y-%m-%d'), id]

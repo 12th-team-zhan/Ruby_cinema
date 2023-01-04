@@ -1,30 +1,43 @@
 <div class="movie position-relative" data-controller="select-seat" 
-     data-notseatlist="<%= @not_seat.seat_list %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>">
+     data-notseatlist="<%= @not_seat.seat_list %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-userSinged="<%= user_signed_in? %>">
   <%= render "movie_info" %>
   <div class="body">
-    <div class="container-md px-lg-4p py-2 d-flex justify-content-between">
-      <div class="select-title">
-        <p class="fs-4 fw-light m-0 py-2">選取座位</p>
+    <div class="container-md px-lg-4p py-3 d-flex justify-content-between">
+      <div class="select-title col-lg-4 my-auto">
+        <p class="fs-4 fw-light m-0">選取座位</p>
       </div>
-      <div class="time" data-controller="alarm-clock">
-        <p class="fs-4 fw-light m-0 py-2">剩餘時間<span data-alarm-clock-target="time"></span></p>
+      <div class="time col-lg-4 text-center  my-auto" data-controller="alarm-clock">
+        <p class="fs-4 fw-light m-0">剩餘時間<span data-alarm-clock-target="time"></span></p>
       </div>
-      <%= link_to ticketing_index_path, 
-          class: "col-md-4 col-lg-3 text-center my-auto next",
-          data: {select_seat_target: "next"}, 
-          method: "post" do %>
-        <p class="fw-light m-0">確認訂單</p>
+      <%= form_with class: "col-md-4 col-lg-4 text-end my-auto", data: {select_seat_target: "next" } do |f| %>
+        <%= f.submit "確認訂單", class: "fw-light next seat-next px-5", data:{ action: "click->select-seat#checkLogin" } %>
       <% end %>
     </div>
   </div>
-  <div class="select d-flex flex-column align-items-center w-100">
+  <div class="select d-flex flex-column align-items-center py-3 px-2">
+    <div class="d-flex p-4">
+      <div class="seat-inf d-flex p-3">
+        <div class="text-dark d-flex align-items-center">正在選取
+          <div class="item ms-3 bg-MediumPurple text-MediumPurple"></div>
+        </div>
+      </div>
+      <div class="seat-inf d-flex flex-row flex-sm-column p-3">
+        <div class="text-dark d-flex align-items-center">已售出
+          <div class="item ms-3 bg-LightRed text-LightRed"></div>
+        </div>
+      </div>
+      <div class="seat-inf d-flex flex-row flex-sm-column p-3">
+        <div class="text-dark d-flex align-items-center">您的位置
+          <div class="item ms-3 bg-LightCerulean text-LightCerulean"></div>
+        </div>
+      </div>
+    </div>
     <div class="screen text-white">
       Screen
     </div>
     <br>
-    <div>
+    <div class="seat w-100 d-flex justify-content-center">
       <div class="seat-grid" data-select-seat-target="seatGrid"></div>
-      <br>
     </div>
   </div>
 </div>

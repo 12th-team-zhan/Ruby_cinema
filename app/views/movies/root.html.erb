@@ -33,10 +33,10 @@
               justify-content-center search" >
     <div class="qalist d-none d-lg-block col-lg-3 ">
       <ul class="bg-secondary mt-4 p-0">
-        <li class="bg-darkgray ps-4 py-2 border-bottom text-white">線上訂票</li>
-        <li class="bg-darkgray ps-4 py-2 border-bottom text-white">售票公告</li>
-        <li class="bg-darkgray ps-4 py-2 border-bottom text-white">入場須知</li>
-        <li class="bg-darkgray ps-4 py-2 border-bottom text-white">場次查詢</li>
+        <li class="bg-darkgray ps-4 py-2 border-bottom text-white"><%= link_to "線上訂票", root_path, class: "text-white" %></li>
+        <li class="bg-darkgray ps-4 py-2 border-bottom text-white"><%= link_to "電影介紹", movies_path, class: "text-white" %></li>
+        <li class="bg-darkgray ps-4 py-2 border-bottom text-white"><%= link_to "影城資訊", theaters_path, class: "text-white" %></li>
+        <li class="bg-darkgray ps-4 py-2 border-bottom text-white"><%= link_to "場次查詢", find_showtimes_path, class: "text-white" %></li>
       </ul>
     </div>
     <div class="container col-12 col-lg-9 mx-md-0 px-4 bg-cerulean rounded-4 body" data-controller="index-search-form">
@@ -68,7 +68,7 @@
             <select class="form-select w-90" 
                     aria-label="select" 
                     data-action="change->search-showtime#addShowtimeDate" 
-                    data-search-showtime-target="theaterList">
+              data-search-showtime-target="theaterList">
               <option>請選擇影城</option>
             </select>
           </div>

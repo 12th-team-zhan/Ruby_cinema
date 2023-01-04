@@ -1,4 +1,5 @@
 import { Controller } from "stimulus";
+import modal from "bootstrap/js/dist/modal";
 
 
 export default class extends Controller {
@@ -101,6 +102,9 @@ export default class extends Controller {
         }
     }
 
-    inputAt(inputName, atType) { }
+    show() {
+        const myModal = new modal(this.element);
+        myModal.show()
+    }
 
 }

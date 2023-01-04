@@ -12,7 +12,7 @@ module Admin
     end
 
     def create
-      @showtimes = Showtime.where(movie_id:params[:movie_id],cinema_id: showtime_params[:cinema_id])
+      @showtimes = Showtime.where(movie_id: @movie.id, cinema_id: showtime_params[:cinema_id])
       @showtime = @movie.showtimes.new(showtime_params)
 
       showtime_start = showtime_params[:started_at].to_datetime.to_i
@@ -32,7 +32,7 @@ module Admin
       end
 
       if showtime_condition.include?(false) || showtime_start > showtime_end || showtime_start < current_time || showtime_start == showtime_end
-        redirect_to admin_movie_showtimes_path(@movie.id), alert: '場次設定有誤,請重新輸入'
+        redirect_to admin_movie_showtimes_path(@movie.id), alert: "場次設定有誤,請重新輸入"
       else
         @showtime.save
       end
@@ -45,11 +45,11 @@ module Admin
     private
 
     def find_movie
-      @movie = Movie.find(params[:movie_id])
+      @movie = Movie.friendly.find(params[:movie_id])
     end
 
     def find_theater
-      @theaters = @movie.movie_theater.where(movie_id: params[:movie_id]).map do |cinema|
+      @theaters = MovieTheater.where(movie_id: @movie.id).map do |cinema|
         [cinema.theater.name, cinema.theater_id]
       end
     end

@@ -43,7 +43,7 @@ module Admin
     end
 
     def params_news
-      params.require(:news).permit(:title, :article, :user_id, :deleted_at).merge(edit_user_id: current_user.id)
+      params.require(:news).permit(:title, :description, :user_id, :deleted_at).merge(edit_user_id: current_user.id)
     end
   end
 end

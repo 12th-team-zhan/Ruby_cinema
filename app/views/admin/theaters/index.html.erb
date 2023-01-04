@@ -29,7 +29,7 @@
             <td><%= theater.id %></td>
             <td scope="row"><%= theater.name %></td>
             <td><%= theater.phone %></td>
-            <td><%= theater.area %></td>
+            <td><%= Theater.human_attribute_name("area.#{theater.area}") %></td>
             <td><%= theater.address %></td>
             <td><%= link_to "查看影廳", admin_theater_cinemas_path(theater) %></td>
             <td><%= link_to "編輯", edit_admin_theater_path(theater) %></td>
