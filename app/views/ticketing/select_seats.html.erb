@@ -2,7 +2,7 @@
      data-notseatlist="<%= @not_seat.seat_list %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-userSinged="<%= user_signed_in? %>">
   <%= render "movie_info" %>
   <div class="body">
-    <div class="container-md px-lg-4p py-2 d-flex justify-content-between">
+    <div class="container-md px-lg-4p py-3 d-flex justify-content-between">
       <div class="select-title col-lg-4 my-auto">
         <p class="fs-4 fw-light m-0">選取座位</p>
       </div>
@@ -15,20 +15,20 @@
     </div>
   </div>
   <div class="select d-flex flex-column align-items-center py-3 px-2">
-    <div class="d-flex">
+    <div class="d-flex p-4">
       <div class="seat-inf d-flex p-3">
         <div class="text-dark d-flex align-items-center">正在選取
-          <div class="item ms-3 bg-MediumPurple text-MediumPurple">1</div>
+          <div class="item ms-3 bg-MediumPurple text-MediumPurple"></div>
         </div>
       </div>
       <div class="seat-inf d-flex flex-row flex-sm-column p-3">
         <div class="text-dark d-flex align-items-center">已售出
-          <div class="item ms-3 bg-LightRed text-LightRed">1</div>
+          <div class="item ms-3 bg-LightRed text-LightRed"></div>
         </div>
       </div>
       <div class="seat-inf d-flex flex-row flex-sm-column p-3">
         <div class="text-dark d-flex align-items-center">您的位置
-          <div class="item ms-3 bg-LightCerulean text-LightCerulean">1</div>
+          <div class="item ms-3 bg-LightCerulean text-LightCerulean"></div>
         </div>
       </div>
     </div>
