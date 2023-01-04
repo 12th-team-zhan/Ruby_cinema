@@ -56,7 +56,6 @@ export default class extends Controller {
     this.amountTargets.forEach((e) => {
       allAmount = allAmount + Number(e.value);
     });
-    this.allAmountTarget.textContent = allAmount;
     this.changeLink(allAmount);
   }
 
@@ -64,11 +63,12 @@ export default class extends Controller {
     const params = new URLSearchParams({
       showtimeid: this.showtimeId.toString(),
       amount: amount,
+      authenticity_token: document.querySelector("meta[name='csrf-token']").content,
       regularAmount: this.regularAmountTarget.value.toString(),
       concessionAmount: this.concessionAmountTarget.value.toString(),
       elderlyAmount: this.elderlyAmountTarget.value.toString(),
       disabilityAmount: this.disabilityAmountTarget.value.toString(),
     });
-    this.nextTarget.href = `/ticketing/select_seats?${params}`;
+    this.nextTarget.action = `/ticketing/tickets?${params}`;
   }
 }

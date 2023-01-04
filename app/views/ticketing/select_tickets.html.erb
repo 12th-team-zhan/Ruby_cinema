@@ -5,11 +5,8 @@
       <div class="select-title">
         <p class="fs-4 fw-light m-0 py-2">選取票種</p>
       </div>
-      <%= link_to select_seats_ticketing_index_path, 
-          class: "col-md-4 col-lg-3 text-center my-auto next",
-          data: {select_ticketing_target: "next"}  do %>
-        <p class="fw-light m-0">已選取<span data-select-ticketing-target="allAmount">
-          </span>張票，開始選位<i class="fa-solid fa-chevron-right"></i></p>
+      <%= form_with class: "col-md-4 col-lg-4 text-end my-auto", data: {select_ticketing_target: "next" } do |f| %>
+        <%= f.submit "開始選位", class: "fw-light next seat-next px-5", data:{select_ticketing_target: "allAmount", action: "click->select-seat#checkLogin" } %>
       <% end %>
     </div>
   </div>

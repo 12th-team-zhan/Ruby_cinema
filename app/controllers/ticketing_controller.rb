@@ -11,14 +11,24 @@ class TicketingController < ApplicationController
     @showtime = @showtime.first
   end
 
+  def tickets
+      session["showtimeid"] = params[:showtimeid]
+      session["regularAmount"] = params[:regularAmount]
+      session["concessionAmount"] = params[:concessionAmount]
+      session["elderlyAmount"] = params[:elderlyAmount]
+      session["disabilityAmount"] = params[:disabilityAmount]
+      redirect_to select_seats_ticketing_index_path
+  end
+
   def select_seats
-    @showtime = Showtime.find(params[:showtimeid])
+    @showtime = Showtime.find(session["showtimeid"])
     @cinema = Cinema.find(@showtime.cinema.id)
     @not_seat = Seat.find_by(cinema_id: @showtime.cinema.id, category: 'not_added')
-    @ticket_list = [("全票#{params[:regularAmount]}" unless params[:regularAmount] == '0').to_s,
-                    ("優待票#{params[:concessionAmount]}" unless params[:concessionAmount] == '0').to_s,
-                    ("敬老票#{params[:elderlyAmount]}" unless params[:elderlyAmount] == '0').to_s,
-                    ("愛心票#{params[:disabilityAmount]}" unless params[:disabilityAmount] == '0').to_s]
+    @ticket_list = [("全票#{session["regularAmount"]}" unless session["regularAmount"] == '0').to_s,
+                    ("優待票#{session["concessionAmount"]}" unless session["concessionAmount"] == '0').to_s,
+                    ("敬老票#{session["elderlyAmount"]}" unless session["elderlyAmount"] == '0').to_s,
+                    ("愛心票#{session["disabilityAmount"] }" unless session["disabilityAmount"]  == '0').to_s]
+    @amount=session["regularAmount"].to_i+session["concessionAmount"].to_i+session["elderlyAmount"].to_i+session["disabilityAmount"].to_i
   end
 
   def seat_reservation
@@ -28,7 +38,7 @@ class TicketingController < ApplicationController
 
   def create
     if user_signed_in?
-      showtime_id = params[:showtimeid]
+      showtime_id = session["showtimeid"]
 
       @order_data = { amount: @amount }
       @order = current_user.orders.new(@order_data)
@@ -88,19 +98,19 @@ class TicketingController < ApplicationController
   private
 
   def calc_amount
-    @showtime = Showtime.includes(:cinema).where(id: params[:showtimeid]).references(:cinema)
-    @amount = params[:regularAmount].to_i * @showtime.first.cinema.regular_price +
-              params[:concessionAmount].to_i * @showtime.first.cinema.concession_price +
-              params[:elderlyAmount].to_i * @showtime.first.cinema.elderly_price +
-              params[:disabilityAmount].to_i * @showtime.first.cinema.disability_price
+    @showtime = Showtime.includes(:cinema).where(id: session["showtimeid"]).references(:cinema)
+    @amount = session["regularAmount"].to_i * @showtime.first.cinema.regular_price +
+              session["concessionAmount"].to_i * @showtime.first.cinema.concession_price +
+              session["elderlyAmount"].to_i * @showtime.first.cinema.elderly_price +
+              session["disabilityAmount"].to_i * @showtime.first.cinema.disability_price
   end
 
   def calc_ticket_category_arr
     @tickets_category = []
-    @tickets_category.concat([0] * params[:regularAmount].to_i)
-    @tickets_category.concat([1] * params[:concessionAmount].to_i)
-    @tickets_category.concat([2] * params[:elderlyAmount].to_i)
-    @tickets_category.concat([3] * params[:disabilityAmount].to_i)
+    @tickets_category.concat([0] * session["regularAmount"].to_i)
+    @tickets_category.concat([1] * session["concessionAmount"].to_i)
+    @tickets_category.concat([2] * session["elderlyAmount"].to_i)
+    @tickets_category.concat([3] * session["disabilityAmount"].to_i)
   end
 
   def generate_serial
