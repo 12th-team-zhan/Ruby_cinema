@@ -20,17 +20,17 @@
         <div>
             <%= link_to "編輯座位", admin_cinema_seats_edit_path, class: "btn btn-primary" %>
         </div>
-                <br>
-                <div>
-                  <div class="screen">
-                    銀幕位置
-                  </div>
-                  <br>
-                  <div data-controller="showseat" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-not-added="<%= @not_added.seat_list %>">
-                    <div class="grid"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <br>
+        <div>
+          <div class="screen">
+            銀幕位置
+          </div>
+          <br>
+          <div data-controller="admin--seats--show-seats" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-not-added="<%= @not_added.seat_list %>">
+            <div class="grid"></div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
