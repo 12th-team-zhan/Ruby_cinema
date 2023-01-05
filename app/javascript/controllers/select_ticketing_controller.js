@@ -30,10 +30,10 @@ export default class extends Controller {
     const event = new CustomEvent("update-typelist", {
       detail: {
         Quantity: e.target.value,
-        ticketType: e.srcElement.parentElement.parentElement.children[2].textContent,
+        ticketType: e.srcElement.parentElement.parentElement.parentElement.children[0].children[0].textContent,
       },
     });
-    this.element.dispatchEvent(event);
+    window.dispatchEvent(event);
   }
 
   calcAllTotal() {
