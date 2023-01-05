@@ -28,7 +28,7 @@ export default class extends Controller {
         "X-CSRF-Token": this.token,
       },
       body: JSON.stringify({
-        showtime_id: this.showtime_id,
+        showtime_id: this.element.dataset.showtimeid,
       }),
     })
       .then((resp) => resp.json())
@@ -106,7 +106,7 @@ export default class extends Controller {
             body: JSON.stringify({
               status: "cancel",
               seat_id: firstSelect,
-              showtime_id: this.showtime_id,
+              showtime_id: this.element.dataset.showtimeid,
               id: this.id,
             }),
           }).catch(() => {
@@ -125,7 +125,7 @@ export default class extends Controller {
             body: JSON.stringify({
               status: "cancel",
               seat_id: el.target.value,
-              showtime_id: this.showtime_id,
+              showtime_id: this.element.dataset.showtimeid,
               id: this.id,
             }),
           }).catch(() => {
@@ -145,7 +145,7 @@ export default class extends Controller {
           body: JSON.stringify({
             status: "selected",
             seat_id: el.target.value,
-            showtime_id: this.showtime_id,
+            showtime_id: this.element.dataset.showtimeid,
             id: this.id,
           }),
         }).catch(() => {
@@ -163,7 +163,7 @@ export default class extends Controller {
           body: JSON.stringify({
             status: "cancel",
             seat_id: el.target.value,
-            showtime_id: this.showtime_id,
+            showtime_id: this.element.dataset.showtimeid,
             id: this.id,
           }),
         }).catch(() => {
