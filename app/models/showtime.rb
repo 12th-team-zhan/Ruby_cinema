@@ -7,4 +7,7 @@ class Showtime < ApplicationRecord
   belongs_to :movie
   belongs_to :cinema
   has_many :ticket
+  scope :includes_id, ->(showtimeid) {
+          includes([:movie, { cinema: :theater }]).where(id: showtimeid).references(:movie, :cinema).first
+        }
 end
