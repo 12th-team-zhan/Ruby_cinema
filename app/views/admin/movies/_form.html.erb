@@ -39,7 +39,7 @@
     <%= f.file_field :movie_poster, class:"input-group-text w-100" %>
   </div>
   <div class="d-block align-items-center">
-    <span class="input-group-text">上映戲院</span>
+    <span class="input-group-text">上映影城</span>
     <% @theaters.each do |theater| %>
       <%= check_box_tag "theater[]", theater.id %>
       <%= label_tag(:theater_id, theater.name) %>
