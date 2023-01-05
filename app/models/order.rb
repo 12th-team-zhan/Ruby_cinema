@@ -21,4 +21,8 @@ class Order < ApplicationRecord
   def generate_serial
     self.serial = SecureRandom.alphanumeric(10) if serial.nil?
   end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || serial_changed?
+  end
 end
