@@ -70,8 +70,6 @@
       </div>
       <div class="modal-body" >
         <%= form_for User.new, url: user_session_path, method:"post" do |f| %>
-          <%= f.hidden_field "path", value: request.url %>
-          <%= f.hidden_field "base_path", value: request.base_url %>
           <div class="field mt-5 position-relative d-flex">
             <%= f.email_field :email, autocomplete: "email",class:"form-control",
                 data:{ action: "click->index-login#addClassAt focusout->index-login#removeClassAt

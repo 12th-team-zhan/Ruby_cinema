@@ -1,8 +1,14 @@
-<% if flash.any? %>
-    <div style="background-color: green; color: white">
-        <%= notice %>
+<div class="flash position-absolute w-100">
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <div><%= notice %></div>
+      <button ype="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <div style="background-color: red; color: white">
-        <%= alert %>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <div><%= alert %></div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-<% end %>
+  <% end %>
+</div>

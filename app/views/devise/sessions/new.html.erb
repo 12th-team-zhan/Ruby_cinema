@@ -1,44 +1,51 @@
-<div class="login" data-controller="index-login">
-  <div class="modal-content shadow-sm mx-auto">
-    <div class="modal-header position-relative">
-      <h1 class="modal-title fs-5 col-12 text-center">寶石影城</h1>
-    </div>
-    <div class="modal-body" >
-      <%= form_for User.new , url: user_session_path ,method:"post" do |f| %>
-        <%= f.hidden_field "path", value: request.url %>
-        <%= f.hidden_field "base_path", value: request.base_url %>
-        <div class="field mt-5 position-relative d-flex">
-          <%= f.email_field :email, autocomplete: "email",class:"form-control",
+<div class="login">
+  <div class="" data-controller="index-login">
+    <div class="modal-content shadow-sm mx-auto">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 col-12 text-center">寶石影城</h1>
+      </div>
+      <% if alert %>
+        <div class="modal-error fs-5 col-12 text-center">
+          <p class="text-danger m-0"><%= alert[0..-2] %></p>
+        </div>
+      <% end %>
+      <div class="modal-body" >
+        <%= form_for User.new , url: user_session_path ,method:"post" do |f| %>
+          <%= f.hidden_field "path", value: request.url %>
+          <%= f.hidden_field "base_path", value: request.base_url %>
+          <div class="field mt-5 position-relative d-flex">
+            <%= f.email_field :email, autocomplete: "email",class:"form-control",
                 data:{ action: "click->index-login#addClassAt focusout->index-login#removeClassAt
                                 keyup->index-login#keyup",index_login_target: "email"}%>
-          <%= f.label :email,class:"form-inline position-absolute ",
+            <%= f.label :email,class:"form-inline position-absolute ",
                 data:{ index_login_target: "emailLabel" }%>
-        </div>
-        <div class="field mt-5 mb-3 position-relative d-flex">
-          <%= f.password_field :password, autocomplete: "current-password" ,class:"form-control",
+          </div>
+          <div class="field mt-5 mb-3 position-relative d-flex">
+            <%= f.password_field :password, autocomplete: "current-password" ,class:"form-control",
                 data:{ action: "click->index-login#addClassAt focusout->index-login#removeClassAt
                                 keyup->index-login#keyup",index_login_target: "password"}%>
-          <%= f.label :password ,class:"form-inline position-absolute ",
+            <%= f.label :password ,class:"form-inline position-absolute ",
                 data:{ index_login_target: "passwordLabel" }%>
+          </div>
+          <div class="forgot-password d-flex flex-row-reverse text-dodgerblue">
+            <%= link_to "Forgot your password?", new_user_password_path %>
+          </div>
         </div>
-        <div class="forgot-password d-flex flex-row-reverse text-dodgerblue">
-          <%= link_to "Forgot your password?", new_user_password_path %>
-        </div>
-      </div>
-      <div class="modal-footer flex-column justify-content-center">
-        <div class="actions text-white">
-          <%= f.submit "Log in" ,class:"px-5 py-3 rounded-3",disabled: "disabled",
+        <div class="modal-footer flex-column justify-content-center">
+          <div class="actions text-white">
+            <%= f.submit "Log in" ,class:"px-5 py-3 rounded-3",disabled: "disabled",
                 data:{ index_login_target: "login" }%>
+          </div>
+          <div class="sing-up">
+            <span>Don’t have an account?</span>
+            <span class="ms-2"><%= link_to "Sign Up", new_user_registration_path %></span>
+          </div>
+          <div>
+            <%= link_to "<i class=\"fa-brands fa-facebook text-primary \"></i> Facebook登入".html_safe, user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark"  %>
+            <%= link_to "<i class=\"fa-brands fa-google\"></i> Google登入".html_safe, user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark" %>
+          </div>
         </div>
-        <div class="sing-up">
-          <span>Don’t have an account?</span>
-          <span class="ms-2"><%= link_to "Sign Up", new_user_registration_path %></span>
-        </div>
-        <div>
-          <%= link_to "<i class=\"fa-brands fa-facebook text-primary \"></i> Facebook登入".html_safe, user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark"  %>
-          <%= link_to "<i class=\"fa-brands fa-google\"></i> Google登入".html_safe, user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-outline-dark" %>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

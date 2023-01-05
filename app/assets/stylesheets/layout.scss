@@ -1,3 +1,7 @@
-.layout-body{
-    min-height: calc(100vh - 128px);
+.layout-body {
+  min-height: calc(100vh - 128px);
+}
+
+.flash {
+  z-index: 2;
 }
