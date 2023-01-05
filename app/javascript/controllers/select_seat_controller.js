@@ -55,12 +55,13 @@ export default class extends Controller {
       .catch(() => {
         console.log("error!!");
       });
+
     this.id = Math.round(Date.now() + Math.random());
     this.channel = consumer.subscriptions.create(
       {
         channel: "SelectseatChannel",
         id: this.id,
-        showtime_id: params.get("showtimeid"),
+        showtime_id: this.element.dataset.showtimeid,
       },
       {
         connected: this._cableConnected.bind(this),
