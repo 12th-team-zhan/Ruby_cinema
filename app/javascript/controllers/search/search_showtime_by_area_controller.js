@@ -1,4 +1,7 @@
 import { Controller } from "stimulus";
+import { fetchWithParams } from "../lib/fetcher";
+import { resetOptions } from "../lib/reset_dropdown_options";
+import { addOptions } from "../lib/add_options";
 
 export default class extends Controller {
   static targets = [
@@ -10,23 +13,16 @@ export default class extends Controller {
   ];
 
   addMovieList(el) {
-    this.resetMovie();
-    this.resetShowtime();
+    resetOptions(this.movieListTarget, "請選擇電影");
+    resetOptions(this.showtimeListTarget, "請選擇日期");
+    this.movieListTarget.disabled = false;
     this.resetTimeSelect();
 
-    const token = document.querySelector("meta[name='csrf-token']").content;
     this.areaId = el.target.value;
-    fetch("/find_showtimes/add_movie_list", {
-      method: "POST",
-      headers: {
-        "X-csrf-Token": token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ area: this.areaId }),
+
+    fetchWithParams(`/find_showtimes/add_movie_list`, "POST", {
+      area: this.areaId,
     })
-      .then((resp) => {
-        return resp.json();
-      })
       .then((data) => {
         let options = "";
 
@@ -42,27 +38,16 @@ export default class extends Controller {
   }
 
   addShowtimeList(el) {
-    this.resetShowtime();
+    resetOptions(this.showtimeListTarget, "請選擇日期");
     this.resetTimeSelect();
-
-    const token = document.querySelector("meta[name='csrf-token']").content;
     this.movieId = el.target.value;
-    fetch("/find_showtimes/add_showtime_list", {
-      method: "POST",
-      headers: {
-        "X-csrf-Token": token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        movie_id: this.movieId,
-      }),
+    this.showtimeListTarget.disabled = false;
+
+    fetchWithParams(`/find_showtimes/add_showtime_list`, "POST", {
+      movie_id: this.movieId,
     })
-      .then((resp) => {
-        return resp.json();
-      })
       .then((data) => {
         const date = [];
-        let options = "";
 
         if (data.length !== 0) {
           data.map((element) => {
@@ -70,11 +55,7 @@ export default class extends Controller {
               date.push(element[0]);
             }
           });
-          date.forEach((element) => {
-            options += `<option value="${element}" >${element}</option>`;
-          });
-          
-          this.showtimeListTarget.insertAdjacentHTML("beforeend", options);
+          addOptions(date, this.showtimeListTarget);
         } else {
           this.noComeOut();
         }
@@ -87,6 +68,8 @@ export default class extends Controller {
   addTimeSelect() {
     this.resetTimeSelect();
 
+    this.startTimeTarget.disabled = false;
+    this.endTimeTarget.disabled = false;
     let options = "";
 
     var i = 6;
@@ -128,26 +111,9 @@ export default class extends Controller {
     }
   }
 
-  resetMovie() {
-    this.movieListTarget.replaceChildren();
-    let movieOption = `<option>請選擇電影</option>`;
-    this.movieListTarget.insertAdjacentHTML("beforeend", movieOption);
-  }
-
-  resetShowtime() {
-    this.showtimeListTarget.replaceChildren();
-    let dateOption = `<option>請選擇日期</option>`;
-    this.showtimeListTarget.insertAdjacentHTML("beforeend", dateOption);
-  }
-
   resetTimeSelect() {
-    this.startTimeTarget.replaceChildren();
-    this.endTimeTarget.replaceChildren();
-
-    let startTimeOption = `<option value="0">時段(起)</option>`;
-    let endTimeOption = `<option value="0">時段(迄)</option>`;
-    this.startTimeTarget.insertAdjacentHTML("beforeend", startTimeOption);
-    this.endTimeTarget.insertAdjacentHTML("beforeend", endTimeOption);
+    resetOptions(this.startTimeTarget, "時段(起)");
+    resetOptions(this.endTimeTarget, "時段(迄)");
   }
 
   autoSupplement(timeHour) {

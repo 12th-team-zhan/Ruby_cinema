@@ -1,5 +1,5 @@
 <h2 class="text-start text-deepskyblue mb-3">場次查詢</h2>
-<div class="movie-show-showtime border boder-cerulean bg-cerulean rounded p-3" data-controller="theater-show-showtimes">
+<div class="movie-show-showtime border boder-cerulean bg-cerulean rounded p-3" data-controller="search--theater-show-showtimes">
   <div class="btn-group w-100">
     <button type="button" class="btn btn-outline-Silver dropdown-toggle text-wrap" 
               data-bs-toggle="dropdown" 
@@ -8,24 +8,24 @@
     <ul class="dropdown-menu">
       <% @movies.each do |movie| %>
         <li class="dropdown-item bg-white text-center" 
-          data-action="click->theater-show-showtimes#addShowtimeDate" 
-          data-theater-show-showtimes-target="movie"
+          data-action="click->search--theater-show-showtimes#addShowtimeDate" 
+          data-search--theater-show-showtimes-target="movie"
           data-theater-id="<%= @theater.id %>"
           value="<%= movie.id %>"><%= movie.name %></li>
       <% end %>
     </ul>
   </div>
-  <div data-theater-show-showtimes-target="showtimeSelect" class="d-none mt-3">
+  <div data-search--theater-show-showtimes-target="showtimeSelect" class="d-none mt-3">
     <div class="btn-group w-100">
       <button type="button" class="btn btn-outline-Silver dropdown-toggle text-wrap" 
               data-bs-toggle="dropdown" 
               aria-expanded="false"
-              data-theater-show-showtimes-target="dateDropdownBtn">
+              data-search--theater-show-showtimes-target="dateDropdownBtn">
       </button>
-      <ul class="dropdown-menu" data-theater-show-showtimes-target="showtimeDate">
+      <ul class="dropdown-menu" data-search--theater-show-showtimes-target="showtimeDate">
       </ul>
     </div>
-    <div class="d-none border rounded mt-3" data-theater-show-showtimes-target="showtimeTable">
+    <div class="d-none border rounded mt-3" data-search--theater-show-showtimes-target="showtimeTable">
       <table class="table fs-5 text-center text-Silver m-0">
         <thead class="bg-Silver text-cerulean">
           <tr>
@@ -34,7 +34,7 @@
             <th>前往購票</th>
           </tr>
         </thead>
-        <tbody data-theater-show-showtimes-target="showtime">
+        <tbody data-search--theater-show-showtimes-target="showtime">
         </tbody>
       </table>
     </div>

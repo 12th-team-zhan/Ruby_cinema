@@ -4,7 +4,6 @@ export default class extends Controller {
     static targets = [""]
 
     connect() {
-        console.log("Text");
         this.setupTrix()
     }
     setupTrix() {

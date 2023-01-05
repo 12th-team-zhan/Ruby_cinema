@@ -8,15 +8,15 @@
 </div>
 <div class="container text-center px-lg-4p find-showtimes">
   <h2 class="text-LightCerulean py-3 py-lg-4 m-0"><i class="fa-solid fa-magnifying-glass"></i>快搜條件</h2>
-  <div class="d-flex" data-controller="search-showtime-by-area">
+  <div class="d-flex" data-controller="search--search-showtime-by-area">
     <div class="col d-flex flex-wrap">
       <div class="col-12 col-sm-4 col-xl-2 py-2">
         <div class="d-flex align-items-center position-relative item">
           <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot text-LightCerulean"></i></div>
           <select class="form-select w-90" 
                     aria-label="select" 
-                    data-action="change->search-showtime-by-area#addMovieList"
-            data-search-showtime-by-area-target="area">
+                    data-action="change->search--search-showtime-by-area#addMovieList"
+            data-search--search-showtime-by-area-target="area">
             <option>請選擇地區</option>
             <% @theater_areas.each do |theater_area| %>
               <option value="<%= theater_area[1] %>" ><%= Theater.human_attribute_name("area.#{theater_area[0]}") %></option>
@@ -29,8 +29,8 @@
           <div class="icon position-absolute"><i class="m-0 fa-solid fa-video text-LightCerulean"></i></div>
           <select class="form-select w-90" 
                       aria-label="select"
-                      data-search-showtime-by-area-target="movieList"
-                      data-action="change->search-showtime-by-area#addShowtimeList">
+                      data-search--search-showtime-by-area-target="movieList"
+                      data-action="change->search--search-showtime-by-area#addShowtimeList">
             <option>請選擇電影</option>
           </select>
         </div>
@@ -41,8 +41,8 @@
             <div class="icon position-absolute"><i class="m-0 fa-regular fa-calendar-days text-LightCerulean"></i></div>
             <select class="form-select w-90 col" 
                           aria-label="select"
-                          data-search-showtime-by-area-target="showtimeList"
-                          data-action="change->search-showtime-by-area#addTimeSelect">
+                          data-search--search-showtime-by-area-target="showtimeList"
+                          data-action="change->search--search-showtime-by-area#addTimeSelect">
               <option>請選擇日期</option>
             </select>
           </div>
@@ -54,7 +54,7 @@
             <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot text-LightCerulean"></i></div>
             <select class="form-select w-90 col" 
                           aria-label="select"
-                          data-search-showtime-by-area-target="startTime">
+                          data-search--search-showtime-by-area-target="startTime">
               <option value="0">時段(起)</option>
             </select>
           </div>
@@ -64,15 +64,15 @@
             <div class="icon position-absolute"><i class="m-0 fa-solid fa-location-dot text-LightCerulean"></i></div>
             <select class="form-select w-90 col" 
                           aria-label="select"
-                          data-search-showtime-by-area-target="endTime"
-                          data-action="change->search-showtime-by-area#changeLink">
+                          data-search--search-showtime-by-area-target="endTime"
+                          data-action="change->search--search-showtime-by-area#changeLink">
               <option value="0">時段(迄)</option>
             </select>
           </div>
         </div>
       </div>
       <div class="col-12 col-xl-2 py-2 pe-xl-5 d-flex align-items-center justify-content-center">
-        <%= link_to "查詢場次", "#", class: "click->search-showtime-by-area#checkAreaData text-center btn btn-LightCerulean search-bottom", id: "rootSearchShowtime"%>
+        <%= link_to "查詢場次", "#", class: "click->search--search-showtime-by-area#checkAreaData text-center btn btn-LightCerulean search-bottom", id: "rootSearchShowtime"%>
       </div>
     </div>
   </div>
