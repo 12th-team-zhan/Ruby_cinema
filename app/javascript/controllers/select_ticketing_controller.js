@@ -62,7 +62,6 @@ export default class extends Controller {
   changeLink(amount) {
     const params = new URLSearchParams({
       showtimeid: this.showtimeId.toString(),
-      amount: amount,
       authenticity_token: document.querySelector("meta[name='csrf-token']").content,
       regularAmount: this.regularAmountTarget.value.toString(),
       concessionAmount: this.concessionAmountTarget.value.toString(),
