@@ -4,7 +4,7 @@
             <select class="form-select w-90" 
                     aria-label="select" 
                     data-action="change->search--search-showtime-by-area#addMovieList"
-              data-search--search-showtime-by-area-target="area">
+                    data-search--search-showtime-by-area-target="area">
               <option>請選擇地區</option>
               <% human_attribute_areas.each do |theater_area| %>
                 <option value="<%= theater_area[1] %>" ><%= theater_area[0] %></option>

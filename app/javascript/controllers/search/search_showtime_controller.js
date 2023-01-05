@@ -10,6 +10,7 @@ export default class extends Controller {
     resetOptions(this.theaterListTarget, "請選擇影城");
     resetOptions(this.showtimeDateTarget, "請選擇日期");
     resetOptions(this.showtimeTarget, "請選擇場次");
+    this.theaterListTarget.disabled = false;
     this.movieId = el.target.value;
 
     fetchWithParams("/api/v1/theater_list", "POST", { movie_id: this.movieId })
@@ -24,7 +25,7 @@ export default class extends Controller {
   addShowtimeDate(el) {
     resetOptions(this.showtimeDateTarget, "請選擇日期");
     resetOptions(this.showtimeTarget, "請選擇場次");
-
+    this.showtimeDateTarget.disabled = false;
     this.theaterId = el.target.value;
 
     fetchWithParams("/api/v1/showtime_list", "POST", {
@@ -53,7 +54,7 @@ export default class extends Controller {
 
   addShowtime() {
     resetOptions(this.showtimeTarget, "請選擇場次");
-
+    this.showtimeDateTarget.disabled = false;
     let options = "";
 
     this.showtime.map((showtime) => {

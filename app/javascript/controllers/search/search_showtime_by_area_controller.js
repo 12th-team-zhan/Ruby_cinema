@@ -15,6 +15,7 @@ export default class extends Controller {
   addMovieList(el) {
     resetOptions(this.movieListTarget, "請選擇電影");
     resetOptions(this.showtimeListTarget, "請選擇日期");
+    this.movieListTarget.disabled = false;
     this.resetTimeSelect();
 
     this.areaId = el.target.value;
@@ -40,6 +41,7 @@ export default class extends Controller {
     resetOptions(this.showtimeListTarget, "請選擇日期");
     this.resetTimeSelect();
     this.movieId = el.target.value;
+    this.showtimeListTarget.disabled = false;
 
     fetchWithParams(`/find_showtimes/add_showtime_list`, "POST", {
       movie_id: this.movieId,
@@ -66,6 +68,8 @@ export default class extends Controller {
   addTimeSelect() {
     this.resetTimeSelect();
 
+    this.startTimeTarget.disabled = false;
+    this.endTimeTarget.disabled = false;
     let options = "";
 
     var i = 6;
