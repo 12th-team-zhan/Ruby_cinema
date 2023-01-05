@@ -10,7 +10,7 @@
   <h1 class="text-deepskyblue text-center text-md-start">熱售中</h1>
   <div class="movie-list">
     <div class="d-flex flex-wrap">
-      <% @movie.each do |movie| %>
+      <% @movies.each do |movie| %>
         <%= link_to movie_path(movie), class: "card p-4 col-12 col-md-4 col-lg-3" do%>
           <% if movie.movie_poster.attached? %>
             <div class="pic">
@@ -27,5 +27,6 @@
   </div>
 </div>
 <section class="text-center py-3">
+  <%= will_paginate @movies, class: "d-flex gap-3 justify-content-center"%>
   <%= link_to "回首頁", root_path, class: "btn btn-LightCerulean btn-lg " %>
 </section>
