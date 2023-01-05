@@ -9,7 +9,7 @@
       <% @order.tickets.each do |ticket|%>
         <div class="shadow mb-3">
           <div class="ticket-text d-flex py-2 flex-column align-items-center">
-            <div><%= format_seats(ticket.showtime.cinema.max_column) %></div>
+            <div><%= format_seat(ticket) %></div>
             <div><%= Ticket.human_attribute_name("status.#{ticket.status}") %></div>
           </div>
           <div class="d-flex justify-content-center">

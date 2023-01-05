@@ -75,6 +75,7 @@ Rails.application.routes.draw do
       get :pay
       get :select_tickets
       get :select_seats
+      post :tickets
       post :checkout
       post :seat_reservation, to: 'ticketing#seat_reservation'
     end

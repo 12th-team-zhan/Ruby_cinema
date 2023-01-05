@@ -12,6 +12,9 @@ class Ticket < ApplicationRecord
 
   validates :serial, presence: true, uniqueness: true
 
+  scope :includes_byorder_id, ->(orderid) {includes(showtime: [:movie,{ cinema: :theater }]).where(order_id: orderid).limit(1).references(:showtime).first
+  }
+
   private
 
   def generate_serial

@@ -6,11 +6,7 @@ export default class extends Controller {
   connect() {
     let params = new URLSearchParams(location.search);
     this.url = new URL("ticketing", location.origin);
-    for (const [key, value] of params) {
-      this.url.searchParams.append(key, value);
-    }
-    this.showtime_id = params.get("showtimeid");
-    this.ticketAmount = Number(params.get("amount"));
+    this.ticketAmount = Number(this.element.dataset.amount);
     this.token = document.querySelector("meta[name='csrf-token']").content;
     this.url.searchParams.append("authenticity_token", this.token);
     //去空隔 [] 轉陣列
@@ -32,7 +28,7 @@ export default class extends Controller {
         "X-CSRF-Token": this.token,
       },
       body: JSON.stringify({
-        showtime_id: this.showtime_id,
+        showtime_id: this.element.dataset.showtimeid,
       }),
     })
       .then((resp) => resp.json())
@@ -59,12 +55,13 @@ export default class extends Controller {
       .catch(() => {
         console.log("error!!");
       });
+
     this.id = Math.round(Date.now() + Math.random());
     this.channel = consumer.subscriptions.create(
       {
         channel: "SelectseatChannel",
         id: this.id,
-        showtime_id: params.get("showtimeid"),
+        showtime_id: this.element.dataset.showtimeid,
       },
       {
         connected: this._cableConnected.bind(this),
@@ -109,7 +106,7 @@ export default class extends Controller {
             body: JSON.stringify({
               status: "cancel",
               seat_id: firstSelect,
-              showtime_id: this.showtime_id,
+              showtime_id: this.element.dataset.showtimeid,
               id: this.id,
             }),
           }).catch(() => {
@@ -128,7 +125,7 @@ export default class extends Controller {
             body: JSON.stringify({
               status: "cancel",
               seat_id: el.target.value,
-              showtime_id: this.showtime_id,
+              showtime_id: this.element.dataset.showtimeid,
               id: this.id,
             }),
           }).catch(() => {
@@ -148,7 +145,7 @@ export default class extends Controller {
           body: JSON.stringify({
             status: "selected",
             seat_id: el.target.value,
-            showtime_id: this.showtime_id,
+            showtime_id: this.element.dataset.showtimeid,
             id: this.id,
           }),
         }).catch(() => {
@@ -166,7 +163,7 @@ export default class extends Controller {
           body: JSON.stringify({
             status: "cancel",
             seat_id: el.target.value,
-            showtime_id: this.showtime_id,
+            showtime_id: this.element.dataset.showtimeid,
             id: this.id,
           }),
         }).catch(() => {

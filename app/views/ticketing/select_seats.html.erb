@@ -1,10 +1,10 @@
 <div class="movie position-relative" data-controller="select-seat" 
-     data-notseatlist="<%= @not_seat.seat_list %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-userSinged="<%= user_signed_in? %>">
+     data-notseatlist="<%= @not_seat.seat_list %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-amount="<%= @amount %>"  data-usersinged="<%= user_signed_in? %>"  data-showtimeid="<%= @showtime.id %>">
   <%= render "movie_info" %>
   <div class="body">
     <div class="container-md px-lg-4p py-3 d-flex justify-content-between">
       <div class="select-title col-lg-4 my-auto">
-        <p class="fs-4 fw-light m-0">選取座位</p>
+        <p class="fs-4 fw-light m-0">選取座位<%= @s %></p>
       </div>
       <div class="time col-lg-4 text-center  my-auto" data-controller="alarm-clock">
         <p class="fs-4 fw-light m-0">剩餘時間<span data-alarm-clock-target="time"></span></p>
