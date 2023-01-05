@@ -13,7 +13,6 @@
     <table class="table table-striped ">
       <thead>
         <tr>
-          <th scope="col">影城編號</th>
           <th scope="col">影城名稱</th>
           <th scope="col">電話</th>
           <th scope="col">區域</th>
@@ -26,7 +25,6 @@
       <% @theaters.each do |theater| %>
         <tbody>
           <tr>
-            <td><%= theater.id %></td>
             <td scope="row"><%= theater.name %></td>
             <td><%= theater.phone %></td>
             <td><%= Theater.human_attribute_name("area.#{theater.area}") %></td>

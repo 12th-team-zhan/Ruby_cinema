@@ -7,6 +7,7 @@ class Movie < ApplicationRecord
 
   # validates
   validates :name, presence: true
+  validates :duration, presence: true
   validates :description, presence: true
 
   # relationships

@@ -1,5 +1,8 @@
 <div class="card text-center">
   <div class="card-body">
+    <div class="progress my-3">
+      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 66%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">註冊進度: 2/3</div>
+    </div>
     <h2 class="card-title">會員條款</h2>
     <div class="container ">
       <div class="col-12">
@@ -40,10 +43,8 @@
           </article>
         </section>
         <div>
-          <input type="checkbox" 
-                 data-action="click->user-register#confirm"
-          id="TermsCheckbox">
-          <label>我已閱讀以上條款(以上內容皆為虛構，僅供ASTRO CAMP demo day使用)</label>
+          <input type="checkbox" data-action="click->user-register#confirm" id="TermsCheckbox" name="TermsCheckbox">
+          <label for="TermsCheckbox">我已閱讀以上條款(以上內容皆為虛構，僅供ASTRO CAMP demo day使用)</label>
         </div>
         <section>
           <div class="container text-center p-4">
@@ -59,9 +60,6 @@
           </div>
         </section>
       </div>
-    </div>
-    <div class="progress">
-      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 66%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">註冊進度: 2/3</div>
     </div>
   </div>
 </div>

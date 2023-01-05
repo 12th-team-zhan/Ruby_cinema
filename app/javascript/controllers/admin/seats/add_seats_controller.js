@@ -1,9 +1,10 @@
 import { Controller } from "stimulus";
+import { fetchWithParamsAndRedirect } from "../../lib/fetcher";
 
 export default class extends Controller {
   connect() {
-    this.maxRow = this.element.dataset.maxrow;
-    this.maxColumn = this.element.dataset.maxcolumn;
+    this.maxRow = parseInt(this.element.dataset.maxrow);
+    this.maxColumn = parseInt(this.element.dataset.maxcolumn);
 
     this.seatsAll = [...Array(this.maxRow * this.maxColumn).keys()].map((x) => x + 1);
     this.seatsNotAdded = [];
@@ -13,17 +14,20 @@ export default class extends Controller {
 
   makeSeatingChart(maxR, maxC) {
     const grid = this.element.firstElementChild;
+    grid.style.cssText += `grid-template-rows: repeat(${maxR}, 1fr);grid-template-columns: repeat(${maxC + 2}, 1fr);`;
 
-    grid.style.cssText += `grid-template-rows: repeat(${maxR}, 1fr);grid-template-columns: repeat(${maxC}, 1fr);`;
-
+    let seatList = "";
     for (var r = 1; r <= maxR; r++) {
-      let row_index = String.fromCharCode(r + 64);
+      let RowId = `<div class="text-center text-dark">${String.fromCharCode(r + 64)}</div>`;
+      seatList += RowId;
       for (let c = 1; c <= maxC; c++) {
-        const item = `<div class="seat-item" data-seat-id=${(r - 1) * maxC + c} data-status="added" data-action="click->addseat#changeSeatStatus">${row_index}${String(c).padStart(2, "0")}</div>`;
+        let columnId = `<div class="seat-item" data-seat-id=${(r - 1) * maxC + c} data-status="added" data-action="click->admin--seats--add-seats#changeSeatStatus">${String(c).padStart(2, "0")}</div>`;
 
-        grid.insertAdjacentHTML("beforeend", item);
+        seatList += columnId;
       }
+      seatList += RowId;
     }
+    grid.insertAdjacentHTML("beforeend", seatList);
   }
 
   changeSeatStatus(el) {
@@ -32,7 +36,7 @@ export default class extends Controller {
 
     switch (seatStatus) {
       case "not added":
-        el.target.classList.remove("bg-transparent");
+        el.target.classList.remove("bg-transparent", "text-dark");
 
         el.target.dataset.status = "added";
 
@@ -40,7 +44,7 @@ export default class extends Controller {
         this.seatsNotAdded.splice(index, 1);
         break;
       case "added":
-        el.target.classList.add("bg-transparent");
+        el.target.classList.add("bg-transparent", "text-dark");
 
         el.target.dataset.status = "not added";
 
@@ -52,28 +56,14 @@ export default class extends Controller {
   }
 
   addToTable() {
-    const token = document.querySelector("meta[name='csrf-token']").content;
     const cinemaId = this.element.dataset.id;
+    const path = `/admin/cinemas/${cinemaId}/seats`;
 
     this.seatsAdded = this.seatsAll.filter((s) => !this.seatsNotAdded.includes(s));
     const seats = { added: this.seatsAdded, notAdded: this.seatsNotAdded };
 
-    fetch(`/admin/cinemas/${cinemaId}/seats`, {
-      method: "POST",
-      headers: {
-        "X-csrf-Token": token,
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      body: JSON.stringify(seats),
-    })
-      .then((resp) => {
-        if (resp.redirected) {
-          window.location.href = resp.url;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fetchWithParamsAndRedirect(path, "POST", seats).catch((err) => {
+      console.log(err);
+    });
   }
 }
