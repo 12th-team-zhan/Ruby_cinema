@@ -3,7 +3,7 @@ import consumer from "../channels/consumer";
 import Swal from "sweetalert2";
 
 export default class extends Controller {
-  static targets = ["seatGrid", "next"];
+  static targets = ["seatGrid", "next", "form", "nextAmount"];
   connect() {
     let params = new URLSearchParams(location.search);
     this.url = new URL("ticketing", location.origin);
@@ -21,6 +21,7 @@ export default class extends Controller {
     this.makeSeatingChart(this.maxRow, this.maxColumn);
     this.otherSeat = {};
     this.selectSeat = [];
+    this.formatNext()
     //向API查詢已被選擇位子selected_tickets
     fetch(`/api/v1/selected_tickets`, {
       method: "POST",
@@ -73,9 +74,8 @@ export default class extends Controller {
   }
 
   makeSeatingChart(maxR, maxC) {
-    this.seatGridTarget.style.cssText += `grid-template-rows: repeat(${maxR}, 1fr);grid-template-columns: repeat(${
-      maxC + 2
-    }, 1fr);`;
+    this.seatGridTarget.style.cssText += `grid-template-rows: repeat(${maxR}, 1fr);grid-template-columns: repeat(${maxC + 2
+      }, 1fr);`;
 
     let seatingChart = "";
     for (var r = 1; r <= maxR; r++) {
@@ -84,11 +84,9 @@ export default class extends Controller {
       )}</div>`;
       seatingChart += itemAlphabet;
       for (let c = 1; c <= maxC; c++) {
-        let item = `<button  class="item item${
-          (r - 1) * maxC + c
-        }" data-status="empty" data-row="${r}" data-column="${c}" value="${
-          (r - 1) * maxC + c
-        }" data-action="click->select-seat#changeSeatStatus">${c}</button>`;
+        let item = `<button  class="item item${(r - 1) * maxC + c
+          }" data-status="empty" data-row="${r}" data-column="${c}" value="${(r - 1) * maxC + c
+          }" data-action="click->select-seat#changeSeatStatus">${c}</button>`;
 
         if (this.notSeatList.includes((r - 1) * maxC + c)) {
           item = `<button class="item item-hidden" data-status="empty" data-row="${r}" data-column="${c}">${c}</button>`;
@@ -183,6 +181,7 @@ export default class extends Controller {
       default:
         console.log("We don't have the seat status");
     }
+
   }
   _cableConnected() {
     // Called when the subscription is ready for use on the server.
@@ -219,6 +218,7 @@ export default class extends Controller {
           break;
       }
       this.changeLink();
+      this.formatNext()
     } else {
       switch (data.status) {
         case "selected":
@@ -262,7 +262,7 @@ export default class extends Controller {
 
   changeLink() {
     this.url.searchParams.append("seatId", this.selectSeat);
-    this.nextTarget.action = this.url;
+    this.formTarget.action = this.url;
   }
 
   checkLogin(e) {
@@ -289,5 +289,22 @@ export default class extends Controller {
         this.nextTarget.submit();
       }
     }
+  }
+
+  formatNext() {
+    const res = this.element.dataset.amount - this.selectSeat.length
+    if (res === 0) {
+      const html = `確認訂單<i class="fa-solid fa-chevron-right"></i>`
+      this.nextAmountTarget.innerHTML = html;
+    }
+    else {
+      const html = ` <span >還需要選取</span>
+      <span class="d-block d-sm-inline">${res} 個位子<i class="fa-solid fa-chevron-right"></i></span>`
+      this.nextAmountTarget.innerHTML = html;
+    }
+  }
+
+  submit() {
+    this.formTarget.submit()
   }
 }

@@ -15,7 +15,7 @@
     </ul>
     <ul class="list-group">
       <li class="list-group-item ps-0 py-4 fw-semibold" data-controller="select-ticket-type">票種：
-        <span class="d-flex gap-2">
+        <span class="d-flex pt-2 gap-2">
           <div data-action="update-typelist@window->select-ticket-type#addRegularType" data-select-ticket-type-target="regular"></div>
           <div data-action="update-typelist@window->select-ticket-type#addConcessionType" data-select-ticket-type-target="concession"></div>
           <div data-action="update-typelist@window->select-ticket-type#addElderlyType" data-select-ticket-type-target="elderly"></div>
@@ -33,9 +33,15 @@
       </li>
     </ul>
     <ul class="list-group">
-      <li class="list-group-item ps-0 py-4 fw-semibold">
-        總計 <span class="fs-3 fw-semibold" data-select-ticketing-target="allTotal">$0</span>
-      </li>
+      <%if @amount %>
+        <li class="list-group-item ps-0 py-4 fw-semibold">
+          總計 <span class="fs-3 fw-semibold" data-select-ticketing-target="titleTotal">$<%= @amount %></span>
+        </li>
+      <% else %>
+        <li class="list-group-item ps-0 py-4 fw-semibold">
+          總計 <span class="fs-3 fw-semibold" data-select-ticketing-target="titleTotal">$0</span>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
