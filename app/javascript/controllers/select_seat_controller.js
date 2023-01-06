@@ -207,6 +207,8 @@ export default class extends Controller {
           seatElement = document.querySelector(`.item${data.seat_id}`);
           seatElement.classList.remove("bg-LightCerulean", "text-white");
           seatElement.dataset.status = "empty";
+          // const index = this.selectSeat.indexOf(data.seat_id);
+          // this.selectSeat.splice(index, 1);
           break;
 
         case "fail":
@@ -286,7 +288,7 @@ export default class extends Controller {
           },
         });
       } else {
-        this.nextTarget.submit();
+        this.formTarget.submit();
       }
     }
   }
@@ -298,8 +300,9 @@ export default class extends Controller {
       this.nextAmountTarget.innerHTML = html;
     }
     else {
-      const html = ` <span >還需要選取</span>
-      <span class="d-block d-sm-inline">${res} 個位子<i class="fa-solid fa-chevron-right"></i></span>`
+      // const html = ` <span >還需要選取</span>
+      // <span class="d-block d-sm-inline">${res} 個位子<i class="fa-solid fa-chevron-right"></i></span>`
+      const html = `請選取 ${this.element.dataset.amount} 個位子</i>`
       this.nextAmountTarget.innerHTML = html;
     }
   }
