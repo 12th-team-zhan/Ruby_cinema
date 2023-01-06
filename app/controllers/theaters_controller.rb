@@ -2,7 +2,7 @@
 
 class TheatersController < ApplicationController
   def index
-    @theaters = Theater.all
+    @theaters = Theater.order(created_at: :desc)
   end
 
   def show

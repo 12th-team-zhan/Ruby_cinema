@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   before_action :find_movie, only: %i[show]
 
   def index
-    @movies = Movie.paginate(page: params[:page], per_page: 12)
+    @movies = Movie.paginate(page: params[:page], per_page: 12).order(created_at: :desc)
   end
 
   def root
