@@ -36,8 +36,10 @@ module Admin
       if @movie.save
         append_movie_poster
 
-        @theaters = params.require(:theater).map do |theater|
-          MovieTheater.create(movie_id: @movie.id, theater_id: theater.to_i)
+        if params["theater"].present?
+          params.require(:theater).map do |theater|
+            MovieTheater.create(movie_id: @movie.id, theater_id: theater.to_i)
+          end
         end
 
         redirect_to admin_movies_path, notice: "成功新增電影!"
