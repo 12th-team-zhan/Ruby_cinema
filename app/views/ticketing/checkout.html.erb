@@ -1,7 +1,9 @@
 <div class="container pay">
   <div class="d-flex position-relative">
     <div class="col-12 col-md-9 col-lg-8 col-xl-6 position-absolute img d-none d-md-block">
-      <%= image_tag @ticket.showtime.movie.movie_poster, class: "m-auto w-50  order-img" %>
+      <% if @ticket.showtime.movie.movie_poster.attached? %>
+        <%= image_tag @ticket.showtime.movie.movie_poster, class: "m-auto w-50  order-img" %>
+      <%end%>
     </div>
     <div class="order col-12 col-md-9 col-lg-8 col-xl-6 bg-darkblue rounded-3 shadow mx-auto my-50px">
       <div class="order-title p-3 p-md-5 text-center">
