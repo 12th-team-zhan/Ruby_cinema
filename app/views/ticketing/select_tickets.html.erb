@@ -2,13 +2,20 @@
   <%= render "movie_info" %>
   <div class="body">
     <div class="container-md px-lg-4p my-3 d-flex justify-content-between">
-      <div class="select-title">
-        <p class="fs-4 fw-light m-0 py-2">選取票種</p>
+      <div class="select-title my-auto col-6">
+        <p class="fs-4 fw-light text-md-center mb-0 py-2">選取票種</p>
       </div>
-      <%= form_with class: "col-md-4 col-lg-4 text-end my-auto", data: {select_ticketing_target: "next" } do |f| %>
-        <%= f.submit "開始選位", class: "fw-light next seat-next px-5", data:{select_ticketing_target: "allAmount", action: "click->select-seat#checkLogin" } %>
-      <% end %>
+      <div class="col-6 col-md-5 col-lg-4 col-xl-3 text-center my-auto d-none next ticket-next"
+           data-action="click->select-ticketing#submit" data-select-ticketing-target="next"> 
+        <p class="fw-light m-0">
+          <span>
+            <span data-select-ticketing-target="nextAmount"></span>
+            <span class="d-block d-sm-inline">開始選位<i class="fa-solid fa-chevron-right"></i></span>
+          </span>
+        </p>
+      </div>
     </div>
+    <%= form_with class: "d-none", data: { select_ticketing_target: "form" } %>
   </div>
   <div class="container-md ticket px-lg-4p px-0">
     <div class="d-flex p-3 justify-content-around title">

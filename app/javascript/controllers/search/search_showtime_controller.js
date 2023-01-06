@@ -54,7 +54,7 @@ export default class extends Controller {
 
   addShowtime() {
     resetOptions(this.showtimeTarget, "請選擇場次");
-    this.showtimeDateTarget.disabled = false;
+    this.showtimeTarget.disabled = false;
     let options = "";
 
     this.showtime.map((showtime) => {

@@ -1,18 +1,27 @@
 <div class="movie position-relative" data-controller="select-seat" 
-     data-notseatlist="<%= @not_seat.seat_list %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-amount="<%= @amount %>"  data-usersinged="<%= user_signed_in? %>"  data-showtimeid="<%= @showtime.id %>">
+     data-notseatlist="<%= @not_seat.seat_list %>" data-maxrow="<%= @cinema.max_row %>" data-maxcolumn="<%= @cinema.max_column %>" data-amount="<%= @quantity %>"  data-usersinged="<%= user_signed_in? %>"  data-showtimeid="<%= @showtime.id %>">
   <%= render "movie_info" %>
   <div class="body">
     <div class="container-md px-lg-4p py-3 d-flex justify-content-between">
-      <div class="select-title col-lg-4 my-auto">
-        <p class="fs-4 fw-light m-0">選取座位<%= @s %></p>
+      <div class="select-title col-md-3 my-auto">
+        <p class="fs-4 fw-light text-md-center mb-0">選取座位</p>
       </div>
-      <div class="time col-lg-4 text-center  my-auto" data-controller="alarm-clock">
+         <div class="col-0 col-lg-1"></div>
+      <div class="time col-md-4 text-center  my-auto" data-controller="alarm-clock">
         <p class="fs-4 fw-light m-0">剩餘時間<span data-alarm-clock-target="time"></span></p>
       </div>
-      <%= form_with class: "col-md-4 col-lg-4 text-end my-auto", data: {select_seat_target: "next" } do |f| %>
-        <%= f.submit "確認訂單", class: "fw-light next seat-next px-5", data:{ action: "click->select-seat#checkLogin" } %>
-      <% end %>
+      <div class="col-5 col-md-4">
+        <div class="col-12 col-lg-10 ms-auto text-center my-auto next ticket-next"
+           data-action="click->select-seat#checkLogin" data-select-ticketing-target="next"> 
+          <p class="fw-light m-0">
+            <span data-select-seat-target="nextAmount">
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
+ 
+    <%= form_with class: "col-1", data: { select_seat_target: "form" } %>
   </div>
   <div class="select d-flex flex-column align-items-center py-3 px-2">
     <div class="d-flex p-4">

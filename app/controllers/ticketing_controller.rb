@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TicketingController < ApplicationController
-  before_action :calc_amount, only: %i[create]
+  before_action :calc_amount, only: %i[create select_seats]
   before_action :calc_ticket_category_arr, only: %i[create]
   before_action :ticket_params, only: %i[tickets]
   skip_before_action :verify_authenticity_token, only: %i[checkout]
@@ -23,10 +23,10 @@ class TicketingController < ApplicationController
                     ("優待票#{session["info"]["concessionAmount"]}" unless session["info"]["concessionAmount"] == '0').to_s,
                     ("敬老票#{session["info"]["elderlyAmount"]}" unless session["info"]["elderlyAmount"] == '0').to_s,
                     ("愛心票#{session["info"]["disabilityAmount"] }" unless session["info"]["disabilityAmount"]  == '0').to_s]
-    @amount=session["info"]["regularAmount"].to_i+
-            session["info"]["concessionAmount"].to_i+
-            session["info"]["elderlyAmount"].to_i+
-            session["info"]["disabilityAmount"].to_i
+    @quantity = session["info"]["regularAmount"].to_i+
+                session["info"]["concessionAmount"].to_i+
+                session["info"]["elderlyAmount"].to_i+
+                session["info"]["disabilityAmount"].to_i     
   end
 
   def seat_reservation

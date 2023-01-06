@@ -2,10 +2,11 @@ import { Controller } from "stimulus";
 
 export default class extends Controller {
   static targets = [
-    "allTotal",
+    "form",
+    "titleTotal",
     "next",
     "total",
-    "allAmount",
+    "nextAmount",
     "amount",
     "regularAmount",
     "concessionAmount",
@@ -14,7 +15,7 @@ export default class extends Controller {
   ];
 
   connect() {
-    this.calcAllTotal();
+    this.calcTotal();
     let params = new URLSearchParams(location.search);
     this.showtimeId = params.get("showtimeid");
   }
@@ -24,8 +25,8 @@ export default class extends Controller {
       "$" +
       Number(e.srcElement.value) *
       Number(e.srcElement.parentElement.parentElement.children[0].textContent.substring(1));
-    this.calcAllTotal();
-    this.calcAllAmount();
+    this.calcTotal();
+    this.calcAmount();
 
     const event = new CustomEvent("update-typelist", {
       detail: {
@@ -36,13 +37,13 @@ export default class extends Controller {
     window.dispatchEvent(event);
   }
 
-  calcAllTotal() {
+  calcTotal() {
     let allPrice = 0;
-    this.allTotalTarget.textContent = "";
+    this.titleTotalTarget.textContent = "";
     this.totalTargets.forEach((e) => {
       allPrice = allPrice + Number(e.textContent.substring(1));
     });
-    this.allTotalTarget.textContent = "$" + allPrice;
+    this.titleTotalTarget.textContent = "$" + allPrice;
     if (allPrice > 0) {
       this.nextTarget.classList.remove("d-none");
     } else {
@@ -50,16 +51,18 @@ export default class extends Controller {
     }
   }
 
-  calcAllAmount() {
+  calcAmount() {
     let allAmount = 0;
-    this.allAmountTarget.textContent = "";
+    this.nextAmountTarget.textContent = "";
     this.amountTargets.forEach((e) => {
       allAmount = allAmount + Number(e.value);
     });
+    const html = `已選取${allAmount}張票`
+    this.nextAmountTarget.innerHTML = html;
     this.changeLink(allAmount);
   }
 
-  changeLink(amount) {
+  changeLink() {
     const params = new URLSearchParams({
       showtimeid: this.showtimeId.toString(),
       authenticity_token: document.querySelector("meta[name='csrf-token']").content,
@@ -68,6 +71,10 @@ export default class extends Controller {
       elderlyAmount: this.elderlyAmountTarget.value.toString(),
       disabilityAmount: this.disabilityAmountTarget.value.toString(),
     });
-    this.nextTarget.action = `/ticketing/tickets?${params}`;
+    this.formTarget.action = `/ticketing/tickets?${params}`;
+  }
+
+  submit() {
+    this.formTarget.submit()
   }
 }

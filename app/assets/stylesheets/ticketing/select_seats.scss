@@ -4,9 +4,10 @@
       letter-spacing: 0.2rem;
     }
 
-    .seat-next {
-      background-color: white;
-      color: var(--bs-link-color);
+    .select-title {
+      p {
+        max-width: 290px;
+      }
     }
   }
 
