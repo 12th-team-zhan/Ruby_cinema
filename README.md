@@ -1,35 +1,61 @@
-# Ruby cinema
-下班之後要一起看電影嗎？最近上映的阿凡達你看了嗎？今天我的曖昧對象約我去看電影欸！
+# Ruby cinema  
 
-打開網頁，搜尋電影時刻表，總會出現幾大影城的官網可供民眾選擇最符合心意的地點查詢電影場次，想看什麼電影就可以馬上買票。
+你是電影重度愛好者嗎？那Ruby Cinema絕對是你的好朋友！  
 
-本專案為致敬威秀影城官網，使用Ruby on rails製作。
+・電影時刻查詢：提前安排約會行程不卡卡！  
+・線上即時購票系統：喜歡就買單，節省寶貴的排隊時間！  
 
-你可以在Ruby cinema站內體驗以下功能：
-1.查詢電影時刻表
-2.線上預訂電影票（線上付款即時購買）
+事業做很大、分店開不停？Ruby Cinema後台幫你忙！  
+・各大戲院個別資訊管理：客製化座位表、分別場次管理  
+・輕鬆新增電影資訊：各大影城皆可同步上架  
 
 
-## 開發技術
+## 開發技術  
 **前端：**
-HTML / JavaScript / Boostrap / Stimulus / Ajax
+HTML / CSS / JavaScript / Bootstrap / stimulus  
 
 **後端：**
-Ruby on Rails
-Foreman / Devise / Paranoia / Sidekiq /  Action Cable
-
-**資料庫：**
-PostgreSQL 
-
-**第三方登入：**
-Google / Facebook
-
-**協作工具：**
-git / github / Miro / rubocop
+Ruby on Rails  
 
 **部署：**
-Heroku
+Heroku  
 
-## 環境
-RUBY 3.1.2
-Rails 6.1.7
+**版本控制：**
+Git / GitHub  
+
+**資料庫：**
+PostgreSQL / redis  
+
+**第三方登入：**
+Google / Facebook  
+
+**第三方金流：**
+藍新金流  
+
+
+## 環境  
+RUBY 3.1.2  
+Rails 6.1.7  
+
+## 開發人員  
+
+姓名：張格恩  
+github：keenchang  
+gmail: s1277865@gmail.com  
+
+姓名：王禎緯  
+github：wang-626  
+gmail: daib12332@gmail.com  
+
+姓名：張育晨  
+github：82YuChen  
+gmail: z851039@gmail.com  
+
+姓名：詹巧歆  
+github：charsin1olly  
+gmail: charsin1olly@gmail.com  
+
+## 網址  
+https://rubycinema.herokuapp.com/  
+
+##### 本專案以威秀影城官網為原型進行復刻練習，不進行任何營利行為  

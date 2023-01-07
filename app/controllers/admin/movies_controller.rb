@@ -37,7 +37,7 @@ module Admin
         append_movie_poster
 
         if params["theater"].present?
-          params.require(:theater).map do |theater|
+          params.require(:theater).values.map do |theater|
             MovieTheater.create(movie_id: @movie.id, theater_id: theater.to_i)
           end
         end

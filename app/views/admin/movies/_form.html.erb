@@ -41,8 +41,8 @@
   <div class="d-block align-items-center">
     <span class="input-group-text">上映影城</span>
     <% @theaters.each do |theater| %>
-      <%= check_box_tag "theater[]", theater.id %>
-      <%= label_tag(:theater_id, theater.name) %>
+      <%= check_box_tag "theater[#{theater.id}]", theater.id %>
+      <%= label_tag("theater[#{theater.id}]", theater.name) %>
     <% end %>
   </div>
   <div class="input-group my-3">
