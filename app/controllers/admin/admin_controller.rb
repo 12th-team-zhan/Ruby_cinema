@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class AdminController < ApplicationController
+  class AdminController < ActionController::Base
     layout 'admin_application'
     before_action :user_signed_in
     before_action :current_user_is_staff
